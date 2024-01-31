@@ -1,0 +1,11 @@
+version: "3.9"
+volumes:
+  saved-datesets:
+services:
+  flaskapplication:
+    container_name: time_series_analyzer
+    image: sanderbos/time_series_analyzer
+    ports:
+    - "5000:5000"
+    volumes:
+    - saved-datesets:/data

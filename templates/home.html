@@ -1,0 +1,24 @@
+{% extends "template.html" %}
+{% block head %}
+      <link rel="stylesheet" href="{{url_for('static',filename='styles/template.css')}}">
+      <link rel="stylesheet" href="{{url_for('static',filename='styles/home.css')}}">
+    {% endblock %}
+
+{% block content %}
+
+<p id="introductionText"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+    Vestibulum ultrices interdum vehicula. 
+    In venenatis at dolor fringilla fermentum. Sed nec purus orci. 
+    Ut eget enim accumsan, sagittis augue id, bibendum enim. Phasellus in venenatis enim. 
+    Nulla luctus eu ex at fermentum. Proin euismod sagittis eleifend. 
+    Donec magna ex, vehicula vitae nunc sed, aliquet bibendum est. 
+    Curabitur commodo sem ut nisi egestas commodo. Phasellus efficitur augue in congue mollis. 
+    Vestibulum felis nisi, aliquet non hendrerit sed, ornare et risus. Cras volutpat neque elementum leo elementum sodales. 
+    Sed pellentesque convallis mauris, quis vestibulum magna. Vivamus rutrum tincidunt tellus, at pulvinar arcu. 
+    Morbi ut rutrum turpis, sit amet maximus magna.
+</p>
+<form id="uploadForm" method=post enctype=multipart/form-data>
+    <input type=file name=file>
+    <input type=submit value=Upload>
+</form>
+{% endblock %}

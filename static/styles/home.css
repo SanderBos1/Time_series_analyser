@@ -1,0 +1,11 @@
+#introductionText{
+    position:fixed;
+    left:15%;
+    width:50%;
+}
+
+#uploadForm{
+    position:fixed;
+    left:65%;
+    width:35%;
+}

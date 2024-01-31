@@ -1,0 +1,11 @@
+
+{% extends "template.html" %}
+{% block head %}
+      <link rel="stylesheet" href="{{url_for('static',filename='styles/template.css')}}">
+      <link rel="stylesheet" href="{{url_for('static',filename='styles/calculator.css')}}">
+    {% endblock %}
+
+{% block content %}
+<h1>Calculator</h1>
+<p>test for document routing</p>
+{% endblock %}
