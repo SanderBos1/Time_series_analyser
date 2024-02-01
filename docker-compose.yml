@@ -4,7 +4,7 @@ volumes:
 services:
   flaskapplication:
     container_name: time_series_analyzer
-    image: sanderbos/time_series_analyzer
+    image: sanderbos/time_series_analyzer:0.0.1
     ports:
     - "5000:5000"
     volumes:

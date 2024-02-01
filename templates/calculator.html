@@ -1,11 +1,48 @@
-
-{% extends "template.html" %}
+{% extends "foundation.html" %}
 {% block head %}
-      <link rel="stylesheet" href="{{url_for('static',filename='styles/template.css')}}">
-      <link rel="stylesheet" href="{{url_for('static',filename='styles/calculator.css')}}">
-    {% endblock %}
+<link rel="stylesheet" href="{{url_for('static',filename='styles/base.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='styles/calculator.css')}}">
+{% endblock %}
 
+{% block sidebar %}
+
+<div id="data-directory-list">
+  <form method="post">
+    <input type=submit name=displaylist value=display list>
+  </form>
+
+<div id="file-list">
+  {%if files %}
+  <ul>
+  {%for file in files%}
+    <li>{{file}}</li>
+  {%endfor %}
+  </ul>
+  {% endif %}
+</div>
+</div>
+{% endblock %}
 {% block content %}
-<h1>Calculator</h1>
-<p>test for document routing</p>
+
+<div id="user-input">
+  <form method="post">
+
+  <label for="tperiod">Period</label>
+  <input type=text id=tperiod name=period placeholder="Date">
+
+  <label for="tcolumn">Column</label>
+  <input type=text id=tcolumn name=column placeholder="IPG2211A2N">
+
+  <label for="tdataset">Dataset</label>
+  <input type=text id = "tdataset", name=dataset placeholder="Electric_Production.csv">
+
+  <input type=submit name=draw value=Upload>
+</form>
+</div>
+
+<div class="ts-image">
+  {%if img_data %}
+  <img id="picture" src="data:image/jpeg;base64,{{ img_data }}">
+  {% endif %}
+</div>
 {% endblock %}

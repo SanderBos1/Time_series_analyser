@@ -1,8 +1,8 @@
-{% extends "template.html" %}
+{% extends "foundation.html" %}
 {% block head %}
-      <link rel="stylesheet" href="{{url_for('static',filename='styles/template.css')}}">
+      <link rel="stylesheet" href="{{url_for('static',filename='styles/base.css')}}">
       <link rel="stylesheet" href="{{url_for('static',filename='styles/home.css')}}">
-    {% endblock %}
+{% endblock %}
 
 {% block content %}
 
@@ -19,6 +19,6 @@
 </p>
 <form id="uploadForm" method=post enctype=multipart/form-data>
     <input type=file name=file>
-    <input type=submit value=Upload>
+    <input type=submit name=datasetCSV value=Upload>
 </form>
 {% endblock %}
