@@ -1,25 +1,18 @@
-from flask import Flask, flash, request, redirect, url_for, render_template
+from ts_app import app
+from flask import flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 import os
-from pythonFunctions.readCSV import CSV
-from pythonFunctions.files import get_files
+from ts_python.readCSV import CSV
+from ts_python.files import get_files
 import base64
 import io
 from PIL import Image
+from flask_session import Session
 
-#defines where the uploaded files are stored and which extensions are allowed
-UPLOAD_FOLDER = 'data/'
-IMAGES_FOLDER = 'static/images/'
-ALLOWED_EXTENSIONS = {'csv'}
-
-
-app = Flask('your_flask_env')
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config["IMAGES_FOLDER"] = IMAGES_FOLDER
 
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+           filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
 
 @app.route('/', methods=["GET", "POST"])
@@ -34,13 +27,13 @@ def hello():
 
 @app.route('/display_ts', methods=["GET", "POST"])
 def calculator():
-    files = get_files(UPLOAD_FOLDER)
+    files = get_files(app.config['UPLOAD_FOLDER'])
     if "draw" in request.form:
         csvFile = request.form["dataset"]
         period = request.form["period"]
         column = request.form["column"]
-        file = UPLOAD_FOLDER + csvFile
-        place_image = IMAGES_FOLDER + "tsimage.jpg"
+        file = app.config['UPLOAD_FOLDER'] + csvFile
+        place_image = app.config['IMAGES_FOLDER'] + "tsimage.jpg"
         newCSV = CSV(file)
         newCSV.displayCSV(period, column, place_image)
         img = Image.open(place_image)
@@ -50,8 +43,7 @@ def calculator():
         return render_template("display_ts.html", files=files, img_data = encoded_img_data.decode('utf-8')) 
     if "ts_file" in request.form:
         csv = request.form.get("ts_file")
-        file = UPLOAD_FOLDER + csv
-        print("this is the value", csv)
+        file = app.config['UPLOAD_FOLDER'] + csv
         newCSV_columns = CSV(file)
         columns = newCSV_columns.show_columns()
         return render_template("display_ts.html", files=files, columns=columns) 
