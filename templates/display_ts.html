@@ -1,25 +1,38 @@
 {% extends "foundation.html" %}
 {% block head %}
-<link rel="stylesheet" href="{{url_for('static',filename='styles/base.css')}}">
-<link rel="stylesheet" href="{{url_for('static',filename='styles/calculator.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='styles/display_ts.css')}}">
 {% endblock %}
 
 {% block sidebar %}
 
 <div id="data-directory-list">
-  <form method="post">
-    <input type=submit name=displaylist value=display list>
-  </form>
 
 <div id="file-list">
   {%if files %}
   <ul>
   {%for file in files%}
-    <li>{{file}}</li>
+    <li>  
+      <form method="post">
+      <input type=submit name=ts_file value={{file}}>
+    </form>
+    </li>
   {%endfor %}
   </ul>
   {% endif %}
 </div>
+</div>
+
+<div id="ts-column-list">
+  <h3> DS Columns</h3>
+  {%if columns %}
+  <ul>
+  {%for column in columns%}
+  <li>  
+    {{column}}
+  </li>
+  {%endfor%}
+  </ul>
+  {% endif %}
 </div>
 {% endblock %}
 {% block content %}

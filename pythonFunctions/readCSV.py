@@ -11,6 +11,11 @@ class CSV:
         self.df = pd.read_csv(self.file)
 
     #reads csv files and saves them as an image
-    def displayCSV(self, time, column):
+    def displayCSV(self, time, column, place):
         plt.plot(self.df[time],self.df[column] )
-        plt.savefig('static/images/tsimage.jpg')
+        plt.savefig(place)
+
+    def show_columns(self):
+        print(self.df.columns.tolist())
+        return self.df.columns.tolist()
+
