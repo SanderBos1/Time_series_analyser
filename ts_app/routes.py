@@ -1,5 +1,5 @@
 from ts_app import app
-from flask import flash, request, redirect, url_for, render_template
+from flask import request, render_template, session
 from werkzeug.utils import secure_filename
 import os
 from ts_python.readCSV import CSV
@@ -7,7 +7,6 @@ from ts_python.files import get_files
 import base64
 import io
 from PIL import Image
-from flask_session import Session
 
 
 def allowed_file(filename):
@@ -28,8 +27,11 @@ def hello():
 @app.route('/display_ts', methods=["GET", "POST"])
 def calculator():
     files = get_files(app.config['UPLOAD_FOLDER'])
+    file_list = []
+    for file in files:
+        file_list.append(file.split(".csv")[0])
     if "draw" in request.form:
-        csvFile = request.form["dataset"]
+        csvFile = request.form["dataset"] + ".csv"
         period = request.form["period"]
         column = request.form["column"]
         file = app.config['UPLOAD_FOLDER'] + csvFile
@@ -40,12 +42,12 @@ def calculator():
         data = io.BytesIO()
         img.save(data, "JPEG")
         encoded_img_data = base64.b64encode(data.getvalue())
-        return render_template("display_ts.html", files=files, img_data = encoded_img_data.decode('utf-8')) 
+        session["ts_image"] = encoded_img_data.decode('utf-8')
     if "ts_file" in request.form:
         csv = request.form.get("ts_file")
-        file = app.config['UPLOAD_FOLDER'] + csv
+        file = app.config['UPLOAD_FOLDER'] + csv + ".csv"
+        session["csv"] = csv.split(".csv")[0]
         newCSV_columns = CSV(file)
         columns = newCSV_columns.show_columns()
-        return render_template("display_ts.html", files=files, columns=columns) 
-
-    return render_template("display_ts.html", files=files)    
+        session['ts_columns'] = columns
+    return render_template("display_ts.html", file_list=file_list)

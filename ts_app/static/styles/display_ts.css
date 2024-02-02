@@ -5,7 +5,6 @@
     max-width:100%;
     min-height: 45%;  
     max-height:45%;
-
 }
 #data-directory-list ul{
     height:inherit;
@@ -14,12 +13,19 @@
     padding: 0;
     list-style-type: none;
     object-fit: cover;
-    overflow:auto
+    overflow:auto;
+
 }
 
 #data-directory-list li{
     margin: 0; 
     padding: 0;
+    border: solid, 1px;
+    overflow:hidden;
+}
+
+#data-directory-list input{
+    min-width: 100%;
 }
 
 #ts-column-list{
@@ -45,7 +51,6 @@
     max-width: 100%;
     background-color: #BBAB8C;
     color: black;
-    padding: 14px 20px;
     margin: 8px 0;
     border: solid 1px;
     border-radius: 4px;

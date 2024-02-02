@@ -8,9 +8,8 @@
 <div id="data-directory-list">
 
 <div id="file-list">
-  {%if files %}
   <ul>
-  {%for file in files%}
+  {%for file in file_list%}
     <li>  
       <form method="post">
       <input type=submit name=ts_file value={{file}}>
@@ -18,15 +17,18 @@
     </li>
   {%endfor %}
   </ul>
-  {% endif %}
 </div>
 </div>
 
 <div id="ts-column-list">
-  <h3>DS Columns</h3>
-  {%if columns %}
+  {% if session.csv%}
+  <h3>{{session.csv}}</h3>
+  {% else %}
+  <h3> columns</h3>
+  {% endif %}
+  {% if session.ts_columns%}
   <ul>
-  {%for column in columns%}
+  {%for column in session.ts_columns%}
   <li>  
     {{column}}
   </li>
@@ -54,8 +56,8 @@
 </div>
 
 <div class="ts-image">
-  {%if img_data %}
-  <img id="picture" src="data:image/jpeg;base64,{{ img_data }}">
+  {%if session.ts_image %}
+  <img id="picture" src="data:image/jpeg;base64,{{ session.ts_image}}">
   {% endif %}
 </div>
 {% endblock %}
