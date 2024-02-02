@@ -2,3 +2,5 @@ flask
 pandas
 IPython
 matplotlib
+Flask-Session
+python-dotenv
