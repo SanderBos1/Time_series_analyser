@@ -1,0 +1,144 @@
+body{
+    background-color: #FDF7E4;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Style the submit button */
+input[type=submit], input[type=file] {
+    max-width: 100%;
+    background-color: #BBAB8C;
+    color: black;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+input:hover{
+    background-color: #FAEED1;
+
+}
+
+.top{
+    background-color: #BBAB8C;
+    position: absolute;
+    min-width: 100%;
+    min-height: 10%;
+    top: 0;
+    right: 0px;
+}
+
+.side-bar{
+    background-color: #DED0B6;
+    position: absolute;
+    min-height: 90%;
+    max-height:90%;
+    min-width:12%;
+    max-width:12%;
+    top: 10%;
+    left: 0%;
+    text-align: center;
+    overflow:hidden;
+
+}
+
+#data-directory-list{
+    position: absolute;
+    top: 10%;
+    min-width:100%;
+    max-width:100%;
+    min-height: 45%;  
+    max-height:45%;
+}
+#data-directory-list ul{
+    height:inherit;
+    width:inherit;
+    margin: 0; 
+    padding: 0;
+    list-style-type: none;
+    object-fit: cover;
+    overflow:auto;
+
+}
+
+#data-directory-list li{
+    margin: 0; 
+    padding: 0;
+    border: solid, 1px;
+    overflow:hidden;
+}
+
+#data-directory-list input{
+    min-width: 100%;
+}
+
+#ts-column-list{
+    position:absolute;
+    top:50%;
+    min-width:100%;
+    max-width:100%;
+    min-height:50%;
+    max-height:50%;
+
+}
+
+#ts-column-list ul{
+    list-style-type: none;
+    object-fit: cover;
+    text-align:left;
+    margin: 0; 
+    padding: 0;
+
+}
+
+#ts-column-list li{
+    max-width: 100%;
+    background-color: #BBAB8C;
+    color: black;
+    padding: 14px 20px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+#ts-column-list h3{
+    max-width:100%;
+}
+
+.content{
+    position:absolute;
+    top: 15%;
+    left: 15%;
+    min-width: 80%;
+    min-height: 80%;
+    border:solid
+}
+
+#navbar-ul{
+    list-style-type: none;
+    position: absolute;
+    left: 5%;
+    padding-left:0px;
+
+
+}
+
+.navbar-li{
+    float: left;
+}
+
+.navbar-a{
+    display: block;
+    padding: 8px;
+    background-color: #FAEED1;
+    text-decoration: none;
+}
+
+.navbar-a:hover{
+    background-color: #FDF7E4;
+}
+
+.error_message{
+    color: red;
+}

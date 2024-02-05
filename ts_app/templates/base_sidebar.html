@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='styles/base_sidebar.css')}}">
+        {% block head %}
+        {% endblock %}
+    </head>
+<body>
+<div class="top">
+    <ul id="navbar-ul">
+        <li class="navbar-li"><a class="navbar-a" href="/">Home</a></li>
+        <li class="navbar-li"><a class="navbar-a" href="/display_ts">Display TS</a></li>
+        <li class="navbar-li"><a class="navbar-a" href="/calculations">Calculations</a></li>
+    </ul>
+</div>
+
+<div class = side-bar>
+
+    <div id="data-directory-list">
+    
+    <div id="file-list">
+      <ul>
+      {%for file in file_list%}
+        <li>  
+          <form method="post">
+          <input type=submit name=ts_file value={{file}}>
+        </form>
+        </li>
+      {%endfor %}
+      </ul>
+    </div>
+    </div>
+    
+    <div id="ts-column-list">
+      {% if session.csv%}
+      <h3>{{session.csv}}</h3>
+      {% else %}
+      <h3> columns</h3>
+      {% endif %}
+      {% if session.ts_columns%}
+      <ul>
+      {%for column in session.ts_columns%}
+      <li>  
+        {{column}}
+      </li>
+      {%endfor%}
+      </ul>
+      {% endif %}
+    </div>
+</div>
+
+<div class="content">
+{% block content %}
+{% endblock %}
+</div>
+</body>
+</html>

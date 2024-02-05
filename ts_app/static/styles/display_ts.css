@@ -1,67 +1,4 @@
-#data-directory-list{
-    position: absolute;
-    top: 10%;
-    min-width:100%;
-    max-width:100%;
-    min-height: 45%;  
-    max-height:45%;
-}
-#data-directory-list ul{
-    height:inherit;
-    width:inherit;
-    margin: 0; 
-    padding: 0;
-    list-style-type: none;
-    object-fit: cover;
-    overflow:auto;
 
-}
-
-#data-directory-list li{
-    margin: 0; 
-    padding: 0;
-    border: solid, 1px;
-    overflow:hidden;
-}
-
-#data-directory-list input{
-    min-width: 100%;
-}
-
-#ts-column-list{
-    position:absolute;
-    top:50%;
-    min-width:100%;
-    max-width:100%;
-    min-height:50%;
-    max-height:50%;
-
-}
-
-#ts-column-list ul{
-    list-style-type: none;
-    object-fit: cover;
-    text-align:left;
-    margin: 0; 
-    padding: 0;
-
-}
-
-#ts-column-list li{
-    max-width: 100%;
-    background-color: #BBAB8C;
-    color: black;
-    margin: 8px 0;
-    border: solid 1px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 0; 
-    padding: 0;
-}
-
-#ts-column-list h3{
-    max-width:100%;
-}
 
 #user-input{
     position:absolute;
@@ -84,13 +21,12 @@ input[type=text], select {
   
 .ts-image{
     position: absolute;
-    left:35%;
+    left:33%;
     top:10%;
-    right:5;
-    min-width: 60%;
-    max-width: 60%;
-    min-height: 60%;
-    max-height: 60%;
+    min-width: 65%;
+    max-width: 65%;
+    min-height: 70%;
+    max-height: 70%;
     border: solid
 }
 

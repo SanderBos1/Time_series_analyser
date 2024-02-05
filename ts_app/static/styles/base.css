@@ -24,30 +24,17 @@ input:hover{
 .top{
     background-color: #BBAB8C;
     position: absolute;
-    min-width: 90%;
+    min-width: 100%;
     min-height: 10%;
     top: 0;
     right: 0px;
 }
 
-.side-bar{
-    background-color: #DED0B6;
-    position: absolute;
-    min-height: 100%;
-    max-height:100%;
-    min-width:12%;
-    max-width:12%;
-    top: 0%;
-    left: 0%;
-    text-align: center;
-    overflow:hidden;
-
-}
 
 .content{
     position:absolute;
     top: 15%;
-    left: 15%;
+    left: 10%;
     min-width: 80%;
     min-height: 80%;
     border:solid
@@ -75,4 +62,8 @@ input:hover{
 
 .navbar-a:hover{
     background-color: #FDF7E4;
+}
+
+.error_message{
+    color: red;
 }

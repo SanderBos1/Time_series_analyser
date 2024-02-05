@@ -1,42 +1,9 @@
-{% extends "foundation.html" %}
+{% extends "base_sidebar.html" %}
 {% block head %}
 <link rel="stylesheet" href="{{url_for('static',filename='styles/display_ts.css')}}">
 {% endblock %}
 
-{% block sidebar %}
 
-<div id="data-directory-list">
-
-<div id="file-list">
-  <ul>
-  {%for file in file_list%}
-    <li>  
-      <form method="post">
-      <input type=submit name=ts_file value={{file}}>
-    </form>
-    </li>
-  {%endfor %}
-  </ul>
-</div>
-</div>
-
-<div id="ts-column-list">
-  {% if session.csv%}
-  <h3>{{session.csv}}</h3>
-  {% else %}
-  <h3> columns</h3>
-  {% endif %}
-  {% if session.ts_columns%}
-  <ul>
-  {%for column in session.ts_columns%}
-  <li>  
-    {{column}}
-  </li>
-  {%endfor%}
-  </ul>
-  {% endif %}
-</div>
-{% endblock %}
 {% block content %}
 
 <div id="user-input">
@@ -49,9 +16,14 @@
   <input type=text id=tcolumn name=column placeholder="IPG2211A2N">
 
   <label for="tdataset">Dataset</label>
-  <input type=text id = "tdataset", name=dataset placeholder="Electric_Production.csv">
+  <input type=text id = "tdataset", name=dataset placeholder="Electric_Production">
+
+  {% for mesg in get_flashed_messages() %}
+  <p class="error_message">{{ mesg }}</p>
+  {% endfor %}
 
   <input type=submit name=draw value=Upload>
+
 </form>
 </div>
 

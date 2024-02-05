@@ -1,12 +1,9 @@
 from ts_app import app
-from flask import request, render_template, session
+from flask import request, render_template, session, flash, redirect, url_for
 from werkzeug.utils import secure_filename
 import os
-from ts_python.readCSV import CSV
 from ts_python.files import get_files
-import base64
-import io
-from PIL import Image
+from ts_python.data_handeling import show_columns, show_image
 
 
 def allowed_file(filename):
@@ -25,29 +22,25 @@ def hello():
 
 
 @app.route('/display_ts', methods=["GET", "POST"])
-def calculator():
+def display_ts():
     files = get_files(app.config['UPLOAD_FOLDER'])
     file_list = []
     for file in files:
         file_list.append(file.split(".csv")[0])
     if "draw" in request.form:
-        csvFile = request.form["dataset"] + ".csv"
-        period = request.form["period"]
-        column = request.form["column"]
-        file = app.config['UPLOAD_FOLDER'] + csvFile
-        place_image = app.config['IMAGES_FOLDER'] + "tsimage.jpg"
-        newCSV = CSV(file)
-        newCSV.displayCSV(period, column, place_image)
-        img = Image.open(place_image)
-        data = io.BytesIO()
-        img.save(data, "JPEG")
-        encoded_img_data = base64.b64encode(data.getvalue())
-        session["ts_image"] = encoded_img_data.decode('utf-8')
+        show_image(request, file_list, "display_ts")
     if "ts_file" in request.form:
         csv = request.form.get("ts_file")
-        file = app.config['UPLOAD_FOLDER'] + csv + ".csv"
-        session["csv"] = csv.split(".csv")[0]
-        newCSV_columns = CSV(file)
-        columns = newCSV_columns.show_columns()
-        session['ts_columns'] = columns
+        show_columns(csv)
     return render_template("display_ts.html", file_list=file_list)
+
+@app.route("/calculations", methods=["GET", "POST"])
+def calculations():
+    files = get_files(app.config['UPLOAD_FOLDER'])
+    file_list = []
+    for file in files:
+        file_list.append(file.split(".csv")[0])
+    if "ts_file" in request.form:
+        csv = request.form.get("ts_file")
+        show_columns(csv)
+    return render_template("calculations.html", file_list=file_list)
