@@ -17,20 +17,20 @@
 <div class = side-bar>
 
     <div id="data-directory-list">
-    
-    <div id="file-list">
       <ul>
-      {%for file in file_list%}
+      {%for file in files%}
         <li>  
-          <form method="post">
-          <input type=submit name=ts_file value={{file}}>
+          <form id="file_list_and_delete" method="post">
+          <input id="file_display" type=submit name=ts_file value={{file}}>
+          <button id = delete_file name=delete_file value={{file}}>X</button> 
         </form>
         </li>
-      {%endfor %}
       </ul>
+      {%endfor %}
     </div>
-    </div>
-    
+
+
+
     <div id="ts-column-list">
       {% if session.csv%}
       <h3>{{session.csv}}</h3>

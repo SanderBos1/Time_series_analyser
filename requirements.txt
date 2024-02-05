@@ -4,3 +4,4 @@ IPython
 Flask-Session
 python-dotenv
 numpy
+matplotlib

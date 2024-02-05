@@ -22,3 +22,6 @@ class CSV:
         return self.df.columns.tolist()
 
 
+
+#csv = CSV("data/Electric_Production.csv")
+#csv.displayCSV("DATE", "IPG2211A2N", "static/images/test.jpg")
