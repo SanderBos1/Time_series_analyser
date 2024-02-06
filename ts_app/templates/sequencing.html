@@ -12,10 +12,14 @@
       P_value indicates the trend in the time-series is due to change.
   </p>
   <div id="pvalue">
-    {%if session.p_trend > 0.05%}
-    <p> The P value is: {{session.p_trend}}, H0 not rejected </p>
+    {%if session.p_trend is defined%}
+      {%if session.p_trend > 0.05%}
+        <p> The P value is: {{ session.p_trend }}, H0 not rejected </p>
+      {% else %}
+        <p> The P value is: {{ session.p_trend }}, H0 is rejected </p>
+      {% endif %}
     {% else %}
-    <p> The P value is: {{session.p_trend}}, H0 is rejected </p>
+      <p>No calculation was made yet</p>
     {% endif %}
   </div>
 </div>

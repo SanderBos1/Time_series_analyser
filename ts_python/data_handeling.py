@@ -43,6 +43,7 @@ def calculate_pvalue(request, files):
         new_trend_calculator = trend_calculator(file, trend)
         p_trend = new_trend_calculator.calculate_trend(trend, column)
         session["p_trend"] = p_trend
+        print(session["p_trend"])
     except Exception as e:
         flash(str(e), "error") 
     return render_template("sequencing.html", files=files)
