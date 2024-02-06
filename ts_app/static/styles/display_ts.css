@@ -1,23 +1,38 @@
 
-
-#user-input{
+.user-input{
     position:absolute;
     top:10%;
     left:5%;
-    width: 30%;
-    height: 60%;
+    width: 25%;
+    height: 40%;
+    display: grid;
 }
 
-/* Style inputs */
-input[type=text], select {
-    max-width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: grid;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
+.label_input input[type="text"]{
+    position:relative;
+    width:100%;
+    margin:5px;
+}
+
+
+.calculations_placeholder{
+    position:absolute;
+    display:flex;
+    width:30%;
+    height:20%;
+    top:45%;
+    left:5%;
+}
+
+.calculations{
+    position:relative;
+    width:30%;
+
+}
+.descr_numbers{
+    position:relative;
+    width:50%;
+}
   
 .ts-image{
     position: absolute;
@@ -36,22 +51,5 @@ input[type=text], select {
 
 }
 
-.calculations_placeholder{
-    position:absolute;
-    display:flex;
-    width:30%;
-    height:20%;
-    top:70%;
-    left:5%;
-}
 
-.calculations{
-    position:relative;
-    width:30%;
-
-}
-.descr_numbers{
-    position:relative;
-    width:50%;
-}
 

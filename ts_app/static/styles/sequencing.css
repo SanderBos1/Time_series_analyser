@@ -26,20 +26,13 @@
 }
 
 
-.p_value_calculation{
+.calculation_holder{
     position:absolute;
+    display:inline-block;
     border: solid 1px;
     left: 5%;
-    top: 50%;
+    top: 10%;
     width: 30%;
-    height:40%;
-    text-align:center
+    height:70%;
 }
 
-
-input, select {
-    max-width: 100%;
-    display: flex;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }

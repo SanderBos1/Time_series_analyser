@@ -3,7 +3,7 @@ from flask import request, render_template, session, flash, redirect, url_for
 from werkzeug.utils import secure_filename
 import os
 from ts_python.files import get_files, remove_files
-from ts_python.data_handeling import show_columns, show_image, calculate_pvalue
+from ts_python.data_handeling import show_columns, show_image, calculate_pvalue_trend, calculate_pvalue_seasonality
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -42,6 +42,10 @@ def calculations():
     if "delete_file" in request.form:
         files = remove_files(request, files)
         return render_template("sequencing.html", files=files)
-    if "calculate" in request.form:
-        calculate_pvalue(request, files)
+    if "calculate_trend" in request.form:
+        calculate_pvalue_trend(request, files)
+    if "calculate_seasonality" in request.form:
+        calculate_pvalue_seasonality(request, files)
+    if "non_stationary" in request.form:
+        session["non_stationary"] = request.form.get("non_stationary")
     return render_template("sequencing.html", files=files)

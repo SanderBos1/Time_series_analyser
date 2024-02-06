@@ -5,8 +5,15 @@
 {% endblock %}
 
 {%block content%}
+<div class="calculation_holder">
+  <div class="trend_seasonaltiy_choice">
+    <form method = "post">
+      <input class="standard_input" type=submit name=non_stationary value = Trend>
+      <input class="standard_input" type=submit name=non_stationary value = Seasonality>
+    </form>
+  </div>
 
-<div id="explanation">
+  {% if session.non_stationary == "Trend"%}
   <p> H0: There is no trend <br>
       H1: There is trend <br>
       P_value indicates the trend in the time-series is due to change.
@@ -22,35 +29,106 @@
       <p>No calculation was made yet</p>
     {% endif %}
   </div>
-</div>
 
-<div class = "p_value_calculation">
-  <div id="trend_buttons">
-    <form method="post">
 
-      <label for="tcolumn">Column</label>
+
+  <form class = "p_value_calculation" method="post">
+    <div class="user_input">
+      <label class="label_input" for="tcolumn">Column</label>
       <input type=text id=tcolumn name=column>
+    </div>
 
-      <label for="tdataset">Dataset</label>
-      <input type=text id = "tdataset", name=dataset>
+    <div class="trend_options">
+        <label  class="label_input" for=pymannkendall>Mann & Kendell</label>
+        <input type=radio id = pymannkendall name=trend_function value=pymannkendall>
+    </div> 
+    <div >
+      {%if session.dataset%}
 
-      <label for=pymannkendall>Mann & Kendell</label>
-      <input type=radio id = pymannkendall name=trend_function value=pymannkendall><br>
-      
       {% with errors = get_flashed_messages(category_filter=["error"]) %}
-      {% if errors %}
-        <ul>
-        {% for message in errors %}
-          <li>{{ message }}</li>
-        {% endfor %}
-        </ul>
+        {% if errors %}
+          <ul class="error_message_list">
+            {% for message in errors %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+
+      {%else %}
+      <ul class="error_message_list">
+        <li>You first have to select a dataset</li>
+    </ul>
       {% endif %}
-    {% endwith %}
-      
-      <input type=submit id=calculate_p name=calculate value = calculate>
-    </form>
+
+    </div>    
+    <div class="calculate_p_button">
+      <input class="standard_input" type=submit id=calculate_p name=calculate_trend value = calculate_trend>
+    </div>
+  </form>
+  {%endif %}
+
+
+  {% if session.non_stationary == "Seasonality"%}
+  <p> H0: There is no Seasonality <br>
+      H1: There is Seasonality <br>
+      P_value indicates the seasonality in the time-series is due to change.
+  </p>
+  <div id="pvalue">
+    {%if session.p_seasonality is defined%}
+      {%if session.p_seasonality > 0.05%}
+        <p> The P value is: {{ session.p_seasonality }}, H0 not rejected </p>
+      {% else %}
+        <p> The P value is: {{ session.p_seasonality }}, H0 is rejected </p>
+      {% endif %}
+    {% else %}
+      <p>No calculation was made yet</p>
+    {% endif %}
   </div>
 
+
+
+  <form class = "p_value_calculation" method="post">
+    <div class="user_input">
+      <label for=time_column>time_column</label>
+      <input type=text id=time_column name=time_column>
+
+      <label for=tperiod>period</label>
+      <input type=text id=tperiod name=period>
+
+      <label class="label_input" for="tcolumn">Column</label>
+      <input type=text id=tcolumn name=column>
+
+    </div>
+
+    <div class="trend_options">
+        <label  class="label_input" for=kruskal>Kruskal-Wallis</label>
+        <input type=radio id = pymannkendall name=seasonality_function value=kruskal>
+    </div> 
+    <div >
+      {%if session.dataset%}
+
+      {% with errors = get_flashed_messages(category_filter=["error"]) %}
+        {% if errors %}
+          <ul class="error_message_list">
+            {% for message in errors %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      {%else %}
+      <ul class="error_message_list">
+        <li>You first have to select a dataset</li>
+    </ul>
+      {% endif %}
+
+    </div>    
+    <div class="calculate_p_button">
+      <input class="standard_input" type=submit id=calculate_p name=calculate_seasonality value = calculate_seasonality>
+    </div>
+  </form>
+  {%endif %}
 </div>
 
 

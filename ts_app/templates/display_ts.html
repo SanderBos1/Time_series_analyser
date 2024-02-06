@@ -6,31 +6,36 @@
 
 {% block content %}
 
-<div id="user-input">
+<div class=user-input>
   <form method="post">
-
-  <label for="tperiod">Period</label>
-  <input type=text id=tperiod name=period placeholder="Date">
-
-  <label for="tcolumn">Column</label>
-  <input type=text id=tcolumn name=column placeholder="IPG2211A2N">
-
-  <label for="tdataset">Dataset</label>
-  <input type=text id = "tdataset", name=dataset placeholder="Electric_Production">
-
+  <div class="label_input">
+    <label for=tperiod>Period</label>
+    <input type=text id=tperiod name=period placeholder="Date">
+  </div>
+  <div class="label_input">
+    <label for=tcolumn>Column</label>
+    <input type=text id=tcolumn name=column placeholder="IPG2211A2N">
+  </div>
+  <div class="label_input">
+    <input class="standard_input" type=submit name=draw_tsImage value=Upload>
+  </div>
+  {%if session.dataset%}
   {% with errors = get_flashed_messages(category_filter=["error"]) %}
   {% if errors %}
-    <ul>
+    <ul  class="error_message_list">
     {% for message in errors %}
       <li>{{ message }}</li>
     {% endfor %}
     </ul>
   {% endif %}
 {% endwith %}
-
-  <input type=submit name=draw_tsImage value=Upload>
-
 </form>
+
+{%else %}
+<ul class="error_message_list">
+  <li>You first have to select a dataset</li>
+</ul>
+{% endif %}
 </div>
 
 <div class="ts-image">

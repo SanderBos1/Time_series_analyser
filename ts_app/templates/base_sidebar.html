@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='styles/base_sidebar.css')}}">
+        <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='styles/standards.css')}}">
         {% block head %}
         {% endblock %}
     </head>
@@ -21,19 +22,19 @@
       {%for file in files%}
         <li>  
           <form id="file_list_and_delete" method="post">
-          <input id="file_display" type=submit name=ts_file value={{file}}>
-          <button id = delete_file name=delete_file value={{file}}>X</button> 
-        </form>
+            <input id="file_display" type=submit name=ts_file value={{file}}>
+            <button id = delete_file name=delete_file value={{file}}>X</button> 
+          </form>
         </li>
+        {%endfor %}
       </ul>
-      {%endfor %}
     </div>
 
 
 
     <div id="ts-column-list">
-      {% if session.csv%}
-      <h3>{{session.csv}}</h3>
+      {% if session.dataset%}
+      <h3>{{session.dataset}}</h3>
       {% else %}
       <h3> columns</h3>
       {% endif %}
