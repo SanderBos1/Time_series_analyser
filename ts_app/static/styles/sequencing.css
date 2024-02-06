@@ -1,0 +1,45 @@
+.ts-image{
+    position: absolute;
+    left:40%;
+    top:10%;
+    width: 55%;
+    height: 70%;
+    border: solid
+}
+
+.ts-image img{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit: fill;
+
+}
+
+#explanation{
+    position:absolute;
+    border: solid 1px;
+    left: 5%;
+    top: 10%;
+    width: 30%;
+    height:30%;
+
+}
+
+
+.p_value_calculation{
+    position:absolute;
+    border: solid 1px;
+    left: 5%;
+    top: 50%;
+    width: 30%;
+    height:40%;
+    text-align:center
+}
+
+
+input, select {
+    max-width: 100%;
+    display: flex;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }

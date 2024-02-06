@@ -18,9 +18,15 @@
   <label for="tdataset">Dataset</label>
   <input type=text id = "tdataset", name=dataset placeholder="Electric_Production">
 
-  {% for mesg in get_flashed_messages() %}
-  <p class="error_message">{{ mesg }}</p>
-  {% endfor %}
+  {% with errors = get_flashed_messages(category_filter=["error"]) %}
+  {% if errors %}
+    <ul>
+    {% for message in errors %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 
   <input type=submit name=draw_tsImage value=Upload>
 
@@ -29,7 +35,22 @@
 
 <div class="ts-image">
   {%if session.ts_image %}
-  <img id="picture" src="data:image/jpeg;base64,{{ session.ts_image}}">
+    <img id="picture" src="data:image/jpeg;base64,{{ session.ts_image}}">
+  {% endif %}
+</div>
+
+<div class="calculations_placeholder">
+<div class = "calculations">
+  <p> Minimum</p>
+  <p> Maximum</p>
+  <p> Average</p>
+</div>
+{%if session.min_max_avg%}
+  <div class="descr_numbers">
+    {% for number in session.min_max_avg %}
+      <p> {{number}}</p>
+    {%endfor%}
+  </div>
   {% endif %}
 </div>
 {% endblock %}

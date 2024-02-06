@@ -4,8 +4,8 @@
     position:absolute;
     top:10%;
     left:5%;
-    min-width: 30%;
-    min-height: 60%;
+    width: 30%;
+    height: 60%;
 }
 
 /* Style inputs */
@@ -23,10 +23,8 @@ input[type=text], select {
     position: absolute;
     left:33%;
     top:10%;
-    min-width: 65%;
-    max-width: 65%;
-    min-height: 70%;
-    max-height: 70%;
+    width: 65%;
+    height: 70%;
     border: solid
 }
 
@@ -36,5 +34,24 @@ input[type=text], select {
     height:100%;
     object-fit: fill;
 
+}
+
+.calculations_placeholder{
+    position:absolute;
+    display:flex;
+    width:30%;
+    height:20%;
+    top:70%;
+    left:5%;
+}
+
+.calculations{
+    position:relative;
+    width:30%;
+
+}
+.descr_numbers{
+    position:relative;
+    width:50%;
 }
 

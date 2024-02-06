@@ -1,0 +1,60 @@
+{% extends "base_sidebar.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static',filename='styles/sequencing.css')}}">
+{% endblock %}
+
+{%block content%}
+
+<div id="explanation">
+  <p> H0: There is no trend <br>
+      H1: There is trend <br>
+      P_value indicates the trend in the time-series is due to change.
+  </p>
+  <div id="pvalue">
+    {%if session.p_trend > 0.05%}
+    <p> The P value is: {{session.p_trend}}, H0 not rejected </p>
+    {% else %}
+    <p> The P value is: {{session.p_trend}}, H0 is rejected </p>
+    {% endif %}
+  </div>
+</div>
+
+<div class = "p_value_calculation">
+  <div id="trend_buttons">
+    <form method="post">
+
+      <label for="tcolumn">Column</label>
+      <input type=text id=tcolumn name=column>
+
+      <label for="tdataset">Dataset</label>
+      <input type=text id = "tdataset", name=dataset>
+
+      <label for=pymannkendall>Mann & Kendell</label>
+      <input type=radio id = pymannkendall name=trend_function value=pymannkendall><br>
+      
+      {% with errors = get_flashed_messages(category_filter=["error"]) %}
+      {% if errors %}
+        <ul>
+        {% for message in errors %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+      
+      <input type=submit id=calculate_p name=calculate value = calculate>
+    </form>
+  </div>
+
+</div>
+
+
+
+
+<div class="ts-image">
+  {%if session.ts_image %}
+      <img id="picture" src="data:image/jpeg;base64,{{ session.ts_image}}">
+  {% endif %}
+</div>
+{%endblock%}

@@ -20,6 +20,12 @@ class CSV:
 
     def show_columns(self):
         return self.df.columns.tolist()
+    
+    def show_standard_calculations(self, column):
+        maximum = self.df[column].max()
+        minimum = self.df[column].min()
+        average = self.df[column].mean()
+        return minimum, maximum, average
 
 
 
