@@ -1,9 +1,8 @@
-.content{
-    position:absolute;
+.content {
+    position: absolute;
     top: 15%;
     left: 10%;
     width: 80%;
     height: 80%;
-    border:solid
+    border: solid
 }
-

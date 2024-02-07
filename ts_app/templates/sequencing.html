@@ -7,72 +7,74 @@
 {%block content%}
 <div class="calculation_holder">
   <div class="trend_seasonaltiy_choice">
-    <form method = "post">
-      <input class="standard_input" type=submit name=non_stationary value = Trend>
-      <input class="standard_input" type=submit name=non_stationary value = Seasonality>
+    <form method="post">
+      <input class="standard_input" type=submit name=non_stationary value=Trend>
+      <input class="standard_input" type=submit name=non_stationary value=Seasonality>
     </form>
   </div>
 
   {% if session.non_stationary == "Trend"%}
+  {{ form2.csrf_token}}
+
   <div class="multiline_text" id="pvalue">
-H<sub>0</sub>:There is no trend 
-H<sub>1</sub>:There is trend 
-We compare the p value against are chosen threshold value a, which in this case is 0.05.
-The p-value indicates how much chance there is that the trend is due to a random process.
-  {%if session.p_trend is defined%}
+    H<sub>0</sub>:There is no trend
+    H<sub>1</sub>:There is trend
+    We compare the p value against are chosen threshold value a, which in this case is 0.05.
+    The p-value indicates how much chance there is that the trend is due to a random process.
+    {%if session.p_trend is defined%}
     {% if not session.p_trend is number %}
-The return variable is not an integer, something went wrong.
+    The return variable is not an integer, something went wrong.
     {%elif session.p_trend > 0.05%}
-The P value is: {{ session.p_trend }}
-H<sub>0</sub> not rejected 
+    The P value is: {{ session.p_trend }}
+    H<sub>0</sub> not rejected
     {% else %}
-The P value is: {{ session.p_trend }}
-H<sub>0</sub> is rejected 
+    The P value is: {{ session.p_trend }}
+    H<sub>0</sub> is rejected
     {% endif %}
-  {% else %}
-No calculations were made yet
-  {% endif %}
+    {% else %}
+    No calculations were made yet
+    {% endif %}
   </div>
 
 
 
-  <form class = "p_value_calculation" method="post">
+  <form class="p_value_calculation" method="post">
     <div class="user_input">
-    <div class=column_selection>
-      <label  for="tcolumn">Column</label>
-      <input class="p_input" type=text id=tcolumn name=column>
-      <div class="tooltip_column">
-        Select the column that holds the values of the variable you are interested in.
+      <label for="tcolumn">Column</label>
+      <div class=needs_tooltip>
+        {{form2.column_intrest}}
+        <div class="tooltip_selection">
+          Select the column that holds the values of the variable you are interested in.
+        </div>
       </div>
-    </div>
     </div>
 
     <div class="trend_options">
-        <label  for=pymannkendall>Mann & Kendell</label>
-        <input class="p_input" type=radio id = pymannkendall name=trend_function value=pymannkendall>
-    </div> 
+      {{form2.function}}
+    </div>
     <div>
       {%if session.dataset%}
 
       {% with errors = get_flashed_messages(category_filter=["error"]) %}
-        {% if errors %}
-          <ul class="error_message_list">
-            {% for message in errors %}
-              <li>{{ message }}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
+      {% if errors %}
+      <ul class="error_message_list">
+        {% for message in errors %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
       {% endwith %}
 
       {%else %}
       <ul class="error_message_list">
         <li>You first have to select a dataset</li>
-    </ul>
+      </ul>
       {% endif %}
 
-    </div>    
+    </div>
     <div class="calculate_p_button">
-      <button class="standard_input" type=submit id=calculate_p name=calculate_trend value = calculate_trend>Calculate</button>
+      <button class="standard_input" type=submit id=calculate_p name=calculate_trend
+        value=calculate_trend>Calculate</button>
     </div>
   </form>
   {%endif %}
@@ -80,80 +82,80 @@ No calculations were made yet
 
   {% if session.non_stationary == "Seasonality"%}
   <div class="multiline_text" id="pvalue">
-H<sub>0</sub>:There is no Seasonality 
-H<sub>1</sub>:There is Seasonality 
-We compare the p value against are chosen threshold value a, which in this case is 0.05.
-The p-value indicates how much chance there is that the seasonality is due to a random process.
-  {%if session.p_seasonality is defined%}
-  {% if not session.p_trend is number %}
-The return variable is not an integer, something went wrong.
-    {%elif session.p_seasonality > 0.05%}
-The P value is: {{ session.p_seasonality }}
-H<sub>0</sub> not rejected 
+    H<sub>0</sub>:There is no Seasonality
+    H<sub>1</sub>:There is Seasonality
+
+    We compare the p value against are chosen threshold value a, which in this case is 0.05.
+    The p-value indicates how much chance there is that the seasonality is due to a random process.
+    {%if session.p_seasonality is defined%}
+    The return variable is not an number, something went wrong.
+    {%if session.p_seasonality > 0.05%}
+    The P value is: {{ session.p_seasonality }}
+    H<sub>0</sub> not rejected
     {% else %}
-The P value is: {{ session.p_seasonality }}
-H<sub>0</sub> is rejected 
+    The P value is: {{ session.p_seasonality }}
+    H<sub>0</sub> is rejected
     {% endif %}
-  {% else %}
-No calculations were made yet
-  {% endif %}
+    {% else %}
+    No calculations were made yet
+    {% endif %}
   </div>
 
 
 
-  <form class = "p_value_calculation" method="post">
+  <form class="p_value_calculation" method="post">
+    {{ form.csrf_token}}
     <div class="user_input">
-      <div class=time_column_selection>
-        <label  for="time_column">Time Column</label>
-        <input class="p_input" type=text id=time_column name=time_column>
-        <div class="tooltip_time_column">
+      <label for="time_column">Time Column</label>
+      <div class=needs_tooltip>
+        {{form.time_column}}
+        <div class="tooltip_selection">
           Select which column in the data frame is going to be selected as time period.
           It accepts the following format: 1/1/1981
         </div>
       </div>
-      <div class=period_selection>
-        <label  for="tcolumn">Period</label>
-        <input class="p_input" type=text id=tperiod name=period>
-        <div class="tooltip_period">
+      <label for="tcolumn">Period</label>
+      <div class=needs_tooltip>
+        {{form.period}}
+        <div class="tooltip_selection">
           Choose to calculate the seasonality from day, month or year
         </div>
       </div>
-      <div class=column_selection >
-        <label  for="tcolumn">Column</label>
-        <input class="p_input" type=text id=tcolumn name=column>
-        <div class="tooltip_column">
+      <label for="tcolumn">Column</label>
+      <div class=needs_tooltip>
+        {{form.column_intrest}}
+        <div class="tooltip_selection">
           Select the column that holds the values of the variable you are interested in.
         </div>
       </div>
 
-  
+
     </div>
 
     <div class="trend_options">
-        <label  class="p_input" for=kruskal>Kruskal-Wallis</label>
-        <input type=radio id = pymannkendall name=seasonality_function value=kruskal>
-    </div> 
-    <div >
+      {{form.function}}
+    </div>
+    <div>
       {%if session.dataset%}
-
       {% with errors = get_flashed_messages(category_filter=["error"]) %}
-        {% if errors %}
-          <ul class="error_message_list">
-            {% for message in errors %}
-              <li>{{ message }}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
+      {% if errors %}
+      <ul class="error_message_list">
+        {% for message in errors %}
+        <li>Error: {{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
       {% endwith %}
       {%else %}
       <ul class="error_message_list">
         <li>You first have to select a dataset</li>
-    </ul>
+      </ul>
       {% endif %}
 
-    </div>    
+    </div>
     <div class="calculate_p_button">
-      <button class="standard_input" type=submit id=calculate_p name=calculate_seasonality value = calculate_seasonality>calculate</button>
+      <button class="standard_input" type=submit id=calculate_p name=calculate_seasonality
+        value=calculate_seasonality>calculate</button>
     </div>
   </form>
   {%endif %}
@@ -164,7 +166,7 @@ No calculations were made yet
 
 <div class="ts-image">
   {%if session.ts_image %}
-      <img id="picture" src="data:image/jpeg;base64,{{ session.ts_image}}">
+  <img id="picture" src="data:image/jpeg;base64,{{ session.ts_image}}">
   {% endif %}
 </div>
 {%endblock%}

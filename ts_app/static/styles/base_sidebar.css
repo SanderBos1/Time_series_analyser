@@ -1,41 +1,41 @@
-.content{
-    position:absolute;
+.content {
+    position: absolute;
     width: 80%;
     height: 80%;
     top: 15%;
     left: 15%;
-    display:inline-block;
-    border:solid
+    display: inline-block;
+    border: solid
 }
 
 
-#data-directory-list{
-    position:absolute;
-    width:100%;
-    height:50%;
+#data-directory-list {
+    position: absolute;
+    width: 100%;
+    height: 50%;
 }
 
-#data-directory-list h3{
-    top:3%;
-    width:100%;
-    height:5%
+#data-directory-list h3 {
+    top: 3%;
+    width: 100%;
+    height: 5%
 }
 
-#data-directory-list ul{
-    position:relative;
-    top:5%;
-    width:100%;
-    height:85%;
-    margin: 0; 
+#data-directory-list ul {
+    position: relative;
+    top: 5%;
+    width: 100%;
+    height: 85%;
+    margin: 0;
     padding: 0;
 
 }
 
-#data-directory-list li{
-    position:relative;
-    width:100%;
-    height:8%;
-    margin: 0; 
+#data-directory-list li {
+    position: relative;
+    width: 100%;
+    height: 8%;
+    margin: 0;
     padding: 0;
     list-style-type: none;
     display: inline-block;
@@ -43,85 +43,82 @@
 
 
 
-#file_list_and_delete{
-    position:relative;
-    width:100%;
-    height:100%;
-    display:grid;
+#file_list_and_delete {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: grid;
 }
 
-#file_display{
-    position:absolute;
-    width:90%;
-    height:100%;
-    background-color:#ED693C;
+#file_display {
+    position: absolute;
+    width: 90%;
+    height: 100%;
+    background-color: #ED693C;
     cursor: pointer;
     border: none;
     text-decoration: none;
     box-sizing: border-box;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding:0px;
+    padding: 0px;
 }
 
 
-#file_display:hover{
-  background-color: #FDF1F0;
+#file_display:hover {
+    background-color: #FDF1F0;
 
 }
 
-#delete_file{
-    position:relative;
-    width:10%;
-    background-color:red;
-    height:100%;
-    left:90%;
+#delete_file {
+    position: relative;
+    width: 10%;
+    background-color: red;
+    height: 100%;
+    left: 90%;
     cursor: pointer;
     border: none;
     box-sizing: border-box;
 
 }
 
-#delete_file:hover{
+#delete_file:hover {
     background-color: #FAEED1;
-  
-  }
 
-#ts-column-list{
-    position:absolute;
-    width:100%;
-    height:100%;
-    top:50%;
-    left:0%;
+}
+
+#ts-column-list {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 0%;
     display: inline-block;
 
 
 
 }
 
-#ts-column-list h3{
-    position:relative;
-    display:block;  
+#ts-column-list h3 {
+    position: relative;
+    display: block;
     overflow: hidden;
     text-overflow: ellipsis;
 
 }
 
-#ts-column-list ul{
+#ts-column-list ul {
     list-style-type: none;
-    margin: 0; 
+    margin: 0;
     padding: 0;
-    overflow:auto
-
+    overflow: auto
 }
 
-#ts-column-list li{
+#ts-column-list li {
     background-color: #ED693C;
     color: black;
     border: solid 1px;
-    text-align:center;
+    text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
-

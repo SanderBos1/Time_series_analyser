@@ -14,10 +14,10 @@ def show_columns(csv):
     session['ts_columns'] = columns
 
 
-def show_image(request, files, template):
+def show_image(files, template, form):
     csvFile = session['dataset']
-    period = request.form["period"]
-    column = request.form["column"]
+    period = form.time_column.data
+    column = form.column_intrest.data
     file = app.config['UPLOAD_FOLDER'] + csvFile
     place_image = app.config['IMAGES_FOLDER'] + "tsimage.jpg"
     try:
@@ -27,37 +27,35 @@ def show_image(request, files, template):
         data = io.BytesIO()
         img.save(data, "JPEG")
         encoded_img_data = base64.b64encode(data.getvalue())
-        session.pop('ts_image', default=None)
         session["ts_image"] = encoded_img_data.decode('utf-8')
         min_max_avg = newCSV.show_standard_calculations(column)
         session["min_max_avg"] = min_max_avg
     except Exception as e:
         flash(str(e), "error") 
-    return render_template(template +".html", files=files)
+    return render_template(template, files=files, form=form)
     
-def calculate_pvalue_trend(request, files):
+def calculate_pvalue_trend(form, form2, files):
     try:
-        trend = request.form.get("trend_function")
-        column = request.form["column"]
+        trend = form2.function.data
+        column = form2.column_intrest.data
         file = app.config['UPLOAD_FOLDER'] + session['dataset']
         new_trend_calculator = trend_calculator(file, trend)
         p_trend = new_trend_calculator.calculate_trend(trend, column)
         session["p_trend"] = p_trend
-        print(session["p_trend"])
     except Exception as e:
         flash(str(e), "error") 
-    return render_template("sequencing.html", files=files)
+    return render_template("sequencing.html", files=files, form=form, form2=form2)
 
-def calculate_pvalue_seasonality(request, files):
+def calculate_pvalue_seasonality(files, form, form2):
     try:
-        seasonality = request.form.get("seasonality_function")
-        time_column = request.form["time_column"]
-        period =  request.form["period"]
-        column = request.form["column"]
+        seasonality = form.function.data
+        time_column = form.time_column.data
+        period =  form.period.data
+        column = form.column_intrest.data
         file = app.config['UPLOAD_FOLDER'] +  session['dataset'] 
         new_seasonality_calculator = seasonality_calculator(file, seasonality)
         p_seasonality = new_seasonality_calculator.calculate_seasonality(period, time_column, column)
         session["p_seasonality"] = p_seasonality
     except Exception as e:
         flash(str(e), "error") 
-    return render_template("sequencing.html", files=files)
+    return render_template("sequencing.html", files=files, form=form, form2=form2)

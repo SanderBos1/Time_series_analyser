@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 {% block head %}
-      <link rel="stylesheet" href="{{url_for('static',filename='styles/home.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='styles/home.css')}}">
 {% endblock %}
 
 {% block content %}
 
 <div class="multiline_text">
     <div id="home_text">
-This web application is desigend to help you understand time-series.
-Start by uploading a csv file and discover what it has to offer.
+        This web application is desigend to help you understand time-series.
+        Start by uploading a csv file and discover what it has to offer.
     </div>
 </div>
 
 <form id="uploadForm" method=post enctype=multipart/form-data>
     <input class="standard_input" type=file name=file>
-    <input class="standard_input"  type=submit name=datasetCSV value=Upload>
+    <input class="standard_input" type=submit name=datasetCSV value=Upload>
 </form>
 {% endblock %}

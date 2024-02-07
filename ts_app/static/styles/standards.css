@@ -72,9 +72,10 @@ input:hover{
 
 
 .error_message_list{
-    position:relative;
+    position:fixed;
+    width:15%;
     border:solid 1px #ED693C;
-    background-color: #676767;
+    background-color: #ff7a7a;
     color:white;
     border-radius: 15px;
     z-index:1;
@@ -85,58 +86,29 @@ input:hover{
 }
 
 .error_message_list li{
-    text-align:center
+    text-align:center;
     margin:0px;
     padding:0px;
 }
 
 
-.tooltip_time_column{
+
+
+.tooltip_selection{
     display:none;
 }
 
-.time_column_selection:hover .tooltip_time_column{
+.needs_tooltip:hover  .tooltip_selection{
     position:fixed;
-    border:solid 1px #ED693C;
-    background-color: #676767;
+    width:15%;
+    border:solid 2px #ED693C;
+    background-color: #a8a5a5;
     color:white;
     border-radius: 15px;
     z-index:1;
     display:block;
 }
 
-.tooltip_period{
-    display:none;
-}
-
-.period_selection:hover  .tooltip_period{
-    position:fixed;
-    border:solid 1px #ED693C;
-    background-color: #676767;
-    color:white;
-    border-radius: 15px;
-    z-index:1;
-    display:block;
-}
-
-.tooltip_column{
-    display:none;
-}
-
-.column_selection:hover .tooltip_column{
-    position:fixed;
-    border:solid 1px #ED693C;
-    background-color: #676767;
-    color:white;
-    border-radius: 15px;
-    z-index:1;
-    display:block;
-}
-
-.multiline_text{
-    white-space: pre-wrap;
-
-}
 
 
   

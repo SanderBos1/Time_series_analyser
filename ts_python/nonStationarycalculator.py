@@ -1,7 +1,6 @@
 import pymannkendall as mk
 import pandas as pd
 from scipy import stats
-import datetime as dt
 
 class trend_calculator:
 
@@ -47,6 +46,7 @@ class seasonality_calculator:
         self.df[time_column]= pd.to_datetime(self.df[time_column])
         if self.seasonality == "kruskal":
             p_value = self.kruskal_wallis(period, time_column, column)
+        print(p_value)
         return round(p_value, 4)
     
 

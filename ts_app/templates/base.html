@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='styles/base.css')}}">
-        <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='styles/standards.css')}}">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-        {% block head %}
-        {% endblock %}
-    </head>
-<body>
-<div class="top">
-    <ul id="navbar-ul">
-        <li class="navbar-li"><a class="navbar-a" href="/">Home</a></li>
-        <li class="navbar-li"><a class="navbar-a" href="/display_ts">Display TS</a></li>
-        <li class="navbar-li"><a class="navbar-a" href="/calculations">Calculations</a></li>
-    </ul>
-</div>
 
-<div class="content">
-{% block content %}
-{% endblock %}
-</div>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles/base.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles/standards.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    {% block head %}
+    {% endblock %}
+</head>
+
+<body>
+    <div class="top">
+        <ul id="navbar-ul">
+            <li class="navbar-li"><a class="navbar-a" href="/">Home</a></li>
+            <li class="navbar-li"><a class="navbar-a" href="/display_ts">Display TS</a></li>
+            <li class="navbar-li"><a class="navbar-a" href="/calculations">Calculations</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
+
 </html>
