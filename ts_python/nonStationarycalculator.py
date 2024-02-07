@@ -17,7 +17,7 @@ class trend_calculator:
     def calculate_trend(self, trend, column):
         if trend == "pymannkendall":
             trend = self.Mann_KendallTrend(column)
-        return trend
+        return round(trend, 4)
     
 
 class seasonality_calculator:
@@ -41,12 +41,12 @@ class seasonality_calculator:
             for i in self.df[time_column].dt.day.unique():
                 res.append(self.df[self.df[period] == i][column].values)
         p_value = stats.kruskal(*res).pvalue
-        return p_value
+        return round(p_value, 4)
     
     def calculate_seasonality(self, period, time_column,  column):
         self.df[time_column]= pd.to_datetime(self.df[time_column])
         if self.seasonality == "kruskal":
             p_value = self.kruskal_wallis(period, time_column, column)
-        return p_value
+        return round(p_value, 4)
     
 

@@ -17,7 +17,7 @@
   <div class="multiline_text" id="pvalue">
 H<sub>0</sub>:There is no trend 
 H<sub>1</sub>:There is trend 
-We compare the p value against are chosen threshold value a.
+We compare the p value against are chosen threshold value a, which in this case is 0.05.
 The p-value indicates how much chance there is that the trend is due to a random process.
   {%if session.p_trend is defined%}
     {% if not session.p_trend is number %}
@@ -82,7 +82,7 @@ No calculations were made yet
   <div class="multiline_text" id="pvalue">
 H<sub>0</sub>:There is no Seasonality 
 H<sub>1</sub>:There is Seasonality 
-We compare the p value against are chosen threshold value a.
+We compare the p value against are chosen threshold value a, which in this case is 0.05.
 The p-value indicates how much chance there is that the seasonality is due to a random process.
   {%if session.p_seasonality is defined%}
   {% if not session.p_trend is number %}
