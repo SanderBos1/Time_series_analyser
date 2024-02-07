@@ -1,9 +1,10 @@
 .content{
     position:absolute;
-    top: 15%;
-    left: 15%;
     width: 80%;
     height: 80%;
+    top: 15%;
+    left: 15%;
+    display:inline-block;
     border:solid
 }
 
@@ -14,9 +15,19 @@
     height:50%;
 }
 
-#data-directory-list ul{
-    padding: 0;
+#data-directory-list h3{
+    top:3%;
+    width:100%;
+    height:5%
+}
 
+#data-directory-list ul{
+    position:relative;
+    top:5%;
+    width:100%;
+    height:85%;
+    margin: 0; 
+    padding: 0;
 
 }
 
@@ -24,6 +35,8 @@
     position:relative;
     width:100%;
     height:8%;
+    margin: 0; 
+    padding: 0;
     list-style-type: none;
     display: inline-block;
 }
@@ -31,35 +44,42 @@
 
 
 #file_list_and_delete{
-    position:absolute;
-    right:0%;
-    left:0%;
+    position:relative;
+    width:100%;
+    height:100%;
     display:grid;
-
 }
 
 #file_display{
     position:absolute;
-    left:0%;
     width:90%;
-    padding:0px;
-    background-color:#BBAB8C;
+    height:100%;
+    background-color:#ED693C;
     cursor: pointer;
-
+    border: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding:0px;
 }
 
 
 #file_display:hover{
-  background-color: #FAEED1;
+  background-color: #FDF1F0;
 
 }
 
 #delete_file{
     position:relative;
+    width:10%;
     background-color:red;
-    right:0%;
+    height:100%;
     left:90%;
     cursor: pointer;
+    border: none;
+    box-sizing: border-box;
+
 }
 
 #delete_file:hover{
@@ -69,9 +89,21 @@
 
 #ts-column-list{
     position:absolute;
-    top:50%;
     width:100%;
     height:100%;
+    top:50%;
+    left:0%;
+    display: inline-block;
+
+
+
+}
+
+#ts-column-list h3{
+    position:relative;
+    display:block;  
+    overflow: hidden;
+    text-overflow: ellipsis;
 
 }
 
@@ -84,13 +116,12 @@
 }
 
 #ts-column-list li{
-    background-color: #BBAB8C;
+    background-color: #ED693C;
     color: black;
     border: solid 1px;
     text-align:center;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-#ts-column-list h3{
-    max-width:100%;
-}
 

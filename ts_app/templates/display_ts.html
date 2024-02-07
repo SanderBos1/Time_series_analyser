@@ -9,13 +9,25 @@
 <div class=user-input>
   <form method="post">
   <div class="label_input">
-    <label for=tperiod>Period</label>
+    <div class=time_column_selection>
+    <label for=tperiod>Time Column</label>
     <input type=text id=tperiod name=period placeholder="Date">
+    <div class="tooltip_time_column">
+      Select which column in the data frame is going to be selected as time period
+    </div>
   </div>
+  </div>
+
   <div class="label_input">
-    <label for=tcolumn>Column</label>
-    <input type=text id=tcolumn name=column placeholder="IPG2211A2N">
+    <div class=column_selection >
+      <label  for="tcolumn">Column</label>
+      <input class="p_input" type=text id=tcolumn name=column>
+    <div class="tooltip_column">
+      Select the column that holds the values of the variable you are interested in.
+    </div>
   </div>
+  </div>
+
   <div class="label_input">
     <input class="standard_input" type=submit name=draw_tsImage value=Upload>
   </div>

@@ -5,17 +5,13 @@
 
 {% block content %}
 
-<p id="introductionText"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Vestibulum ultrices interdum vehicula. 
-    In venenatis at dolor fringilla fermentum. Sed nec purus orci. 
-    Ut eget enim accumsan, sagittis augue id, bibendum enim. Phasellus in venenatis enim. 
-    Nulla luctus eu ex at fermentum. Proin euismod sagittis eleifend. 
-    Donec magna ex, vehicula vitae nunc sed, aliquet bibendum est. 
-    Curabitur commodo sem ut nisi egestas commodo. Phasellus efficitur augue in congue mollis. 
-    Vestibulum felis nisi, aliquet non hendrerit sed, ornare et risus. Cras volutpat neque elementum leo elementum sodales. 
-    Sed pellentesque convallis mauris, quis vestibulum magna. Vivamus rutrum tincidunt tellus, at pulvinar arcu. 
-    Morbi ut rutrum turpis, sit amet maximus magna.
-</p>
+<div class="multiline_text">
+    <div id="home_text">
+This web application is desigend to help you understand time-series.
+Start by uploading a csv file and discover what it has to offer.
+    </div>
+</div>
+
 <form id="uploadForm" method=post enctype=multipart/form-data>
     <input class="standard_input" type=file name=file>
     <input class="standard_input"  type=submit name=datasetCSV value=Upload>

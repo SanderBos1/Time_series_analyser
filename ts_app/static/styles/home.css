@@ -1,14 +1,14 @@
-#introductionText{
+#home_text{
     position:absolute;
+    width:50%;
     top:5%;
     left:5%;
-    max-width:50%;
    
 }
 
 #uploadForm{
     position:absolute;
+    width:45%;
     top:5%;
     left:55%;
-    max-width:45%;
 }

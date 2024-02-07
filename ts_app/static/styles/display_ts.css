@@ -1,11 +1,11 @@
 
 .user-input{
-    position:absolute;
-    top:10%;
-    left:5%;
+    position:relative;
     width: 25%;
     height: 40%;
-    display: grid;
+    top:10%;
+    left:5%;
+    display: inline-block;
 }
 
 .label_input input[type="text"]{
@@ -16,30 +16,36 @@
 
 
 .calculations_placeholder{
-    position:absolute;
-    display:flex;
-    width:30%;
+    position:relative;
+    width:25%;
     height:20%;
-    top:45%;
     left:5%;
+    top:-65%;
+    display:grid;
+    grid-auto-flow: column;
+    overflow: hidden;
+
+
 }
 
 .calculations{
     position:relative;
-    width:30%;
+    width:50%;
 
 }
 .descr_numbers{
     position:relative;
+    left:50%;
     width:50%;
 }
-  
+
+
 .ts-image{
-    position: absolute;
-    left:33%;
-    top:10%;
-    width: 65%;
+    position: relative;
+    width: 63%;
     height: 70%;
+    top:-30%;
+    left:35%;
     border: solid
 }
 

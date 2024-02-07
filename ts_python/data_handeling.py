@@ -27,6 +27,7 @@ def show_image(request, files, template):
         data = io.BytesIO()
         img.save(data, "JPEG")
         encoded_img_data = base64.b64encode(data.getvalue())
+        session.pop('ts_image', default=None)
         session["ts_image"] = encoded_img_data.decode('utf-8')
         min_max_avg = newCSV.show_standard_calculations(column)
         session["min_max_avg"] = min_max_avg

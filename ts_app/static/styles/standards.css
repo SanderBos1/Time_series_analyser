@@ -1,23 +1,32 @@
 body{
-    background-color: #FDF7E4;
+    background-color: white;
     width: 100%;
     height: 100%;
+    font-family: 'Roboto', sans-serif;
 }
+
+* {
+    box-sizing: border-box;
+  }
+
 
 /* Style the submit button */
 .standard_input {
-    background-color: #BBAB8C;
+    background-color: #ED693C;
+    border: none;
     color: black;
     cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
 input:hover{
-    background-color: #FAEED1;
+    background-color: #F0F0F0;
 
 }
 
 .top{
-    background-color: #BBAB8C;
+    background-color: #ED693C;
     position: absolute;
     width: 100%;
     height: 10%;
@@ -26,7 +35,7 @@ input:hover{
 }
 
 .side-bar{
-    background-color: #DED0B6;
+    background-color: #fabeb9;
     position: absolute;
     height: 90%;
     width:12%;
@@ -53,18 +62,82 @@ input:hover{
 .navbar-a{
     display: block;
     padding: 8px;
-    background-color: #FAEED1;
+    background-color: #ED693C;
     text-decoration: none;
 }
 
 .navbar-a:hover{
-    background-color: #FDF7E4;
+    background-color: #F0F0F0;
 }
 
 
 .error_message_list{
+    position:relative;
+    border:solid 1px #ED693C;
+    background-color: #676767;
+    color:white;
+    border-radius: 15px;
+    z-index:1;
+    display:block;
     list-style-type: none;
-    margin: 0; 
-    padding: 0;
-    color: red;
+    margin:0px;
+    padding:0px;
 }
+
+.error_message_list li{
+    text-align:center
+    margin:0px;
+    padding:0px;
+}
+
+
+.tooltip_time_column{
+    display:none;
+}
+
+.time_column_selection:hover .tooltip_time_column{
+    position:fixed;
+    border:solid 1px #ED693C;
+    background-color: #676767;
+    color:white;
+    border-radius: 15px;
+    z-index:1;
+    display:block;
+}
+
+.tooltip_period{
+    display:none;
+}
+
+.period_selection:hover  .tooltip_period{
+    position:fixed;
+    border:solid 1px #ED693C;
+    background-color: #676767;
+    color:white;
+    border-radius: 15px;
+    z-index:1;
+    display:block;
+}
+
+.tooltip_column{
+    display:none;
+}
+
+.column_selection:hover .tooltip_column{
+    position:fixed;
+    border:solid 1px #ED693C;
+    background-color: #676767;
+    color:white;
+    border-radius: 15px;
+    z-index:1;
+    display:block;
+}
+
+.multiline_text{
+    white-space: pre-wrap;
+
+}
+
+
+  
+  

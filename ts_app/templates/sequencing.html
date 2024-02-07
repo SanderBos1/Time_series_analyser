@@ -14,35 +14,44 @@
   </div>
 
   {% if session.non_stationary == "Trend"%}
-  <p> H0: There is no trend <br>
-      H1: There is trend <br>
-      P_value indicates the trend in the time-series is due to change.
-  </p>
-  <div id="pvalue">
-    {%if session.p_trend is defined%}
-      {%if session.p_trend > 0.05%}
-        <p> The P value is: {{ session.p_trend }}, H0 not rejected </p>
-      {% else %}
-        <p> The P value is: {{ session.p_trend }}, H0 is rejected </p>
-      {% endif %}
+  <div class="multiline_text" id="pvalue">
+H<sub>0</sub>:There is no trend 
+H<sub>1</sub>:There is trend 
+We compare the p value against are chosen threshold value a.
+The p-value indicates how much chance there is that the trend is due to a random process.
+  {%if session.p_trend is defined%}
+    {% if not session.p_trend is number %}
+The return variable is not an integer, something went wrong.
+    {%elif session.p_trend > 0.05%}
+The P value is: {{ session.p_trend }}
+H<sub>0</sub> not rejected 
     {% else %}
-      <p>No calculation was made yet</p>
+The P value is: {{ session.p_trend }}
+H<sub>0</sub> is rejected 
     {% endif %}
+  {% else %}
+No calculations were made yet
+  {% endif %}
   </div>
 
 
 
   <form class = "p_value_calculation" method="post">
     <div class="user_input">
-      <label class="label_input" for="tcolumn">Column</label>
-      <input type=text id=tcolumn name=column>
+    <div class=column_selection>
+      <label  for="tcolumn">Column</label>
+      <input class="p_input" type=text id=tcolumn name=column>
+      <div class="tooltip_column">
+        Select the column that holds the values of the variable you are interested in.
+      </div>
+    </div>
     </div>
 
     <div class="trend_options">
-        <label  class="label_input" for=pymannkendall>Mann & Kendell</label>
-        <input type=radio id = pymannkendall name=trend_function value=pymannkendall>
+        <label  for=pymannkendall>Mann & Kendell</label>
+        <input class="p_input" type=radio id = pymannkendall name=trend_function value=pymannkendall>
     </div> 
-    <div >
+    <div>
       {%if session.dataset%}
 
       {% with errors = get_flashed_messages(category_filter=["error"]) %}
@@ -63,46 +72,65 @@
 
     </div>    
     <div class="calculate_p_button">
-      <input class="standard_input" type=submit id=calculate_p name=calculate_trend value = calculate_trend>
+      <button class="standard_input" type=submit id=calculate_p name=calculate_trend value = calculate_trend>Calculate</button>
     </div>
   </form>
   {%endif %}
 
 
   {% if session.non_stationary == "Seasonality"%}
-  <p> H0: There is no Seasonality <br>
-      H1: There is Seasonality <br>
-      P_value indicates the seasonality in the time-series is due to change.
-  </p>
-  <div id="pvalue">
-    {%if session.p_seasonality is defined%}
-      {%if session.p_seasonality > 0.05%}
-        <p> The P value is: {{ session.p_seasonality }}, H0 not rejected </p>
-      {% else %}
-        <p> The P value is: {{ session.p_seasonality }}, H0 is rejected </p>
-      {% endif %}
+  <div class="multiline_text" id="pvalue">
+H<sub>0</sub>:There is no Seasonality 
+H<sub>1</sub>:There is Seasonality 
+We compare the p value against are chosen threshold value a.
+The p-value indicates how much chance there is that the seasonality is due to a random process.
+  {%if session.p_seasonality is defined%}
+  {% if not session.p_trend is number %}
+The return variable is not an integer, something went wrong.
+    {%elif session.p_seasonality > 0.05%}
+The P value is: {{ session.p_seasonality }}
+H<sub>0</sub> not rejected 
     {% else %}
-      <p>No calculation was made yet</p>
+The P value is: {{ session.p_seasonality }}
+H<sub>0</sub> is rejected 
     {% endif %}
+  {% else %}
+No calculations were made yet
+  {% endif %}
   </div>
 
 
 
   <form class = "p_value_calculation" method="post">
     <div class="user_input">
-      <label for=time_column>time_column</label>
-      <input type=text id=time_column name=time_column>
+      <div class=time_column_selection>
+        <label  for="time_column">Time Column</label>
+        <input class="p_input" type=text id=time_column name=time_column>
+        <div class="tooltip_time_column">
+          Select which column in the data frame is going to be selected as time period.
+          It accepts the following format: 1/1/1981
+        </div>
+      </div>
+      <div class=period_selection>
+        <label  for="tcolumn">Period</label>
+        <input class="p_input" type=text id=tperiod name=period>
+        <div class="tooltip_period">
+          Choose to calculate the seasonality from day, month or year
+        </div>
+      </div>
+      <div class=column_selection >
+        <label  for="tcolumn">Column</label>
+        <input class="p_input" type=text id=tcolumn name=column>
+        <div class="tooltip_column">
+          Select the column that holds the values of the variable you are interested in.
+        </div>
+      </div>
 
-      <label for=tperiod>period</label>
-      <input type=text id=tperiod name=period>
-
-      <label class="label_input" for="tcolumn">Column</label>
-      <input type=text id=tcolumn name=column>
-
+  
     </div>
 
     <div class="trend_options">
-        <label  class="label_input" for=kruskal>Kruskal-Wallis</label>
+        <label  class="p_input" for=kruskal>Kruskal-Wallis</label>
         <input type=radio id = pymannkendall name=seasonality_function value=kruskal>
     </div> 
     <div >
@@ -125,7 +153,7 @@
 
     </div>    
     <div class="calculate_p_button">
-      <input class="standard_input" type=submit id=calculate_p name=calculate_seasonality value = calculate_seasonality>
+      <button class="standard_input" type=submit id=calculate_p name=calculate_seasonality value = calculate_seasonality>calculate</button>
     </div>
   </form>
   {%endif %}

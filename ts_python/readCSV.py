@@ -2,6 +2,8 @@ import pandas as pd
 import matplotlib 
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import os
+
 #class for csv file handeling
 class CSV:
     def __init__(self, file):
@@ -17,6 +19,7 @@ class CSV:
         plt.xticks(rotation=30, ha='right')
         plt.ylabel(column)
         plt.savefig(place)
+        plt.close()
 
     def show_columns(self):
         return self.df.columns.tolist()

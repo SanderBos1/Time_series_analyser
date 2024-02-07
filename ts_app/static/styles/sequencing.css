@@ -1,9 +1,68 @@
-.ts-image{
-    position: absolute;
+.calculation_holder{
+    position:absolute;
+    display:inline-block;
+    border: solid 1px;
+    left: 5%;
+    top: 10%;
+    width: 30%;
+    height:70%;
+}
+
+.trend_seasonaltiy_choice{
+    position:relative;
+    height:5%;
+}
+
+#pvalue.multiline_text{
+    position:relative;
+    height:50%;
+    overflow:auto
+
+}
+.p_value_calculation{
+    position:relative;
+    height:40%;
+    width:100%;
+    top:5%;
+    display:inline-block;
+}
+
+.user_input{
+    width:40%;
+    height:80%;
+    display:inline-block;
+
+}
+
+.trend_options{
+    position:absolute;
+    width:40%;
+    height:80%;
+    top:0%;
+    display:inline-block;
+}
+
+.calculate_p_button{
+    position:relative;
+    width:20%;
     left:40%;
-    top:10%;
-    width: 55%;
+}
+
+#calculate_p{
+    position:relative;
+    width:100%;
+}
+
+.p_input{
+    box-sizing: border-box;
+    width:100%;
+}
+.ts-image{
+    position: relative;
+    width: 50%;
     height: 70%;
+    top:10%;
+    left:40%;
     border: solid
 }
 
@@ -15,24 +74,11 @@
 
 }
 
-#explanation{
-    position:absolute;
-    border: solid 1px;
-    left: 5%;
-    top: 10%;
-    width: 30%;
-    height:30%;
-
+#p_value.column_selection{
+    position:relative;
+    width:50%;
 }
 
 
-.calculation_holder{
-    position:absolute;
-    display:inline-block;
-    border: solid 1px;
-    left: 5%;
-    top: 10%;
-    width: 30%;
-    height:70%;
-}
+
 
