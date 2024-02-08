@@ -2,7 +2,6 @@ import pandas as pd
 import matplotlib 
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import os
 
 #class for csv file handeling
 class CSV:
@@ -13,8 +12,8 @@ class CSV:
     #reads csv files and saves them as an image
     def displayCSV(self, time, column, place):
         self.df[time] = pd.to_datetime(self.df[time])
-        print(self.df)
         plt.plot(self.df[time],self.df[column])
+        plt.grid(True)
         plt.title('Time Series - Plot')
         plt.xlabel(time)
         plt.xticks(rotation=30, ha='right')
@@ -30,6 +29,9 @@ class CSV:
         minimum = self.df[column].min()
         average = self.df[column].mean()
         return minimum, maximum, average
+    
+    def get_df(self):
+        return self.df
 
 
 

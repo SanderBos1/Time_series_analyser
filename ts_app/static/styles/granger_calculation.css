@@ -1,0 +1,63 @@
+.granger_causality_input{
+    position:relative;
+    width:50%;
+    height:40%;
+    top:5%;
+    left:5%;
+}
+
+.needs_tooltip{
+    position:relative;
+    width:100%;
+    display:inline-block
+}
+
+.needs_tooltip > label{
+    position:relative;
+    width:45%;
+    display:inline-block;
+
+
+}
+
+#centered_button{
+    text-align: center;
+
+}
+
+
+.needs_tooltip > input{
+    position:relative;
+    width:50%;
+
+}
+
+.p_value_holder{
+    position:relative;
+    width:50%;
+    height:10%;
+    left:5%;
+}
+
+.p_value_list{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.p_value_list > li{
+    margin: 0;
+    padding: 0;
+}
+
+#test_function{
+    list-style-type: none;
+    padding:0px;
+    margin:0px;
+}
+
+#test_function > li{
+    padding:0px;
+    margin:0px;
+}
+

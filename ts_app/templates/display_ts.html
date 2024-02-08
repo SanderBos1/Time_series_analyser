@@ -7,70 +7,70 @@
 {% block content %}
 
 <div class=user-input>
-  <form method="post">
-    {{ form.csrf_token }}
-    <div class="label_input">
-      <label for=tperiod>{{ form.time_column.label }}
-      </label>
-      <div class=needs_tooltip>
-        {{form.time_column}}
-        <div class="tooltip_selection">
-          Select which column in the data frame is going to be selected as time period
-          s</div>
-      </div>
-    </div>
-
-    <div class="label_input">
-      <label for="tcolumn">Column</label>
-      <div class=needs_tooltip>
-        {{form.column_intrest}}
-        <div class="tooltip_selection">
-          Select the column that holds the values of the variable you are interested in.
+    <form method="post">
+        {{ form.csrf_token }}
+        <div class="label_input">
+            <label for=tperiod>{{ form.time_column.label }}
+            </label>
+            <div class=needs_tooltip>
+                {{form.time_column}}
+                <div class="tooltip_selection">
+                    Select which column in the data frame is going to be selected as time period
+                    s</div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div class="label_input">
-      <input class="standard_input" type=submit name=draw_tsImage value=Upload>
-    </div>
-    {%if session.dataset%}
-    {% with errors = get_flashed_messages(category_filter=["error"]) %}
-    {% if errors %}
+        <div class="label_input">
+            <label for="tcolumn">Column</label>
+            <div class=needs_tooltip>
+                {{form.column_intrest}}
+                <div class="tooltip_selection">
+                    Select the column that holds the values of the variable you are interested in.
+                </div>
+            </div>
+        </div>
+
+        {%if session.dataset%}
+        <div class="label_input">
+            <input class="standard_input" type=submit name=draw_tsImage value=Upload>
+        </div>
+        {% with errors = get_flashed_messages(category_filter=["error"]) %}
+        {% if errors %}
+        <ul class="error_message_list">
+            {% for message in errors %}
+            <li>Error: {{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </form>
+
+    {%else %}
     <ul class="error_message_list">
-      {% for message in errors %}
-      <li>Error: {{ message }}</li>
-      {% endfor %}
+        <li>You first have to select a dataset</li>
     </ul>
     {% endif %}
-    {% endwith %}
-  </form>
-
-  {%else %}
-  <ul class="error_message_list">
-    <li>You first have to select a dataset</li>
-  </ul>
-  {% endif %}
 </div>
 
 <div class="ts-image">
-  {%if session.ts_image %}
-  <img id="picture" src="data:image/jpeg;base64,{{ session.ts_image}}">
-  {% endif %}
+    {%if session.ts_image %}
+    <img id="picture" src="data:image/jpeg;base64,{{ session.ts_image}}">
+    {% endif %}
 </div>
 
 <div class="calculations_placeholder">
-  <div class="calculations">
-    <p> Minimum</p>
-    <p> Maximum</p>
-    <p> Average</p>
-  </div>
-  {%if session.min_max_avg%}
-  <div class="descr_numbers">
-    {% for number in session.min_max_avg %}
-    <p> {{number}}</p>
-    {%endfor%}
-  </div>
-  {% endif %}
+    <div class="calculations">
+        <p> Minimum</p>
+        <p> Maximum</p>
+        <p> Average</p>
+    </div>
+    {%if session.min_max_avg%}
+    <div class="descr_numbers">
+        {% for number in session.min_max_avg %}
+        <p> {{number}}</p>
+        {%endfor%}
+    </div>
+    {% endif %}
 </div>
 
 {% endblock %}

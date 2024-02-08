@@ -72,10 +72,12 @@
       {% endif %}
 
     </div>
+    {%if session.dataset%}
     <div class="calculate_p_button">
       <button class="standard_input" type=submit id=calculate_p name=calculate_trend
         value=calculate_trend>Calculate</button>
     </div>
+    {% endif %}
   </form>
   {%endif %}
 
@@ -153,10 +155,12 @@
       {% endif %}
 
     </div>
+    {%if session.dataset%}
     <div class="calculate_p_button">
       <button class="standard_input" type=submit id=calculate_p name=calculate_seasonality
         value=calculate_seasonality>calculate</button>
     </div>
+    {%endif %}
   </form>
   {%endif %}
 </div>
