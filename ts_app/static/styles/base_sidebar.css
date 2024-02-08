@@ -50,7 +50,7 @@
     display: grid;
 }
 
-#file_display {
+.file_display {
     position: absolute;
     width: 90%;
     height: 100%;
@@ -121,4 +121,22 @@
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+
+
+.column_button{
+    position:relative;
+    width:100%;
+    background-color: #ED693C;
+    border: none;
+}
+
+.column_button:hover{
+    background-color: #FDF1F0;
+
+}
+
+#chosen_button{
+    background-color: #FDF1F0;
 }

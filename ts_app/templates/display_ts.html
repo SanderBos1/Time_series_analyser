@@ -59,18 +59,18 @@
 </div>
 
 <div class="calculations_placeholder">
-    <div class="calculations">
-        <p> Minimum</p>
-        <p> Maximum</p>
-        <p> Average</p>
+    <div class="column_samples">
+        {%if session.selected_column%}
+        <h3> Samples from {{session.selected_column}}</h3>
+        <ul>
+            {% for sample_row in session.column_samples %}
+            <li>
+                {{sample_row}}
+            </li>
+            {%endfor%}
+        {%endif%}
+        </ul>
     </div>
-    {%if session.min_max_avg%}
-    <div class="descr_numbers">
-        {% for number in session.min_max_avg %}
-        <p> {{number}}</p>
-        {%endfor%}
-    </div>
-    {% endif %}
 </div>
 
 {% endblock %}

@@ -36,6 +36,13 @@ def display_ts():
     if "delete_file" in request.form:
         files = remove_files(request, files)
         return render_template("display_ts.html", files=files, form=form)
+    if "column_button" in request.form:
+        csvFile = session['dataset']
+        file = app.config['UPLOAD_FOLDER'] + csvFile
+        newCSV = CSV(file)
+        column_sample = newCSV.show_column_sample(request.form.get("column_button"))
+        session["column_samples"] = column_sample
+        session["selected_column"] = request.form.get("column_button")
     return render_template("display_ts.html", files=files, form=form)
 
 @app.route("/calculations", methods=["GET", "POST"])
@@ -56,6 +63,13 @@ def calculations():
         calculate_pvalue_seasonality(files, form, form2)
     if "non_stationary" in request.form:
         session["non_stationary"] = request.form.get("non_stationary")
+    if "column_button" in request.form:
+        csvFile = session['dataset']
+        file = app.config['UPLOAD_FOLDER'] + csvFile
+        newCSV = CSV(file)
+        column_sample = newCSV.show_column_sample(request.form.get("column_button"))
+        session["column_samples"] = column_sample
+        session["selected_column"] = request.form.get("column_button")
     return render_template("sequencing.html", files=files, form=form, form2=form2)
 
 
@@ -72,4 +86,11 @@ def granger_causality():
                 session["p_value_granger"] = p_values
             except Exception as e:
                 flash(str(e), "error")
+        if "column_button" in request.form:
+            csvFile = session['dataset']
+            file = app.config['UPLOAD_FOLDER'] + csvFile
+            newCSV = CSV(file)
+            column_sample = newCSV.show_column_sample(request.form.get("column_button"))
+            session["column_samples"] = column_sample
+            session["selected_column"] = request.form.get("column_button")
         return render_template("granger_calculation.html", files=files, form=form)

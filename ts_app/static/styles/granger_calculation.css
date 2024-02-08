@@ -1,9 +1,11 @@
 .granger_causality_input{
-    position:relative;
+    position:absolute;
     width:50%;
     height:40%;
     top:5%;
     left:5%;
+    border: solid 1px;
+
 }
 
 .needs_tooltip{
@@ -61,3 +63,11 @@
     margin:0px;
 }
 
+.column_data{
+    position:absolute;
+    width:35%;
+    height:90%;
+    top:5%;
+    left:60%;
+    border: solid 1px;
+}

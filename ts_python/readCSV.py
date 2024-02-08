@@ -24,11 +24,10 @@ class CSV:
     def show_columns(self):
         return self.df.columns.tolist()
     
-    def show_standard_calculations(self, column):
-        maximum = self.df[column].max()
-        minimum = self.df[column].min()
-        average = self.df[column].mean()
-        return minimum, maximum, average
+    def show_column_sample(self, column):
+        df = self.df[column]
+        samples = df.sample(n=10, replace=True)
+        return samples
     
     def get_df(self):
         return self.df

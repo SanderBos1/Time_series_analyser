@@ -30,8 +30,13 @@
         {%for file in files%}
         <li>
           <form id="file_list_and_delete" method="post">
-            <input id="file_display" type=submit name=ts_file value={{file}}>
+            {% if session.dataset and file == session.dataset %}
+            <input class="file_display"  id="chosen_button" type=submit name=ts_file value={{file}}>
+            {%else%}
+            <input class="file_display" type=submit name=ts_file value={{file}}>
+            {%endif%}
             <button id=delete_file name=delete_file value={{file}}>X</button>
+
           </form>
         </li>
         {%endfor %}
@@ -50,7 +55,14 @@
       <ul>
         {%for column in session.ts_columns%}
         <li>
-          {{column}}
+          <form method = "POST">
+            {% if session.selected_column and column == session.selected_column %}
+            <button value="{{column}}" class=column_button id=chosen_button name=column_button>{{column}}</button>
+            {% else%}
+            <button value="{{column}}" class=column_button id={{column}} name=column_button>{{column}}</button>
+
+            {% endif %}
+          </form>
         </li>
         {%endfor%}
       </ul>

@@ -15,11 +15,11 @@
 
 
 .calculations_placeholder {
-    position: relative;
+    position: absolute;
     width: 25%;
-    height: 20%;
+    height: 50%;
     left: 5%;
-    top: -65%;
+    top: 35%;
     display: grid;
     grid-auto-flow: column;
     overflow: hidden;
@@ -37,6 +37,14 @@
     position: relative;
     left: 50%;
     width: 50%;
+    height:40%;
+    overflow:auto;
+}
+
+.column_samples > ul{
+    list-style-type: none;
+    margin:0px;
+    padding:0px;
 }
 
 
@@ -56,3 +64,4 @@
     object-fit: fill;
 
 }
+
