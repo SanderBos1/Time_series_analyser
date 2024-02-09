@@ -27,7 +27,7 @@ def hello():
 def display_ts():
     form = ts_image_form()
     files = get_files(app.config['UPLOAD_FOLDER'])
-    if "draw_tsImage" in request.form:
+    if "submit" in request.form:
         template = "display_ts.html"
         show_image(files, template, form)
     if "ts_file" in request.form:
@@ -35,7 +35,6 @@ def display_ts():
         show_columns(csv)
     if "delete_file" in request.form:
         files = remove_files(request, files)
-        return render_template("display_ts.html", files=files, form=form)
     if "column_button" in request.form:
         csvFile = session['dataset']
         file = app.config['UPLOAD_FOLDER'] + csvFile
@@ -43,6 +42,9 @@ def display_ts():
         column_sample = newCSV.show_column_sample(request.form.get("column_button"))
         session["column_samples"] = column_sample
         session["selected_column"] = request.form.get("column_button")
+    if session.get('ts_columns') is not None:
+        form.time_column.choices = session['ts_columns']
+        form.column_intrest.choices = session['ts_columns']
     return render_template("display_ts.html", files=files, form=form)
 
 @app.route("/calculations", methods=["GET", "POST"])
@@ -70,6 +72,10 @@ def calculations():
         column_sample = newCSV.show_column_sample(request.form.get("column_button"))
         session["column_samples"] = column_sample
         session["selected_column"] = request.form.get("column_button")
+    if session.get('ts_columns') is not None:
+        form.time_column.choices = session['ts_columns']
+        form.column_intrest.choices = session['ts_columns']
+        form2.column_intrest.choices = session['ts_columns']
     return render_template("sequencing.html", files=files, form=form, form2=form2)
 
 
@@ -78,8 +84,10 @@ def calculations():
 def granger_causality():
         files = get_files(app.config['UPLOAD_FOLDER'])
         form = granger_causality_form()
-        if form.validate_on_submit():
+        if "submit" in request.form:
             try:
+                if form.column1.data == form.column2.data:
+                    flash("You have selected the same column", "error")
                 file = app.config['UPLOAD_FOLDER'] + session['dataset']
                 dataset = CSV(file).get_df()
                 p_values = granger_causality_calculation(dataset, form.column1.data, form.column2.data, form.lag.data, form.test_function.data)
@@ -93,4 +101,7 @@ def granger_causality():
             column_sample = newCSV.show_column_sample(request.form.get("column_button"))
             session["column_samples"] = column_sample
             session["selected_column"] = request.form.get("column_button")
+        if session.get('ts_columns') is not None:
+            form.column1.choices = session['ts_columns']
+            form.column2.choices = session['ts_columns']
         return render_template("granger_calculation.html", files=files, form=form)

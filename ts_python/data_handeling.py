@@ -18,6 +18,9 @@ def show_image(files, template, form):
     csvFile = session['dataset']
     period = form.time_column.data
     column = form.column_intrest.data
+    if period == column:
+        flash("You have selected non different columns", "error")
+        return render_template(template, files=files, form=form)
     file = app.config['UPLOAD_FOLDER'] + csvFile
     place_image = app.config['IMAGES_FOLDER'] + "tsimage.jpg"
     try:

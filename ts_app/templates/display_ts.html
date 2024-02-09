@@ -8,6 +8,8 @@
 
 <div class=user-input>
     <form method="post">
+        {%if session.dataset and session.ts_columns%}
+
         {{ form.csrf_token }}
         <div class="label_input">
             <label for=tperiod>{{ form.time_column.label }}
@@ -30,9 +32,8 @@
             </div>
         </div>
 
-        {%if session.dataset%}
         <div class="label_input">
-            <input class="standard_input" type=submit name=draw_tsImage value=Upload>
+            {{form.submit(class_="standard_input")}}
         </div>
         {% with errors = get_flashed_messages(category_filter=["error"]) %}
         {% if errors %}

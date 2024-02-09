@@ -35,7 +35,6 @@
     {{ form.submit(class_="standard_input")}}
 </div>
 </form>
-</div>
 <div class="error">
     {% with errors = get_flashed_messages(category_filter=["error"]) %}
     {% if errors %}
@@ -47,6 +46,10 @@
     {% endif %}
     {% endwith %}
 </div>
+</div>
+
+
+
 
 {% if session.p_value_granger%}
 <div class="p_value_holder">
