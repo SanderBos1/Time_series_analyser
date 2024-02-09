@@ -47,7 +47,7 @@
 
     <div id="ts-column-list">
       {% if session.dataset%}
-      <h3>{{session.dataset}}</h3>
+      <h3>{{session.dataset.get_file_name()}}</h3>
       {% else %}
       <h3> columns</h3>
       {% endif %}

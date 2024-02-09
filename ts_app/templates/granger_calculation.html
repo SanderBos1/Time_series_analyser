@@ -31,9 +31,15 @@
     </div>
 </div>
 {{form.test_function}}
+{%if session.dataset%}
 <div id="centered_button">
     {{ form.submit(class_="standard_input")}}
 </div>
+{%else %}
+<ul class="error_message_list">
+    <li>You first have to select a dataset</li>
+</ul>
+{% endif %}
 </form>
 <div class="error">
     {% with errors = get_flashed_messages(category_filter=["error"]) %}

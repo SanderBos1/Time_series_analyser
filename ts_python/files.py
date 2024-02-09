@@ -13,7 +13,7 @@ def remove_files(request, files):
     remove_file = app.config['UPLOAD_FOLDER'] + csv
     os.remove(remove_file)
     files.remove(request.form.get("delete_file"))
-    if session['dataset'] == csv:
+    if session['dataset'].get_file_name() == csv:
         session.pop('dataset')
         session.pop('ts_columns')
     return files
