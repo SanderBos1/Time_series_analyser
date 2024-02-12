@@ -45,7 +45,7 @@ def display_ts():
     else:
         directory_list(request, files)
     if session.get('ts_columns') is not None:
-        form.time_column.choices = session['dataset'].check_time_column()
+        form.time_column.choices = session['dataset'].get_time_columns()
         form.column_intrest.choices = session['ts_columns']
     return render_template("display_ts.html", files=files, form=form)
 
@@ -64,7 +64,7 @@ def calculations():
     else:
         directory_list(request, files)
     if session.get('ts_columns') is not None:
-        form.time_column.choices = session['dataset'].check_time_column()
+        form.time_column.choices = session['dataset'].get_time_columns()
         form.column_intrest.choices = session['ts_columns']
         form2.column_intrest.choices = session['ts_columns']
     return render_template("sequencing.html", files=files, form=form, form2=form2)

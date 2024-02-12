@@ -3,7 +3,6 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from flask import session
-from pandas.api.types import is_datetime64_any_dtype as is_datetime
 import numpy as np
 
 #class for csv file handeling
@@ -11,7 +10,16 @@ class CSV:
     def __init__(self, file):
         self.file = file
         self.df = pd.read_csv(self.file)
-    
+        self.time_columns = self.check_time_series()
+
+    def check_time_series(self):
+        allowed_columns = []
+        for column in self.df.columns:
+            check = pd.to_datetime(self.df[column], format="ISO8601", errors='coerce').notnull().all()
+            if check == True:
+                allowed_columns.append(column)
+        return allowed_columns
+        
     def get_df(self):
         return self.df
     
@@ -21,6 +29,9 @@ class CSV:
     def get_file_name(self):
         name_file = self.file.split("/")[-1]
         return name_file
+    
+    def get_time_columns(self):
+        return self.time_columns 
 
     #reads csv files and saves them as an image
     def displayCSV(self, time, column, place):
@@ -43,8 +54,5 @@ class CSV:
         samples = df.sample(n=10, replace=True)
         return samples
     
-    def check_time_column(self):
-        time_list = self.df.select_dtypes(include=[np.datetime64, "object"]).columns.tolist()
-        return time_list
 
 

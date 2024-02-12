@@ -17,22 +17,22 @@
   {{ form2.csrf_token}}
 
   <div class="multiline_text" id="pvalue">
-    H<sub>0</sub>:There is no trend
-    H<sub>1</sub>:There is trend
-    We compare the p value against are chosen threshold value a, which in this case is 0.05.
-    The p-value indicates how much chance there is that the trend is due to a random process.
+H<sub>0</sub>:There is no trend
+H<sub>1</sub>:There is trend
+We compare the p value against are chosen threshold value a, which in this case is 0.05.
+The p-value indicates how much chance there is that the trend is due to a random process.
     {%if session.p_trend is defined%}
     {% if not session.p_trend is number %}
-    The return variable is not an integer, something went wrong.
+The return variable is not an integer, something went wrong.
     {%elif session.p_trend > 0.05%}
-    The P value is: {{ session.p_trend }}
-    H<sub>0</sub> not rejected
+The P value is: {{ session.p_trend }}
+H<sub>0</sub> not rejected
     {% else %}
-    The P value is: {{ session.p_trend }}
-    H<sub>0</sub> is rejected
+The P value is: {{ session.p_trend }}
+H<sub>0</sub> is rejected
     {% endif %}
     {% else %}
-    No calculations were made yet
+No calculations were made yet
     {% endif %}
   </div>
 
