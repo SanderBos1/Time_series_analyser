@@ -8,10 +8,6 @@ from ts_python.forms import ts_image_form, seasonality_form, trend_form, granger
 from ts_python.granger_causality import granger_causality_calculation
 from ts_python.dataset import CSV
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
-
 def directory_list(request, files):
     if "delete_file" in request.form:
         files = remove_files(request, files)
@@ -29,7 +25,7 @@ def directory_list(request, files):
 def hello():
     if  'datasetCSV' in request.form:
         file = request.files['file']
-        if file and allowed_file(file.filename):
+        if file:
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     return render_template("home.html")
