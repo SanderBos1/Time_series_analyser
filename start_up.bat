@@ -1,5 +1,5 @@
 set delete_vm=%1
-set upload=%2
+set make_vm=%2
 set directory=%CD%
 
 cd %directory%
@@ -8,7 +8,10 @@ if %delete_vm%==True (
     del /s /q .\venv & rmdir /s /q .\venv 
 )
 
-python -m venv venv
+if %make_vm%==True (
+    python -m venv venv
+)
+
 Call ".\venv\Scripts\activate.bat"
 pip.exe install -r ./requirements.txt
 

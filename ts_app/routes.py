@@ -13,6 +13,8 @@ def directory_list(request, files):
         files = remove_files(request, files)
     elif "ts_file" in request.form:
         csv = app.config['UPLOAD_FOLDER'] + request.form.get("ts_file")
+        for key in list(session.keys()):
+            session.pop(key)
         session['dataset'] = CSV(csv)
         session['dataset'].show_columns()
     elif "column_button" in request.form:
@@ -40,8 +42,9 @@ def display_ts():
         show_image(files, template, form)
     else:
         directory_list(request, files)
-    if session.get('ts_columns') is not None:
-        form.time_column.choices = session['dataset'].get_time_columns()
+    if session.get('dataset') is not None:
+        form.time_column.choices = session["dataset"].time_columns
+        print(form.time_column.choices)
         form.column_intrest.choices = session['ts_columns']
     return render_template("display_ts.html", files=files, form=form)
 

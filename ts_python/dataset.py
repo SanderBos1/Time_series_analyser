@@ -14,10 +14,8 @@ class CSV:
     def check_time_series(self):
         allowed_columns = []
         for column in self.df.columns:
-            check = pd.to_datetime\
-            (self.df[column], format="ISO8601", errors='coerce')\
-            .notnull().all()
-            if check is True:
+            check = pd.to_datetime(self.df[column], format="ISO8601", errors='coerce').notnull().all()
+            if check == True:
                 allowed_columns.append(column)
         return allowed_columns
 
