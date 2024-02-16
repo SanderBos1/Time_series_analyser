@@ -161,4 +161,5 @@ cython_debug/
 /ts_app/__pycache__ 
 /ts_config/__pycache__ 
 #exclude data in data folder
-ts_app/data/*.csv
+data/*.csv
+ts_images/*.jpg
