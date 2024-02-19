@@ -2,4 +2,7 @@ lint:
 	pylint ./ts_app/
 
 activate_vm:
-	./venv/scripts/activate.bat
+	.\venv\Scripts\activate
+
+requirements:
+	pip freeze > requirements.txt

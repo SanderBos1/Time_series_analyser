@@ -1,6 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from flask import session
+import io
+import base64
+
 plt.switch_backend('agg')
 
 
@@ -34,7 +37,7 @@ class CSV:
         return self.time_columns
 
     #reads csv files and saves them as an image
-    def displayCSV(self, time, column, place):
+    def displayCSV(self, time, column):
         self.df[time] = pd.to_datetime(self.df[time])
         plt.plot(self.df[time],self.df[column])
         plt.grid(True)
@@ -42,9 +45,12 @@ class CSV:
         plt.xlabel(time)
         plt.xticks(rotation=30, ha='right')
         plt.ylabel(column)
-        plt.savefig(place)
+        img = io.BytesIO()
+        plt.savefig(img, format='jpg')
+        encoded_img_data = base64.b64encode(img.getvalue()).decode('utf-8')
         plt.close()
-
+        return encoded_img_data
+    
     def show_columns(self):
         session['ts_columns'] = self.df.columns.tolist()
         return self.df.columns.tolist()

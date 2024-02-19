@@ -1,11 +1,14 @@
-FROM ubuntu:latest
-RUN apt update && \ 
-    apt install -y python3-pip 
+FROM python:latest
+
+COPY connections connections
 COPY ts_app ts_app
-COPY ts_config ts_config
-COPY ts_python ts_python
+COPY data data
+COPY ts_images ts_images
+COPY python_classes python_classes
 COPY requirements.txt requirements.txt
+COPY master.py master.py
 
 RUN pip install -r requirements.txt
-WORKDIR /ts_app
-CMD ["python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+ENTRYPOINT [ "python3" ]
+EXPOSE 8000
+CMD ["master.py" ]

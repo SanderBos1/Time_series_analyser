@@ -46,17 +46,18 @@ input:hover{
 
 }
 
-#navbar-ul{
+.navbar-ul{
     list-style-type: none;
-    position: absolute;
     left: 5%;
     padding-left:0px;
-
-
 }
 
 .navbar-li{
     float: left;
+}
+
+.navbar-settings-li{
+    float:right;
 }
 
 .navbar-a{

@@ -59,19 +59,17 @@
     {% endif %}
 </div>
 
-<div class="calculations_placeholder">
-    <div class="column_samples">
-        {%if session.selected_column%}
-        <h3> Samples from {{session.selected_column}}</h3>
-        <ul>
-            {% for sample_row in session.column_samples %}
-            <li>
-                {{sample_row}}
-            </li>
-            {%endfor%}
-        {%endif%}
-        </ul>
-    </div>
+
+<div class="save-and-upload-image">
+    <form method="POST">
+        {{form_image.csrf_token }}
+        {{form_image.imageName}}
+        {{form_image.save}}
+    </form>
 </div>
+
+
+</div>
+
 
 {% endblock %}

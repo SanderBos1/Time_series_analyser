@@ -6,6 +6,17 @@ services:
     container_name: time_series_analyzer
     image: sanderbos/time_series_analyzer:0.0.1
     ports:
-    - "5000:5000"
+    - "8000:8000"
     volumes:
     - saved-datesets:/data
+    depends_on:
+    - postgres
+  postgres:
+    image: postgres:16
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=Time_series
+      - POSTGRES_PORT=5432
+    ports:
+      - "5432:5432"

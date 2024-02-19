@@ -13,13 +13,16 @@
 
 <body>
     <div class="top">
-        <ul id="navbar-ul">
-            <li class="navbar-li"><a class="navbar-a" href="/home">Home</a></li>
-            <li class="navbar-li"><a class="navbar-a" href="/display_ts">Display TS</a></li>
-            <li class="navbar-li"><a class="navbar-a" href="/calculations">Calculations</a></li>
-            <li class="navbar-li"><a class="navbar-a" href="/granger_causality">Granger Causality</a></li>
+        <ul class="navbar-ul">
+          <li class="navbar-li"><a class="navbar-a" href="/home">Home</a></li>
+          <li class="navbar-li"><a class="navbar-a" href="/display_ts">Display TS</a></li>
+          <li class="navbar-li"><a class="navbar-a" href="/calculations">Calculations</a></li>
+          <li class="navbar-li"><a class="navbar-a" href="/granger_causality">Granger Causality</a></li>
         </ul>
-    </div>
+        <ul class="navbar-ul" id="navbar-settings">
+          <li class="navbar-settings-li"><a class="navbar-a" href="/logout">log out</a></li>
+        </ul>
+      </div>
 
     <div class="content">
         {% block content %}

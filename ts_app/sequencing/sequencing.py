@@ -5,6 +5,7 @@ from ts_app.sequencing.python.seasonality_calculator import seasonality_calculat
 from ts_app.ts_python.buttons_sidebar import directory_list
 from python_classes.forms import seasonality_form, trend_form
 from ts_app.ts_python.files import get_files
+from flask_login import login_required
 
 sequencing_bp = Blueprint('sequencing_bp', __name__,
                     template_folder='templates',
@@ -42,6 +43,7 @@ def calculate_pvalue_seasonality(files, form, form2):
     return render_template("sequencing.html", files=files, form=form, form2=form2)
 
 @sequencing_bp.route("/calculations", methods=["GET", "POST"])
+@login_required
 def calculations():
     form = seasonality_form()
     form2 = trend_form()

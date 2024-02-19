@@ -3,14 +3,15 @@ from ts_app.granger_causality.python.granger_causality import granger_causality_
 from python_classes.forms import granger_causality_form
 from ts_app.ts_python.buttons_sidebar import directory_list
 from ts_app.ts_python.files import get_files
+from flask_login import login_required
 
 granger_bp = Blueprint('granger_bp', __name__,
                     template_folder='templates',
                     static_folder='static',
                     static_url_path="/granger/static")
 
-
 @granger_bp.route("/granger_causality", methods=["GET", "POST"])
+@login_required
 def granger_causality():
     files = get_files(current_app.config['UPLOAD_FOLDER'])
     form = granger_causality_form()
