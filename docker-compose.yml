@@ -1,19 +1,8 @@
 version: "3.9"
 volumes:
-  saved-datesets:
   postgres-db:
+  saved-datesets:
 services:
-  flaskapplication:
-    container_name: time_series_analyzer
-    image: sanderbos/time_series_analyzer:0.0.1
-    ports:
-    - "8000:8000"
-    volumes:
-    - saved-datesets:/data
-    environment:
-      SECRET_KEY: ${SECRET_KEY}
-    depends_on:
-    - postgres
   postgres:
     image: postgres:16
     volumes:
@@ -25,3 +14,15 @@ services:
       - POSTGRES_PORT=5432
     ports:
       - "5432:5432"
+  flaskapplication:
+    container_name: time_series_analyzer
+    image: sanderbos/time_series_analyzer:0.0.1
+    ports:
+    - "8000:8000"
+    volumes:
+    - saved-datesets:/data
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+    depends_on:
+      postgres:
+        condition: service_started
