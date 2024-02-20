@@ -1,0 +1,34 @@
+{% extends "base_sidebar.html" %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('image.static',filename='styles/display_ts_images.css')}}">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="choice_list">
+    <ul class="choice">
+        <li class="navbar-li"><a class="navbar-a" href="/display_ts">Make image</a></li>
+        <li class="navbar-li"><a class="navbar-a" href="/display_ts_list">Show List</a></li>
+    </ul>
+</div>
+
+<div class="image-list">
+    <ul class="saved_images">
+        {% for image in images%}
+            <li class="image">
+                <div class="name_and_delete" >
+                    <p>{{image.get_name()}}</p>
+                    <form method="POST">
+                        <button name="delete_image" value = {{image.get_name()}}> X </button>
+                    </form>
+                </div>
+                <image class ="image_list_image" src="data:iamge/jpg;base64, {{image.get_image()}}">
+            </li>
+        {% endfor%}
+    </ul>
+</div>
+
+{% endblock %}

@@ -2,7 +2,7 @@ import os
 from flask import Blueprint, current_app, flash
 from flask import render_template, request, url_for, redirect
 from werkzeug.utils import secure_filename
-from ..models import User
+from ..image_creation.python.models import User
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from ..extensions import db

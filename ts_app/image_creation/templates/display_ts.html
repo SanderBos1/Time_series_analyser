@@ -6,8 +6,15 @@
 
 {% block content %}
 
+    <div class="choice_list">
+        <ul class="choice">
+            <li class="navbar-li"><a class="navbar-a" href="/display_ts">Make image</a></li>
+            <li class="navbar-li"><a class="navbar-a" href="/display_ts_list">Show List</a></li>
+        </ul>
+    </div>
+
 <div class=user-input>
-    <form method="post">
+    <form class = user-input-form method="post">
         {%if session.dataset and session.ts_columns%}
 
         {{ form.csrf_token }}
@@ -35,6 +42,15 @@
         <div class="label_input">
             {{form.submit(class_="standard_input")}}
         </div>
+
+        {%if session.ts_image %} 
+        <div class="save-and-upload-image">
+            <form method="POST">
+                {{form_image.csrf_token }}
+                {{form_image.imageName}}
+                {{form_image.save}}
+            </form>
+        </div>
         {% with errors = get_flashed_messages(category_filter=["error"]) %}
         {% if errors %}
         <ul class="error_message_list">
@@ -45,6 +61,10 @@
         {% endif %}
         {% endwith %}
     </form>
+
+
+{% endif %}
+
 
     {%else %}
     <ul class="error_message_list">
@@ -59,14 +79,6 @@
     {% endif %}
 </div>
 
-
-<div class="save-and-upload-image">
-    <form method="POST">
-        {{form_image.csrf_token }}
-        {{form_image.imageName}}
-        {{form_image.save}}
-    </form>
-</div>
 
 
 </div>

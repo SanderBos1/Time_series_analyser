@@ -3,7 +3,7 @@ from wtforms import StringField, RadioField, IntegerField, SubmitField ,SelectFi
 from wtforms.validators import ValidationError, InputRequired, DataRequired, Email, EqualTo
 from ts_app.extensions import db
 import sqlalchemy as sa
-from ts_app.models import User
+from ts_app.image_creation.python.models import User
 from email_validator import validate_email
 
 class ts_image_form(FlaskForm):

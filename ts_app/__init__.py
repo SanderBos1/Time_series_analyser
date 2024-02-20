@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from ts_app.ts_config import config
 from ts_app.ts_python import *
@@ -9,7 +8,7 @@ from .image_creation.image_ts import image_ts_bp
 from .sequencing.sequencing import sequencing_bp
 from .granger_causality.granger_causality import granger_bp
 from .extensions import db, login
-from ts_app.models import User
+from ts_app.image_creation.python.models import User
 
 
 def create_app():

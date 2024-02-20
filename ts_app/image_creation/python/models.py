@@ -1,10 +1,12 @@
 from typing import Optional
 import sqlalchemy as sa
 import sqlalchemy.orm as so
-from .extensions import db, login
+from ...extensions import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-
+import io
+import base64
+from PIL import Image
 
 @login.user_loader
 def load_user(id):
@@ -26,3 +28,14 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+class ts_image(db.Model):
+    name: so.Mapped[str] = so.mapped_column(sa.String(64), primary_key=True)
+    image_code: so.Mapped[str] = so.mapped_column(sa.TEXT)
+
+    def get_image(self):
+        return self.image_code
+    
+    def get_name(self):
+        return self.name
+    

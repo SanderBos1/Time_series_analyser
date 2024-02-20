@@ -1,0 +1,68 @@
+.choice_list{
+    position:relative;
+    height:10%;
+    width:40%;
+    top:5%;
+}
+
+.choice{
+    list-style-type: None;
+
+}
+
+.image-list{
+    position:relative;
+    top:3%;
+    left:5%;
+    height:80%;
+    width:90%;
+    border: solid 1px black;
+    overflow: auto;
+
+}
+
+
+.saved_images{
+    width:100%;
+    height:100%;
+    margin: 0;
+    padding: 0;
+    float:left;
+    list-style-type: None;
+}
+
+
+.image{
+    position:relative;
+    top:2%;
+    height:40%;
+    width:45%;
+    margin-left: 3%;
+    padding: 0;    
+    float:left
+}
+
+.name_and_delete{
+    position:relative;
+    height:2%;
+    width:100%;
+
+}
+
+.name_and_delete > p{
+    padding:0px;
+    margin:0px;
+    float:left
+}
+
+.name_and_delete > form > button{
+    float:right
+}
+
+
+.image_list_image{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
