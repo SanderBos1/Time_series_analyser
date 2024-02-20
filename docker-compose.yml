@@ -1,6 +1,7 @@
 version: "3.9"
 volumes:
   saved-datesets:
+  postgres-db:
 services:
   flaskapplication:
     container_name: time_series_analyzer
@@ -9,10 +10,14 @@ services:
     - "8000:8000"
     volumes:
     - saved-datesets:/data
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
     depends_on:
     - postgres
   postgres:
     image: postgres:16
+    volumes:
+    - postgres-db:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres

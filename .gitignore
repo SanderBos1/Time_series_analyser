@@ -165,3 +165,5 @@ data/*.csv
 temp_images/*.jpg
 migrations
 Images/.*jpg
+postgres-data
+flask_session
