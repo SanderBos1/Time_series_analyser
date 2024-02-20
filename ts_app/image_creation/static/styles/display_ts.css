@@ -20,7 +20,7 @@
 
 .user-input-form{
     position:relative;
-    height:100%;
+    height:50%;
     width:100%;
 }
 
@@ -31,6 +31,12 @@
     width:40%
    
 }
+
+.save_image_error {
+    position:relative;
+    top:5%;
+}
+
 .label_input input[type="text"] {
     position: relative;
     width: 100%;

@@ -1,6 +1,6 @@
 from flask import session, current_app
 from ts_app.ts_python.files import remove_files
-from python_classes.dataset import CSV
+from ts_app.ts_python.dataset import CSV
 
 def directory_list(request, files):
     if "delete_file" in request.form:

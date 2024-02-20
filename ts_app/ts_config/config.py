@@ -7,7 +7,6 @@ class Config:
     SESSION_PERMANENT = False
     SQLALCHEMY_DATABASE_URI = "postgresql://postgres:postgres@localhost:5432/Time_series"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    USER_IMAGE_FOLDER = "Images/"
 
 class DevConfig:
     UPLOAD_FOLDER = 'data/'
@@ -17,4 +16,3 @@ class DevConfig:
     SESSION_PERMANENT = False
     SESSION_PERMANENT = False
     SQLALCHEMY_DATABASE_URI = "postgresql://postgres:postgres@localhost:5432/Time_series"
-    USER_IMAGE_FOLDER = "Images/"

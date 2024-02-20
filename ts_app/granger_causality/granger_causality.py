@@ -1,6 +1,6 @@
 from flask import request, render_template, session, flash, current_app, Blueprint
 from ts_app.granger_causality.python.granger_causality import granger_causality_calculation
-from python_classes.forms import granger_causality_form
+from ts_app.granger_causality.python.forms import granger_causality_form
 from ts_app.ts_python.buttons_sidebar import directory_list
 from ts_app.ts_python.files import get_files
 from flask_login import login_required

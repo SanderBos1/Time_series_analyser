@@ -6,7 +6,8 @@ from ..image_creation.python.models import User
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from ..extensions import db
-from python_classes.forms import LoginForm, RegistrationForm
+from ts_app.login.python.forms import LoginForm, RegistrationForm
+
 # Defining a blueprint
 login_bp = Blueprint('login', __name__,
                     template_folder='templates',

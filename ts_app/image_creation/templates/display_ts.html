@@ -39,9 +39,12 @@
             </div>
         </div>
 
+
         <div class="label_input">
             {{form.submit(class_="standard_input")}}
         </div>
+    </form>
+
 
         {%if session.ts_image %} 
         <div class="save-and-upload-image">
@@ -50,6 +53,11 @@
                 {{form_image.imageName}}
                 {{form_image.save}}
             </form>
+        </div>
+        <div class="save_image_error">
+        {% for error in form_image.imageName.errors %} 
+        {{ error }}
+        {% endfor%}
         </div>
         {% with errors = get_flashed_messages(category_filter=["error"]) %}
         {% if errors %}
@@ -60,7 +68,6 @@
         </ul>
         {% endif %}
         {% endwith %}
-    </form>
 
 
 {% endif %}

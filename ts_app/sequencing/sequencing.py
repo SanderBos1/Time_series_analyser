@@ -3,7 +3,7 @@ from flask import Blueprint, session, render_template, flash, current_app, reque
 from ts_app.sequencing.python.trend_calculator import trend_calculator
 from ts_app.sequencing.python.seasonality_calculator import seasonality_calculator
 from ts_app.ts_python.buttons_sidebar import directory_list
-from python_classes.forms import seasonality_form, trend_form
+from ts_app.sequencing.python.forms import seasonality_form, trend_form
 from ts_app.ts_python.files import get_files
 from flask_login import login_required
 
