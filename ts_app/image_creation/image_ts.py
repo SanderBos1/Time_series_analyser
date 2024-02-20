@@ -48,9 +48,13 @@ def display_ts():
     if "save" in request.form:
         if form_image.validate_on_submit():
             image_name = form_image.imageName.data
-            image = ts_image(name=image_name, image_code =session["ts_image"])
-            db.session.add(image)
-            db.session.commit()
+            exists = db.session.query(ts_image.name).filter_by(name=image_name).first() is not None
+            if exists:
+                flash("The name that you have selected already exists", "error")
+            else:
+                image = ts_image(name=image_name, image_code =session["ts_image"])
+                db.session.add(image)
+                db.session.commit()
     else:
         directory_list(request, files)
     return render_template("display_ts.html", files=files, form=form, form_image = form_image)

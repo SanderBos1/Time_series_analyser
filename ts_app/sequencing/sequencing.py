@@ -13,21 +13,20 @@ sequencing_bp = Blueprint('sequencing_bp', __name__,
                     static_url_path="/sequencing/static")
 
 
-def calculate_pvalue_trend(form, form2, files):
+def calculate_pvalue_trend(form, files):
     try:
-        trend = form2.function.data
-        column = form2.column_intrest.data
+        trend = form.function.data
+        column = form.column_intrest.data
         file = session['dataset'].get_file()
         new_trend_calculator = trend_calculator(file, trend)
         p_trend = new_trend_calculator.calculate_trend(trend, column)
         session["p_trend"] = p_trend
     except Exception as e:
         flash(str(e), "error")
-    return render_template("sequencing.html", files=files, form=form, form2=form2)
+    return render_template("sequencing_trend.html", files=files, form=form)
 
 
-
-def calculate_pvalue_seasonality(files, form, form2):
+def calculate_pvalue_seasonality(files, form):
     try:
         seasonality = form.function.data
         time_column = form.time_column.data
@@ -40,25 +39,32 @@ def calculate_pvalue_seasonality(files, form, form2):
         session["p_seasonality"] = p_seasonality
     except Exception as e:
         flash(str(e), "error")
-    return render_template("sequencing.html", files=files, form=form, form2=form2)
+    return render_template("sequencing_seasonality.html", files=files, form=form)
 
-@sequencing_bp.route("/calculations", methods=["GET", "POST"])
+@sequencing_bp.route("/trend", methods=["GET", "POST"])
 @login_required
 def calculations():
-    form = seasonality_form()
-    form2 = trend_form()
-    session["non_stationary"]  = "Trend"
+    form = trend_form()
     files = get_files(current_app.config['UPLOAD_FOLDER'])
     if "calculate_trend" in request.form:
-        calculate_pvalue_trend(form, form2, files)
-    elif "calculate_seasonality" in request.form:
-        calculate_pvalue_seasonality(files, form, form2)
-    elif "non_stationary" in request.form:
-        session["non_stationary"] = request.form.get("non_stationary")
+        calculate_pvalue_trend(form, files)
+    else:
+        directory_list(request, files)
+    if session.get('ts_columns') is not None:
+        form.column_intrest.choices = session['ts_columns']
+    return render_template("sequencing_trend.html", files=files, form=form)
+
+
+@sequencing_bp.route("/seasonality", methods=["GET", "POST"])
+@login_required
+def seasonality():
+    form = seasonality_form()
+    files = get_files(current_app.config['UPLOAD_FOLDER'])
+    if "calculate_seasonality" in request.form:
+        calculate_pvalue_seasonality(files, form)
     else:
         directory_list(request, files)
     if session.get('ts_columns') is not None:
         form.time_column.choices = session['dataset'].get_time_columns()
         form.column_intrest.choices = session['ts_columns']
-        form2.column_intrest.choices = session['ts_columns']
-    return render_template("sequencing.html", files=files, form=form, form2=form2)
+    return render_template("sequencing_seasonality.html", files=files, form=form)

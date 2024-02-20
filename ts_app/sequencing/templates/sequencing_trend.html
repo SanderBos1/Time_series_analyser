@@ -1,0 +1,94 @@
+{% extends "base_sidebar.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('sequencing_bp.static',filename='styles/sequencing_trend.css')}}">
+{% endblock %}
+
+{%block content%}
+
+<div class="choice_list">
+    <ul class="choice">
+        <li class="navbar-li"><a class="navbar-a" href="/trend">Trend</a></li>
+        <li class="navbar-li"><a class="navbar-a" href="/seasonality">Seasonality</a></li>
+    </ul>
+</div>
+
+
+{{ form.csrf_token}}
+<div class="place_holder_functions">
+
+<textarea class="multiline_text" id="pvalue">
+H_0:There is no trend
+H_1:There is trend
+We compare the p value against are chosen threshold value a, which in this case is 0.05.
+The p-value indicates how much chance there is that the trend is due to a random process.
+    {%if session.p_trend is defined%}
+    {% if not session.p_trend is number %}
+The return variable is not an integer, something went wrong.
+    {%elif session.p_trend > 0.05%}
+The P value is: {{ session.p_trend }}
+H_0 not rejected
+    {% else %}
+The P value is: {{ session.p_trend }}
+H_0 is rejected
+    {% endif %}
+    {% else %}
+No calculations were made yet
+    {% endif %}
+</textarea>
+
+
+
+  <form class="p_value_calculation" method="post">
+    <div class="user_input">
+      <label for="tcolumn">Column</label>
+      <div class=needs_tooltip>
+        {{form.column_intrest}}
+        <div class="tooltip_selection">
+          Select the column that holds the values of the variable you are interested in.
+        </div>
+      </div>
+    </div>
+
+    <div class="trend_options">
+      {{form.function}}
+    </div>
+    <div>
+      {%if session.dataset%}
+
+      {% with errors = get_flashed_messages(category_filter=["error"]) %}
+      {% if errors %}
+      <ul class="error_message_list">
+        {% for message in errors %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+
+      {%else %}
+      <ul class="error_message_list">
+        <li>You first have to select a dataset</li>
+      </ul>
+      {% endif %}
+
+    </div>
+    {%if session.dataset%}
+    <div class="calculate_p_button">
+      <button class="standard_input" type=submit id=calculate_p name=calculate_trend
+        value=calculate_trend>Calculate</button>
+    </div>
+    {% endif %}
+  </form>
+</div>
+
+
+<div class="ts-image">
+  {%if session.ts_image %}
+  <img id="picture" src="data:image/jpeg;base64,{{ session.ts_image}}">
+  {% endif %}
+</div>
+{%endblock%}
+
+
+
