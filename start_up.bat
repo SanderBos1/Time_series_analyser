@@ -18,7 +18,6 @@ pip.exe install -r ./requirements.txt
 del /s /q .\ts_python\__pycache__ & rmdir /s /q .\ts_python\__pycache__ 
 del /s /q .\ts_config\__pycache__ & rmdir /s /q .\ts_config\__pycache__ 
 del /s /q .\ts_app\__pycache__ & rmdir /s /q .\ts_app\__pycache__ 
-del /s /q .\ts_app\flask_session & rmdir /s /q .\ts_app\flask_session
+del /s /q .\flask_session & rmdir /s /q .\ts_app\flask_session
 
-cd ts_app
 flask run

@@ -42,9 +42,7 @@ def display_ts():
     files = get_files(current_app.config['UPLOAD_FOLDER'])
     if "submit" in request.form:
         show_image(files, form, form_image)
-    if session.get('dataset') is not None:
-        form.time_column.choices = session["dataset"].time_columns
-        form.column_intrest.choices = session['ts_columns']
+
     if "save" in request.form:
         if form_image.validate_on_submit():
             image_name = form_image.imageName.data
@@ -56,7 +54,11 @@ def display_ts():
                 db.session.add(image)
                 db.session.commit()
     else:
+        print("do i get here")
         directory_list(request, files)
+    if session.get('dataset') is not None:
+        form.time_column.choices = session["dataset"].time_columns
+        form.column_intrest.choices = session['ts_columns']
     return render_template("display_ts.html", files=files, form=form, form_image = form_image)
 
 @image_ts_bp.route('/display_ts_list', methods=["GET", "POST"])
