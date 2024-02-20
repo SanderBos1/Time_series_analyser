@@ -1,8 +1,13 @@
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 
 class Config:
     UPLOAD_FOLDER = 'data/'
     ALLOWED_EXTENSIONS = {'csv'}
-    SECRET_KEY = "98dca8ef6c39030f678e09c5"
+    SECRET_KEY = os.getenv('SECRET_KEY')
     SESSION_TYPE = 'filesystem'
     SESSION_PERMANENT = False
     SQLALCHEMY_DATABASE_URI = "postgresql://postgres:postgres@localhost:5432/Time_series"
@@ -11,7 +16,7 @@ class Config:
 class DevConfig:
     UPLOAD_FOLDER = 'data/'
     ALLOWED_EXTENSIONS = {'csv'}
-    SECRET_KEY = "98dca8ef6c39030f678e09c5"
+    SECRET_KEY = os.getenv('SECRET_KEY')    
     SESSION_TYPE = "filesystem"
     SESSION_PERMANENT = False
     SESSION_PERMANENT = False
