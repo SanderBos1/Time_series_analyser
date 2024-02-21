@@ -4,6 +4,7 @@ from ts_app.ts_config import config
 from ts_app.ts_python import *
 from flask_session import Session
 from .login.login import login_bp
+from .sidebar_logic.sidebar import sidebar_bp
 from .image_creation.image_ts import image_ts_bp
 from .sequencing.sequencing import sequencing_bp
 from .granger_causality.granger_causality import granger_bp
@@ -21,6 +22,7 @@ def create_app():
 
     """ Registering blueprints"""
     app.register_blueprint(login_bp)
+    app.register_blueprint(sidebar_bp)
     app.register_blueprint(image_ts_bp)
     app.register_blueprint(sequencing_bp)
     app.register_blueprint(granger_bp)

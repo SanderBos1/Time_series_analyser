@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{{url_for('sidebar_bp.static',filename='styles/base_sidebar.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles/standards.css')}}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="{{url_for('sidebar_bp.static',filename='scripts/sidebar.js')}}"></script>
+
+  {% block head %}
+  {% endblock %}
+</head>
+
+<body>
+  <div class="top">
+    <ul class="navbar-ul">
+      <li class="navbar-li"><a class="navbar-a" href="/home">Home</a></li>
+      <li class="navbar-li"><a class="navbar-a" href="/display_ts">Display TS</a></li>
+      <li class="navbar-li"><a class="navbar-a" href="/trend">Calculations</a></li>
+      <li class="navbar-li"><a class="navbar-a" href="/granger_causality">Granger Causality</a></li>
+    </ul>
+    <ul class="navbar-ul" id="navbar-settings">
+      <li class="navbar-settings-li"><a class="navbar-a" href="/logout">log out</a></li>
+    </ul>
+  </div>
+
+  <div class=side-bar>
+
+    <div id="data-directory-list">
+      <h3> Datasets </h3>
+      <ul id="csv_list_ul">
+
+      </ul>
+    </div>
+
+
+
+    <div id="ts-column-list">
+      <h3 id="column title"> </h3>
+      <ul id="column_list_ul">
+
+      </ul>
+    </div>
+  </div>
+
+  <div class="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
+
+</html>

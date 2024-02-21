@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, current_app, request, session, jsonify
 from flask_login import login_required
 from ts_app.ts_python.files import get_files
-from ts_app.ts_python.buttons_sidebar import directory_list
 from ..image_creation.python.forms import ts_image_form, image_save_load
 from ..image_creation.python.models import ts_image
 from ..extensions import db
@@ -19,19 +18,15 @@ image_ts_bp = Blueprint('image', __name__,
 def display_ts():
     form = ts_image_form()
     form_image = image_save_load()
-    files = get_files(current_app.config['UPLOAD_FOLDER'])
-    directory_list(request, files)
     if session.get('dataset') is not None:
         form.time_column.choices = session["dataset"].time_columns
         form.column_intrest.choices = session['ts_columns']
-    return render_template("display_ts.html", files=files, form=form, form_image = form_image)
+    return render_template("display_ts.html",  form=form, form_image = form_image)
 
 @image_ts_bp.route('/display_ts_list', methods=["GET", "POST"])
 @login_required
 def display_ts_list():
-    files = get_files(current_app.config['UPLOAD_FOLDER'])
-    directory_list(request, files)
-    return render_template("display_ts_imagelist.html", files=files)
+    return render_template("display_ts_imagelist.html")
 
 
 @image_ts_bp.route('/make_image', methods=["POST"])

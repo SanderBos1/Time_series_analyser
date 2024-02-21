@@ -1,6 +1,6 @@
 $(document).on('submit','#delete_image_form',function(e)
-{   let button = document.getElementById("delete_image_button")
-    let button_value = button.value
+{   let button = document.getElementById("delete_image_button");
+    let button_value = button.value;
     console.log(button_value);
     e.preventDefault();
     $.ajax({
@@ -12,9 +12,6 @@ $(document).on('submit','#delete_image_form',function(e)
         }
     })
 });
-
-
-
 
 
 window.onload = function() {
