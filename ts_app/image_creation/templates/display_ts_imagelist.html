@@ -3,6 +3,9 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{url_for('image.static',filename='styles/display_ts_images.css')}}">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="{{url_for('image.static',filename='scripts/image_list.js')}}"></script>
+
 {% endblock %}
 
 
@@ -15,20 +18,13 @@
     </ul>
 </div>
 
-<div class="image-list">
-    <ul class="saved_images">
-        {% for image in images%}
-            <li class="image">
-                <div class="name_and_delete" >
-                    <p>{{image.get_name()}}</p>
-                    <form method="POST">
-                        <button name="delete_image" value = {{image.get_name()}}> X </button>
-                    </form>
-                </div>
-                <image class ="image_list_image" src="data:iamge/jpg;base64, {{image.get_image()}}">
-            </li>
-        {% endfor%}
+<div id="image-list">
+    <ul id="saved_images">
+
     </ul>
 </div>
+
+
+
 
 {% endblock %}

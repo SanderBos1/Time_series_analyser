@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block head %}
 <link rel="stylesheet" href="{{url_for('login.login',filename='/static/home.css')}}">
+
+
 {% endblock %}
 
 {% block content %}
@@ -17,4 +19,6 @@
     <input class="standard_input" type=file name=file accept=".csv">
     <input class="standard_input" type=submit name=datasetCSV value=Upload>
 </form>
+
+
 {% endblock %}

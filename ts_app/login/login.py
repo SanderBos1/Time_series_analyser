@@ -62,3 +62,8 @@ def home_page():
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
     return render_template("home.html")
 
+
+@login_bp.route('/background_process_test')
+def background_process_test():
+    print ("Hello")
+    return ("nothing")

@@ -1,6 +1,9 @@
 {% extends "base_sidebar.html" %}
 {% block head %}
 <link rel="stylesheet" href="{{url_for('image.static',filename='styles/display_ts.css')}}">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="{{url_for('image.static',filename='scripts/image_handeling.js')}}"></script>
+
 {% endblock %}
 
 
@@ -14,7 +17,7 @@
     </div>
 
 <div class=user-input>
-    <form class = user-input-form method="post">
+    <form class = user-input-form id="image_draw_form" method="post">
         {%if session.dataset and session.ts_columns%}
 
         {{ form.csrf_token }}
@@ -44,11 +47,9 @@
             {{form.submit(class_="standard_input")}}
         </div>
     </form>
-
-
         {%if session.ts_image %} 
         <div class="save-and-upload-image">
-            <form method="POST">
+            <form  id="image_save_form">
                 {{form_image.csrf_token }}
                 {{form_image.imageName}}
                 {{form_image.save}}
@@ -80,10 +81,7 @@
     {% endif %}
 </div>
 
-<div class="ts-image">
-    {%if session.ts_image %}
-    <img id="picture" src="data:image/jpeg;base64,{{ session.ts_image}}">
-    {% endif %}
+<div class="ts-image" id="image_div">
 </div>
 
 

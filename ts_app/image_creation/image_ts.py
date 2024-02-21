@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, render_template, current_app, request, session
+from flask import Blueprint, render_template, current_app, request, session, jsonify
 from flask_login import login_required
 from ts_app.ts_python.files import get_files
 from ts_app.ts_python.buttons_sidebar import directory_list
@@ -13,7 +13,30 @@ image_ts_bp = Blueprint('image', __name__,
                     static_url_path="/image/static"
 )
 
-def show_image(files, form, form_image):
+
+@image_ts_bp.route('/display_ts', methods=["GET", "POST"])
+@login_required
+def display_ts():
+    form = ts_image_form()
+    form_image = image_save_load()
+    files = get_files(current_app.config['UPLOAD_FOLDER'])
+    directory_list(request, files)
+    if session.get('dataset') is not None:
+        form.time_column.choices = session["dataset"].time_columns
+        form.column_intrest.choices = session['ts_columns']
+    return render_template("display_ts.html", files=files, form=form, form_image = form_image)
+
+@image_ts_bp.route('/display_ts_list', methods=["GET", "POST"])
+@login_required
+def display_ts_list():
+    files = get_files(current_app.config['UPLOAD_FOLDER'])
+    directory_list(request, files)
+    return render_template("display_ts_imagelist.html", files=files)
+
+
+@image_ts_bp.route('/make_image', methods=["POST"])
+@login_required
+def make_image():
     """
     input: 
         files = List of csv files in the datadirectory
@@ -23,55 +46,54 @@ def show_image(files, form, form_image):
     returns:
         a drawn image displaying a time column on the x axis and a column of interest on the y axis.
     """
-    csv_file = session['dataset']
-    period = form.time_column.data
-    column = form.column_intrest.data
-    if period == column:
-        flash("You have selected non different columns", "error")
-        return render_template("display_ts_imagelist.html", files=files, form=form)
-    img = csv_file.displayCSV(period, column)
-    session["ts_image"] = img
-    return render_template("display_ts_imagelist.html", files=files, form=form, \
-                            form_image = form_image)
-
-@image_ts_bp.route('/display_ts', methods=["GET", "POST"])
-@login_required
-def display_ts():
     form = ts_image_form()
-    form_image = image_save_load()
-    files = get_files(current_app.config['UPLOAD_FOLDER'])
-    if "submit" in request.form:
-        show_image(files, form, form_image)
-
-    if "save" in request.form:
-        if form_image.validate_on_submit():
-            image_name = form_image.imageName.data
-            exists = db.session.query(ts_image.name).filter_by(name=image_name).first() is not None
-            if exists:
-                flash("The name that you have selected already exists", "error")
-            else:
-                image = ts_image(name=image_name, image_code =session["ts_image"])
-                db.session.add(image)
-                db.session.commit()
-    else:
-        print("do i get here")
-        directory_list(request, files)
     if session.get('dataset') is not None:
         form.time_column.choices = session["dataset"].time_columns
         form.column_intrest.choices = session['ts_columns']
-    return render_template("display_ts.html", files=files, form=form, form_image = form_image)
-
-@image_ts_bp.route('/display_ts_list', methods=["GET", "POST"])
-@login_required
-def display_ts_list():
-    images = ts_image.query.all()
-    files = get_files(current_app.config['UPLOAD_FOLDER'])
-    if "delete_image" in request.form:
-        image_id = request.form["delete_image"]
-        image = ts_image.query.get(image_id)
-        db.session.delete(image)
-        db.session.commit()
-        images = ts_image.query.all()
+    if form.validate_on_submit():
+        csv_file = session['dataset']
+        period = form.time_column.data
+        column = form.column_intrest.data
+        img = csv_file.displayCSV(period, column)
+        session["ts_image"] = img
+        return img
     else:
-        directory_list(request, files)
-    return render_template("display_ts_imagelist.html", images=images, files=files)
+        return "Something has gone wrong"
+
+@image_ts_bp.route('/get_images/', methods=["GET"])
+@login_required
+def get_images():
+    images = ts_image.query.all()
+    images_converted = {}
+    for image in images:
+        name = image.get_name()
+        image = image.get_image()
+        images_converted.update({name : image})
+    images_converted = jsonify(images_converted)
+    return images_converted
+
+@image_ts_bp.route('/delete/<image_name>', methods=["POST"])
+@login_required
+def delete_image(image_name):
+    image = ts_image.query.get({image_name})
+    db.session.delete(image)
+    db.session.commit()
+    return "image deleted"
+
+
+@image_ts_bp.route('/save_image/', methods=["POST"])
+@login_required
+def save_image():
+		form_image = image_save_load()
+		if form_image.validate_on_submit():
+			image_name = form_image.imageName.data
+			exists = db.session.query(ts_image.name).filter_by(name=image_name).first() is not None
+			if exists:
+				return "image already existed"
+			else:
+				image = ts_image(name=image_name, image_code=session["ts_image"])
+				db.session.add(image)
+				db.session.commit()
+				return "Image saved"
+		else:
+			return "Not validated"
