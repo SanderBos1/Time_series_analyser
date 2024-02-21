@@ -1,4 +1,7 @@
-function csv_button_click(value){
+
+
+
+  function csv_button_click(value){
     $.ajax({
         type: "GET",
         url: '/columns/' + value.value,
@@ -6,21 +9,20 @@ function csv_button_click(value){
             var ul = document.getElementById("column_list_ul")
             ul.innerHTML = "";
             for(var column_number in data){
-                console.log(column_number)
                 var li = document.createElement("li");
                 li.className = "dataset";
                 column = data[column_number];
                 li.innerHTML =  column   
                 ul.append(li);
         }
+        add_options()
+
     }
 
     });
 };
 
 function delete_csv(value){
-    console.log("delete test")
-
     $.ajax({
         type: "POST",
         url: '/delete_csv/' + value.value,
@@ -61,5 +63,3 @@ function load_csvdata(){
 $(document).ready(function() {
     load_csvdata()
   });
-
-

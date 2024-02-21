@@ -16,12 +16,8 @@ image_ts_bp = Blueprint('image', __name__,
 @image_ts_bp.route('/display_ts', methods=["GET", "POST"])
 @login_required
 def display_ts():
-    form = ts_image_form()
     form_image = image_save_load()
-    if session.get('dataset') is not None:
-        form.time_column.choices = session["dataset"].time_columns
-        form.column_intrest.choices = session['ts_columns']
-    return render_template("display_ts.html",  form=form, form_image = form_image)
+    return render_template("display_ts.html", form_image = form_image)
 
 @image_ts_bp.route('/display_ts_list', methods=["GET", "POST"])
 @login_required
@@ -41,10 +37,6 @@ def make_image():
     returns:
         a drawn image displaying a time column on the x axis and a column of interest on the y axis.
     """
-    form = ts_image_form()
-    if session.get('dataset') is not None:
-        form.time_column.choices = session["dataset"].time_columns
-        form.column_intrest.choices = session['ts_columns']
     if form.validate_on_submit():
         csv_file = session['dataset']
         period = form.time_column.data
@@ -92,3 +84,8 @@ def save_image():
 				return "Image saved"
 		else:
 			return "Not validated"
+
+
+
+
+

@@ -52,3 +52,25 @@ $(document).ready(function() {
         }
     })
 });
+
+function add_options(){
+    var columns = document.getElementById("columns");
+    columns.textContent = '';
+    var time_columns = document.getElementById("time_columns");
+    console.log(time_columns)
+    console.log(columns)
+    time_columns.textContent = '';
+    var csv_columns = document.getElementById("column_list_ul")
+    var list = csv_columns.getElementsByTagName("li")
+    for(let i = 0; i < list.length; i++){
+        var option = list[i].innerHTML
+        const element = document.createElement("option");
+        const element_2 = document.createElement("option");
+        element.value = option;
+        element_2.value = option;
+        element.innerHTML = option;
+        element_2.innerHTML = option;
+        time_columns.appendChild(element)
+        columns.appendChild(element_2)
+    }
+}

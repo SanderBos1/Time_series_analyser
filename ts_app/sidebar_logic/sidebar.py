@@ -2,7 +2,6 @@ from flask import Blueprint, current_app, session, jsonify
 from flask_login import login_required
 import os
 import glob
-from ts_app.ts_python.dataset import CSV
 import pandas as pd
 
 sidebar_bp = Blueprint('sidebar_bp', __name__,
@@ -39,3 +38,6 @@ def delete_dataset(name):
     remove_file = current_app.config['UPLOAD_FOLDER'] + csv
     os.remove(remove_file)
     return csv + "deleted"
+
+
+

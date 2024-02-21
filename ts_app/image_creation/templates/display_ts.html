@@ -16,68 +16,15 @@
     </div>
 
 <div class=user-input>
-    <form class = user-input-form id="image_draw_form" method="post">
-        {%if session.dataset and session.ts_columns%}
+<form method="GET">
+    <label for="columns">Variables</label>
+    <select id="columns">
+    </select>
+    <label for="time_columns">time_variables</label>
+    <select id="time_columns">
+    </select>
+</form>
 
-        {{ form.csrf_token }}
-        <div class="label_input">
-            <label for=tperiod>{{ form.time_column.label }}
-            </label>
-            <div class=needs_tooltip>
-                {{form.time_column}}
-                <div class="tooltip_selection">
-                    Select which column in the data frame is going to be selected as time period
-                    s</div>
-            </div>
-        </div>
-
-        <div class="label_input">
-            <label for="tcolumn">Column</label>
-            <div class=needs_tooltip>
-                {{form.column_intrest}}
-                <div class="tooltip_selection">
-                    Select the column that holds the values of the variable you are interested in.
-                </div>
-            </div>
-        </div>
-
-
-        <div class="label_input">
-            {{form.submit(class_="standard_input")}}
-        </div>
-    </form>
-        {%if session.ts_image %} 
-        <div class="save-and-upload-image">
-            <form  id="image_save_form">
-                {{form_image.csrf_token }}
-                {{form_image.imageName}}
-                {{form_image.save}}
-            </form>
-        </div>
-        <div class="save_image_error">
-        {% for error in form_image.imageName.errors %} 
-        {{ error }}
-        {% endfor%}
-        </div>
-        {% with errors = get_flashed_messages(category_filter=["error"]) %}
-        {% if errors %}
-        <ul class="error_message_list">
-            {% for message in errors %}
-            <li>Error: {{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-
-
-{% endif %}
-
-
-    {%else %}
-    <ul class="error_message_list">
-        <li>You first have to select a dataset</li>
-    </ul>
-    {% endif %}
 </div>
 
 <div class="ts-image" id="image_div">
