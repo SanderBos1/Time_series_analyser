@@ -2,7 +2,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{url_for('sequencing_bp.static',filename='styles/sequencing_trend.css')}}">
-<script src="{{url_for('sequencing_bp.static',filename='scripts/sequencing.js')}}"></script>
+<script src="{{url_for('sequencing_bp.static',filename='scripts/sequencing_trend.js')}}"></script>
 
 {% endblock %}
 
@@ -40,7 +40,7 @@
 
   </div>
 
-  <div class="pval_exp" id="trend_text">
+  <div class="pval_exp" id="seasonality_text">
     <p>
       The form found above this text aims to calculate if there is a trend in the time series. 
       A trend indicates the long-term change in the variable of a time series. 

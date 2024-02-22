@@ -1,10 +1,10 @@
 .choice_list{
     position:relative;
-    top:3%;
+    top:5%;
+    left:4%;
     width:45%;
     height:10%;
 }
-
 
 .choice{
     position:relative;
@@ -15,39 +15,41 @@
     margin:0px;
     padding:0px;
 }
-
-.place_holder_functions{
+#seasonality_form{
     position:relative;
-    height:70%;
-    width:45%;
-    margin:0px;
-    padding:0px;
-}
-
-.multiline_text{
-    position:relative;
-    height:60%;
     width:100%;
-    resize: none;
-    border: none;
-    outline: none;
-    font-family:'Roboto', sans-serif;
-
+    height:35%;
 }
 
-.ts-image{
-    position:absolute;
-    top: 5%;
-    width:50%;
-    height:60%;
-    left:50%;
+#user_input{
+    position:relative;
+    top:2%;
+    left:5%;
+    width:60%;
+}
+
+#user_input > *{
+    display:block;
+    margin:3%;
+}
+
+#season_functions{
+    position:relative;
+    width:40%;
+    float:right;
+}
+
+#season_functions > *{
+    list-style-type: None;
+    display:block;
     margin:0px;
     padding:0px;
 }
 
-.ts-image img{
+#seasonality_text{
     position:relative;
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
+}
+
+#seasonality_answers{
+    display:none;
 }

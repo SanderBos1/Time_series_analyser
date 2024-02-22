@@ -3,10 +3,12 @@ from scipy import stats
 
 
 class seasonality_calculator:
-    def __init__(self, file, seasonality):
-        self.file = file
-        self.df = pd.read_csv(self.file)
-        self.seasonality = seasonality
+    def __init__(self, file, period, function, time_column, column):
+        self.df = pd.read_csv(file)
+        self.period = period
+        self.function = function
+        self.time_column = time_column
+        self.column = column
 
     def kruskal_wallis(self, period, time_column, column):
         res = []
@@ -25,10 +27,10 @@ class seasonality_calculator:
         p_value = stats.kruskal(*res).pvalue
         return round(p_value, 4)
     
-    def calculate_seasonality(self, period, time_column,  column):
-        self.df[time_column]= pd.to_datetime(self.df[time_column])
-        if self.seasonality == "kruskal":
-            p_value = self.kruskal_wallis(period, time_column, column)
+    def calculate_seasonality(self):
+        self.df[self.time_column]= pd.to_datetime(self.df[self.time_column])
+        if self.function == "kruskal":
+            p_value = self.kruskal_wallis(self.period, self.time_column, self.column)
         print(p_value)
         return round(p_value, 4)
     

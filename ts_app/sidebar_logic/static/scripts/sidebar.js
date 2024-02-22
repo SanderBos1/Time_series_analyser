@@ -1,5 +1,10 @@
 
-
+window.addEventListener('load', function() {
+    var csv_list = document.getElementsByClassName('file_display');
+    if(csv_list[0]){
+        csv_button_click(csv_list[0])
+    }
+    })
 
   function csv_button_click(value){
     var current_selected = document.getElementById('file_display_selected')
@@ -71,9 +76,3 @@ $(document).ready(function() {
   });
 
 
-window.addEventListener('load', function (e) {
-    var csv_list = document.getElementsByClassName('file_display');
-    if(csv_list[0]){
-        csv_button_click(csv_list[0])
-    }
-    })
