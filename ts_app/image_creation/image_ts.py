@@ -16,6 +16,10 @@ image_ts_bp = Blueprint('image', __name__,
 @image_ts_bp.route('/display_ts', methods=["GET", "POST"])
 @login_required
 def display_ts():
+    """    
+    Load the basis of the webpage that handles image logic and display
+
+    """
     form = ts_image_form()
     form_image = image_save_load()
     return render_template("display_ts.html", form = form, form_image = form_image)
@@ -23,6 +27,10 @@ def display_ts():
 @image_ts_bp.route('/display_ts_list', methods=["GET", "POST"])
 @login_required
 def display_ts_list():
+    """    
+    Load the basis of the webpage that handles displaying a list of images and the functions on them
+
+    """
     return render_template("display_ts_imagelist.html")
 
 
@@ -31,10 +39,9 @@ def display_ts_list():
 def drawn_image():
     """
     input: 
-        files = List of csv files in the datadirectory
         form = A user form that indicates which columns are going to be used to draw an image
-        form_image = A user form that is used to save the image.
-
+        it shoud have information for the csv file, 
+        which column is the variable and which column is the time variable.
     returns:
         a drawn image displaying a time column on the x axis and a column of interest on the y axis.
     """
@@ -48,12 +55,14 @@ def drawn_image():
         img = make_image(csv_file, column, period)
         session["ts_image"] = img
         return img
-    else:
-        return "Something has gone wrong"
+    return "Something has gone wrong"
 
 @image_ts_bp.route('/get_images/', methods=["GET"])
 @login_required
 def get_images():
+    """
+    returns a json file containing the name and code of all images in the database
+    """
     images = ts_image.query.all()
     images_converted = {}
     for image in images:
@@ -66,6 +75,10 @@ def get_images():
 @image_ts_bp.route('/delete/<image_name>', methods=["POST"])
 @login_required
 def delete_image(image_name):
+    """
+    input: The name of the image
+    Deletes the image from the database based on its name
+    """
     image = ts_image.query.get({image_name})
     db.session.delete(image)
     db.session.commit()
@@ -75,21 +88,18 @@ def delete_image(image_name):
 @image_ts_bp.route('/save_image', methods=["POST"])
 @login_required
 def save_image():
-		form_image = image_save_load()
-		if form_image.validate_on_submit():
-			image_name = form_image.imageName.data
-			exists = db.session.query(ts_image.name).filter_by(name=image_name).first() is not None
-			if exists:
-				return "image already existed"
-			else:
-				image = ts_image(name=image_name, image_code=session["ts_image"])
-				db.session.add(image)
-				db.session.commit()
-				return "Image saved"
-		else:
-			return "Not validated"
-
-
-
-
-
+    """
+    input: A form containing the name of the image
+    saves the images in the database if its name does not already exists
+    """
+    form_image = image_save_load()
+    if form_image.validate_on_submit():
+        image_name = form_image.imageName.data
+        exists = db.session.query(ts_image.name).filter_by(name=image_name).first() is not None
+        if exists:
+            return "image already existed"
+        image = ts_image(name=image_name, image_code=session["ts_image"])
+        db.session.add(image)
+        db.session.commit()
+        return "Image saved"
+    return "Not validated"

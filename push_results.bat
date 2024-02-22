@@ -8,7 +8,7 @@ REM remove old containers, volumes and images
 docker container stop time_series_analyser
 docker container rm time_series_analyser
 docker volume remove time_series_analyser_saved-datesets
-docker rmi time_series_analyzer:latest
+docker rmi time_series_analyzer:0.0.1
 docker rmi sanderbos/time_series_analyzer:0.0.1
 
 REM push to dockerhub:
