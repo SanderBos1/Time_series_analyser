@@ -1,14 +1,22 @@
 $(document).ready(function() {
     $('#trend_form').submit(function (e) {
-        console.log("test calculate trend")
         $.ajax({
             type: "POST",
             url: '/trend/calculate',
             data: $('form').serialize(), // serializes the form's elements.
             success: function (data) {
-                var div = document.getElementById("calculated_value_trend")
-                div.innerHTML = "<p>" + data.p_value + "</p>"
-                console.log(data)  // display the returned data in the console.
+                if(data=="something went wrong"){
+                    document.getElementById("trend_answers").style.display="none"
+                    document.getElementById("Error").style.display="inline"
+                }
+                else{
+                document.getElementById("Error").style.display="none"
+                document.getElementById("trend_answers").style.display="inline"
+                var trend_value = document.getElementById("trend_value")
+                trend_value.innerHTML = data.p_value 
+                var hypotheses = document.getElementById("hypothese_trend")
+                hypotheses.innerHTML = data.Hypotheses 
+                }
             }
         });
         e.preventDefault(); // block the traditional submission of the form.

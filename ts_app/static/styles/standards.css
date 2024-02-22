@@ -80,6 +80,13 @@ input:hover{
     box-sizing: border-box;
 }
 
+.standard_error{
+    border: 1px black solid;
+    background-color:red;
+    text-align: center;
+    color:white;
+}
+
 
 
   

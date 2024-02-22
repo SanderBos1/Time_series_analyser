@@ -2,7 +2,6 @@
 
 
   function csv_button_click(value){
-    console.log(value)
     var current_selected = document.getElementById('file_display_selected')
     if(current_selected){
         current_selected.removeAttribute('id', "file_display_selected")

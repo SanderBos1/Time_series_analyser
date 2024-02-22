@@ -29,12 +29,34 @@
     {{form.submit (class_="button_standard")}}
     </div>
 
+    <div class = standard_error id="Error">
+      Something went wrong
+    </div>
+
   </form>
 
 
   <div id="calculated_value_trend">
 
   </div>
+
+  <div class="pval_exp" id="trend_text">
+    <p>
+      The form found above this text aims to calculate if there is a trend in the time series. 
+      A trend indicates the long-term change in the variable of a time series. 
+      All statistical trend functions calculate how likely it is that the trend is present due to some random process. 
+      This likelihood is expressed as a percentage called the p-value. 
+      For example, if the p-value is 10%, then there is a 10% chance that the trend observed in the time series is due to randomness
+      Normally in statistical test we define two hypotheses. Hypotheses 0 is that there is no trend in the time series while Hypotheses 1 is that there is trend in the time-series.
+    </p>
+    <div id="trend_answers">
+    <p >Your trend value is: <var id="trend_value">Not yet defined</var></p>
+    <p id="hypothese_trend"> Therefore your trend is: <var id="hypothese_trend">Not yet defined</var></p>
+    </div>
+
+</div>
+
+
 
 
 {%endblock%}

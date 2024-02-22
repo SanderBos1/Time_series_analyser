@@ -48,15 +48,19 @@ def calculate_trend():
         trend_function = form.function.data
         try:
             current_trend_calculator = trend_calculator(dataset, trend_function, var_column).calculate_trend()
+            if current_trend_calculator > 0.05:
+                hypotheses = "H0 is Rejected"
+            else:
+                hypotheses = "H0 is Accepted"
+            values_dict = {
+                'p_value':current_trend_calculator,
+                'Hypotheses':hypotheses
+            }
+            return jsonify(values_dict)
         except:
             return "something went wrong"
-        
-        values_dict = {
-            'p_value':current_trend_calculator
-        }
-        return jsonify(values_dict)
     else:
-        return "form can not be validated"
+        return "something went wrong"
 
 
 
