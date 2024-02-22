@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_migrate import Migrate
 from ts_app.ts_config import config
-from ts_app.ts_python import *
 from flask_session import Session
 from .login.login import login_bp
 from .sidebar_logic.sidebar import sidebar_bp

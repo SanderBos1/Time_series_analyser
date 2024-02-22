@@ -2,6 +2,12 @@
 
 
   function csv_button_click(value){
+    console.log(value)
+    var current_selected = document.getElementById('file_display_selected')
+    if(current_selected){
+        current_selected.removeAttribute('id', "file_display_selected")
+    }
+    value.setAttribute('id', "file_display_selected");
     $.ajax({
         type: "GET",
         url: '/columns/' + value.value,
@@ -46,11 +52,11 @@ function load_csvdata(){
             ul.innerHTML = ""
             for(var csv_number in data){
                 var li = document.createElement("li");
-                li.className = "image";
+                li.className = "csv_file_list_item";
                 csv = data[csv_number];
                 li.innerHTML = "<div>" + "<form id=file_list_and_delete method=post>"+
                 "<button class=file_display  value=" + csv + " onClick='csv_button_click(this);return false;'>" + csv + "</button>" +
-                "<button id=delete_file name=delete_file value=" + csv + " onClick='delete_csv(this);return false;'>X</button>" + "</form>" +
+                "<button id=delete_file class=delete_standard name=delete_file value=" + csv + " onClick='delete_csv(this);return false;'>X</button>" + "</form>" +
                 "</div>"
                 list.append(li);
             }
@@ -62,4 +68,13 @@ function load_csvdata(){
 
 $(document).ready(function() {
     load_csvdata()
+
   });
+
+
+window.addEventListener('load', function (e) {
+    var csv_list = document.getElementsByClassName('file_display');
+    if(csv_list[0]){
+        csv_button_click(csv_list[0])
+    }
+    })

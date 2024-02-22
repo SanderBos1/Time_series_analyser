@@ -73,13 +73,8 @@
 #delete_file {
     position: relative;
     width: 10%;
-    background-color: red;
     height: 100%;
     left: 90%;
-    cursor: pointer;
-    border: none;
-    box-sizing: border-box;
-
 }
 
 #delete_file:hover {

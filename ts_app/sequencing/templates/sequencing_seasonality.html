@@ -8,102 +8,23 @@
 
 <div class="choice_list">
   <ul class="choice">
-      <li class="navbar-li"><a class="navbar-a" href="/trend">Trend</a></li>
-      <li class="navbar-li"><a class="navbar-a" href="/seasonality">Seasonality</a></li>
+      <li class="navbar-li"><a class="button_standard" href="/trend">Trend</a></li>
+      <li class="navbar-li"><a class="button_standard" href="/seasonality">Seasonality</a></li>
   </ul>
 </div>
 
-{{ form.csrf_token}}
-<div class="place_holder_functions">
-
-<textarea class="multiline_text" id="pvalue">
-H_0:There is no Seasonality
-H_1:There is Seasonality
-
-We compare the p value against are chosen threshold value a, which in this case is 0.05.
-The p-value indicates how much chance there is that the seasonality is due to a random process.
-{%if session.p_seasonality is defined%}
-The return variable is not an number, something went wrong.
-{%if session.p_seasonality > 0.05%}
-The P value is: {{ session.p_seasonality }}
-H_0 not rejected
-{% else %}
-The P value is: {{ session.p_seasonality }}
-H_0 is rejected
-{% endif %}
-{% else %}
-No calculations were made yet
-{% endif %}
-</textarea>
-
-
-
   <form class="p_value_calculation" method="post">
     {{ form.csrf_token}}
-    <div class="user_input">
-      <label for="time_column">Time Column</label>
-      <div class=needs_tooltip>
-        {{form.time_column}}
-        <div class="tooltip_selection">
-          Select which column in the data frame is going to be selected as time period.
-          It accepts the following format: 1/1/1981
-        </div>
-      </div>
-      <label for="tcolumn">Period</label>
-      <div class=needs_tooltip>
-        {{form.period}}
-        <div class="tooltip_selection">
-          Choose to calculate the seasonality from day, month or year
-        </div>
-      </div>
-      <label for="tcolumn">Column</label>
-      <div class=needs_tooltip>
-        {{form.column_intrest}}
-        <div class="tooltip_selection">
-          Select the column that holds the values of the variable you are interested in.
-        </div>
-      </div>
-
+    {{form.dataset}}
+    {{form.period_choices}}
+    {{form.time_column}}
+    {{form.column_intrest}}
+    {{form.function}}
+    {{form.submit}}
 
     </div>
 
-    <div class="trend_options">
-      {{form.function}}
-    </div>
-    <div>
-      {%if session.dataset%}
-      {% with errors = get_flashed_messages(category_filter=["error"]) %}
-      {% if errors %}
-      <ul class="error_message_list">
-        {% for message in errors %}
-        <li>Error: {{ message }}</li>
-        {% endfor %}
-      </ul>
-      {% endif %}
-      {% endwith %}
-      {%else %}
-      <ul class="error_message_list">
-        <li>You first have to select a dataset</li>
-      </ul>
-      {% endif %}
-
-    </div>
-    {%if session.dataset%}
-    <div class="calculate_p_button">
-      <button class="standard_input" type=submit id=calculate_p name=calculate_seasonality
-        value=calculate_seasonality>calculate</button>
-    </div>
-    {%endif %}
-  </form>
-</div>
-
-
-<div class="ts-image">
-  {%if session.ts_image %}
-  <img id="picture" src="data:image/jpeg;base64,{{ session.ts_image}}">
-  {% endif %}
-</div>
-
+    
 </div>
 
 

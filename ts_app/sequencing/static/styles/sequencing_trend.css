@@ -16,22 +16,36 @@
     padding:0px;
 }
 
-.place_holder_functions{
+.p_value_calculation{
     position:relative;
+    top:3%;
+    left:5%;
+    width:60%;
     height:70%;
-    width:45%;
-    margin:0px;
-    padding:0px;
 }
 
-.multiline_text{
+
+#form_values > *{
+    display:block;
+
+}
+
+#form_function{
     position:relative;
-    height:60%;
-    width:100%;
-    resize: none;
-    border: none;
-    outline: none;
-    font-family:'Roboto', sans-serif;
+    width:40%;
+    float:right
+
+}
+
+#form_function > *{
+    padding:0px;
+    margin:0px;
+    list-style-type: none;
+}
+
+#form_values{
+    position:relative;
+    width:60%;
 }
 
 .ts-image{

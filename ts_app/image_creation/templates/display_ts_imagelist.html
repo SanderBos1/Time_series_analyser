@@ -3,7 +3,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{url_for('image.static',filename='styles/display_ts_images.css')}}">
-<script src="{{url_for('image.static',filename='scripts/image_list.js')}}"></script>
+<script src="{{url_for('image.static',filename='scripts/image_handeling.js')}}"></script>
 
 {% endblock %}
 
@@ -12,8 +12,8 @@
 
 <div class="choice_list">
     <ul class="choice">
-        <li class="navbar-li"><a class="navbar-a" href="/display_ts">Make image</a></li>
-        <li class="navbar-li"><a class="navbar-a" href="/display_ts_list">Show List</a></li>
+        <li class="navbar-li"><a class="button_standard" href="/display_ts">Make image</a></li>
+        <li class="navbar-li"><a class="button_standard" href="/display_ts_list">Show List</a></li>
     </ul>
 </div>
 
@@ -22,8 +22,5 @@
 
     </ul>
 </div>
-
-
-
 
 {% endblock %}

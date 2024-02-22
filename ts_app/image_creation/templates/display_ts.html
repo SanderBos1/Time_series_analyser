@@ -10,19 +10,26 @@
 
     <div class="choice_list">
         <ul class="choice">
-            <li class="navbar-li"><a class="navbar-a" href="/display_ts">Make image</a></li>
-            <li class="navbar-li"><a class="navbar-a" href="/display_ts_list">Show List</a></li>
+            <li class="navbar-li"><a class="button_standard" href="/display_ts">Make image</a></li>
+            <li class="navbar-li"><a class="button_standard" href="/display_ts_list">Show List</a></li>
         </ul>
     </div>
 
 <div class=user-input>
-<form method="GET">
-    <label for="columns">Variables</label>
-    <select id="columns">
-    </select>
-    <label for="time_columns">time_variables</label>
-    <select id="time_columns">
-    </select>
+    <h3> Plot two variables </h3>
+<form id= image_draw_form method="POST">
+{{ form.csrf_token }}
+{{form.dataset}}
+{{form.time_column}}
+{{form.column_intrest}}
+{{form.submit (class_="button_standard")}}
+</form>
+
+
+<form id= image_save_form method="POST">
+    <h3> Save image</h3>
+    {{ form_image.imageName }}
+    {{form_image.save (class_="button_standard")}}
 </form>
 
 </div>

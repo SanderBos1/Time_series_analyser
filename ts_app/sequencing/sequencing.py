@@ -1,30 +1,13 @@
-from flask import Blueprint, session, render_template, flash, current_app, request
-
+from flask import Blueprint, session, render_template, flash, current_app, request, jsonify
 from ts_app.sequencing.python.trend_calculator import trend_calculator
 from ts_app.sequencing.python.seasonality_calculator import seasonality_calculator
-from ts_app.ts_python.buttons_sidebar import directory_list
 from ts_app.sequencing.python.forms import seasonality_form, trend_form
-from ts_app.ts_python.files import get_files
 from flask_login import login_required
 
 sequencing_bp = Blueprint('sequencing_bp', __name__,
                     template_folder='templates',
                     static_folder='static',
                     static_url_path="/sequencing/static")
-
-
-def calculate_pvalue_trend(form, files):
-    try:
-        trend = form.function.data
-        column = form.column_intrest.data
-        file = session['dataset'].get_file()
-        new_trend_calculator = trend_calculator(file, trend)
-        p_trend = new_trend_calculator.calculate_trend(trend, column)
-        session["p_trend"] = p_trend
-    except Exception as e:
-        flash(str(e), "error")
-    return render_template("sequencing_trend.html", files=files, form=form)
-
 
 def calculate_pvalue_seasonality(files, form):
     try:
@@ -45,26 +28,35 @@ def calculate_pvalue_seasonality(files, form):
 @login_required
 def calculations():
     form = trend_form()
-    files = get_files(current_app.config['UPLOAD_FOLDER'])
-    if "calculate_trend" in request.form:
-        calculate_pvalue_trend(form, files)
-    else:
-        directory_list(request, files)
-    if session.get('ts_columns') is not None:
-        form.column_intrest.choices = session['ts_columns']
-    return render_template("sequencing_trend.html", files=files, form=form)
+    return render_template("sequencing_trend.html", form=form)
 
 
 @sequencing_bp.route("/seasonality", methods=["GET", "POST"])
 @login_required
 def seasonality():
     form = seasonality_form()
-    files = get_files(current_app.config['UPLOAD_FOLDER'])
-    if "calculate_seasonality" in request.form:
-        calculate_pvalue_seasonality(files, form)
+    return render_template("sequencing_seasonality.html", form=form)
+
+@sequencing_bp.route("/trend/calculate", methods=["POST"])
+@login_required
+def calculate_trend():
+    form = trend_form()
+    form.column_intrest.choices = [form.column_intrest.data]
+    if form.validate_on_submit():
+        dataset = current_app.config['UPLOAD_FOLDER']  + form.dataset.data
+        var_column = form.column_intrest.data
+        trend_function = form.function.data
+        try:
+            current_trend_calculator = trend_calculator(dataset, trend_function, var_column).calculate_trend()
+        except:
+            return "something went wrong"
+        
+        values_dict = {
+            'p_value':current_trend_calculator
+        }
+        return jsonify(values_dict)
     else:
-        directory_list(request, files)
-    if session.get('ts_columns') is not None:
-        form.time_column.choices = session['dataset'].get_time_columns()
-        form.column_intrest.choices = session['ts_columns']
-    return render_template("sequencing_seasonality.html", files=files, form=form)
+        return "form can not be validated"
+
+
+

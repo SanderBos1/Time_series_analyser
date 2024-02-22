@@ -60,51 +60,24 @@ input:hover{
     float:right;
 }
 
-.navbar-a{
+.button_standard{
     display: block;
     padding: 8px;
     background-color: #ED693C;
     text-decoration: none;
+    text-align:center;
 }
 
-.navbar-a:hover{
+.button_standard:hover{
     background-color: #F0F0F0;
 }
 
 
-.error_message_list{
-    position:fixed;
-    width:15%;
-    border:solid 1px #ED693C;
-    background-color: #ff7a7a;
-    color:white;
-    border-radius: 15px;
-    z-index:1;
-    display:block;
-    list-style-type: none;
-    padding:0px;
-}
-
-.error_message_list li{
-    text-align:center;
-    margin:0px;
-    padding:0px;
-}
-
-
-.tooltip_selection{
-    display:none;
-}
-
-.needs_tooltip:hover  .tooltip_selection{
-    position:absolute;
-    width:100%;
-    border:solid 2px #ED693C;
-    background-color: #a8a5a5;
-    color:white;
-    border-radius: 15px;
-    z-index:1;
-    display:block;
+.delete_standard{
+    background-color: red;
+    cursor: pointer;
+    border: none;
+    box-sizing: border-box;
 }
 
 

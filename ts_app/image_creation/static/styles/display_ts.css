@@ -18,31 +18,34 @@
     display: inline-block;
 }
 
-.user-input-form{
+#image_draw_form{
     position:relative;
     height:50%;
     width:100%;
+    display: block;
+    text-align:center;
+
+}
+
+#image_draw_form > *{
+    width:70%;
+    height:15%;
+    display: block;
 }
 
 
-.save-and-upload-image{
+#image_save_form{
     position:relative;
-    top:5%;
-    width:40%
-   
-}
-
-.save_image_error {
-    position:relative;
-    top:5%;
-}
-
-.label_input input[type="text"] {
-    position: relative;
     width: 100%;
-    margin: 5px;
+    height: 40%;
+    display: block;
 }
 
+#image_save_form > *{
+    width:70%;
+    height:15%;
+    display: block;
+}
 .ts-image {
     position: relative;
     top:-65%;

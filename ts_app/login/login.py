@@ -63,7 +63,8 @@ def home_page():
     return render_template("home.html")
 
 
-@login_bp.route('/background_process_test')
-def background_process_test():
-    print ("Hello")
-    return ("nothing")
+
+@login_bp.route("/settings", methods=["GET", "POST"])
+@login_required
+def setting_page():
+    return render_template("home.html")

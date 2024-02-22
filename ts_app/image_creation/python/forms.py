@@ -12,6 +12,7 @@ class image_save_load(FlaskForm):
     save = SubmitField("save Image")
 
 class ts_image_form(FlaskForm):
+    dataset = StringField(label="Dataset", render_kw={'readonly': True}, validators=[InputRequired()])
     time_column = SelectField(label='Time Column', validators=[InputRequired()])
     column_intrest = SelectField(label='Column of intrest', validators=[InputRequired()])
-    submit = SubmitField("Show Image")
+    submit = SubmitField("Show Image", id="image_draw_form")
