@@ -1,7 +1,7 @@
 from flask import Blueprint, session, render_template, flash, current_app, request, jsonify
-from ts_app.sequencing.python.trend_calculator import trend_calculator
+from ts_app.sequencing.python.trend_calculator import trend_calculator, trend_residuals
 from ts_app.sequencing.python.seasonality_calculator import seasonality_calculator
-from ts_app.sequencing.python.forms import seasonality_form, trend_form
+from ts_app.sequencing.python.forms import seasonality_form, trend_form, draw_resiudals
 from flask_login import login_required
 
 sequencing_bp = Blueprint('sequencing_bp', __name__,
@@ -28,14 +28,9 @@ def calculate_pvalue_seasonality(files, form):
 @login_required
 def calculations():
     form = trend_form()
-    return render_template("sequencing_trend.html", form=form)
+    draw_residuals_form = draw_resiudals()
+    return render_template("sequencing_trend.html", form=form, draw_residuals_form=draw_residuals_form)
 
-
-@sequencing_bp.route("/seasonality", methods=["GET", "POST"])
-@login_required
-def seasonality():
-    form = seasonality_form()
-    return render_template("sequencing_seasonality.html", form=form)
 
 @sequencing_bp.route("/trend/calculate", methods=["POST"])
 @login_required
@@ -61,6 +56,32 @@ def calculate_trend():
             return "something went wrong"
     else:
         return "something went wrong"
+    
+
+@sequencing_bp.route("/trend/residuals/<dataset>/<variable>", methods=["POST"])
+@login_required
+def show_residuals_trend(dataset, variable):
+    form = draw_resiudals()
+    if form.validate_on_submit():
+        plot_variables = {
+            "dataset":dataset,
+            "variable":variable,
+            "xlabel":form.xlabel.data,
+            "ylabel":form.ylabel.data,
+            "color":form.line_color.data
+        }
+
+        img = trend_residuals(plot_variables).show_residuals()
+        return img
+    return "Something went wrong"
+
+
+@sequencing_bp.route("/seasonality", methods=["GET", "POST"])
+@login_required
+def seasonality():
+    form = seasonality_form()
+    return render_template("sequencing_seasonality.html", form=form)
+
     
 
 @sequencing_bp.route("/seasonality/calculate", methods=["POST"])

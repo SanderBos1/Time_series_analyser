@@ -1,10 +1,15 @@
 
 window.addEventListener('load', function() {
     var csv_list = document.getElementsByClassName('file_display');
+    console.log(csv_list)
+    console.log(csv_list[0])
     if(csv_list[0]){
         csv_button_click(csv_list[0])
     }
+
     })
+
+
 
   function csv_button_click(value){
     var current_selected = document.getElementById('file_display_selected')
@@ -67,6 +72,7 @@ function load_csvdata(){
 
         }
     })
+
 
 }
 

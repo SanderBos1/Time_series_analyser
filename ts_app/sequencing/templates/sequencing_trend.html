@@ -16,16 +16,18 @@
 </div>
 
 
-
-
+<div class="p_value_calculation_holder">
   <form class="p_value_calculation" id="trend_form" method="post">
     {{ form.csrf_token}}
     <div id="form_function">
-      {{form.function}}
+      {{form.function.label  (class_="form_label")}}
+      {{form.function (class_="form_input")}}
     </div>
     <div id = "form_values">
-    {{form.dataset}}
-    {{form.column_intrest}}
+    {{form.dataset.label (class_="form_label")}}
+    {{form.dataset (class_="form_input")}}
+    {{form.column_intrest.label  (class_="form_label")}}
+    {{form.column_intrest (class_="form_input")}}
     {{form.submit (class_="button_standard")}}
     </div>
 
@@ -34,13 +36,10 @@
     </div>
 
   </form>
+</div>
 
-
-  <div id="calculated_value_trend">
-
-  </div>
-
-  <div class="pval_exp" id="seasonality_text">
+<div id="trend_explanation_answers">
+  <div class="pval_exp" id="trend_text">
     <p>
       The form found above this text aims to calculate if there is a trend in the time series. 
       A trend indicates the long-term change in the variable of a time series. 
@@ -49,15 +48,29 @@
       For example, if the p-value is 10%, then there is a 10% chance that the trend observed in the time series is due to randomness
       Normally in statistical test we define two hypotheses. Hypotheses 0 is that there is no trend in the time series while Hypotheses 1 is that there is trend in the time-series.
     </p>
-    <div id="trend_answers">
-    <p >Your trend value is: <var id="trend_value">Not yet defined</var></p>
-    <p id="hypothese_trend"> Therefore your trend is: <var id="hypothese_trend">Not yet defined</var></p>
-    </div>
-
 </div>
 
+<div id="trend_answers">
+  <p >Your trend value is: <var id="trend_value">Not yet defined</var></p>
+  <p id="hypothese_trend"> Therefore your trend is: <var id="hypothese_trend">Not yet defined</var></p>
+</div>
+</div>
 
+<div id="draw_residuals">
+<form  id="draw_residul_form">
+  {{draw_residuals_form.csrf_token}}
+  {{draw_residuals_form.xlabel.label  (class_="form_label")}}
+  {{draw_residuals_form.xlabel (class_="form_input")}}
+  {{draw_residuals_form.ylabel.label  (class_="form_label")}}
+  {{draw_residuals_form.ylabel (class_="form_input")}}
+  {{draw_residuals_form.line_color.label  (class_="form_label")}}
+  {{draw_residuals_form.line_color (class_="form_input")}}
+  {{draw_residuals_form.submit (class_="form_input")}}
+</form>
+</div>
 
+<div class="ts-image" id="residuals_trend_div">
+</div>
 
 {%endblock%}
 

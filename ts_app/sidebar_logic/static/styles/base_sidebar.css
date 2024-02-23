@@ -65,7 +65,12 @@
 }
 
 
-#file_display:hover {
+.file_display:hover {
+    background-color: #FDF1F0;
+
+}
+
+#file_display_selected{
     background-color: #FDF1F0;
 
 }

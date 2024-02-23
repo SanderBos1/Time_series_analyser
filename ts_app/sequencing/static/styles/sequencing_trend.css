@@ -1,7 +1,7 @@
 .choice_list{
     position:relative;
-    top:5%;
-    left:4%;
+    top:2%;
+    left:3%;
     width:45%;
     height:10%;
 }
@@ -12,23 +12,51 @@
     list-style-type: None;
     width:100%;
     height:100%;
-    left:3%;
     margin:0px;
     padding:0px;
 }
-
-.p_value_calculation{
-    position:relative;
-    top:3%;
-    left:5%;
-    width:60%;
-    height:20%;
+#trend_text > p{
+    font-size:90%;
+    height:100%;
 }
 
+.p_value_calculation_holder{
+    position:relative;
+    float:left;
+    top:2%;
+    left:3%;
+    width:40%;
+    height:50%;
 
-#form_values > *{
-    display:block;
-    margin:3%;
+}
+.p_value_calculation{
+    position:relative;
+    width:100%;
+    height:100%;
+}
+
+#trend_explanation_answers{
+    position:relative;
+    float:left;
+    left:5%;
+    width:55%;
+    height:50%;
+    overflow:auto;
+    font-size:90%;
+
+}
+
+#trend_text{
+    position:relative;
+    width:100%;
+    height:60%;
+}
+
+#trend_answers{
+    position:relative;
+    width: 100%;
+    height:10%;
+    display:none;
 
 }
 
@@ -36,13 +64,24 @@
     position:relative;
     width:40%;
     float:right
-
 }
 
-#form_function > *{
-    padding:0px;
-    margin:0px;
+.form_input{
+    margin-bottom:3%;
+    width:100%;
+}
+
+#function{
     list-style-type: none;
+    margin:0px;
+    padding:0px;
+}
+#function > li{
+    width:100%;
+    height:100%;
+    margin:0px;
+    padding:0px;
+
 }
 
 #form_values{
@@ -50,12 +89,39 @@
     width:60%;
 }
 
-#trend_text{
-    position:relative;
-    left:5%;
-    width:60%;
-}
-#trend_answers{
-    display:none
+
+
+#trend_answers > *{
+    margin:0px;
 }
 
+#draw_residuals{
+    position:relative;
+    float:left;
+    left:3%;
+    width:30%;
+    height:30%;
+}
+
+#draw_residul_form{
+    position:relative;
+    width:100%;
+    height:100%;
+}
+
+#residuals_trend_div{
+    position:relative;
+    float:left;
+    left:5%;
+    width:60%;
+    height:40%;
+}
+
+
+#residuals_trend_div img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+
+}
