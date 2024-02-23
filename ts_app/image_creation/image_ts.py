@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, jsonify
+from flask import Blueprint, render_template, session, jsonify, current_app
 from flask_login import login_required
 from ..image_creation.python.make_image import make_image
 from ..image_creation.python.forms import ts_image_form, image_save_load
@@ -34,9 +34,9 @@ def display_ts_list():
     return render_template("display_ts_imagelist.html")
 
 
-@image_ts_bp.route('/make_image', methods=["POST"])
+@image_ts_bp.route('/make_image/<dataset>', methods=["POST"])
 @login_required
-def drawn_image():
+def drawn_image(dataset):
     """
     input: 
         form = A user form that indicates which columns are going to be used to draw an image
@@ -47,11 +47,10 @@ def drawn_image():
     """
     form = ts_image_form()
     form.column_intrest.choices = [form.column_intrest.data]
-    form.time_column.choices  =[form.time_column.data]
     if form.validate_on_submit():
         plot_variables = {
-            "csv_file": form.dataset.data,
-            "time_column":form.time_column.data,
+            "csv_file": dataset,
+            "time_column": current_app.config['TIME_COLUMN'],
             "var_column":form.column_intrest.data,
             "xlabel": form.xlabel.data,
             "ylabel":form.ylabel.data,

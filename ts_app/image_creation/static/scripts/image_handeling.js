@@ -1,10 +1,10 @@
 $(document).ready(function() {
     $('#image_draw_form').submit(function (e) {
-        console.log("test")
+        var dataset = document.getElementById("file_display_selected").value
 
         $.ajax({
             type: "POST",
-            url: '/make_image',
+            url: '/make_image/'+ dataset,
             data: $('form').serialize(), // serializes the form's elements.
             success: function (data) {
                 const img_div = document.getElementById("image_div");
@@ -54,23 +54,14 @@ $(document).ready(function() {
 function add_options(){
     var columns = document.getElementById("column_intrest");
     columns.textContent = '';
-    var dataset = document.getElementById("dataset");
-    dataset.textContent = '';
-    dataset.setAttribute('value', document.getElementById("file_display_selected").value)
-    var time_columns = document.getElementById("time_column");
-    time_columns.textContent = '';
     var csv_columns = document.getElementById("column_list_ul")
     var list = csv_columns.getElementsByTagName("li")
     for(let i = 0; i < list.length; i++){
         var option = list[i].innerHTML
         const element = document.createElement("option");
-        const element_2 = document.createElement("option");
         element.value = option;
-        element_2.value = option;
         element.innerHTML = option;
-        element_2.innerHTML = option;
-        time_columns.appendChild(element)
-        columns.appendChild(element_2)
+        columns.appendChild(element)
     }
 }
 

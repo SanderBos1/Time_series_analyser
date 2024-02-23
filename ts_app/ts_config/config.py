@@ -12,6 +12,7 @@ class Config:
     SESSION_PERMANENT = False
     SQLALCHEMY_DATABASE_URI = "postgresql://postgres:postgres@host.docker.internal:5432/Time_series"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    TIME_COLUMN = "Date"
 
 
 class devConfig:
