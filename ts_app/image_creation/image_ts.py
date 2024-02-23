@@ -49,10 +49,15 @@ def drawn_image():
     form.column_intrest.choices = [form.column_intrest.data]
     form.time_column.choices  =[form.time_column.data]
     if form.validate_on_submit():
-        csv_file = form.dataset.data
-        period = form.time_column.data
-        column = form.column_intrest.data
-        img = make_image(csv_file, column, period)
+        plot_variables = {
+            "csv_file": form.dataset.data,
+            "time_column":form.time_column.data,
+            "var_column":form.column_intrest.data,
+            "xlabel": form.xlabel.data,
+            "ylabel":form.ylabel.data,
+            "color": form.line_color.data
+        }
+        img = make_image(plot_variables)
         session["ts_image"] = img
         return img
     return "Something has gone wrong"

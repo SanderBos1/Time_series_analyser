@@ -29,7 +29,6 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#image_save_form').submit(function (e) {
-
         $.ajax({
             type: "POST",
             url: '/save_image',

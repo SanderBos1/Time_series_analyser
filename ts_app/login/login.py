@@ -38,6 +38,7 @@ def logout():
     logout_user()
     return redirect(url_for('login.login'))
 
+
 @login_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:

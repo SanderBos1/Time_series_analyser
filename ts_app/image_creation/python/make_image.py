@@ -5,16 +5,15 @@ import base64
 from flask import current_app
 plt.switch_backend('agg')
 
-def make_image(file, var_column, time_column):
-    
-        df = pd.read_csv(current_app.config['UPLOAD_FOLDER'] + file)
-        df[time_column] = pd.to_datetime(df[time_column])
-        plt.plot(df[time_column],df[var_column])
+def make_image(plot_variables):
+        df = pd.read_csv(current_app.config['UPLOAD_FOLDER'] + plot_variables["csv_file"])
+        df[plot_variables["time_column"]] = pd.to_datetime(df[plot_variables["time_column"]])
+        plt.plot(df[plot_variables["time_column"]],df[plot_variables["var_column"]], color=plot_variables["color"])
         plt.grid(True)
         plt.title('Time Series - Plot')
-        plt.xlabel(time_column)
+        plt.xlabel(plot_variables["xlabel"])
         plt.xticks(rotation=30, ha='right')
-        plt.ylabel(var_column)
+        plt.ylabel(plot_variables["ylabel"])
         img = io.BytesIO()
         plt.savefig(img, format='jpg')
         encoded_img_data = base64.b64encode(img.getvalue()).decode('utf-8')

@@ -15,31 +15,44 @@
         </ul>
     </div>
 
-<div class=user-input>
 <form id= image_draw_form method="POST">
-    <h3> Plot two variables </h3>
-    {{ form.csrf_token }}
-    {{form.dataset}}
-    {{form.time_column}}
-    {{form.column_intrest}}
-    {{form.submit (class_="button_standard")}}
+    <div class=user-input>
+        <h3> Make Image </h3>
+        {{ form.csrf_token }}
+        {{form.dataset.label (class_="form_label")}}
+        {{form.dataset (class_="form_input")}}
+        {{form.time_column.label (class_="form_label")}}
+        {{form.time_column (class_="form_input")}}
+        {{form.column_intrest.label (class_="form_label")}}
+        {{form.column_intrest (class_="form_input")}}
+        {{form.submit (class_="button_standard")}}
+    </div>
+
+    <div id="image_plot_options">
+        <h3> Plot options</h3>
+        {{form.xlabel.label (class_="form_label")}}
+        {{form.xlabel (class_="form_input")}}
+        {{form.ylabel.label (class_="form_label")}}
+        {{form.ylabel (class_="form_input")}}
+        {{form.line_color.label (class_="form_label")}}
+        {{form.line_color (class_="form_input")}}
+    </div>
+
+
+    <div class="ts-image" id="image_div">
+    </div>
+    
+
 </form>
 
 
-<form id= image_save_form method="POST">
-    <h3> Save image</h3>
-    {{ form_image.imageName }}
-    {{form_image.save (class_="button_standard")}}
-</form>
-
-</div>
-
-<div class="ts-image" id="image_div">
-</div>
 
 
 
-</div>
+    <form id= image_save_form method="POST">
+        {{ form_image.imageName }}
+        {{form_image.save (class_="button_standard")}}
+    </form>
 
 
 {% endblock %}
