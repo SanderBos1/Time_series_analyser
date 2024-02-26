@@ -1,21 +1,26 @@
 {% extends "base.html" %}
 {% block head %}
-<link rel="stylesheet" href="{{url_for('login.login',filename='/static/home.css')}}">
+<link rel="stylesheet" href="{{url_for('login.static',filename='styles/home.css')}}">
 
 
 {% endblock %}
 
 {% block content %}
-<h1>Hi, {{ current_user.username }}!</h1>
+<h1 id="username">Hi, {{ current_user.username }}!</h1>
 
-<div class="multiline_text">
-    <div id="home_text">
-        This web application is desigend to help you understand time-series.
-        Start by uploading a csv file and discover what it has to offer.
-    </div>
+<div class="text_box" id="introduction_text">
+     <p>This web application is built to help people understand time series data. 
+        All functions in this web application work with CSV files that include a time column named "Date." 
+        Be aware that all functions will not work unless the data is provided in this format.</p>
+    <p>
+        Click on the 'Display ts' button to plot your data. 
+        On this page, you can also find a link to the page that shows all the images you have created. 
+        On the calculation page, you can analyze the trend and seasonality of your dataset and examine the behavior of the residuals after removing the trend or seasonality.
+         Feel free to leave suggestions for improvements on the GitHub page of this project.
+    </p>
 </div>
 
-<form id="uploadForm" method=post enctype=multipart/form-data>
+<form id="upload_form" method=post enctype=multipart/form-data>
     <input class="standard_input" type=file name=file accept=".csv">
     <input class="standard_input" type=submit name=datasetCSV value=Upload>
 </form>

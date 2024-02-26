@@ -1,8 +1,8 @@
 {% extends "base_sidebar.html" %}
 
 {% block head %}
-<link rel="stylesheet" href="{{url_for('sequencing_bp.static',filename='styles/sequencing_trend.css')}}">
-<script src="{{url_for('sequencing_bp.static',filename='scripts/sequencing_trend.js')}}"></script>
+<link rel="stylesheet" href="{{url_for('sequencing_bp.static',filename='styles/sequencing.css')}}">
+<script src="{{url_for('sequencing_bp.static',filename='scripts/sequencing.js')}}"></script>
 
 {% endblock %}
 
@@ -24,8 +24,6 @@
       {{form.function (class_="form_input")}}
     </div>
     <div id = "form_values">
-    {{form.dataset.label (class_="form_label")}}
-    {{form.dataset (class_="form_input")}}
     {{form.column_intrest.label  (class_="form_label")}}
     {{form.column_intrest (class_="form_input")}}
     {{form.submit (class_="button_standard")}}
@@ -38,7 +36,7 @@
   </form>
 </div>
 
-<div id="trend_explanation_answers">
+<div class="pvalue_explanation_answers">
   <div class="pval_exp" id="trend_text">
     <p>
       The form found above this text aims to calculate if there is a trend in the time series. 

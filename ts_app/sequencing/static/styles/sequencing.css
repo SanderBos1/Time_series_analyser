@@ -15,10 +15,8 @@
     margin:0px;
     padding:0px;
 }
-#trend_text > p{
-    font-size:90%;
-    height:100%;
-}
+
+
 
 .p_value_calculation_holder{
     position:relative;
@@ -35,7 +33,7 @@
     height:100%;
 }
 
-#trend_explanation_answers{
+.pvalue_explanation_answers{
     position:relative;
     float:left;
     left:5%;
@@ -44,6 +42,11 @@
     overflow:auto;
     font-size:90%;
 
+}
+
+.pval_exp > p{
+    font-size:90%;
+    height:100%;
 }
 
 #trend_text{

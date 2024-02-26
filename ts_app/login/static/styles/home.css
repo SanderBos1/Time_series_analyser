@@ -1,0 +1,19 @@
+#introduction_text {
+    position: relative;
+    width: 70%;
+    height:35%;
+    top: 5%;
+    left: 15%;
+
+}
+#username{
+    position:relative;
+    left:35%;
+    width:30%;
+}
+#upload_form {
+    position: relative;
+    width: 60%;
+    top: 10%;
+    left: 35%;
+}

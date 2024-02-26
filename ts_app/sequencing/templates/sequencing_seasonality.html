@@ -1,8 +1,8 @@
 {% extends "base_sidebar.html" %}
 
 {% block head %}
-<link rel="stylesheet" href="{{url_for('sequencing_bp.static',filename='styles/sequencing_seasonality.css')}}">
-<script src="{{url_for('sequencing_bp.static',filename='scripts/sequencing_seasonality.js')}}"></script>
+<link rel="stylesheet" href="{{url_for('sequencing_bp.static',filename='styles/sequencing.css')}}">
+<script src="{{url_for('sequencing_bp.static',filename='scripts/sequencing.js')}}"></script>
 {% endblock %}
 
 {%block content%}
@@ -14,17 +14,19 @@
   </ul>
 </div>
 
+<div class="p_value_calculation_holder">
   <form class="p_value_calculation" id="seasonality_form" method="post">
-    <div id="season_functions">
+    <div id="form_function">
+      {{form.function.label  (class_="form_label")}}
       {{form.function}}
     </div>
-    <div id="user_input">
+    <div id="form_values">
       {{ form.csrf_token}}
-      {{form.dataset}}
+      {{form.season_per.label  (class_="form_label")}}
       {{form.season_per}}
-      {{form.time_column}}
+      {{form.column_intrest.label  (class_="form_label")}}
       {{form.column_intrest}}
-      {{form.submit}}
+      {{form.submit (class_="button_standard")}}
     </div>
 
 
@@ -34,22 +36,25 @@
 
 
   </form>
-
-
-<div class="pval_exp" id="seasonality_text">
-    <p>
-        The form found above this text aims to calculate if there is seasonality in the time series. 
-        seasonality indicated that the time-series repeats itself somehow
-        All statistical seasonality functions calculate how likely it is that the seasonality is present due to some random process. 
-        This likelihood is expressed as a percentage called the p-value. 
-        For example, if the p-value is 10%, then there is a 10% chance that the seasonality observed in the time series is due to randomness
-        Normally in statistical test we define two hypotheses. Hypotheses 0 is that there is no seasonality in the time series while Hypotheses 1 is that there is seasonality in the time-series.
-      </p>
-      <div id="seasonality_answers">
-      <p >Your seasonality value is: <var id="seasonality_value">Not yet defined</var></p>
-      <p id="hypothese_trend"> Therefore your seasonality is: <var id="hypothese_seasonality">Not yet defined</var></p>
 </div>
 
+<div class="pvalue_explanation_answers">
+  <div class="pval_exp" id="trend_text">
+    <p>
+      The form found above this text aims to calculate if there is seasonality in the time series. 
+      seasonality indicated that the time-series repeats itself somehow
+      All statistical seasonality functions calculate how likely it is that the seasonality is present due to some random process. 
+      This likelihood is expressed as a percentage called the p-value. 
+      For example, if the p-value is 10%, then there is a 10% chance that the seasonality observed in the time series is due to randomness
+      Normally in statistical test we define two hypotheses. Hypotheses 0 is that there is no seasonality in the time series while Hypotheses 1 is that there is seasonality in the time-series.
+    </p>
+</div>
+
+<div id="seasonality_answers">
+  <p >our seasonality value is: <var id="seasonality_value">Not yet defined</var></p>
+  <p id="hypothese_seasonality"> Therefore your seasonality is: <var id="hypothese_seasonality">Not yet defined</var></p>
+</div>
+</div>
 
 
 {%endblock%}

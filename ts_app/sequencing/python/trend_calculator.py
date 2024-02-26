@@ -8,10 +8,10 @@ plt.switch_backend('agg')
 
 class trend_calculator:
 
-    def __init__(self, file, trend, column):
-        self.df = pd.read_csv(file)
-        self.trend = trend
-        self.column = column
+    def __init__(self, variable_dict):
+        self.df = pd.read_csv(variable_dict["dataset"])
+        self.column = variable_dict["var_column"]
+        self.trend = variable_dict["trend_function"]
 
     def Mann_KendallTrend(self, column):
         p_value = mk.original_test(self.df[column]).p
