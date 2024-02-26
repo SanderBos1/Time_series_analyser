@@ -27,13 +27,25 @@
 };
 
 function delete_csv(value){
+    console.log(value)
+    console.log(value.id)
     $.ajax({
         type: "POST",
         url: '/delete_csv/' + value.value,
         success: function () {
+            if(document.getElementById("file_display_selected")){
+                console.log("get here")
+                if(value.value == document.getElementById("file_display_selected").value){
+                    console.log("get here 2")
+                    var ul= document.getElementById("column_list_ul");
+                    ul.innerHTML = ""
+                }
+
+            }
             list = document.getElementById("csv_list_ul");
             list.innerHTML = ""
             load_csvdata()
+
     }
     });
 };

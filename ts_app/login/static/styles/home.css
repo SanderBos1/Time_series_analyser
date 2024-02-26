@@ -4,16 +4,22 @@
     height:35%;
     top: 5%;
     left: 15%;
+}
+
+#introduction_text > p{
+    height:50%;
+    width:100%;
+    overflow:auto
 
 }
 #username{
     position:relative;
-    left:35%;
-    width:30%;
+    text-align: center;
+
 }
 #upload_form {
+    top:15%;
     position: relative;
-    width: 60%;
-    top: 10%;
-    left: 35%;
+    text-align: center;
+
 }
