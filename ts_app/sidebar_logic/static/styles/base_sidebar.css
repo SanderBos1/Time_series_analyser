@@ -9,6 +9,18 @@
 }
 
 
+#upload_form_holder{
+    position:absolute;
+    top:10%;
+    left:10%;
+    width:50%;
+    height:50%;
+    z-index:1;
+    background-color: blue;
+    border: solid 1px black;
+    display:none;
+}
+
 #data-directory-list {
     position: absolute;
     width: 100%;

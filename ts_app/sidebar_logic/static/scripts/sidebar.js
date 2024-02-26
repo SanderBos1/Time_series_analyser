@@ -1,4 +1,10 @@
 
+function show_upload(){
+    var save_dialogue = document.getElementById("upload_form_holder")
+    save_dialogue.style.display="inline-block"
+}
+
+
 
   function csv_button_click(value){
     var current_selected = document.getElementById('file_display_selected')
@@ -27,8 +33,6 @@
 };
 
 function delete_csv(value){
-    console.log(value)
-    console.log(value.id)
     $.ajax({
         type: "POST",
         url: '/delete_csv/' + value.value,
@@ -77,6 +81,39 @@ function load_csvdata(){
 
 }
 
+
+
+$(document).ready(function() {
+    $('#upload_form').submit(function (e) {
+        var form = new FormData($(this)[0])
+        console.log(form)
+        $.ajax({
+            beforeSend: function(xhr, settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken",  "{{ form.csrf_token._value() }}");
+                }
+            },
+            type:'POST',
+            url:'/upload',
+            data: form, 
+            processData: false,
+            contentType: false,
+            success:function(data)
+            {
+                load_csvdata()
+            }
+        })
+        e.preventDefault()
+
+    })
+});
+
+
+
+
+
+
+
 $(document).ready(function() {
     load_csvdata()
       
@@ -91,8 +128,6 @@ window.addEventListener('load', function() {
     })
 
   });
-
-
 
 
 

@@ -25,9 +25,13 @@
     <ul class="navbar-ul" id="navbar-settings">
       <li class="navbar-settings-li"><a class="button_standard" href="/logout">log out</a></li>
       <li class="navbar-settings-li"><a class = button_standard href="/settings">{{current_user.username}}</a></li>
+      <li class="navbar-settings-li"><button class="button_standard" onclick="show_upload()">Upload data</button>
+    </li>
     </ul>
     {%endif%}
   </div>
+
+
 
   <div class=side-bar>
 
@@ -49,6 +53,13 @@
   </div>
 
   <div class="content">
+    <div id="upload_form_holder">
+      <form id="upload_form" method=post  enctype="multipart/form-data">
+        {{upload_form.csrf_token (id_="csv_upload_csfr")}}
+        {{upload_form.file }}
+        {{upload_form.submit (id_="csv_upload")}}
+      </form>
+  </div>
     {% block content %}
     {% endblock %}
   </div>

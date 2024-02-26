@@ -69,34 +69,30 @@ $(document).ready(function() {
     })
 });
 
+
 $(document).ready(function() {
-    console.log("test")
     $('#draw_residul_form').submit(function (e) {
         var dataset = document.getElementById("file_display_selected").value
         var var_column = document.getElementById("column_intrest").value
-
-        console.log(dataset)
         $.ajax({
+            beforeSend: function(xhr, settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
+                }
+            },
             type: "POST",
             url: '/trend/residuals/' + dataset + "/" + var_column,
-            data: $('form').serialize(), // serializes the form's elements.
+            data: $('form').serialize(), 
             success: function (data) {
                 const img_div = document.getElementById("residuals_trend_div");
                 img_div.innerHTML = "<img id=picture src=data:image/jpeg;base64," + data + ">";
             }
         });
-        e.preventDefault(); // block the traditional submission of the form.
-    });
+        e.preventDefault(); 
 
-    // Inject our CSRF token into our AJAX request.
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
-            }
-        }
     })
 });
+
 
 function add_options(){
     var columns = document.getElementById("column_intrest");

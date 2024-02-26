@@ -15,13 +15,13 @@
 </div>
 
 <div class="p_value_calculation_holder">
-  <form class="p_value_calculation" id="seasonality_form" method="post">
+  <form class="p_value_calculation" id="seasonality_form" method="post" onsubmit="return false;">
     <div id="form_function">
       {{form.function.label  (class_="form_label")}}
       {{form.function}}
     </div>
     <div id="form_values">
-      {{ form.csrf_token}}
+      {{form.csrf_token}}
       {{form.season_per.label  (class_="form_label")}}
       {{form.season_per}}
       {{form.column_intrest.label  (class_="form_label")}}

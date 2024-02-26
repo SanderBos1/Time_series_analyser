@@ -1,7 +1,6 @@
 import os
-from flask import Blueprint, current_app, flash
+from flask import Blueprint, flash
 from flask import render_template, request, url_for, redirect
-from werkzeug.utils import secure_filename
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from ..extensions import db
@@ -56,14 +55,7 @@ def register():
 @login_bp.route("/home", methods=["GET", "POST"])
 @login_required
 def home_page():
-    if  'datasetCSV' in request.form:
-        file = request.files['file']
-        if file:
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
     return render_template("home.html")
-
-
 
 @login_bp.route("/settings", methods=["GET", "POST"])
 @login_required

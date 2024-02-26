@@ -67,7 +67,9 @@ function add_options(){
 
 
 $(document).on('submit','#delete_image_form',function(e)
-{   let button = document.getElementById("delete_image_button");
+{   
+    console.log("get here")
+    let button = document.getElementById("delete_image_button");
     let button_value = button.value;
     console.log(button_value);
     e.preventDefault();

@@ -9,20 +9,6 @@ sequencing_bp = Blueprint('sequencing_bp', __name__,
                     static_folder='static',
                     static_url_path="/sequencing/static")
 
-def calculate_pvalue_seasonality(files, form):
-    try:
-        seasonality = form.function.data
-        time_column = form.time_column.data
-        period =  form.period.data
-        column = form.column_intrest.data
-        file = session['dataset'].get_file()
-        new_seasonality_calculator = seasonality_calculator(file, seasonality)
-        p_seasonality = new_seasonality_calculator\
-            .calculate_seasonality(period, time_column, column)
-        session["p_seasonality"] = p_seasonality
-    except Exception as e:
-        flash(str(e), "error")
-    return render_template("sequencing_seasonality.html", files=files, form=form)
 
 @sequencing_bp.route("/trend", methods=["GET", "POST"])
 @login_required
