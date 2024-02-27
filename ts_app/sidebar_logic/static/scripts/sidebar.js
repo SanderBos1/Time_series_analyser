@@ -1,7 +1,12 @@
 
 function show_upload(){
-    var save_dialogue = document.getElementById("upload_form_holder")
-    save_dialogue.style.display="inline-block"
+    var save_dialogue = document.getElementById("upload_form_holder");
+    save_dialogue.style.display="inline-block";
+}
+
+function delete_dialogue(value){
+    var dialogue = value.closest(".standard_dialogue")
+    dialogue.style.display="none";
 }
 
 

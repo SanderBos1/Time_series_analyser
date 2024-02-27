@@ -53,7 +53,11 @@
   </div>
 
   <div class="content">
-    <div id="upload_form_holder">
+    <div class = "standard_dialogue" id="upload_form_holder">
+      <div class="orange_top">
+        <button onclick="delete_dialogue(this)" class="delete_standard" id="upload_delete">X</button>
+      </div>
+      <p id="upload_explanation"> Upload a csv file</p>
       <form id="upload_form" method=post  enctype="multipart/form-data">
         {{upload_form.csrf_token (id_="csv_upload_csfr")}}
         {{upload_form.file }}

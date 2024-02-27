@@ -90,8 +90,23 @@ input:hover{
 
 }
 
+.standard_dialogue{
+    z-index:1;
+    background-color: white;
+    border: solid 1px black;
+    display:none;
+    box-shadow: 3px 0px 10px;
+
+}
+
+.orange_top{
+    position:relative;
+    width:100%;
+    height:10%;
+    background-color: #ED693C;
 
 
+}
 
   
   
