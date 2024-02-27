@@ -28,15 +28,11 @@
       {{form.column_intrest}}
       {{form.submit (class_="button_standard")}}
     </div>
-
-
-    <div class = standard_error id="Error">
-      Something went wrong
-    </div>
-
-
   </form>
 </div>
+
+<error-dialogue class="dialogue-element" id="seasonality_calculation_error" dialogue_name="Error with calculating p value">
+</error-dialogue>
 
 <div class="pvalue_explanation_answers">
   <div class="pval_exp" id="trend_text">
@@ -51,8 +47,8 @@
 </div>
 
 <div id="seasonality_answers">
-  <p >our seasonality value is: <var id="seasonality_value">Not yet defined</var></p>
-  <p id="hypothese_seasonality"> Therefore your seasonality is: <var id="hypothese_seasonality">Not yet defined</var></p>
+  <p >Your p value of your statistical trend test is: <var id="seasonality_value">Not yet defined</var></p>
+  <p> Therefore we can say the following over your hypotheses: <var id="hypothese_seasonality">Not yet defined</var></p>
 </div>
 </div>
 

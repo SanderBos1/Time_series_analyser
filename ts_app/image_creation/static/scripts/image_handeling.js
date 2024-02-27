@@ -64,7 +64,7 @@ $(document).ready(function() {
                 var error_text = document.getElementById("save_image_error");
                 var text = document.createElement("p");
                 text.setAttribute("id", "error_text_save")
-                text.innerHTML = "Something went wrong";
+                text.innerHTML = answer['message'];
                 error_text.appendChild(text)
                 error_text.style.display="inline-block";
             }

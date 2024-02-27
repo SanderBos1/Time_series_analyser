@@ -19,22 +19,16 @@
 <div class="p_value_calculation_holder">
   <form class="p_value_calculation" id="trend_form" method="post">
     {{ form.csrf_token}}
-    <div id="form_function">
       {{form.function.label  (class_="form_label")}}
       {{form.function (class_="form_input")}}
-    </div>
-    <div id = "form_values">
     {{form.column_intrest.label  (class_="form_label")}}
     {{form.column_intrest (class_="form_input")}}
     {{form.submit (class_="button_standard")}}
-    </div>
-
-    <div class = standard_error id="Error">
-      Something went wrong
-    </div>
-
   </form>
 </div>
+
+<error-dialogue class="dialogue-element" id="trend_calculation_error" dialogue_name="Error with calculating p value">
+</error-dialogue>
 
 <div class="pvalue_explanation_answers">
   <div class="pval_exp" id="trend_text">
@@ -49,8 +43,8 @@
 </div>
 
 <div id="trend_answers">
-  <p >Your trend value is: <var id="trend_value">Not yet defined</var></p>
-  <p id="hypothese_trend"> Therefore your trend is: <var id="hypothese_trend">Not yet defined</var></p>
+  <p >Your p value of your statistical trend test is: <var id="trend_value">Not yet defined</var></p>
+  <p> Therefore we can say the following over your hypotheses: <var id="hypothese_trend">Not yet defined</var></p>
 </div>
 </div>
 

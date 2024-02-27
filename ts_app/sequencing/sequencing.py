@@ -1,8 +1,8 @@
 from flask import Blueprint, session, render_template, flash, current_app, request, jsonify
+from flask_login import login_required
 from ts_app.sequencing.python.trend_calculator import trend_calculator, trend_residuals
 from ts_app.sequencing.python.seasonality_calculator import seasonality_calculator
 from ts_app.sequencing.python.forms import seasonality_form, trend_form, draw_resiudals
-from flask_login import login_required
 
 sequencing_bp = Blueprint('sequencing_bp', __name__,
                     template_folder='templates',
@@ -21,29 +21,40 @@ def calculations():
 @sequencing_bp.route("/trend/calculate/<dataset>", methods=["POST"])
 @login_required
 def calculate_trend(dataset):
+    """
+    Input: 
+        Dataset: The file which is used to calculate the trend from
+        Column: The column for which trend is calculated
+        Trend function: The statistical function that is used
+    Results:
+        P value + message indicating if Hypotheses 0 can be rejected or not
+    """
     form = trend_form()
     form.column_intrest.choices = [form.column_intrest.data]
-    if form.validate_on_submit():
-        variable_dict = {
-            "dataset": current_app.config['UPLOAD_FOLDER']  + dataset,
-            "var_column":form.column_intrest.data,
-            "trend_function": form.function.data,
-        }
-        try:
+    current_trend_calculator = "Not defined"
+    hypotheses="Not defined"
+    try:
+
+        if form.validate_on_submit():
+            variable_dict = {
+                "dataset": current_app.config['UPLOAD_FOLDER']  + dataset,
+                "var_column":form.column_intrest.data,
+                "trend_function": form.function.data,
+            }
             current_trend_calculator = trend_calculator(variable_dict).calculate_trend()
             if current_trend_calculator > 0.05:
                 hypotheses = "H0 is Rejected"
             else:
                 hypotheses = "H0 is Accepted"
-            values_dict = {
-                'p_value':current_trend_calculator,
-                'Hypotheses':hypotheses
-            }
-            return jsonify(values_dict)
-        except:
-            return "something went wrong"
-    return "something went wrong"
-    
+            message="Calculated."
+    except Exception as e:
+        message = str(e)
+    values_dict = {
+        "message":message,
+        'p_value':current_trend_calculator,
+        'Hypotheses':hypotheses
+        }
+    return values_dict
 
 @sequencing_bp.route("/trend/residuals/<dataset>/<variable>", methods=["POST"])
 @login_required
@@ -76,26 +87,27 @@ def seasonality():
 def calculate_seasonality(dataset):
     form = seasonality_form()
     form.column_intrest.choices = [form.column_intrest.data]
-    if form.validate_on_submit():
-        variable_dict = {
-            "dataset": current_app.config['UPLOAD_FOLDER']  + dataset,
-            "var_column":form.column_intrest.data,
-            "seasonality_function": form.function.data,
-            "period": form.season_per.data
-        }
-        try:
+    current_trend_calculator = "Not defined"
+    hypotheses="Not defined"
+    try:
+        if form.validate_on_submit():
+            variable_dict = {
+                "dataset": current_app.config['UPLOAD_FOLDER']  + dataset,
+                "var_column":form.column_intrest.data,
+                "seasonality_function": form.function.data,
+                "period": form.season_per.data
+            }
             current_seasonality_calculator = seasonality_calculator(variable_dict).calculate_seasonality()
             if current_seasonality_calculator > 0.05:
                 hypotheses = "H0 is Rejected"
             else:
                 hypotheses = "H0 is Accepted"
-            values_dict = {
-                'p_value':current_seasonality_calculator,
-                'Hypotheses':hypotheses
-		    }
-            print(values_dict)
-            return jsonify(values_dict) 
-        except Exception as e:
-            print(e)
-            return "something went wrong"
-    return "something went wrong"
+            message = "Calculated."
+    except Exception as e:
+        message = str(e)
+    values_dict = {
+        "message":message,
+        'p_value':current_trend_calculator,
+        'Hypotheses':hypotheses
+        }
+    return jsonify(values_dict)

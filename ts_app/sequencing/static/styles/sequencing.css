@@ -17,13 +17,14 @@
 }
 
 
+/* Trend css */
 
 .p_value_calculation_holder{
     position:relative;
     float:left;
     top:2%;
     left:3%;
-    width:40%;
+    width:30%;
     height:50%;
 
 }
@@ -33,6 +34,31 @@
     height:100%;
 }
 
+.form_input{
+    margin-bottom:3%;
+    width:100%;
+}
+
+#function{
+    list-style-type: none;
+    padding:0px;
+}
+#function > li{
+    width:100%;
+    height:100%;
+    margin:0px;
+    padding:0px;
+
+}
+
+#trend_calculation_error{
+    width:60%;
+    left:15%;
+    height: 40%;
+    
+}
+
+
 .pvalue_explanation_answers{
     position:relative;
     float:left;
@@ -40,26 +66,23 @@
     width:55%;
     height:50%;
     overflow:auto;
-    font-size:90%;
+    word-wrap: break-word;
 
-}
 
-.pval_exp > p{
-    font-size:90%;
-    height:100%;
 }
 
 #trend_text{
     position:relative;
     width:100%;
     height:60%;
+    overflow:auto;
 }
 
 #trend_answers{
     position:relative;
+    top:2%;
     width: 100%;
     height:10%;
-    display:none;
 
 }
 
@@ -70,29 +93,6 @@
     display:none;
 }
 
-#form_function{
-    position:relative;
-    width:40%;
-    float:right
-}
-
-.form_input{
-    margin-bottom:3%;
-    width:100%;
-}
-
-#function{
-    list-style-type: none;
-    margin:0px;
-    padding:0px;
-}
-#function > li{
-    width:100%;
-    height:100%;
-    margin:0px;
-    padding:0px;
-
-}
 
 #form_values{
     position:relative;
@@ -133,5 +133,12 @@
     width: 100%;
     height: 100%;
     object-fit: fill;
+
+}
+
+#seasonality_calculation_error{
+    left:20%;
+    width:60%;
+    height:40%;
 
 }

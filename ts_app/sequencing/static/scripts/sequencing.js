@@ -6,17 +6,26 @@ $(document).ready(function() {
             url: '/trend/calculate/' + dataset,
             data: $('form').serialize(), // serializes the form's elements.
             success: function (data) {
-                if(data=="something went wrong"){
-                    document.getElementById("trend_answers").style.display="none"
-                    document.getElementById("Error").style.display="inline-block"
+                if(data['message']=="Calculated."){
+                    var trend_value = document.getElementById("trend_value")
+                    trend_value.innerHTML = data["p_value"]
+                    var hypotheses = document.getElementById("hypothese_trend")
+                    hypotheses.innerHTML = data["Hypotheses"]
                 }
                 else{
-                document.getElementById("Error").style.display="none"
-                document.getElementById("trend_answers").style.display="inline-block"
-                var trend_value = document.getElementById("trend_value")
-                trend_value.innerHTML = data.p_value 
-                var hypotheses = document.getElementById("hypothese_trend")
-                hypotheses.innerHTML = data.Hypotheses 
+                    if(document.getElementById('error_trend_calculation_message')){
+                        document.getElementById('error_trend_calculation_message').remove();
+                    }
+                    var trend_value = document.getElementById("trend_value")
+                    trend_value.innerHTML = data["p_value"]
+                    var hypotheses = document.getElementById("hypothese_trend")
+                    hypotheses.innerHTML = data["Hypotheses"]
+                    var error_text = document.getElementById("trend_calculation_error");
+                    var text = document.createElement("p");
+                    text.setAttribute("id", "error_trend_calculation_message")
+                    text.innerHTML = data["message"];
+                    error_text.appendChild(text)
+                    error_text.style.display="inline-block";
                 }
             }
         });
@@ -42,17 +51,26 @@ $(document).ready(function() {
             url: '/seasonality/calculate/' + dataset,
             data: $('form').serialize(), // serializes the form's elements.
             success: function (data) {
-                if(data=="something went wrong"){
-                    document.getElementById("seasonality_answers").style.display="none"
-                    document.getElementById("Error").style.display="inline-block"
+                if(data['message']=="Calculated."){
+                    var trend_value = document.getElementById("seasonality_value")
+                    trend_value.innerHTML = data["p_value"]
+                    var hypotheses = document.getElementById("hypothese_seasonality")
+                    hypotheses.innerHTML = data["Hypotheses"]
                 }
                 else{
-                document.getElementById("Error").style.display="none"
-                document.getElementById("seasonality_answers").style.display="inline-block"
-                var trend_value = document.getElementById("seasonality_value")
-                trend_value.innerHTML = data.p_value 
-                var hypotheses = document.getElementById("hypothese_seasonality")
-                hypotheses.innerHTML = data.Hypotheses 
+                    if(document.getElementById('error_seasonality_calculation_message')){
+                        document.getElementById('error_seasonality_calculation_message').remove();
+                    }
+                    var trend_value = document.getElementById("seasonality_value")
+                    trend_value.innerHTML = data["p_value"]
+                    var hypotheses = document.getElementById("hypothese_seasonality")
+                    hypotheses.innerHTML = data["Hypotheses"]
+                    var error_text = document.getElementById("seasonality_calculation_error");
+                    var text = document.createElement("p");
+                    text.setAttribute("id", "error_seasonality_calculation_message")
+                    text.innerHTML = data["message"];
+                    error_text.appendChild(text)
+                    error_text.style.display="inline-block";
                 }
             }
         });

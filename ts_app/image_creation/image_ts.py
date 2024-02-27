@@ -69,7 +69,7 @@ def drawn_image(dataset):
     answer = {
         "message":message,
         "img": img
-    }            
+    }
     return jsonify(answer)
 
 @image_ts_bp.route('/get_images/', methods=["GET"])
