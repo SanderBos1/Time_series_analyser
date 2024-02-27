@@ -79,22 +79,29 @@ input:hover{
     cursor: pointer;
     border: none;
     box-sizing: border-box;
+    float:right;
 }
 
 .standard_error{
+    position:absolute;
+    z-index:1;
     border: 1px black solid;
     background-color:red;
+    border-radius: 10px;
     text-align: center;
+    box-shadow: 3px 0px 10px black;
     color:white;
-    display:none
+    display:none;
+
 
 }
 
-.standard_dialogue{
-    z-index:1;
+.dialogue-element{
+    position:absolute;
+    display:none;
+    z-index:20;
     background-color: white;
     border: solid 1px black;
-    display:none;
     box-shadow: 3px 0px 10px;
 
 }
@@ -104,9 +111,28 @@ input:hover{
     width:100%;
     height:10%;
     background-color: #ED693C;
-
-
+    z-index:20;
 }
+
+.red_top{
+    position:relative;
+    width:100%;
+    height:20%;
+    background-color: red;
+    z-index:20;
+}
+
+#dialogue_message{
+    position:relative;
+    top:3%;
+    left:20%;
+    width:60%;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    float:left;
+}
+
 
   
   

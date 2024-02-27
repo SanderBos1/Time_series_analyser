@@ -22,6 +22,7 @@
         {{form.column_intrest.label (class_="form_label")}}
         {{form.column_intrest (class_="form_input")}}
         {{form.submit (class_="button_standard")}}
+
     </div>
 
     <div id="image_plot_options">
@@ -37,18 +38,29 @@
 
     <div class="ts-image" id="image_div">
     </div>
-    
 
 </form>
+<button class="button_standard" id="save_image_dialogue_button" onclick="show_save_dialogue()">Save image</button>
 
 
 
-
-
-    <form id= image_save_form method="POST">
+<dialogue-element class="dialogue-element" id="image_save_form" dialogue_name="Save Image">
+    <form id=save_form method="POST">
         {{ form_image.imageName }}
         {{form_image.save (class_="button_standard")}}
     </form>
+    <error-dialogue class="dialogue-element" id="save_image_error" dialogue_name="Error">
+    </error-dialogue>
+    
+  </dialogue-element>
+
+
+
+<error-dialogue class="dialogue-element" id="image_error" dialogue_name="image plot error">
+</dialogue-element>
+
+
+
 
 
 {% endblock %}

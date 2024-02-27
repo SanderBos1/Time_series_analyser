@@ -1,11 +1,11 @@
 
 function show_upload(){
-    var save_dialogue = document.getElementById("upload_form_holder");
+    var save_dialogue = document.getElementById("upload_csv_dialogue");
     save_dialogue.style.display="inline-block";
 }
 
 function delete_dialogue(value){
-    var dialogue = value.closest(".standard_dialogue")
+    var dialogue = value.closest(".dialogue-element")
     dialogue.style.display="none";
 }
 
@@ -43,9 +43,7 @@ function delete_csv(value){
         url: '/delete_csv/' + value.value,
         success: function () {
             if(document.getElementById("file_display_selected")){
-                console.log("get here")
                 if(value.value == document.getElementById("file_display_selected").value){
-                    console.log("get here 2")
                     var ul= document.getElementById("column_list_ul");
                     ul.innerHTML = ""
                 }
@@ -91,7 +89,6 @@ function load_csvdata(){
 $(document).ready(function() {
     $('#upload_form').submit(function (e) {
         var form = new FormData($(this)[0])
-        console.log(form)
         $.ajax({
             beforeSend: function(xhr, settings) {
                 if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {

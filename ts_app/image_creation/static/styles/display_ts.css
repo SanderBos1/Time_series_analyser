@@ -30,10 +30,18 @@
     float:left;
     top:10%;
     left:2%;
-    width: 30%;
-    height: 40%;
+    width: 25%;
+    height: 60%;
 }
 
+#image_error{
+    top:80%;
+    left:10%;
+    width:80%;
+    height:15%;
+    text-align:center;
+
+}
 
 .form_input{
     position:relative;
@@ -42,14 +50,6 @@
     margin-bottom:5%;
 }
 
-
-#image_display_save{
-    position:relative;
-    float:left;
-    right:2%;
-    width:60%;
-    height:80%;
-}
 
 #image_plot_options{
     position:relative;
@@ -70,6 +70,7 @@
 
 .ts-image {
     position: relative;
+    left:3%;
     top:10%;
     width: 50%;
     height: 90%;
@@ -86,19 +87,34 @@
 }
 
 #image_save_form{
-    position:relative;
-    left:35%;
-    width: 40%;
-    height: 30%;
-    display: block;
+    left:10%;
+    top:10%;
+    width: 80%;
+    height: 50%;
     text-align:center;
 
 }
 
-#image_save_form > *{
+#save_form > input{
+    position:relative;
     width:70%;
+    left:10%;
     height:20%;
     display: block;
     margin:3%;
 
+}
+
+#save_image_dialogue_button{
+    position:absolute;
+    text-align:center;
+    top:75%;
+    left:45%;
+    display:none;
+}
+
+#save_image_error{
+    width: 50%;
+    height:50%;
+    left:20%;
 }

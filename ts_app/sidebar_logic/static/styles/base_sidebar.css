@@ -9,20 +9,27 @@
 }
 
 
-#upload_form_holder{
-    position:absolute;
-    top:10%;
-    left:10%;
-    width:50%;
-    height:50%;
-
-}
-
 #upload_form{
     position:relative;
     top:35%;
     text-align: center;
+    width:80%;
+    height:20%;
+    left:10%;
 }
+
+#csv_upload{
+    position:relative;
+    float:right;
+    width:30%;
+}
+
+#file{
+    position:relative;
+    float:left;
+    width:70%;
+}
+
 
 #upload_delete{
     position:relative;
@@ -167,3 +174,13 @@
 #chosen_button{
     background-color: #FDF1F0;
 }
+
+
+#upload_csv_dialogue{
+    left:10%;
+    top:10%;
+    width:60%;
+    height:50%;
+
+}
+

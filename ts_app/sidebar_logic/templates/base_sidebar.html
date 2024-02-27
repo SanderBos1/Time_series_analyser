@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="{{url_for('sidebar_bp.static',filename='scripts/sidebar.js')}}" defer></script>
+  <script src="{{url_for('static',filename='scripts/components.js')}}"></script>
 
   {% block head %}
   {% endblock %}
@@ -53,17 +54,17 @@
   </div>
 
   <div class="content">
-    <div class = "standard_dialogue" id="upload_form_holder">
-      <div class="orange_top">
-        <button onclick="delete_dialogue(this)" class="delete_standard" id="upload_delete">X</button>
-      </div>
+
+
+    <dialogue-element class="dialogue-element" id="upload_csv_dialogue" dialogue_name="Upload Dataset">
       <p id="upload_explanation"> Upload a csv file</p>
       <form id="upload_form" method=post  enctype="multipart/form-data">
         {{upload_form.csrf_token (id_="csv_upload_csfr")}}
-        {{upload_form.file }}
-        {{upload_form.submit (id_="csv_upload")}}
+        {{upload_form.file (class_="button_standard") }}
+        {{upload_form.submit (id_="csv_upload", class_="button_standard")}}
       </form>
-  </div>
+    </dialogue-element>
+
     {% block content %}
     {% endblock %}
   </div>

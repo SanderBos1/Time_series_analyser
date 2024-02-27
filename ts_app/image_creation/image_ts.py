@@ -38,72 +38,102 @@ def display_ts_list():
 @login_required
 def drawn_image(dataset):
     """
-    input: 
+    Input: 
         form = A user form that indicates which columns are going to be used to draw an image
         it shoud have information for the csv file, 
         which column is the variable and which column is the time variable.
-    returns:
-        a drawn image displaying a time column on the x axis and a column of interest on the y axis.
+    Goal: 
+        Make an b64encode encoded image and store it as session variable
+    Returns:
+        a message container an error or a conformation that the image has been uploaded
     """
     form = ts_image_form()
     form.column_intrest.choices = [form.column_intrest.data]
+    message="something went wrong"
+    img = "dwadwapdawp"
     if form.validate_on_submit():
-        plot_variables = {
-            "csv_file": dataset,
-            "time_column": current_app.config['TIME_COLUMN'],
-            "var_column":form.column_intrest.data,
-            "xlabel": form.xlabel.data,
-            "ylabel":form.ylabel.data,
-            "color": form.line_color.data
-        }
-        img = make_image(plot_variables)
-        session["ts_image"] = img
-        return img
-    return "Something has gone wrong"
+        try:
+            plot_variables = {
+                "csv_file": dataset,
+                "time_column": current_app.config['TIME_COLUMN'],
+                "var_column":form.column_intrest.data,
+                "xlabel": form.xlabel.data,
+                "ylabel":form.ylabel.data,
+                "color": form.line_color.data
+            }
+            img = make_image(plot_variables)
+            session["ts_image"] = img
+            message="The image is uploaded."
+        except Exception as e:
+            message=str(e)
+    answer = {
+        "message":message,
+        "img": img
+    }            
+    return jsonify(answer)
 
 @image_ts_bp.route('/get_images/', methods=["GET"])
 @login_required
 def get_images():
     """
+    Input: none
+    Goal: show all images from the database
     returns a json file containing the name and code of all images in the database
     """
-    images = ts_image.query.all()
-    images_converted = {}
-    for image in images:
-        name = image.get_name()
-        image = image.get_image()
-        images_converted.update({name : image})
-    images_converted = jsonify(images_converted)
-    return images_converted
+    try:
+        images = ts_image.query.all()
+        images_converted = {}
+        for image in images:
+            name = image.get_name()
+            image = image.get_image()
+            images_converted.update({name : image})
+        message="Images retrieved."
+    except Exception as e:
+        images_converted = {}
+        message = str(e)
+    answer = {
+        "message":message,
+        "images":images_converted
+    }
+    return jsonify(answer)
 
 @image_ts_bp.route('/delete/<image_name>', methods=["POST"])
 @login_required
 def delete_image(image_name):
     """
-    input: The name of the image
-    Deletes the image from the database based on its name
+    Input: The name of the image
+    Goal: Deletes the image from the database based on its name
     """
-    image = ts_image.query.get({image_name})
-    db.session.delete(image)
-    db.session.commit()
-    return "image deleted"
-
+    try:
+        image = ts_image.query.get({image_name})
+        db.session.delete(image)
+        db.session.commit()
+        message = "Image deleted"
+    except Exception as e:
+        message=str(e)
+    answer = {
+        "message": message
+    }
+    return answer
 
 @image_ts_bp.route('/save_image', methods=["POST"])
 @login_required
 def save_image():
     """
-    input: A form containing the name of the image
-    saves the images in the database if its name does not already exists
+    Input: A form containing the name of the database
+    Goal: to save the drawn image in the database if its name does not already exists
     """
     form_image = image_save_load()
-    if form_image.validate_on_submit():
-        image_name = form_image.imageName.data
-        exists = db.session.query(ts_image.name).filter_by(name=image_name).first() is not None
-        if exists:
-            return "image already existed"
-        image = ts_image(name=image_name, image_code=session["ts_image"])
-        db.session.add(image)
-        db.session.commit()
-        return "Image saved"
-    return "Not validated"
+    try:
+        if form_image.validate_on_submit():
+            image_name = form_image.imageName.data
+            image = ts_image(name=image_name, image_code=session["ts_image"])
+            db.session.add(image)
+            db.session.commit()
+            message = "Image is saved."
+    except Exception as e:
+        message=str(e)
+    answer = {
+        "message":message
+    }
+    return jsonify(answer)
