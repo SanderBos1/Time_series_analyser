@@ -46,6 +46,7 @@
 
 <dialogue-element class="dialogue-element" id="image_save_form" dialogue_name="Save Image">
     <form id=save_form method="POST">
+        {{ form_image.csrf_token }}
         {{ form_image.imageName }}
         {{form_image.save (class_="button_standard")}}
     </form>

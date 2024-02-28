@@ -1,3 +1,9 @@
+function show_save_dialogue(){
+    var save_dialogue = document.getElementById("image_trendresidual_save_form")
+    save_dialogue.style.display = "inline-block";
+}
+
+
 $(document).ready(function() {
     $('#trend_form').submit(function (e) {
         var dataset = document.getElementById("file_display_selected").value
@@ -93,17 +99,16 @@ $(document).ready(function() {
         var dataset = document.getElementById("file_display_selected").value
         var var_column = document.getElementById("column_intrest").value
         $.ajax({
-            beforeSend: function(xhr, settings) {
-                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
-                }
+            headers: { 
+                "X-CSRFToken" : "{{ form.csrf_token._value() }}"
             },
             type: "POST",
             url: '/trend/residuals/' + dataset + "/" + var_column,
             data: $('form').serialize(), 
             success: function (data) {
                 const img_div = document.getElementById("residuals_trend_div");
-                img_div.innerHTML = "<img id=picture src=data:image/jpeg;base64," + data + ">";
+                img_div.innerHTML = "<img class=fullscreen_image id=trend_picture src=data:image/jpeg;base64," + data + ">";
+                document.getElementById("save_image_trend").style.display="inline-block";
             }
         });
         e.preventDefault(); 
@@ -126,3 +131,40 @@ function add_options(){
     }
 }
 
+$(document).ready(function() {
+    $('#save_residual_image_form').submit(function (e) {
+        image = document.getElementById("trend_picture")
+        const data = new FormData(save_residual_image_form);
+        form = Object.fromEntries(data.entries())
+        src_image = image.src
+        $.ajax({
+            headers: { 
+                'Accept': 'application/json',
+                'Content-Type': 'application/json', 
+            },
+            type: "POST",
+            url: '/save_image',
+            data:JSON.stringify({
+                "form":form,
+                "src":src_image
+            }),
+            success: function (answer) {
+                if(answer['message'] == "Image is saved."){
+                }
+            else{
+                if(document.getElementById('error_text_save')){
+                    document.getElementById('error_text_save').remove();
+                }
+                var error_text = document.getElementById("save_residual_image_error");
+                var text = document.createElement("p");
+                text.setAttribute("id", "error_text_save")
+                text.innerHTML = answer['message'];
+                error_text.appendChild(text)
+                error_text.style.display="inline-block";
+            }
+        }
+        });
+        e.preventDefault(); 
+    });
+
+});

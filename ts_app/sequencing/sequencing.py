@@ -3,6 +3,7 @@ from flask_login import login_required
 from ts_app.sequencing.python.trend_calculator import trend_calculator, trend_residuals
 from ts_app.sequencing.python.seasonality_calculator import seasonality_calculator
 from ts_app.sequencing.python.forms import seasonality_form, trend_form, draw_resiudals
+from ..image_creation.python.forms import image_save_load
 
 sequencing_bp = Blueprint('sequencing_bp', __name__,
                     template_folder='templates',
@@ -14,8 +15,9 @@ sequencing_bp = Blueprint('sequencing_bp', __name__,
 @login_required
 def calculations():
     form = trend_form()
+    residual_save_form = image_save_load()
     draw_residuals_form = draw_resiudals()
-    return render_template("sequencing_trend.html", form=form, draw_residuals_form=draw_residuals_form)
+    return render_template("sequencing_trend.html", form=form, draw_residuals_form=draw_residuals_form, residual_save_form = residual_save_form)
 
 
 @sequencing_bp.route("/trend/calculate/<dataset>", methods=["POST"])

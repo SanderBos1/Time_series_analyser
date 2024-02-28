@@ -48,6 +48,17 @@
 </div>
 </div>
 
+<dialogue-element class="dialogue-element" id="image_trendresidual_save_form" dialogue_name="Save Image">
+  <form id=save_residual_image_form method="POST">
+    {{ residual_save_form.csrf_token }}
+    {{ residual_save_form.imageName }}
+    {{residual_save_form.save (class_="button_standard")}}
+  </form>
+  <error-dialogue class="dialogue-element" id="save_residual_image_error" dialogue_name="Error">
+  </error-dialogue>
+  
+</dialogue-element>
+
 <div id="draw_residuals">
 <form  id="draw_residul_form">
   {{draw_residuals_form.csrf_token}}
@@ -61,9 +72,11 @@
 </form>
 </div>
 
+<div class="residual_interaction" id="save_image_trend">
 <div class="ts-image" id="residuals_trend_div">
 </div>
-
+<button class="button_standard" id="save_residual_image_dialogue_button" onclick="show_save_dialogue()">Save image</button>
+</div>
 {%endblock%}
 
 

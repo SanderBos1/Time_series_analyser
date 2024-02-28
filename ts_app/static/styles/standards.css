@@ -103,6 +103,7 @@ input:hover{
     background-color: white;
     border: solid 1px black;
     box-shadow: 3px 0px 10px;
+    overflow:auto;
 
 }
 

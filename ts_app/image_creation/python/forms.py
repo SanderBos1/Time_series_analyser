@@ -1,9 +1,9 @@
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm, Form
 from wtforms import StringField, SubmitField ,SelectField
 from wtforms.validators import InputRequired, DataRequired, Length, Regexp
 
 
-class image_save_load(FlaskForm):
+class image_save_load(Form):
     imageName = StringField('ImageName',[
         DataRequired(), 
         Length(min=4, max=25), 

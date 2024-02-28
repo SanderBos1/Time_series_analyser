@@ -119,26 +119,64 @@
     height:100%;
 }
 
-#residuals_trend_div{
-    position:relative;
-    float:left;
-    left:5%;
-    width:60%;
-    height:40%;
-}
 
 
-#residuals_trend_div img{
-    position: relative;
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-
-}
 
 #seasonality_calculation_error{
     left:20%;
     width:60%;
     height:40%;
+
+}
+
+.residual_interaction{
+    display:none;
+    position:relative;
+    float:left;
+    left:5%;
+    width:60%;
+    height:40%;
+    text-align:center;
+}
+
+#residuals_trend_div{
+    position:relative;
+    height:80%;
+    width:100%;
+
+}
+
+#save_residual_image_dialogue_button{
+    position:relative;
+    height:10%;
+    left:40%;
+
+}
+
+#image_trendresidual_save_form{
+    left:5%;
+    width:50%;
+    height:50%;
+    text-align: center;
+}
+
+#save_residual_image_form > input{
+    position: relative;
+    width: 70%;
+    left: 10%;
+    height: 20%;
+    display: block;
+    margin: 3%;
+}
+
+#save_residual_image_form{
+    position:relative;
+    top:5%;
+}
+
+#save_residual_image_error{
+    width: 50%;
+    height: 50%;
+    left: 20%;
 
 }

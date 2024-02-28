@@ -8,7 +8,6 @@ function enlarge_image(element){
     var image = element.closest(".image")
     image.classList.add("fullscreen_image")
     image.classList.remove("image")
-    console.log(image)
     element.onclick = function(){small_image(this)};
 
 }
@@ -23,13 +22,13 @@ function small_image(element){
 }
 $(document).ready(function() {
     $('#image_draw_form').submit(function (e) {
+        e.preventDefault()
         var dataset = document.getElementById("file_display_selected").value
         var form = new FormData($(this)[0])
+        console.log(form)
         $.ajax({
-            beforeSend: function(xhr, settings) {
-                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken",  "{{ form.csrf_token._value() }}");
-                }
+            headers: { 
+                "X-CSRFToken": "{{ form.csrf_token._value() }}",
             },
             type: "POST",
             url: '/make_image/'+ dataset,
@@ -59,18 +58,28 @@ $(document).ready(function() {
                 }
             }
     })
-    e.preventDefault()
 
     });
 });
 
 
 $(document).ready(function() {
-    $('#image_save_form').submit(function (e) {
+    $('#save_form').submit(function (e) {
+        e.preventDefault(); 
+        image = document.getElementById("picture")
+        const data = new FormData(save_form);
+        form = Object.fromEntries(data.entries())
+        src_image = image.src
         $.ajax({
+            headers: { 
+                'Accept': 'application/json',
+                'Content-Type': 'application/json; charset=utf-8', 
+            },
             type: "POST",
             url: '/save_image',
-            data: $('form').serialize(), 
+            data:JSON.stringify({
+                "form":form,
+                "src":src_image}),
             success: function (answer) {
                 if(answer['message'] == "Image is saved."){
                 }
@@ -86,19 +95,10 @@ $(document).ready(function() {
                 error_text.style.display="inline-block";
             }
         }
-        });
-        e.preventDefault(); 
     });
-
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
-            }
-        }
-    })
+    });
+    
 });
-
 
 
 
@@ -119,11 +119,12 @@ function add_options(){
 }
 
 
+
 $(document).on('submit','#delete_image_form',function(e)
 {   
+    e.preventDefault();
     let button = document.getElementById("delete_image_button");
     let button_value = button.value;
-    e.preventDefault();
     $.ajax({
         type:'POST',
         url:'/delete/' + button_value,
@@ -153,7 +154,7 @@ window.onload = function() {
                     "<button name=delete_image id=delete_image_button class=delete_standard value =" + image +" > X </button>" +
                     "</form>" + "</div>" +
                     "<div onClick=enlarge_image(this) class=image_list_image >"+
-                    "<img class=standard_img src=data:image/jpeg;base64," + image_ojb + ">" +
+                    "<img class=standard_img src=" + image_ojb + ">" +
                     "</div>";
                     list.append(li);
             }

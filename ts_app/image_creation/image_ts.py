@@ -1,9 +1,11 @@
-from flask import Blueprint, render_template, session, jsonify, current_app
+import json
+from flask import Blueprint, render_template, session, jsonify, current_app, request
 from flask_login import login_required
 from ..image_creation.python.make_image import make_image
 from ..image_creation.python.forms import ts_image_form, image_save_load
 from ..image_creation.python.models import ts_image
 from ..extensions import db
+
 
 # Defining a blueprint
 image_ts_bp = Blueprint('image', __name__,
@@ -117,17 +119,21 @@ def delete_image(image_name):
     return answer
 
 @image_ts_bp.route('/save_image', methods=["POST"])
-@login_required
+# @login_required
 def save_image():
     """
     Input: A form containing the name of the database
     Goal: to save the drawn image in the database if its name does not already exists
     """
-    form_image = image_save_load()
+    answer="hello"
+    data = request.get_json()
+    form = image_save_load.from_json(data["form"])
+
     try:
-        if form_image.validate_on_submit():
-            image_name = form_image.imageName.data
-            image = ts_image(name=image_name, image_code=session["ts_image"])
+        if form.validate():
+            print("validated")
+            image_name = form.imageName.data
+            image = ts_image(name=image_name, image_code=data["src"])
             db.session.add(image)
             db.session.commit()
             message = "Image is saved."

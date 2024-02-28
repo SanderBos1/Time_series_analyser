@@ -8,15 +8,18 @@ from .image_creation.image_ts import image_ts_bp
 from .sequencing.sequencing import sequencing_bp
 from .extensions import db, login
 from ts_app.image_creation.python.models import User
+import wtforms_json
 
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(config.Config)
+    app.config.from_object(config.devConfig)
     db.init_app(app)
     migrate = Migrate(app, db)
     login.init_app(app)
     login.login_view = 'login.login'
+    wtforms_json.init()
+
 
     """ Registering blueprints"""
     app.register_blueprint(login_bp)
