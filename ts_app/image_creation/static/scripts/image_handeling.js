@@ -3,7 +3,24 @@ function show_save_dialogue(){
     save_dialogue.style.display = "inline-block";
 }
 
+function enlarge_image(element){
+    element.removeAttribute("onclick")
+    var image = element.closest(".image")
+    image.classList.add("fullscreen_image")
+    image.classList.remove("image")
+    console.log(image)
+    element.onclick = function(){small_image(this)};
 
+}
+
+function small_image(element){
+    element.removeAttribute("onclick")
+    var image = element.closest(".fullscreen_image")
+    image.classList.add("image")
+    image.classList.remove("fullscreen_image")
+    element.onclick = function(){enlarge_image(this)};
+
+}
 $(document).ready(function() {
     $('#image_draw_form').submit(function (e) {
         var dataset = document.getElementById("file_display_selected").value
@@ -22,7 +39,7 @@ $(document).ready(function() {
             success: function (answer) {
                 if(answer['message'] == "The image is uploaded."){
                     const img_div = document.getElementById("image_div");
-                    img_div.innerHTML = "<img id=picture src=data:image/jpeg;base64," + answer["img"] + ">";
+                    img_div.innerHTML = "<img class=standard_img id=picture src=data:image/jpeg;base64," + answer["img"] + ">";
                     if(document.getElementById("image_error")){
                         document.getElementById("image_error").style.display="none";
                     }
@@ -135,7 +152,9 @@ window.onload = function() {
                     "<form method=POST id=delete_image_form>" +  
                     "<button name=delete_image id=delete_image_button class=delete_standard value =" + image +" > X </button>" +
                     "</form>" + "</div>" +
-                    "<img class=image_list_image src=data:image/jpeg;base64," + image_ojb + ">";
+                    "<div onClick=enlarge_image(this) class=image_list_image >"+
+                    "<img class=standard_img src=data:image/jpeg;base64," + image_ojb + ">" +
+                    "</div>";
                     list.append(li);
             }
         }

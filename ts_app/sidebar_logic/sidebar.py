@@ -1,5 +1,4 @@
-from flask import Blueprint, current_app, session, jsonify, request, g
-from werkzeug.utils import secure_filename
+from flask import Blueprint, current_app, jsonify
 from flask_login import login_required
 import os
 import glob
@@ -20,9 +19,16 @@ def inject_file_form():
 @sidebar_bp.route('/columns/<name>', methods=["GET"])
 @login_required
 def select_dataset(name):
+    """
+    Input: The name of a csv file
+    Goal: to retrieve al column names (except Date).
+    Returns: A list of all column names in the csv file except the time column
+    
+    """
     csv = current_app.config['UPLOAD_FOLDER'] + name
     df = pd.read_csv(csv)
     columns = df.columns.tolist()
+    columns.remove(current_app.config['TIME_COLUMN'])
     column_dictionary = {}
     for i in range(len(columns)):
         column_dictionary.update({i : columns[i]})

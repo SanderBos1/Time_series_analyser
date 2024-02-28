@@ -18,7 +18,8 @@
     width:90%;
     border: solid 1px black;
     overflow: auto;
-
+    padding:0px;
+    margin:0px;
 }
 
 
@@ -30,7 +31,6 @@
     float:left;
     list-style-type: None;
 }
-
 
 .image{
     position:relative;
