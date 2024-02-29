@@ -1,0 +1,39 @@
+#sign_in_form_container{
+	position:relative;
+	left:20%;
+	width:60%;
+	text-align:center;
+}
+
+#sign_in_form{
+	position:relative;
+	height:100%;
+	width:100%;
+	display: inline-block;
+}
+
+#sign_in_form > *{
+	position:relative;
+	margin:auto;
+	margin-bottom: 3%;
+}
+
+#register_form_container{
+	position:relative;
+	left:10%;
+	width:70%;
+	text-align:center;
+}
+
+#register_form{
+	position:relative;
+	height:100%;
+	width:100%;
+	display: inline-block;
+}
+
+#register_form > *{
+	position:relative;
+	margin:auto;
+	margin-bottom: 3%;
+}
