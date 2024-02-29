@@ -1,10 +1,9 @@
-from dotenv import load_dotenv
 import os
-
+from dotenv import load_dotenv
 load_dotenv()
 
 
-class Config:
+class config:
     UPLOAD_FOLDER = 'data/'
     ALLOWED_EXTENSIONS = {'csv'}
     SECRET_KEY = os.getenv('SECRET_KEY')
@@ -15,7 +14,7 @@ class Config:
     TIME_COLUMN = "Date"
 
 
-class devConfig:
+class dev_config:
     UPLOAD_FOLDER = 'data/'
     ALLOWED_EXTENSIONS = {'csv'}
     SECRET_KEY = os.getenv('SECRET_KEY')

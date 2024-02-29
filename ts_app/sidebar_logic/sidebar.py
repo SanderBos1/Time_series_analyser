@@ -37,6 +37,11 @@ def select_dataset(name):
 @sidebar_bp.route('/get_csvfiles', methods=["GET"])
 @login_required
 def get_datasets():
+    """
+    Goal: load all dataset that are placed in data the Data dictionary
+    Returns: A list of csv files
+    
+    """
     csvFiles = [os.path.basename(x) for x in glob.glob(current_app.config['UPLOAD_FOLDER'] + '/*.csv')]
     file_dict = {}
     for number in range(len(csvFiles)):
@@ -47,6 +52,11 @@ def get_datasets():
 @sidebar_bp.route('/delete_csv/<name>', methods=["POST"])
 @login_required
 def delete_dataset(name):
+    """
+    Input: The name of the dataset that is going to be deleted
+    Goal: Delete a dataset
+    Returns: Which file has been deleted as message
+    """
     csv =name
     remove_file = current_app.config['UPLOAD_FOLDER'] + csv
     os.remove(remove_file)
@@ -56,7 +66,6 @@ def delete_dataset(name):
 @sidebar_bp.route("/upload", methods=["POST"])
 @login_required
 def upload_csv_data():
-    print("test")
     form = file_upload_form()
     if form.validate_on_submit():
         filename = form.file.data.filename

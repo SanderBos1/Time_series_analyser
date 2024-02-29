@@ -14,6 +14,7 @@ sequencing_bp = Blueprint('sequencing_bp', __name__,
 @sequencing_bp.route("/trend", methods=["GET", "POST"])
 @login_required
 def calculations():
+    "Loads the trend page and all its HTML elements."
     form = trend_form()
     residual_save_form = image_save_load()
     draw_residuals_form = draw_resiudals()
@@ -61,24 +62,38 @@ def calculate_trend(dataset):
 @sequencing_bp.route("/trend/residuals/<dataset>/<variable>", methods=["POST"])
 @login_required
 def show_residuals_trend(dataset, variable):
+    """
+    Input: The dataset that is used and the column of intreset from where the residuals are calculated
+    Goal: show an image on the page that shows the residuals of the selected column
+    Returns: An image showing the residuals of the selected column from the selected dataset.
+    """
     form = draw_resiudals()
-    if form.validate_on_submit():
-        plot_variables = {
-            "dataset":dataset,
-            "variable":variable,
-            "xlabel":form.xlabel.data,
-            "ylabel":form.ylabel.data,
-            "color":form.line_color.data
-        }
+    try:
+        if form.validate_on_submit():
+            plot_variables = {
+                "dataset":dataset,
+                "variable":variable,
+                "xlabel":form.xlabel.data,
+                "ylabel":form.ylabel.data,
+                "color":form.line_color.data
+            }
 
-        img = trend_residuals(plot_variables).show_residuals()
-        return img
-    return "Something went wrong"
+            img = trend_residuals(plot_variables).show_residuals()
+            message="The image has been created."
+    except Exception as e:
+        message = str(e)
+        img = ""
+    answer = {
+        "message": message,
+        "img": img
+    }
+    return answer
 
 
 @sequencing_bp.route("/seasonality", methods=["GET", "POST"])
 @login_required
 def seasonality():
+    "Loads the seasonality page and all its elements."
     form = seasonality_form()
     return render_template("sequencing_seasonality.html", form=form)
 
@@ -87,9 +102,17 @@ def seasonality():
 @sequencing_bp.route("/seasonality/calculate/<dataset>", methods=["POST"])
 @login_required
 def calculate_seasonality(dataset):
+    """
+    Input: 
+        Dataset: The file which is used to calculate the seasonality farom
+        Column: The column for which the hypotheses of seasonality is defined and calculated on
+        seasonality function: The statistical function that is used
+    Results:
+        P value + message indicating if Hypotheses 0 can be rejected or not
+    """
     form = seasonality_form()
     form.column_intrest.choices = [form.column_intrest.data]
-    current_trend_calculator = "Not defined"
+    current_seasonality_calculator = "Not defined"
     hypotheses="Not defined"
     try:
         if form.validate_on_submit():
@@ -109,7 +132,7 @@ def calculate_seasonality(dataset):
         message = str(e)
     values_dict = {
         "message":message,
-        'p_value':current_trend_calculator,
+        'p_value':current_seasonality_calculator,
         'Hypotheses':hypotheses
         }
     return jsonify(values_dict)

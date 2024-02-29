@@ -119,7 +119,7 @@ def delete_image(image_name):
     return answer
 
 @image_ts_bp.route('/save_image', methods=["POST"])
-# @login_required
+@login_required
 def save_image():
     """
     Input: A form containing the name of the database

@@ -106,9 +106,22 @@ $(document).ready(function() {
             url: '/trend/residuals/' + dataset + "/" + var_column,
             data: $('form').serialize(), 
             success: function (data) {
-                const img_div = document.getElementById("residuals_trend_div");
-                img_div.innerHTML = "<img class=fullscreen_image id=trend_picture src=data:image/jpeg;base64," + data + ">";
-                document.getElementById("save_image_trend").style.display="inline-block";
+                if(data["message"] == "The image has been created."){
+                    const img_div = document.getElementById("residuals_trend_div");
+                    img_div.innerHTML = "<img class=fullscreen_image id=trend_picture src=data:image/jpeg;base64," + data["img"] + ">";
+                    document.getElementById("save_image_trend").style.display="inline-block";
+                }
+                else{
+                    if(document.getElementById('error_trend_residual_plot_message')){
+                        document.getElementById('error_trend_residual_plot_message').remove();
+                    }
+                    error_message = document.getElementById("plot_trend_residual_error")
+                    error_message.style.display="inline-block"
+                    var text = document.createElement("p");
+                    text.setAttribute("id", "error_trend_residual_plot_message")
+                    text.innerHTML = data["message"];
+                    error_message.appendChild(text)
+                }
             }
         });
         e.preventDefault(); 
