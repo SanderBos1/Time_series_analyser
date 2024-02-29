@@ -70,15 +70,17 @@ def show_residuals_trend(dataset, variable):
     form = draw_resiudals()
     try:
         if form.validate_on_submit():
-            plot_variables = {
+            variables = {
                 "dataset":dataset,
                 "variable":variable,
+            }
+            plot_variables = {
                 "xlabel":form.xlabel.data,
                 "ylabel":form.ylabel.data,
                 "color":form.line_color.data
             }
 
-            img = trend_residuals(plot_variables).show_residuals()
+            img = trend_residuals(variables, plot_variables).show_residuals()
             message="The image has been created."
     except Exception as e:
         message = str(e)
@@ -89,6 +91,24 @@ def show_residuals_trend(dataset, variable):
     }
     return answer
 
+
+@sequencing_bp.route("/trend/add_residuals/<dataset>/<variable>", methods=["POST"])
+@login_required
+def add_residuals(dataset, variable):
+    try:
+        print("get here")
+        variables = {
+            "dataset":dataset,
+            "variable":variable,
+        }
+        message= trend_residuals(variables).add_residuals()
+    except Exception as e:
+        message = str(e)
+    answer = {
+        "message":message
+    }
+    print(message)
+    return jsonify(answer)
 
 @sequencing_bp.route("/seasonality", methods=["GET", "POST"])
 @login_required

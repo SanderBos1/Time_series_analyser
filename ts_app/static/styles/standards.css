@@ -62,7 +62,6 @@ input:hover{
 }
 
 .button_standard{
-    display: block;
     padding: 8px;
     background-color: #ED693C;
     text-decoration: none;

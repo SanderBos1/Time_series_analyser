@@ -4,6 +4,18 @@ function show_save_dialogue(){
 }
 
 
+function save_residuals(){
+    console.log("test")
+    var dataset = document.getElementById("file_display_selected").value
+    var var_column = document.getElementById("column_intrest").value
+    $.ajax({
+        type: "POST",
+        url: '/trend/add_residuals/' + dataset + "/" + var_column,
+        success: function (data) {
+        }
+    });
+}
+
 $(document).ready(function() {
     $('#trend_form').submit(function (e) {
         var dataset = document.getElementById("file_display_selected").value
@@ -108,7 +120,7 @@ $(document).ready(function() {
             success: function (data) {
                 if(data["message"] == "The image has been created."){
                     const img_div = document.getElementById("residuals_trend_div");
-                    img_div.innerHTML = "<img class=fullscreen_image id=trend_picture src=data:image/jpeg;base64," + data["img"] + ">";
+                    img_div.innerHTML = "<img class=standard_img id=trend_picture src=data:image/jpeg;base64," + data["img"] + ">";
                     document.getElementById("save_image_trend").style.display="inline-block";
                 }
                 else{
