@@ -71,3 +71,9 @@ class error extends HTMLElement {
 
 customElements.define('dialogue-element', dialogue);
 customElements.define('error-dialogue', error);
+
+function show_dialogue(dialogue){
+	console.log(dialogue)
+    var save_dialogue = document.getElementById(dialogue)
+    save_dialogue.style.display = "inline-block";
+}

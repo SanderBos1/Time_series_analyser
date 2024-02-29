@@ -34,11 +34,11 @@ def calculate_trend(dataset):
     """
     form = trend_form()
     form.column_intrest.choices = [form.column_intrest.data]
+    message="something went wrong"
     current_trend_calculator = "Not defined"
     hypotheses="Not defined"
     try:
-
-        if form.validate_on_submit():
+        if form.validate():
             variable_dict = {
                 "dataset": current_app.config['UPLOAD_FOLDER']  + dataset,
                 "var_column":form.column_intrest.data,

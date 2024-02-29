@@ -1,4 +1,3 @@
-import json
 from flask import Blueprint, render_template, session, jsonify, current_app, request
 from flask_login import login_required
 from ..image_creation.python.make_image import make_image
@@ -128,7 +127,6 @@ def save_image():
     answer="hello"
     data = request.get_json()
     form = image_save_load.from_json(data["form"])
-
     try:
         if form.validate():
             print("validated")

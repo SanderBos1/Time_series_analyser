@@ -10,28 +10,34 @@
 
 <div class="choice_list">
     <ul class="choice">
-        <li class="navbar-li"><a class="button_standard" href="/trend">Trend</a></li>
-        <li class="navbar-li"><a class="button_standard" href="/seasonality">Seasonality</a></li>
+        <li class="navbar-li"><a class="button_standard link_button" href="/trend">Trend</a></li>
+        <li class="navbar-li"><a class="button_standard link_button" href="/seasonality">Seasonality</a></li>
     </ul>
 </div>
 
-
-<div class="p_value_calculation_holder">
-  <form class="p_value_calculation" id="trend_form" method="post">
-    {{ form.csrf_token}}
+<dialogue-element class="dialogue-element" id="stattest_trend_dialogue" dialogue_name="Trend P test">
+<div id="statistical_trend_test">
+  <form  id="statistical_trend_form">
+      {{ form.csrf_token}}
       {{form.function.label  (class_="form_label")}}
       {{form.function (class_="form_input")}}
-    {{form.column_intrest.label  (class_="form_label")}}
-    {{form.column_intrest (class_="form_input")}}
-    {{form.submit (class_="button_standard")}}
+      {{form.column_intrest.label  (class_="form_label")}}
+      {{form.column_intrest (class_="form_input")}}
+      {{form.submit (class_="button_standard")}}
   </form>
 </div>
-
+<div id="trend_answers">
+  <p >Your p value of your statistical trend test is: <var id="trend_value">Not yet defined</var></p>
+  <p> Therefore we can say the following over your hypotheses: <var id="hypothese_trend">Not yet defined</var></p>
+</div>
 <error-dialogue class="dialogue-element" id="trend_calculation_error" dialogue_name="Error with calculating p value">
 </error-dialogue>
+</dialogue-element>
+
+
+<div id="trend_explanation_button_holder">
 
 <div class="pvalue_explanation_answers">
-  <div class="pval_exp" id="trend_text">
     <p>
       The form found above this text aims to calculate if there is a trend in the time series. 
       A trend indicates the long-term change in the variable of a time series. 
@@ -40,25 +46,25 @@
       For example, if the p-value is 10%, then there is a 10% chance that the trend observed in the time series is due to randomness
       Normally in statistical test we define two hypotheses. Hypotheses 0 is that there is no trend in the time series while Hypotheses 1 is that there is trend in the time-series.
     </p>
+
+
 </div>
 
-<div id="trend_answers">
-  <p >Your p value of your statistical trend test is: <var id="trend_value">Not yet defined</var></p>
-  <p> Therefore we can say the following over your hypotheses: <var id="hypothese_trend">Not yet defined</var></p>
-</div>
+<div id="trend_buttons_holder">
+  <button class="button_standard" id="statest_trend_button" onclick="show_dialogue('stattest_trend_dialogue')">Calculate p value</button>
+  <button class="button_standard" id="plot_trend_residuals_button" onclick="show_dialogue('draw_residuals_dialogue')">Plot Trend Residuals</button>
 </div>
 
-<dialogue-element class="dialogue-element" id="image_trendresidual_save_form" dialogue_name="Save Image">
-  <form id=save_residual_image_form method="POST">
-    {{ residual_save_form.csrf_token }}
-    {{ residual_save_form.imageName }}
-    {{residual_save_form.save (class_="button_standard")}}
-  </form>
-  <error-dialogue class="dialogue-element" id="save_residual_image_error" dialogue_name="Error">
-  </error-dialogue>
+</div>
+
+
+
+
   
 </dialogue-element>
 
+<dialogue-element class="dialogue-element" id="draw_residuals_dialogue" dialogue_name="Draw Residual plot">
+<div id= "image_form_holder">
 <div id="draw_residuals">
 <form  id="draw_residul_form">
   {{draw_residuals_form.csrf_token}}
@@ -72,16 +78,33 @@
 </form>
 </div>
 
+
+
+<div class="residual_interaction invinsible" id="save_image_trend">
+<div class="ts-image" id="residuals_trend_div">
+</div>
+
+<button class="button_standard invinsible_button" id="save_residual_image_dialogue_button" onclick="show_dialogue('trend_residual_image_dialoague')">Save image</button>
+<button class="button_standard invinsible_button" id="add_residuals_to_dataset" onclick="save_residuals();return false;">Add residuals to csv</button>
+</div>
+</div>
+
+
 <error-dialogue class="dialogue-element" id="plot_trend_residual_error" dialogue_name="Error">
 </error-dialogue>
 
-<div class="residual_interaction" id="save_image_trend">
-<div class="ts-image" id="residuals_trend_div">
-</div>
-<button class="button_standard" id="save_residual_image_dialogue_button" onclick="show_save_dialogue()">Save image</button>
-<button class="button_standard" id="add_residuals_to_dataset" onclick="save_residuals();return false;">Add residuals to csv</button>
-</div>
-</div>
+<dialogue-element class="dialogue-element" id="image_trendresidual_save_form" dialogue_name="Plot Residuals">
+  <form id=save_residual_image_form method="POST">
+    {{ residual_save_form.csrf_token }}
+    {{ residual_save_form.imageName }}
+    {{residual_save_form.save (class_="button_standard")}}
+  </form>
+  <error-dialogue class="dialogue-element" id="save_residual_image_error" dialogue_name="Error">
+  </error-dialogue>
+
+</dialogue-element>
+
+
 {%endblock%}
 
 

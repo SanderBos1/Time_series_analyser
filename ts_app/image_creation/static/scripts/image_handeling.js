@@ -1,8 +1,3 @@
-function show_save_dialogue(){
-    var save_dialogue = document.getElementById("image_save_form")
-    save_dialogue.style.display = "inline-block";
-}
-
 function enlarge_image(element){
     element.removeAttribute("onclick")
     var image = element.closest(".image")
@@ -25,7 +20,6 @@ $(document).ready(function() {
         e.preventDefault()
         var dataset = document.getElementById("file_display_selected").value
         var form = new FormData($(this)[0])
-        console.log(form)
         $.ajax({
             headers: { 
                 "X-CSRFToken": "{{ form.csrf_token._value() }}",

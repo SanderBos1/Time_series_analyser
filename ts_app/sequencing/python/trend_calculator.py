@@ -20,6 +20,7 @@ class trend_calculator:
     
     def calculate_trend(self):
         if self.trend == "pymannkendall":
+            print("pyman")
             p_value = self.Mann_KendallTrend(self.column)
         return round(p_value, 4)
     
@@ -58,13 +59,11 @@ class trend_residuals:
         date_list = date_list.drop(date_list.index[0])
         detrend_list = self.calculate_residuals(df)
         time_column = current_app.config['TIME_COLUMN']
-        print(time_column)
         residual_df = pd.DataFrame(
             {  
             time_column: date_list,
             self.variables["variable"]: detrend_list
         })
-        print(residual_df)
         name = self.variables["variable"] + "_residuals.csv"
         residual_df.to_csv(current_app.config['UPLOAD_FOLDER'] + name, index=False)
         return "Your file was saved"

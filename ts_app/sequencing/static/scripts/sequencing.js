@@ -17,14 +17,25 @@ function save_residuals(){
 }
 
 $(document).ready(function() {
-    $('#trend_form').submit(function (e) {
+    $('#statistical_trend_form').submit(function (e) {
+        e.preventDefault(); 
         var dataset = document.getElementById("file_display_selected").value
+        var form = new FormData($(this)[0])
         $.ajax({
+            headers: { 
+                "X-CSRFToken" : "{{ form.csrf_token._value() }}"
+            },
             type: "POST",
             url: '/trend/calculate/' + dataset,
-            data: $('form').serialize(), // serializes the form's elements.
+            data:form,
+            processData: false,
+            contentType: false,            
             success: function (data) {
+                
                 if(data['message']=="Calculated."){
+                    if(document.getElementById('trend_calculation_error')){
+                        document.getElementById('trend_calculation_error').style.display="none";
+                    }
                     var trend_value = document.getElementById("trend_value")
                     trend_value.innerHTML = data["p_value"]
                     var hypotheses = document.getElementById("hypothese_trend")
@@ -47,17 +58,7 @@ $(document).ready(function() {
                 }
             }
         });
-        e.preventDefault(); // block the traditional submission of the form.
     });
-
-    // Inject our CSRF token into our AJAX request.
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
-            }
-        }
-    })
 });
 
 
@@ -108,6 +109,8 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#draw_residul_form').submit(function (e) {
+        e.preventDefault(); 
+
         var dataset = document.getElementById("file_display_selected").value
         var var_column = document.getElementById("column_intrest").value
         $.ajax({
@@ -136,7 +139,6 @@ $(document).ready(function() {
                 }
             }
         });
-        e.preventDefault(); 
 
     })
 });

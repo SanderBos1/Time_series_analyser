@@ -10,10 +10,12 @@
 
     <div class="choice_list">
         <ul class="choice">
-            <li class="navbar-li"><a class="button_standard" href="/display_ts">Make image</a></li>
-            <li class="navbar-li"><a class="button_standard" href="/display_ts_list">Show List</a></li>
+            <li class="navbar-li"><a class="button_standard link_button" href="/display_ts">Make image</a></li>
+            <li class="navbar-li"><a class="button_standard link_button" href="/display_ts_list">Show List</a></li>
         </ul>
     </div>
+
+
 
 <form id= image_draw_form method="POST">
     <div class=user-input>
@@ -24,6 +26,7 @@
         {{form.submit (class_="button_standard")}}
 
     </div>
+
 
     <div id="image_plot_options">
         <h3> Plot options</h3>
@@ -40,7 +43,7 @@
     </div>
 
 </form>
-<button class="button_standard" id="save_image_dialogue_button" onclick="show_save_dialogue()">Save image</button>
+<button class="button_standard" id="save_image_dialogue_button" onclick="show_dialogue('image_save_form')">Save image</button>
 
 
 
@@ -52,9 +55,7 @@
     </form>
     <error-dialogue class="dialogue-element" id="save_image_error" dialogue_name="Error">
     </error-dialogue>
-    
   </dialogue-element>
-
 
 
 <error-dialogue class="dialogue-element" id="image_error" dialogue_name="image plot error">
