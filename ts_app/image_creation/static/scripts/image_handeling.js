@@ -1,3 +1,7 @@
+/* 
+Function to make the selected image element larger.
+*/
+
 function enlarge_image(element){
     element.removeAttribute("onclick")
     var image = element.closest(".image")
@@ -7,6 +11,10 @@ function enlarge_image(element){
 
 }
 
+
+/* 
+Function to make the selected image element smaller.
+*/
 function small_image(element){
     element.removeAttribute("onclick")
     var image = element.closest(".fullscreen_image")
@@ -15,6 +23,18 @@ function small_image(element){
     element.onclick = function(){enlarge_image(this)};
 
 }
+
+/*
+Send the image_draw_form to the back end and displays the image on the screen.
+Input: 
+    Dataset: the selected dataset
+    Form: The image drawn form of the html page
+On success:
+    Displays plot in the image holder
+On failure:
+    Displays error in the error dialogue
+
+*/
 $(document).ready(function() {
     $('#image_draw_form').submit(function (e) {
         e.preventDefault()
@@ -33,22 +53,14 @@ $(document).ready(function() {
                 if(answer['message'] == "The image is uploaded."){
                     const img_div = document.getElementById("image_div");
                     img_div.innerHTML = "<img class=standard_img id=picture src=data:image/jpeg;base64," + answer["img"] + ">";
-                    if(document.getElementById("image_error")){
-                        document.getElementById("image_error").style.display="none";
-                    }
                     document.getElementById("save_image_dialogue_button").style.display="inline-block";
-
                 } 
                 else{
-                    if(document.getElementById('errror_image_plot')){
-                        document.getElementById('errror_image_plot').remove();
-                    }
-                    var error_text = document.getElementById("image_error");
-                    var text = document.createElement("p");
-                    text.setAttribute("id", "errror_image_plot")
-                    text.innerHTML = answer["message"];
-                    error_text.appendChild(text)
-                    error_text.style.display="inline-block";
+                    make_unclickable('dialogue_unclickable')
+                    var error_text = document.getElementById("error_text_draw_image");
+                    var error_message = '<p id="errror_image_plot">' +  answer["message"] + "</p>";
+                    error_text.innerHTML = error_message;
+                    document.getElementById("image_error").style.display="inline-block";
                 }
             }
     })
@@ -56,6 +68,18 @@ $(document).ready(function() {
     });
 });
 
+
+/*
+Retrieves the created plot as image and saves it in the backend
+Input: 
+    Img: The created plot
+    Form: The image drawn form of the html page
+On success:
+    Displays plot in the image holder
+On failure:
+    Displays error in the error dialogue
+
+*/
 
 $(document).ready(function() {
     $('#save_form').submit(function (e) {
@@ -80,15 +104,11 @@ $(document).ready(function() {
 
                 }
             else{
-                if(document.getElementById('error_text_save')){
-                    document.getElementById('error_text_save').remove();
-                }
-                var error_text = document.getElementById("save_image_error");
-                var text = document.createElement("p");
-                text.setAttribute("id", "error_text_save")
-                text.innerHTML = answer['message'];
-                error_text.appendChild(text)
-                error_text.style.display="inline-block";
+                make_unclickable('dialogue_unclickable')
+                var error_text = document.getElementById("error_text_save_image");
+                var error_message = '<p id="errror_image_plot">' +  answer["message"] + "</p>";
+                error_text.innerHTML = error_message;
+                document.getElementById("save_image_error").style.display="inline-block";
             }
         }
     });
@@ -97,6 +117,9 @@ $(document).ready(function() {
 });
 
 
+
+/* 
+    Adds the columns of the csv files to the list */
 
 function add_options(){
     if(document.getElementById("column_intrest")){
@@ -115,7 +138,7 @@ function add_options(){
 }
 
 
-
+/* when an image is deleted it deleted the li element that holds that image */
 $(document).on('submit','#delete_image_form',function(e)
 {   
     e.preventDefault();
@@ -132,6 +155,9 @@ $(document).on('submit','#delete_image_form',function(e)
 });
 
 
+/*
+    loads all images in the database to the front end
+*/
 window.onload = function() {
     $.ajax({
         type:'Get',
@@ -156,15 +182,11 @@ window.onload = function() {
             }
         }
         else{
-            if(document.getElementById('error_loading_images')){
-                document.getElementById('error_loading_images').remove();
-            }
-            var error_text = document.getElementById("display_images_error");
-            var text = document.createElement("p");
-            text.setAttribute("id", "error_loading_images")
-            text.innerHTML = "Something went wrong";
-            error_text.appendChild(text)
-            error_text.style.display="inline-block";
+            make_unclickable('dialogue_unclickable')
+            var error_text = document.getElementById("error_text_load_images");
+            var error_message = '<p id="errror_image_plot">' +  data["message"] + "</p>";
+            error_text.innerHTML = error_message;
+            document.getElementById("display_images_error").style.display="inline-block";
 
         }
 

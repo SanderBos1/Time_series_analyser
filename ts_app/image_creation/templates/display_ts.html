@@ -22,8 +22,8 @@
         <h3> Make Image </h3>
         {{ form.csrf_token }}
         {{form.column_intrest.label (class_="form_label")}}
-        {{form.column_intrest (class_="form_input")}}
-        {{form.submit (class_="button_standard")}}
+        {{form.column_intrest (class_="form_input dialogue_unclickable")}}
+        {{form.submit (class_="button_standard dialogue_unclickable")}}
 
     </div>
 
@@ -31,13 +31,13 @@
     <div id="image_plot_options">
         <h3> Plot options</h3>
         {{form.image_title.label (class_="form_label")}}
-        {{form.image_title (class_="form_input")}}
+        {{form.image_title (class_="form_input dialogue_unclickable")}}
         {{form.xlabel.label (class_="form_label")}}
-        {{form.xlabel (class_="form_input")}}
+        {{form.xlabel (class_="form_input dialogue_unclickable")}}
         {{form.ylabel.label (class_="form_label")}}
-        {{form.ylabel (class_="form_input")}}
-        {{form.line_color.label (class_="form_label")}}
-        {{form.line_color (class_="form_input")}}
+        {{form.ylabel (class_="form_input dialogue_unclickable")}}
+        {{form.line_color.label (class_="form_label ")}}
+        {{form.line_color (class_="form_input dialogue_unclickable")}}
     </div>
 
 
@@ -52,17 +52,23 @@
 <dialogue-element class="dialogue-element" id="image_save_form" dialogue_name="Save Image">
     <form id=save_form method="POST">
         {{ form_image.csrf_token }}
-        {{ form_image.imageName }}
-        {{form_image.save (class_="button_standard")}}
+        {{ form_image.imageName (class_="dialogue_unclickable") }}
+        {{form_image.save (class_="button_standard dialogue_unclickable")}}
     </form>
     <p id="image_save_feedback"></p>
 
     <error-dialogue class="dialogue-element" id="save_image_error" dialogue_name="Error">
+        <div id="error_text_save_image">
+        
+        </div>
     </error-dialogue>
   </dialogue-element>
 
 
 <error-dialogue class="dialogue-element" id="image_error" dialogue_name="image plot error">
+    <div id="error_text_draw_image">
+        
+    </div>
 </dialogue-element>
 
 
