@@ -43,7 +43,7 @@ class trend_residuals:
         detrend_list = self.calculate_residuals(df)
         plt.plot(detrend_list,  color=self.plot_variables["color"])
         plt.grid(True)
-        plt.title('Time Series - Plot')
+        plt.title(self.plot_variables["image_title"])
         plt.xlabel(self.plot_variables["xlabel"])
         plt.xticks(rotation=30, ha='right')
         plt.ylabel(self.plot_variables["ylabel"])

@@ -76,6 +76,7 @@ def show_residuals_trend(dataset):
                 "variable":form.column_intrest.data,
             }
             plot_variables = {
+                "image_title":form.image_title.data,
                 "xlabel":form.xlabel.data,
                 "ylabel":form.ylabel.data,
                 "color":form.line_color.data

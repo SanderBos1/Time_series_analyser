@@ -10,7 +10,7 @@ def make_image(plot_variables):
         df[plot_variables["time_column"]] = pd.to_datetime(df[plot_variables["time_column"]])
         plt.plot(df[plot_variables["time_column"]],df[plot_variables["var_column"]], color=plot_variables["color"])
         plt.grid(True)
-        plt.title('Time Series - Plot')
+        plt.title(plot_variables['plot_tile'])
         plt.xlabel(plot_variables["xlabel"])
         plt.xticks(rotation=30, ha='right')
         plt.ylabel(plot_variables["ylabel"])

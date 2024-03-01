@@ -50,14 +50,13 @@ def drawn_image(dataset):
     """
     form = ts_image_form()
     form.column_intrest.choices = [form.column_intrest.data]
-    message="something went wrong"
-    img = "dwadwapdawp"
     if form.validate_on_submit():
         try:
             plot_variables = {
                 "csv_file": dataset,
                 "time_column": current_app.config['TIME_COLUMN'],
                 "var_column":form.column_intrest.data,
+                "plot_tile": form.image_title.data,
                 "xlabel": form.xlabel.data,
                 "ylabel":form.ylabel.data,
                 "color": form.line_color.data
@@ -129,7 +128,6 @@ def save_image():
     form = image_save_load.from_json(data["form"])
     try:
         if form.validate():
-            print("validated")
             image_name = form.imageName.data
             image = ts_image(name=image_name, image_code=data["src"])
             db.session.add(image)

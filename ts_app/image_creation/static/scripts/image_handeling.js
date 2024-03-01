@@ -76,6 +76,8 @@ $(document).ready(function() {
                 "src":src_image}),
             success: function (answer) {
                 if(answer['message'] == "Image is saved."){
+                    show_message("image_save_feedback","Your image was saved")
+
                 }
             else{
                 if(document.getElementById('error_text_save')){

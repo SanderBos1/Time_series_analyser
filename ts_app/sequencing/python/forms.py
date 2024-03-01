@@ -18,6 +18,7 @@ class trend_form(FlaskForm):
 
 class draw_resiudals(FlaskForm):
     column_intrest = SelectField(label = "column_intrest", validators=[InputRequired()], id="residual_column_intrest")
+    image_title = StringField(label='Plot Title', validators=[InputRequired()])
     xlabel = StringField(label="X label", validators=[InputRequired()])
     ylabel = StringField(label="Y label", validators=[InputRequired()])
     line_color = SelectField(label='Line Color', validators=[InputRequired()], choices=[("red", "red"), ("blue", "blue")])

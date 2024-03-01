@@ -30,6 +30,8 @@
 
     <div id="image_plot_options">
         <h3> Plot options</h3>
+        {{form.image_title.label (class_="form_label")}}
+        {{form.image_title (class_="form_input")}}
         {{form.xlabel.label (class_="form_label")}}
         {{form.xlabel (class_="form_input")}}
         {{form.ylabel.label (class_="form_label")}}
@@ -53,6 +55,8 @@
         {{ form_image.imageName }}
         {{form_image.save (class_="button_standard")}}
     </form>
+    <p id="image_save_feedback"></p>
+
     <error-dialogue class="dialogue-element" id="save_image_error" dialogue_name="Error">
     </error-dialogue>
   </dialogue-element>

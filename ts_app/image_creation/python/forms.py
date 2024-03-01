@@ -13,6 +13,7 @@ class image_save_load(Form):
 
 class ts_image_form(FlaskForm):
     column_intrest = SelectField(label='Column of intrest', validators=[InputRequired()])
+    image_title = StringField(label='Plot Title', validators=[InputRequired()])
     xlabel = StringField(label="X label", validators=[InputRequired()])
     ylabel = StringField(label="Y label", validators=[InputRequired()])
     line_color = SelectField(label='Line Color', validators=[InputRequired()], choices=[("red", "red"), ("blue", "blue")])
