@@ -24,7 +24,7 @@
       {{form.season_per (class_="form_input error_unclickable")}}
       {{form.column_intrest.label  (class_="form_label")}}
       {{form.column_intrest (class_="form_input error_unclickable")}}
-      {{form.submit (class_="button_standard")}}
+      {{form.submit (class_="button_standard error_unclickable")}}
   </form>
 </div>
 <div class=sequecing_answers id="seasonality_answers">
@@ -32,6 +32,9 @@
   <p> Therefore we can say the following over your hypotheses: <var id="hypothese_seasonality">Not yet defined</var></p>
 </div>
 <error-dialogue class="dialogue-element pvalue_calculation_error" id="seasonality_calculation_error" dialogue_name="Error with calculating p value">
+  <div id="error_seasonality_pvalue">
+
+  </div>
 </error-dialogue>
 </dialogue-element>
 

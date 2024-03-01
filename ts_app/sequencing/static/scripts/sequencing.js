@@ -17,9 +17,6 @@ function save_residuals(){
                 load_csvdata()
             }
             else{
-                if(document.getElementById('error_trend_residual_plot_message')){
-                    document.getElementById('error_trend_residual_plot_message').remove();
-                }
                 make_unclickable("error_unclickable")
                 error_message = document.getElementById("plot_trend_residual_error")
                 error_message.style.display="inline-block"
@@ -49,29 +46,19 @@ $(document).ready(function() {
             success: function (data) {
                 
                 if(data['message']=="Calculated."){
-                    if(document.getElementById('trend_calculation_error')){
-                        document.getElementById('trend_calculation_error').style.display="none";
-                    }
                     var trend_value = document.getElementById("trend_value")
                     trend_value.innerHTML = data["p_value"]
                     var hypotheses = document.getElementById("hypothese_trend")
                     hypotheses.innerHTML = data["Hypotheses"]
                 }
                 else{
-                    if(document.getElementById('error_trend_calculation_message')){
-                        document.getElementById('error_trend_calculation_message').remove();
-                    }
                     make_unclickable("error_unclickable")
-                    var trend_value = document.getElementById("trend_value")
-                    trend_value.innerHTML = data["p_value"]
-                    var hypotheses = document.getElementById("hypothese_trend")
-                    hypotheses.innerHTML = data["Hypotheses"]
-                    var error_text = document.getElementById("trend_calculation_error");
-                    var text = document.createElement("p");
-                    text.setAttribute("id", "error_trend_calculation_message")
-                    text.innerHTML = data["message"];
-                    error_text.appendChild(text)
-                    error_text.style.display="inline-block";
+                    document.getElementById("trend_value").innerHTML = data["p_value"]
+                    document.getElementById("hypothese_trend").innerHTML = data["Hypotheses"]
+                    var error_text = document.getElementById("error_trend_pvalue");
+                    var error_message = '<p id="errror_trend_pvalue">' +  data["message"] + "</p>";
+                    error_text.innerHTML = error_message;
+                    document.getElementById("trend_calculation_error").style.display="inline-block";
                 }
             }
         });
@@ -81,8 +68,12 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#seasonality_form').submit(function (e) {
+        e.preventDefault(); 
         var dataset = document.getElementById("file_display_selected").value
         $.ajax({
+            headers: { 
+                "X-CSRFToken" : "{{ form.csrf_token._value() }}"
+            },
             type: "POST",
             url: '/seasonality/calculate/' + dataset,
             data: $('form').serialize(), // serializes the form's elements.
@@ -94,41 +85,23 @@ $(document).ready(function() {
                     hypotheses.innerHTML = data["Hypotheses"]
                 }
                 else{
-                    if(document.getElementById('error_seasonality_calculation_message')){
-                        document.getElementById('error_seasonality_calculation_message').remove();
-                    }
                     make_unclickable("error_unclickable")
-                    var trend_value = document.getElementById("seasonality_value")
-                    trend_value.innerHTML = data["p_value"]
-                    var hypotheses = document.getElementById("hypothese_seasonality")
-                    hypotheses.innerHTML = data["Hypotheses"]
-                    var error_text = document.getElementById("seasonality_calculation_error");
-                    var text = document.createElement("p");
-                    text.setAttribute("id", "error_seasonality_calculation_message")
-                    text.innerHTML = data["message"];
-                    error_text.appendChild(text)
-                    error_text.style.display="inline-block";
+                    document.getElementById("seasonality_value").innerHTML = data["p_value"]
+                    document.getElementById("hypothese_seasonality").innerHTML = data["Hypotheses"]
+                    var error_text = document.getElementById("error_seasonality_pvalue");
+                    var error_message = '<p id="errror_seasonality_pvalue">' +  data["message"] + "</p>";
+                    error_text.innerHTML = error_message;
+                    document.getElementById("seasonality_calculation_error").style.display="inline-block";
                 }
             }
         });
-        e.preventDefault(); // block the traditional submission of the form.
     });
-
-    // Inject our CSRF token into our AJAX request.
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
-            }
-        }
-    })
 });
 
 
 $(document).ready(function() {
     $('#draw_residul_form').submit(function (e) {
         e.preventDefault(); 
-
         var dataset = document.getElementById("file_display_selected").value
         $.ajax({
             headers: { 
@@ -144,16 +117,11 @@ $(document).ready(function() {
                     document.getElementById("save_image_trend").style.display="inline-block";
                 }
                 else{
-                    if(document.getElementById('error_trend_residual_plot_message')){
-                        document.getElementById('error_trend_residual_plot_message').remove();
-                    }
                     make_unclickable("error_unclickable")
-                    error_message = document.getElementById("plot_trend_residual_error")
-                    error_message.style.display="inline-block"
-                    var text = document.createElement("p");
-                    text.setAttribute("id", "error_trend_residual_plot_message")
-                    text.innerHTML = data["message"];
-                    error_message.appendChild(text)
+                    var error_text = document.getElementById("error_residual_plot_message");
+                    var error_message = '<p id="error_trend_residual_plot_message">' +  data["message"] + "</p>";
+                    error_text.innerHTML = error_message;
+                    document.getElementById("plot_trend_residual_error").style.display="inline-block";
                 }
             }
         });
@@ -211,15 +179,10 @@ $(document).ready(function() {
                     show_message("resimg_save_result_feedback",answer['message'] )
                 }
             else{
-                if(document.getElementById('error_text_save')){
-                    document.getElementById('error_text_save').remove();
-                }
-                var error_text = document.getElementById("save_residual_image_error");
-                var text = document.createElement("p");
-                text.setAttribute("id", "error_text_save")
-                text.innerHTML = answer['message'];
-                error_text.appendChild(text)
-                error_text.style.display="inline-block";
+                var error_text = document.getElementById("error_saving_resimg");
+                var error_message = '<p id="error_trend_residual_plot_message">' +  answer["message"] + "</p>";
+                error_text.innerHTML = error_message;
+                document.getElementById("save_residual_image_error").style.display="inline-block";
             }
         }
         });
