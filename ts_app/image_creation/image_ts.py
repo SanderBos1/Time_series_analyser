@@ -65,6 +65,7 @@ def drawn_image(dataset):
             session["ts_image"] = img
             message="The image is uploaded."
         except Exception as e:
+            img=""
             message=str(e)
     answer = {
         "message":message,

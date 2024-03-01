@@ -14,6 +14,7 @@ function save_residuals(){
             console.log(data)
             if (data["answer"] == "Saved."){
                 show_message("save_residualcsv_feedback",data['message'])
+                load_csvdata()
             }
             else{
                 if(document.getElementById('error_trend_residual_plot_message')){
