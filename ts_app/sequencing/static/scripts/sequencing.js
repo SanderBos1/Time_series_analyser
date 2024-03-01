@@ -5,9 +5,8 @@ function show_save_dialogue(){
 
 
 function save_residuals(){
-    console.log("test")
     var dataset = document.getElementById("file_display_selected").value
-    var var_column = document.getElementById("column_intrest").value
+    var var_column = document.getElementById("residual_column_intrest").value
     $.ajax({
         type: "POST",
         url: '/trend/add_residuals/' + dataset + "/" + var_column,
@@ -45,6 +44,7 @@ $(document).ready(function() {
                     if(document.getElementById('error_trend_calculation_message')){
                         document.getElementById('error_trend_calculation_message').remove();
                     }
+                    make_unclickable("error_unclickable")
                     var trend_value = document.getElementById("trend_value")
                     trend_value.innerHTML = data["p_value"]
                     var hypotheses = document.getElementById("hypothese_trend")
@@ -112,13 +112,12 @@ $(document).ready(function() {
         e.preventDefault(); 
 
         var dataset = document.getElementById("file_display_selected").value
-        var var_column = document.getElementById("column_intrest").value
         $.ajax({
             headers: { 
                 "X-CSRFToken" : "{{ form.csrf_token._value() }}"
             },
             type: "POST",
-            url: '/trend/residuals/' + dataset + "/" + var_column,
+            url: '/trend/residuals/' + dataset ,
             data: $('form').serialize(), 
             success: function (data) {
                 if(data["message"] == "The image has been created."){
@@ -130,6 +129,7 @@ $(document).ready(function() {
                     if(document.getElementById('error_trend_residual_plot_message')){
                         document.getElementById('error_trend_residual_plot_message').remove();
                     }
+                    make_unclickable("error_unclickable")
                     error_message = document.getElementById("plot_trend_residual_error")
                     error_message.style.display="inline-block"
                     var text = document.createElement("p");
@@ -146,15 +146,23 @@ $(document).ready(function() {
 
 function add_options(){
     var columns = document.getElementById("column_intrest");
+    var columns_draw = document.getElementById("residual_column_intrest");
+    console.log(columns_draw)
     columns.textContent = '';
+    columns_draw.textContent = '';
     var csv_columns = document.getElementById("column_list_ul")
     var list = csv_columns.getElementsByTagName("li")
     for(let i = 0; i < list.length; i++){
         var option = list[i].innerHTML
         const element = document.createElement("option");
+        const element2 = document.createElement("option");
         element.value = option;
+        element2.value = option;
         element.innerHTML = option;
+        element2.innerHTML = option;
         columns.appendChild(element)
+        columns_draw.appendChild(element)
+
     }
 }
 

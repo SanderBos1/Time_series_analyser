@@ -59,20 +59,22 @@ def calculate_trend(dataset):
         }
     return values_dict
 
-@sequencing_bp.route("/trend/residuals/<dataset>/<variable>", methods=["POST"])
+@sequencing_bp.route("/trend/residuals/<dataset>", methods=["POST"])
 @login_required
-def show_residuals_trend(dataset, variable):
+def show_residuals_trend(dataset):
     """
     Input: The dataset that is used and the column of intreset from where the residuals are calculated
     Goal: show an image on the page that shows the residuals of the selected column
     Returns: An image showing the residuals of the selected column from the selected dataset.
     """
     form = draw_resiudals()
+    form.column_intrest.choices = [form.column_intrest.data]
+
     try:
         if form.validate_on_submit():
             variables = {
                 "dataset":dataset,
-                "variable":variable,
+                "variable":form.column_intrest.data,
             }
             plot_variables = {
                 "xlabel":form.xlabel.data,

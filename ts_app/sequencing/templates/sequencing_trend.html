@@ -20,10 +20,10 @@
   <form  id="statistical_trend_form">
       {{ form.csrf_token}}
       {{form.function.label  (class_="form_label")}}
-      {{form.function (class_="form_input")}}
+      {{form.function (class_="form_input error_unclickable")}}
       {{form.column_intrest.label  (class_="form_label")}}
-      {{form.column_intrest (class_="form_input")}}
-      {{form.submit (class_="button_standard")}}
+      {{form.column_intrest (class_="form_input error_unclickable")}}
+      {{form.submit (class_="button_standard error_unclickable")}}
   </form>
 </div>
 <div id="trend_answers">
@@ -37,7 +37,7 @@
 
 <div id="trend_explanation_button_holder">
 
-<div class="pvalue_explanation_answers">
+<div class="trend_pvalue_explanation">
     <p>
       The form found above this text aims to calculate if there is a trend in the time series. 
       A trend indicates the long-term change in the variable of a time series. 
@@ -51,8 +51,8 @@
 </div>
 
 <div id="trend_buttons_holder">
-  <button class="button_standard" id="statest_trend_button" onclick="show_dialogue('stattest_trend_dialogue')">Calculate p value</button>
-  <button class="button_standard" id="plot_trend_residuals_button" onclick="show_dialogue('draw_residuals_dialogue')">Plot Trend Residuals</button>
+  <button class="button_standard" id="statest_trend_button" onclick="show_dialogue('stattest_trend_dialogue', 'true')">Calculate p value</button>
+  <button class="button_standard" id="plot_trend_residuals_button" onclick="show_dialogue('draw_residuals_dialogue', 'true')">Plot Trend Residuals</button>
 </div>
 
 </div>
@@ -68,13 +68,15 @@
 <div id="draw_residuals">
 <form  id="draw_residul_form">
   {{draw_residuals_form.csrf_token}}
+  {{draw_residuals_form.column_intrest.label  (class_="form_label")}}
+  {{draw_residuals_form.column_intrest ( class_="form_input error_unclickable")}}
   {{draw_residuals_form.xlabel.label  (class_="form_label")}}
-  {{draw_residuals_form.xlabel (class_="form_input")}}
+  {{draw_residuals_form.xlabel (class_="form_input error_unclickable")}}
   {{draw_residuals_form.ylabel.label  (class_="form_label")}}
-  {{draw_residuals_form.ylabel (class_="form_input")}}
+  {{draw_residuals_form.ylabel (class_="form_input error_unclickable")}}
   {{draw_residuals_form.line_color.label  (class_="form_label")}}
-  {{draw_residuals_form.line_color (class_="form_input")}}
-  {{draw_residuals_form.submit (class_="button_standard")}}
+  {{draw_residuals_form.line_color (class_="form_input error_unclickable")}}
+  {{draw_residuals_form.submit (class_="button_standard error_unclickable")}}
 </form>
 </div>
 

@@ -26,7 +26,7 @@
     <ul class="navbar-ul" id="navbar-settings">
       <li class="navbar-settings-li"><a class="button_standard" href="/logout">log out</a></li>
       <li class="navbar-settings-li"><a class = button_standard href="/settings">{{current_user.username}}</a></li>
-      <li class="navbar-settings-li"><button class="button_standard" onclick="show_upload()">Upload data</button>
+      <li class="navbar-settings-li"><button class="button_standard dialogue_unclickable" onclick="show_upload()">Upload data</button>
     </li>
     </ul>
     {%endif%}
@@ -54,8 +54,6 @@
   </div>
 
   <div class="content">
-
-
     <dialogue-element class="dialogue-element" id="upload_csv_dialogue" dialogue_name="Upload Dataset">
       <p id="upload_explanation"> From this dialogue you can upload csv files. Be aware that the time element of your data should be called "Date"</p>
       <form id="upload_form" method=post  enctype="multipart/form-data">

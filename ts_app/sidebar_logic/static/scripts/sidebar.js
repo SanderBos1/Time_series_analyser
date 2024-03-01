@@ -4,10 +4,6 @@ function show_upload(){
     save_dialogue.style.display="inline-block";
 }
 
-function delete_dialogue(value){
-    var dialogue = value.closest(".dialogue-element")
-    dialogue.style.display="none";
-}
 
 
 
@@ -72,8 +68,8 @@ function load_csvdata(){
                 li.className = "csv_file_list_item";
                 csv = data[csv_number];
                 li.innerHTML = "<div>" + "<form id=file_list_and_delete method=post>"+
-                "<button class=file_display  value=" + csv + " onClick='csv_button_click(this);return false;'>" + csv + "</button>" +
-                "<button id=delete_file class=delete_standard name=delete_file value=" + csv + " onClick='delete_csv(this);return false;'>X</button>" + "</form>" +
+                "<button class='file_display dialogue_unclickable' value=" + csv + " onClick='csv_button_click(this);return false;'>" + csv + "</button>" +
+                "<button id=delete_file class='delete_standard dialogue_unclickable' name=delete_file value=" + csv + " onClick='delete_csv(this);return false;'>X</button>" + "</form>" +
                 "</div>"
                 list.append(li);
             }
