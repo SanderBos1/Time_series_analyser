@@ -14,7 +14,7 @@ class dialogue extends HTMLElement {
 		this.innerHTML = `
 			<div class=orange_top>
 				<p id=dialogue_message> ${name} </p>
-  				<button onclick="delete_dialogue(this)" class="delete_standard" id="upload_delete">X</button>
+  				<button onclick="delete_dialogue(this)" class="delete_standard error_unclickable" id="upload_delete">X</button>
 			</div>
 		`;
 	}

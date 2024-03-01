@@ -14,28 +14,31 @@
   </ul>
 </div>
 
-<div class="p_value_calculation_holder">
-  <form class="p_value_calculation" id="seasonality_form" method="post" onsubmit="return false;">
-    <div id="form_function">
-      {{form.function.label  (class_="form_label")}}
-      {{form.function}}
-    </div>
-    <div id="form_values">
+<dialogue-element class="dialogue-element dialogue-element-sequencing" id="stattest_seasonality_dialogue" dialogue_name="Draw Residual plot">
+  <div class=statistical_test id="statistical_form">
+    <form class="statistical_form" id="seasonality_form" method="post" onsubmit="return false;">
       {{form.csrf_token}}
+      {{form.function.label  (class_="form_label")}}
+      {{form.function (class_="form_input error_unclickable")}}
       {{form.season_per.label  (class_="form_label")}}
-      {{form.season_per}}
+      {{form.season_per (class_="form_input error_unclickable")}}
       {{form.column_intrest.label  (class_="form_label")}}
-      {{form.column_intrest}}
+      {{form.column_intrest (class_="form_input error_unclickable")}}
       {{form.submit (class_="button_standard")}}
-    </div>
   </form>
 </div>
-
-<error-dialogue class="dialogue-element" id="seasonality_calculation_error" dialogue_name="Error with calculating p value">
+<div class=sequecing_answers id="seasonality_answers">
+  <p >Your p value of your statistical trend test is: <var id="seasonality_value">Not yet defined</var></p>
+  <p> Therefore we can say the following over your hypotheses: <var id="hypothese_seasonality">Not yet defined</var></p>
+</div>
+<error-dialogue class="dialogue-element pvalue_calculation_error" id="seasonality_calculation_error" dialogue_name="Error with calculating p value">
 </error-dialogue>
+</dialogue-element>
 
-<div class="pvalue_explanation_answers">
-  <div class="pval_exp" id="trend_text">
+
+
+<div class="explanation_button_holder" id="seasonality_explanation_button_holder">
+  <div class="explanation">
     <p>
       The form found above this text aims to calculate if there is seasonality in the time series. 
       seasonality indicated that the time-series repeats itself somehow
@@ -44,12 +47,11 @@
       For example, if the p-value is 10%, then there is a 10% chance that the seasonality observed in the time series is due to randomness
       Normally in statistical test we define two hypotheses. Hypotheses 0 is that there is no seasonality in the time series while Hypotheses 1 is that there is seasonality in the time-series.
     </p>
-</div>
+  </div>
 
-<div id="seasonality_answers">
-  <p >Your p value of your statistical trend test is: <var id="seasonality_value">Not yet defined</var></p>
-  <p> Therefore we can say the following over your hypotheses: <var id="hypothese_seasonality">Not yet defined</var></p>
-</div>
+  <div class="dialogue_buttons_holder" id="seasonality_buttons_holder">
+    <button class="button_standard" id="statest_trend_button" onclick="show_dialogue('stattest_seasonality_dialogue', 'true')">Calculate p value</button>
+  </div>
 </div>
 
 

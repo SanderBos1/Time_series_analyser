@@ -80,6 +80,7 @@ $(document).ready(function() {
                     if(document.getElementById('error_seasonality_calculation_message')){
                         document.getElementById('error_seasonality_calculation_message').remove();
                     }
+                    make_unclickable("error_unclickable")
                     var trend_value = document.getElementById("seasonality_value")
                     trend_value.innerHTML = data["p_value"]
                     var hypotheses = document.getElementById("hypothese_seasonality")
@@ -146,22 +147,27 @@ $(document).ready(function() {
 
 function add_options(){
     var columns = document.getElementById("column_intrest");
-    var columns_draw = document.getElementById("residual_column_intrest");
+    if(document.getElementById("residual_column_intrest")){
+        var columns_draw = document.getElementById("residual_column_intrest");
+        columns_draw.textContent = '';
+        var show = "True";
+    }
     columns.textContent = '';
-    columns_draw.textContent = '';
     var csv_columns = document.getElementById("column_list_ul")
     var list = csv_columns.getElementsByTagName("li")
     for(let i = 0; i < list.length; i++){
         var option = list[i].innerHTML
-        var option2 = list[i].innerHTML
         const element = document.createElement("option");
-        const element2 = document.createElement("option");
         element.value = option;
-        element2.value = option2;
         element.innerHTML = option;
-        element2.innerHTML = option2;
         columns.appendChild(element)
-        columns_draw.appendChild(element2)
+        if(Boolean(show)){
+            var option2 = list[i].innerHTML
+            const element2 = document.createElement("option");
+            element2.value = option2;
+            element2.innerHTML = option2;
+            columns_draw.appendChild(element2)
+        }
 
     }
 }

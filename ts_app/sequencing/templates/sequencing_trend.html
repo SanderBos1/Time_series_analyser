@@ -15,9 +15,9 @@
     </ul>
 </div>
 
-<dialogue-element class="dialogue-element" id="stattest_trend_dialogue" dialogue_name="Trend P test">
-<div id="statistical_trend_test">
-  <form  id="statistical_trend_form">
+<dialogue-element class="dialogue-element dialogue-element-sequencing" id="stattest_trend_dialogue" dialogue_name="Trend P test">
+<div class=statistical_test id="statistical_trend_test">
+  <form  class="statistical_form" id="statistical_trend_form">
       {{ form.csrf_token}}
       {{form.function.label  (class_="form_label")}}
       {{form.function (class_="form_input error_unclickable")}}
@@ -26,18 +26,18 @@
       {{form.submit (class_="button_standard error_unclickable")}}
   </form>
 </div>
-<div id="trend_answers">
+<div class=sequecing_answers id="trend_answers">
   <p >Your p value of your statistical trend test is: <var id="trend_value">Not yet defined</var></p>
   <p> Therefore we can say the following over your hypotheses: <var id="hypothese_trend">Not yet defined</var></p>
 </div>
-<error-dialogue class="dialogue-element" id="trend_calculation_error" dialogue_name="Error with calculating p value">
+<error-dialogue class="dialogue-element pvalue_calculation_error" id="trend_calculation_error" dialogue_name="Error with calculating p value">
 </error-dialogue>
 </dialogue-element>
 
 
-<div id="trend_explanation_button_holder">
+<div class="explanation_button_holder" id="trend_explanation_button_holder">
 
-<div class="trend_pvalue_explanation">
+<div class="explanation">
     <p>
       The form found above this text aims to calculate if there is a trend in the time series. 
       A trend indicates the long-term change in the variable of a time series. 
@@ -46,24 +46,17 @@
       For example, if the p-value is 10%, then there is a 10% chance that the trend observed in the time series is due to randomness
       Normally in statistical test we define two hypotheses. Hypotheses 0 is that there is no trend in the time series while Hypotheses 1 is that there is trend in the time-series.
     </p>
-
-
 </div>
 
-<div id="trend_buttons_holder">
+<div class="dialogue_buttons_holder" id="trend_buttons_holder">
   <button class="button_standard" id="statest_trend_button" onclick="show_dialogue('stattest_trend_dialogue', 'true')">Calculate p value</button>
   <button class="button_standard" id="plot_trend_residuals_button" onclick="show_dialogue('draw_residuals_dialogue', 'true')">Plot Trend Residuals</button>
 </div>
 
 </div>
-
-
-
-
-  
 </dialogue-element>
 
-<dialogue-element class="dialogue-element" id="draw_residuals_dialogue" dialogue_name="Draw Residual plot">
+<dialogue-element class="dialogue-element dialogue-element-sequencing" id="draw_residuals_dialogue" dialogue_name="Draw Residual plot">
 <div id= "image_form_holder">
 <div id="draw_residuals">
 <form  id="draw_residul_form">

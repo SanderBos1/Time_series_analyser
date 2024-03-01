@@ -34,7 +34,6 @@ def calculate_trend(dataset):
     """
     form = trend_form()
     form.column_intrest.choices = [form.column_intrest.data]
-    message="something went wrong"
     current_trend_calculator = "Not defined"
     hypotheses="Not defined"
     try:
