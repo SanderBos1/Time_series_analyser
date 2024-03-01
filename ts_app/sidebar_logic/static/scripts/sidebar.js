@@ -1,12 +1,3 @@
-
-function show_upload(){
-    var save_dialogue = document.getElementById("upload_csv_dialogue");
-    save_dialogue.style.display="inline-block";
-}
-
-
-
-
   function csv_button_click(value){
     var current_selected = document.getElementById('file_display_selected')
     if(current_selected){
@@ -68,7 +59,7 @@ function load_csvdata(){
                 li.className = "csv_file_list_item";
                 csv = data[csv_number];
                 li.innerHTML = "<div>" + "<form id=file_list_and_delete method=post>"+
-                "<button class='file_display dialogue_unclickable' value=" + csv + " onClick='csv_button_click(this);return false;'>" + csv + "</button>" +
+                "<button class='file_display' value=" + csv + " onClick='csv_button_click(this);return false;'>" + csv + "</button>" +
                 "<button id=delete_file class='delete_standard dialogue_unclickable' name=delete_file value=" + csv + " onClick='delete_csv(this);return false;'>X</button>" + "</form>" +
                 "</div>"
                 list.append(li);
@@ -98,6 +89,7 @@ $(document).ready(function() {
             contentType: false,
             success:function(data)
             {
+                show_message("save_dataset_feedback","Your files were saved")
                 load_csvdata()
             }
         })

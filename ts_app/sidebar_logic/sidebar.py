@@ -68,6 +68,7 @@ def delete_dataset(name):
 def upload_csv_data():
     form = file_upload_form()
     if form.validate_on_submit():
-        filename = form.file.data.filename
-        form.file.data.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+        for file in form.file.data:        
+            filename = file.filename
+            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
     return "File is not uploaded"

@@ -11,6 +11,22 @@ function save_residuals(){
         type: "POST",
         url: '/trend/add_residuals/' + dataset + "/" + var_column,
         success: function (data) {
+            console.log(data)
+            if (data["answer"] == "Saved."){
+                show_message("save_residualcsv_feedback",data['message'])
+            }
+            else{
+                if(document.getElementById('error_trend_residual_plot_message')){
+                    document.getElementById('error_trend_residual_plot_message').remove();
+                }
+                make_unclickable("error_unclickable")
+                error_message = document.getElementById("plot_trend_residual_error")
+                error_message.style.display="inline-block"
+                var text = document.createElement("p");
+                text.setAttribute("id", "error_trend_residual_plot_message")
+                text.innerHTML = data["message"];
+                error_message.appendChild(text)
+            }
         }
     });
 }

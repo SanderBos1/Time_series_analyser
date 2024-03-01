@@ -96,19 +96,24 @@ def show_residuals_trend(dataset):
 @sequencing_bp.route("/trend/add_residuals/<dataset>/<variable>", methods=["POST"])
 @login_required
 def add_residuals(dataset, variable):
+    """
+    Takes a column and makes a csv file of the trend residuals of that column
+    """
     try:
-        print("get here")
         variables = {
             "dataset":dataset,
             "variable":variable,
         }
         message= trend_residuals(variables).add_residuals()
+        reaction = "Saved."
     except Exception as e:
         message = str(e)
+        reaction = "Something went wrong"
     answer = {
+        "answer": reaction,
         "message":message
     }
-    print(message)
+    print(answer)
     return jsonify(answer)
 
 @sequencing_bp.route("/seasonality", methods=["GET", "POST"])

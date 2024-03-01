@@ -66,7 +66,7 @@ class trend_residuals:
         })
         name = self.variables["variable"] + "_residuals.csv"
         residual_df.to_csv(current_app.config['UPLOAD_FOLDER'] + name, index=False)
-        return "Your file was saved"
+        return "Trend file of " + self.variables["variable"] + " is made."
 
 
 

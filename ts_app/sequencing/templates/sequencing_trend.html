@@ -39,12 +39,13 @@
 
 <div class="explanation">
     <p>
-      The form found above this text aims to calculate if there is a trend in the time series. 
-      A trend indicates the long-term change in the variable of a time series. 
-      All statistical trend functions calculate how likely it is that the trend is present due to some random process. 
-      This likelihood is expressed as a percentage called the p-value. 
-      For example, if the p-value is 10%, then there is a 10% chance that the trend observed in the time series is due to randomness
-      Normally in statistical test we define two hypotheses. Hypotheses 0 is that there is no trend in the time series while Hypotheses 1 is that there is trend in the time-series.
+      Trend in a time series is defined as the general tendency of the data to increase or decrease over a long period of time. 
+      Most computations on time series assume that there is no trend in the data. 
+      This means that we have to test if a trend is present in the variable you are interested in. 
+      On the left of this text, you see multiple buttons that can show or calculate different things to provide insight into the trend. 
+      Press the 'Calculate p-value' button to determine if there is a trend present in a certain column. 
+      Here, we calculate the p-value, which indicates the percentage chance that the trend is due to random variation. 
+      A p-value lower than 0.05 means that there is a trend in the dataset. Press the 'Plot Trend Residuals' button to plot the trend residuals and save them to a CSV file.
     </p>
 </div>
 
@@ -79,8 +80,11 @@
 <div class="ts-image" id="residuals_trend_div">
 </div>
 
+
 <button class="button_standard invinsible_button" id="save_residual_image_dialogue_button" onclick="show_dialogue('image_trendresidual_save_form')">Save image</button>
 <button class="button_standard invinsible_button" id="add_residuals_to_dataset" onclick="save_residuals();return false;">Add residuals to csv</button>
+<p id="save_residualcsv_feedback"></p>
+
 </div>
 </div>
 
