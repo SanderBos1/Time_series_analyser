@@ -86,7 +86,7 @@
 <div class="ts-image" id="residuals_trend_div">
 </div>
 
-<button class="button_standard invinsible_button" id="save_residual_image_dialogue_button" onclick="show_dialogue('trend_residual_image_dialoague')">Save image</button>
+<button class="button_standard invinsible_button" id="save_residual_image_dialogue_button" onclick="show_dialogue('image_trendresidual_save_form')">Save image</button>
 <button class="button_standard invinsible_button" id="add_residuals_to_dataset" onclick="save_residuals();return false;">Add residuals to csv</button>
 </div>
 </div>
@@ -101,6 +101,7 @@
     {{ residual_save_form.imageName }}
     {{residual_save_form.save (class_="button_standard")}}
   </form>
+  <p id="resimg_save_result_feedback"></p>
   <error-dialogue class="dialogue-element" id="save_residual_image_error" dialogue_name="Error">
   </error-dialogue>
 

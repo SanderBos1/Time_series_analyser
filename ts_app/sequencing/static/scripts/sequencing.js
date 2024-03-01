@@ -147,21 +147,21 @@ $(document).ready(function() {
 function add_options(){
     var columns = document.getElementById("column_intrest");
     var columns_draw = document.getElementById("residual_column_intrest");
-    console.log(columns_draw)
     columns.textContent = '';
     columns_draw.textContent = '';
     var csv_columns = document.getElementById("column_list_ul")
     var list = csv_columns.getElementsByTagName("li")
     for(let i = 0; i < list.length; i++){
         var option = list[i].innerHTML
+        var option2 = list[i].innerHTML
         const element = document.createElement("option");
         const element2 = document.createElement("option");
         element.value = option;
-        element2.value = option;
+        element2.value = option2;
         element.innerHTML = option;
-        element2.innerHTML = option;
+        element2.innerHTML = option2;
         columns.appendChild(element)
-        columns_draw.appendChild(element)
+        columns_draw.appendChild(element2)
 
     }
 }
@@ -185,6 +185,7 @@ $(document).ready(function() {
             }),
             success: function (answer) {
                 if(answer['message'] == "Image is saved."){
+                    show_message("resimg_save_result_feedback",answer['message'] )
                 }
             else{
                 if(document.getElementById('error_text_save')){
