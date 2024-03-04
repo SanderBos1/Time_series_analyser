@@ -56,19 +56,12 @@
         {{form_image.save (class_="button_standard dialogue_unclickable")}}
     </form>
     <p id="image_save_feedback"></p>
-
-    <error-dialogue class="dialogue-element" id="save_image_error" dialogue_name="Error">
-        <div id="error_text_save_image">
-        
-        </div>
+    <error-dialogue class="dialogue-element" id="save_image_error" dialogue_name="Error" delete_function =delete_dialogue_error(this) message_id="error_text_save_image">
     </error-dialogue>
   </dialogue-element>
 
 
-<error-dialogue class="dialogue-element" id="image_error" dialogue_name="image plot error">
-    <div id="error_text_draw_image">
-        
-    </div>
+<error-dialogue class="dialogue-element" id="image_error" dialogue_name="image plot error" delete_function = delete_dialogue(this) message_id="error_text_draw_image">
 </dialogue-element>
 
 

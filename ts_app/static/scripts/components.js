@@ -46,11 +46,16 @@ class error extends HTMLElement {
 
     render() {
 		const name = this.getAttribute('dialogue_name');        
+		const delete_function = this.getAttribute('delete_function');        
+		const message_id = this.getAttribute("message_id")
 
 		this.innerHTML = `
 			<div class=red_top>
 				<p id=dialogue_message> ${name} </p>
-  				<button onclick="delete_dialogue(this);make_clickable('error_unclickable')" class="delete_standard upload_delete">X</button>
+  				<button onclick="${delete_function};make_clickable('error_unclickable')" class="delete_standard upload_delete">X</button>
+			</div>
+			<div id=${message_id}>
+    
 			</div>
 		`
 	}
@@ -62,7 +67,7 @@ class error extends HTMLElement {
     }
 
 	static get observedAttributes() {
-        return ['dialogue_name'];
+        return ['dialogue_name', 'delete_function', "message_id"];
     }
 
 
@@ -80,6 +85,10 @@ function show_dialogue(dialogue, block_side_buttons=false){
 	}
 }
 
+function delete_dialogue_error(value){
+    var dialogue = value.closest(".dialogue-element");
+    dialogue.style.display="none";
+}
 
 function delete_dialogue(value){
     var dialogue = value.closest(".dialogue-element");
