@@ -156,41 +156,45 @@ $(document).on('submit','#delete_image_form',function(e)
 
 
 /*
-    loads all images in the database to the front end
+    This function is triggered when the window loads. It makes an AJAX request to fetch all images from the server and displays them on the front end.
 */
 window.onload = function() {
     $.ajax({
-        type:'Get',
-        url:'/get_images/',
-        success:function(data)
-        {  
-            if(data["images"].length !=0){
+        type: 'Get',
+        url: '/get_images/',
+        success: function(data) {  
+            // Check if there are any images returned from the server
+            if (data["images"].length != 0) {
+                // Get the reference to the list where images will be displayed
                 var list = $("#image-list").find('ul');
-                for(var image in data["images"]){
+                // Loop through each image returned from the server
+                for (var image in data["images"]) {
+                    // Create a list item to hold each image
                     var li = document.createElement("li");
+                    // Assign a class to the list item
                     li.className = "image";
-                    image_ojb = data["images"][image];
+                    // Get the current image object
+                    var image_obj = data["images"][image];
+                    // Populate the list item with image details and delete button
                     li.innerHTML =  "<div class=name_and_delete>" +  
-                    "<p>" + image + "</p>" +
-                    "<form method=POST id=delete_image_form>" +  
-                    "<button name=delete_image id=delete_image_button class=delete_standard value =" + image +" > X </button>" +
-                    "</form>" + "</div>" +
-                    "<div onClick=enlarge_image(this) class=image_list_image >"+
-                    "<img class=standard_img src=" + image_ojb + ">" +
-                    "</div>";
+                                    "<p>" + image + "</p>" +
+                                    "<form method=POST id=delete_image_form>" +  
+                                    "<button name=delete_image id=delete_image_button class=delete_standard value =" + image +" > X </button>" +
+                                    "</form>" + "</div>" +
+                                    "<div onClick=enlarge_image(this) class=image_list_image >"+
+                                    "<img class=standard_img src=" + image_obj + ">" +
+                                    "</div>";
+                    // Append the list item to the list
                     list.append(li);
+                }
+            } else {
+                // If no images are returned, display an error message
+                make_unclickable('dialogue_unclickable');
+                var error_text = document.getElementById("error_text_load_images");
+                var error_message = '<p id="errror_image_plot">' +  data["message"] + "</p>";
+                error_text.innerHTML = error_message;
+                document.getElementById("display_images_error").style.display = "inline-block";
             }
         }
-        else{
-            make_unclickable('dialogue_unclickable')
-            var error_text = document.getElementById("error_text_load_images");
-            var error_message = '<p id="errror_image_plot">' +  data["message"] + "</p>";
-            error_text.innerHTML = error_message;
-            document.getElementById("display_images_error").style.display="inline-block";
-
-        }
-
-
-        }
-    })
-  };
+    });
+};

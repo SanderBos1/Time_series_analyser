@@ -1,28 +1,26 @@
-  function csv_button_click(value){
-    var current_selected = document.getElementById('file_display_selected')
-    if(current_selected){
-        current_selected.removeAttribute('id', "file_display_selected")
+function csv_button_click(value) {
+    var current_selected = document.getElementById('file_display_selected');
+    if (current_selected) {
+        current_selected.removeAttribute('id', "file_display_selected");
     }
     value.setAttribute('id', "file_display_selected");
     $.ajax({
         type: "GET",
         url: '/columns/' + value.value,
-        success: function (data) {
-            var ul = document.getElementById("column_list_ul")
+        success: function(data) {
+            var ul = document.getElementById("column_list_ul");
             ul.innerHTML = "";
-            for(var column_number in data){
+            for (var column_number in data) {
                 var li = document.createElement("li");
                 li.className = "dataset";
                 column = data[column_number];
-                li.innerHTML =  column   
+                li.innerHTML = column;
                 ul.append(li);
+            }
+            add_options();
         }
-        add_options()
-
-    }
-
     });
-};
+}
 
 function delete_csv(value){
     $.ajax({
@@ -75,6 +73,7 @@ function load_csvdata(){
 
 $(document).ready(function() {
     $('#upload_form').submit(function (e) {
+        e.preventDefault()
         var form = new FormData($(this)[0])
         $.ajax({
             beforeSend: function(xhr, settings) {
@@ -93,7 +92,6 @@ $(document).ready(function() {
                 load_csvdata()
             }
         })
-        e.preventDefault()
 
     })
 });
@@ -101,23 +99,21 @@ $(document).ready(function() {
 
 
 
-
-
-
 $(document).ready(function() {
-    load_csvdata()
-      
-window.addEventListener('load', function() {
-
-    var csv_list = document.getElementsByClassName('file_display');
-
-    if(csv_list[0]){
-        csv_button_click(csv_list[0])
-    }
-
-    })
-
-  });
+    load_csvdata(); // Load CSV data when the document is ready
+    
+    // When the entire page (including images and other resources) is loaded
+    window.addEventListener('load', function() {
+        var csv_list = document.getElementsByClassName('file_display');
+        setTimeout(function() {
+            var csv_list = document.getElementsByClassName('file_display');
+            if (csv_list.length > 0) {
+                // If CSV file buttons exist, trigger a click event on the first one
+                csv_button_click(csv_list[0]);
+            }
+        }, 50); 
+    });
+});
 
 
 
