@@ -122,3 +122,8 @@ function show_message(message_holder, message){
 	}, 2000);
 
 }
+
+function reset(id_htmlobject){
+	var object_intrest = document.getElementById(id_htmlobject)
+	object_intrest.innerHTML = ""
+}

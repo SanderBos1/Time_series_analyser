@@ -10,7 +10,7 @@
 <form id= image_draw_form method="POST">
     <div class=user-input>
         <h3> Make Image </h3>
-        {{ form.csrf_token }}
+        {{form.csrf_token }}
         {{form.column_intrest.label (class_="form_label")}}
         {{form.column_intrest (class_="form_input dialogue_unclickable")}}
         {{form.submit (class_="button_standard dialogue_unclickable")}}

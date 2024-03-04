@@ -5,21 +5,23 @@ from wtforms.validators import InputRequired
 
 class seasonality_form(FlaskForm):
     season_per = SelectField(label = "periods", validators=[InputRequired()], choices=[("Year", "Year"), ("Month", "Month")])
-    column_intrest = SelectField(label = "column_intrest", validators=[InputRequired()])
+    column_intrest = SelectField(label = "column_intrest", validators=[InputRequired()], id="seasonality_column_var")
     function = RadioField(label = 'Statistical Test', choices=[('kruskal','kruskal')], default="kruskal")
     submit = SubmitField("Calculate Seasonality", id="calculate_seasonality")
 
 
 class trend_form(FlaskForm):
-    column_intrest = SelectField(label='Variable of intrest', validators=[InputRequired()])
+    column_intrest = SelectField(label='Variable of intrest', validators=[InputRequired()] , id="trend_column_var")
     function = RadioField(label='Statistical Test', choices=[('pymannkendall','pymannkendall')], default="pymannkendall")
     submit = SubmitField("Calculate Trend", id="calculate_trend")
 
 
-class draw_resiudals(FlaskForm):
-    column_intrest = SelectField(label = "column_intrest", validators=[InputRequired()], id="residual_column_intrest")
-    image_title = StringField(label='Plot Title', validators=[InputRequired()])
-    xlabel = StringField(label="X label", validators=[InputRequired()])
-    ylabel = StringField(label="Y label", validators=[InputRequired()])
-    line_color = SelectField(label='Line Color', validators=[InputRequired()], choices=[("red", "red"), ("blue", "blue")])
-    submit = SubmitField("Show plot residuals", id="draw_image_button")
+class stationarity_form(FlaskForm):
+    column_intrest = SelectField(label='Variable of intrest', validators=[InputRequired()] , id="stationarity_column_var")
+    function = RadioField(label='Statistical Test', choices=[('adfuller','adfuller')], default="adfuller")
+    submit = SubmitField("Calculate Trend", id="calculate_stationarity")
+
+class make_residuals(FlaskForm):
+    column_intrest = SelectField(label='Variable of intrest', validators=[InputRequired()] , id="residual_column_intrest")
+    function = RadioField(label='Statistical Test', choices=[('detrend','detrend')], default="detrend")
+    submit = SubmitField("Make CSV", id="save_residuals_button")

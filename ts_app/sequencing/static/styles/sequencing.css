@@ -70,7 +70,6 @@ trend_buttons_holder --> holds the buttons that open the trend calculations dial
 }
 
 
-/* Statistical test if there is trend in the dataset dialogue */
 
 .dialogue-element-sequencing{
     width:96%;
@@ -124,64 +123,25 @@ trend_buttons_holder --> holds the buttons that open the trend calculations dial
 }
 
 
+/*
+ css for decompositon 
+ */
 
-/* draw trend residuals answer */
+
 #draw_residuals{
     position:relative;
     top: 5%;
-    left:2%;
+    left:10%;
     width: 20%;
     height:50%;
 }
 
 
-.residual_interaction{
-    position:relative;
-    width:75%;
-    heigth:
-
-}
-
-#image_form_holder{
-    position:relative;
-    width:100%;
-    height:50%;
-    display:flex;
-    flex-direction:row;
-}
-
-
-#residuals_trend_div
-{
-    position:relative;
-    left:2%;
-    width:100%;
-    height:100%;
-}
-
-#draw_image_button{
-    display:block;
-}
-
-#plot_trend_residual_error{
-    left:20%;
-    width:60%;
-    height:40%;
-    
-}
-
-#image_trendresidual_save_form{
-    top:20%;
+#make_stationary_csv_error{
+    top:10%;
     left:20%;
     width:60%;
     height:50%;
-}
-
-#save_residual_image_error{
-    left:0%;
-    width:100%;
-    height:50%;
-    overflow:auto;
-
     
 }
+

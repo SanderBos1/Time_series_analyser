@@ -124,7 +124,6 @@ def save_image():
     Input: A form containing the name of the database
     Goal: to save the drawn image in the database if its name does not already exists
     """
-    answer="hello"
     data = request.get_json()
     form = image_save_load.from_json(data["form"])
     try:

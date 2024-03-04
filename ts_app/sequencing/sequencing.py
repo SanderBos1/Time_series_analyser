@@ -1,8 +1,8 @@
-from flask import Blueprint, session, render_template, flash, current_app, request, jsonify
+from flask import Blueprint, render_template, current_app, jsonify, request
 from flask_login import login_required
-from ts_app.sequencing.python.trend_calculator import trend_calculator, trend_residuals
-from ts_app.sequencing.python.seasonality_calculator import seasonality_calculator
-from ts_app.sequencing.python.forms import seasonality_form, trend_form, draw_resiudals
+from ts_app.sequencing.python.decomposition import decomposition_residuals
+from ts_app.sequencing.python.stationarity_calculator import trend_calculator, seasonality_calculator, stationarity_calculator
+from ts_app.sequencing.python.forms import seasonality_form, trend_form, make_residuals, stationarity_form
 from ..image_creation.python.forms import image_save_load
 
 sequencing_bp = Blueprint('sequencing_bp', __name__,
@@ -11,14 +11,14 @@ sequencing_bp = Blueprint('sequencing_bp', __name__,
                     static_url_path="/sequencing/static")
 
 
-@sequencing_bp.route("/trend", methods=["GET", "POST"])
+@sequencing_bp.route("/stationary_ptests", methods=["GET", "POST"])
 @login_required
 def calculations():
     "Loads the trend page and all its HTML elements."
-    form = trend_form()
-    residual_save_form = image_save_load()
-    draw_residuals_form = draw_resiudals()
-    return render_template("sequencing_trend.html", form=form, draw_residuals_form=draw_residuals_form, residual_save_form = residual_save_form)
+    new_trend_form = trend_form()
+    new_seasonality_form = seasonality_form()
+    new_stationarity_form = stationarity_form()
+    return render_template("stationary_ptests.html", trend_form=new_trend_form, seasonality_form=new_seasonality_form, stationarity_form = new_stationarity_form)
 
 
 @sequencing_bp.route("/trend/calculate/<dataset>", methods=["POST"])
@@ -45,9 +45,9 @@ def calculate_trend(dataset):
             }
             current_trend_calculator = trend_calculator(variable_dict).calculate_trend()
             if current_trend_calculator > 0.05:
-                hypotheses = "H0 is Rejected"
+                hypotheses = "H0 is Accepted, there is no Trend."
             else:
-                hypotheses = "H0 is Accepted"
+                hypotheses = "H0 is Rejected, there is Trend."
             message="Calculated."
     except Exception as e:
         message = str(e)
@@ -57,74 +57,6 @@ def calculate_trend(dataset):
         'Hypotheses':hypotheses
         }
     return values_dict
-
-@sequencing_bp.route("/trend/residuals/<dataset>", methods=["POST"])
-@login_required
-def show_residuals_trend(dataset):
-    """
-    Input: The dataset that is used and the column of intreset from where the residuals are calculated
-    Goal: show an image on the page that shows the residuals of the selected column
-    Returns: An image showing the residuals of the selected column from the selected dataset.
-    """
-    form = draw_resiudals()
-    form.column_intrest.choices = [form.column_intrest.data]
-
-    try:
-        if form.validate_on_submit():
-            variables = {
-                "dataset":dataset,
-                "variable":form.column_intrest.data,
-            }
-            plot_variables = {
-                "image_title":form.image_title.data,
-                "xlabel":form.xlabel.data,
-                "ylabel":form.ylabel.data,
-                "color":form.line_color.data
-            }
-
-            img = trend_residuals(variables, plot_variables).show_residuals()
-            message="The image has been created."
-    except Exception as e:
-        message = str(e)
-        img = ""
-    answer = {
-        "message": message,
-        "img": img
-    }
-    return answer
-
-
-@sequencing_bp.route("/trend/add_residuals/<dataset>/<variable>", methods=["POST"])
-@login_required
-def add_residuals(dataset, variable):
-    """
-    Takes a column and makes a csv file of the trend residuals of that column
-    """
-    try:
-        variables = {
-            "dataset":dataset,
-            "variable":variable,
-        }
-        message= trend_residuals(variables).add_residuals()
-        reaction = "Saved."
-    except Exception as e:
-        message = str(e)
-        reaction = "Something went wrong"
-    answer = {
-        "answer": reaction,
-        "message":message
-    }
-    print(answer)
-    return jsonify(answer)
-
-@sequencing_bp.route("/seasonality", methods=["GET", "POST"])
-@login_required
-def seasonality():
-    "Loads the seasonality page and all its elements."
-    form = seasonality_form()
-    return render_template("sequencing_seasonality.html", form=form)
-
-    
 
 @sequencing_bp.route("/seasonality/calculate/<dataset>", methods=["POST"])
 @login_required
@@ -151,9 +83,9 @@ def calculate_seasonality(dataset):
             }
             current_seasonality_calculator = seasonality_calculator(variable_dict).calculate_seasonality()
             if current_seasonality_calculator > 0.05:
-                hypotheses = "H0 is Rejected"
+                hypotheses = "H0 is Accepted, there is no Seasonality."
             else:
-                hypotheses = "H0 is Accepted"
+                hypotheses =  "H0 is Rejected, there is Seasonality."
             message = "Calculated."
     except Exception as e:
         message = str(e)
@@ -163,3 +95,79 @@ def calculate_seasonality(dataset):
         'Hypotheses':hypotheses
         }
     return jsonify(values_dict)
+
+@sequencing_bp.route("/stationarity/calculate/<dataset>", methods=["POST"])
+@login_required
+def stationarity(dataset):
+    """
+    Input: 
+        Dataset: The file which is used to calculate the stationarity farom
+        Column: The column for which the hypotheses of stationarity is defined and calculated on
+        stationarity function: The statistical function that is used
+    Results:
+        P value + message indicating if Hypotheses 0 can be rejected or not
+    """
+    form = stationarity_form()
+    form.column_intrest.choices = [form.column_intrest.data]
+    current_stationarity_calculator = "Not defined"
+    hypotheses="Not defined"
+    try:
+        if form.validate_on_submit():
+            variable_dict = {
+                "dataset": current_app.config['UPLOAD_FOLDER']  + dataset,
+                "var_column":form.column_intrest.data,
+                "stationarity_function": form.function.data,
+            }
+            current_stationarity_calculator = stationarity_calculator(variable_dict).calculate_seasonality()
+            if current_stationarity_calculator > 0.05:
+                hypotheses = "H0 is Accepted, there is no Stationarity."
+            else:
+                hypotheses = "H0 is Rejected, there is Stationarity."
+            message = "Calculated."
+    except Exception as e:
+        message = str(e)
+    values_dict = {
+        "message":message,
+        'p_value':current_stationarity_calculator,
+        'Hypotheses':hypotheses
+        }
+    return jsonify(values_dict)
+
+# Decomposition
+
+@sequencing_bp.route("/decomposition", methods=["GET", "POST"])
+@login_required
+def seasonality():
+    "Loads the seasonality page and all its elements."
+    make_residuals_form = make_residuals()
+    return render_template("residual_logic.html", make_residuals_form=make_residuals_form)
+
+    
+@sequencing_bp.route("/add_residuals/<dataset>", methods=["POST"])
+@login_required
+def add_residuals(dataset):
+    """
+    Takes a column and makes a csv file of the trend residuals of that column
+    """
+    form = make_residuals()
+    form.column_intrest.choices = [form.column_intrest.data]
+
+    try:
+        if form.validate_on_submit:
+            variables = {
+                "dataset":dataset,
+                "variable":form.column_intrest.data,
+                "function":form.function.data
+
+            }
+            message= decomposition_residuals(variables).add_residuals()
+            reaction = "Saved."
+    except Exception as e:
+        message = str(e)
+        reaction = "Something went wrong"
+    answer = {
+        "answer": reaction,
+        "message":message
+    }
+    print(answer)
+    return jsonify(answer)

@@ -1,0 +1,49 @@
+{% extends "base_sidebar.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('sequencing_bp.static',filename='styles/sequencing.css')}}">
+<script src="{{url_for('sequencing_bp.static',filename='scripts/decomposition.js')}}"></script>
+{% endblock %}
+
+{%block content%}
+
+<div class="choice_list">
+  <ul class="choice">
+      <li class="navbar-li"><a class="button_standard link_button" href="/stationary_ptests">Trend & Seasonality</a></li>
+      <li class="navbar-li"><a class="button_standard link_button" href="/decomposition">Decomposition</a></li>
+  </ul>
+</div>
+<div class="explanation_button_holder" id="trend_explanation_button_holder">
+<div class="explanation">
+  <p>
+    Trend in a time series is defined as the general tendency of the data to increase or decrease over a long period of time. 
+    Most computations on time series assume that there is no trend in the data. 
+    This means that we have to test if a trend is present in the variable you are interested in. 
+  </p>
+</div>
+
+<div class="dialogue_buttons_holder" id="trend_buttons_holder">
+  <button class="button_standard" id="plot_trend_residuals_button" onclick="show_dialogue('make_csv_residuals', 'true');reset('trend_file_made_feedback_text')">Plot Trend Residuals</button>
+</div>
+</div>
+
+<dialogue-element class="dialogue-element dialogue-element-sequencing" id="make_csv_residuals" dialogue_name="Make CSV Residuals">
+  <div id="draw_residuals">
+  <form  id="make_csv_residuals_form">
+    {{make_residuals_form.csrf_token}}
+    {{make_residuals_form.column_intrest.label  (class_="form_label")}}
+    {{make_residuals_form.column_intrest ( class_="form_input error_unclickable")}}
+    {{make_residuals_form.function.label  (class_="form_label")}}
+    {{make_residuals_form.function ( class_="form_input error_unclickable")}}
+    {{make_residuals_form.submit (class_="button_standard error_unclickable")}}
+  </form>
+  </div>
+  
+  <error-dialogue class="dialogue-element" id="make_stationary_csv_error" dialogue_name="Error" delete_function =delete_dialogue_error(this) message_id="error_making_residual_csv">
+  </error-dialogue>
+  
+  <p id = trend_file_made_feedback_text></p>
+
+  </dialogue-element>
+
+{%endblock%}

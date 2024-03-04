@@ -1,0 +1,115 @@
+{% extends "base_sidebar.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('sequencing_bp.static',filename='styles/sequencing.css')}}">
+<script src="{{url_for('sequencing_bp.static',filename='scripts/seasonality_trend.js')}}"></script>
+
+{% endblock %}
+
+{%block content%}
+
+<div class="choice_list">
+  <ul class="choice">
+      <li class="navbar-li"><a class="button_standard link_button" href="/stationary_ptests">Trend & Seasonality</a></li>
+      <li class="navbar-li"><a class="button_standard link_button" href="/decomposition">Decomposition</a></li>
+  </ul>
+</div>
+
+
+
+
+<div class="explanation_button_holder" id="trend_explanation_button_holder">
+
+<div class="explanation">
+    <p>
+      Trend in a time series is defined as the general tendency of the data to increase or decrease over a long period of time. 
+      Most computations on time series assume that there is no trend in the data. 
+      This means that we have to test if a trend is present in the variable you are interested in. 
+    </p>
+    <p>
+      Seasonality in a time series is defined as cycles that repeat regularly over time.
+      Most computations on time series assume that there is no seasonality in the data. 
+      This means that we have to test if seasonality is present in the variable you are interested in. 
+    </p>
+    <p>
+      These buttons are used to calculate statistical tests on various assumptions regarding seasonality, trend and stationarity. 
+      Each button can be pressed to determine if there is a trend, seasonality, or if the time series is stationary. 
+      In each test, the p-value is calculated, which indicates the percentage chance that the assumption is present due to random variation.
+      A p-value lower than 0.05 means that there is a certainty that the assumption is present.
+    </p>
+</div>
+
+<div class="dialogue_buttons_holder" id="trend_buttons_holder">
+  <button class="button_standard" id="statest_trend_button" onclick="show_dialogue('stattest_trend_dialogue', 'true');reset_var_pvalue('trend_value', 'hypothese_trend');">Calculate Trend</button>
+  <button class="button_standard" id="statest_trend_button" onclick="show_dialogue('stattest_seasonality_dialogue', 'true');reset_var_pvalue('seasonality_value', 'hypothese_seasonality');">Calculate Seasonality</button>
+  <button class="button_standard" id="statest_trend_button" onclick="show_dialogue('stattest_stationarity_dialogue', 'true');reset_var_pvalue('stationarity_value', 'hypothese_stationarity');">Calculate Stationarity</button>
+
+</div>
+
+</div>
+</dialogue-element>
+
+<dialogue-element class="dialogue-element dialogue-element-sequencing" id="stattest_trend_dialogue" dialogue_name="Trend P test">
+  <div class=statistical_test id="statistical_trend_test">
+    <form  class="statistical_form" id="statistical_trend_form">
+        {{trend_form.csrf_token}}
+        {{trend_form.function.label  (class_="form_label")}}
+        {{trend_form.function (class_="form_input error_unclickable")}}
+        {{trend_form.column_intrest.label  (class_="form_label")}}
+        {{trend_form.column_intrest (class_="form_input error_unclickable")}}
+        {{trend_form.submit (class_="button_standard error_unclickable")}}
+    </form>
+  </div>
+  <div class=sequecing_answers id="trend_answers">
+    <p >Your p value of your statistical trend test is: <var id="trend_value">Not yet defined</var></p>
+    <p> Therefore we can say the following over your hypotheses: <var id="hypothese_trend">Not yet defined</var></p>
+  </div>
+  <error-dialogue class="dialogue-element pvalue_calculation_error" id="trend_calculation_error" dialogue_name="Error with calculating p value" delete_function =delete_dialogue_error(this) message_id="error_trend_pvalue">
+  </error-dialogue>
+  </dialogue-element>
+
+<dialogue-element class="dialogue-element dialogue-element-sequencing" id="stattest_seasonality_dialogue" dialogue_name="Seasonality P Test">
+  <div class=statistical_test id="statistical_form">
+    <form class="statistical_form" id="seasonality_form" method="post" onsubmit="return false;">
+      {{seasonality_form.csrf_token}}
+      {{seasonality_form.function.label  (class_="form_label")}}
+      {{seasonality_form.function (class_="form_input error_unclickable")}}
+      {{seasonality_form.season_per.label  (class_="form_label")}}
+      {{seasonality_form.season_per (class_="form_input error_unclickable")}}
+      {{seasonality_form.column_intrest.label  (class_="form_label")}}
+      {{seasonality_form.column_intrest (class_="form_input error_unclickable")}}
+      {{seasonality_form.submit (class_="button_standard error_unclickable")}}
+  </form>
+</div>
+<div class=sequecing_answers id="seasonality_answers">
+  <p >Your p value of your statistical seasonality test is: <var id="seasonality_value">Not yet defined</var></p>
+  <p> Therefore we can say the following over your hypotheses: <var id="hypothese_seasonality">Not yet defined</var></p>
+</div>
+<error-dialogue class="dialogue-element pvalue_calculation_error" id="seasonality_calculation_error" dialogue_name="Error with calculating p value" delete_function =delete_dialogue_error(this) message_id="error_seasonality_pvalue">
+</error-dialogue>
+</dialogue-element>
+
+
+<dialogue-element class="dialogue-element dialogue-element-sequencing" id="stattest_stationarity_dialogue" dialogue_name="Stationarity P Test">
+  <div class=statistical_test id="statistical_form">
+    <form class="statistical_form" id="stationarity_form" method="post" onsubmit="return false;">
+      {{stationarity_form.csrf_token}}
+      {{stationarity_form.function.label  (class_="form_label")}}
+      {{stationarity_form.function (class_="form_input error_unclickable")}}
+      {{stationarity_form.column_intrest.label  (class_="form_label")}}
+      {{stationarity_form.column_intrest (class_="form_input error_unclickable")}}
+      {{stationarity_form.submit (class_="button_standard error_unclickable")}}
+  </form>
+</div>
+<div class=sequecing_answers id="stationarity_answers">
+  <p >Your p value of your statistical stationarity test is: <var id="stationarity_value">Not yet defined</var></p>
+  <p> Therefore we can say the following over your hypotheses: <var id="hypothese_stationarity">Not yet defined</var></p>
+</div>
+<error-dialogue class="dialogue-element pvalue_calculation_error" id="stationarity_calculation_error" dialogue_name="Error with calculating p value" delete_function =delete_dialogue_error(this) message_id="error_stationarity_pvalue">
+</error-dialogue>
+</dialogue-element>
+
+{%endblock%}
+
+
+

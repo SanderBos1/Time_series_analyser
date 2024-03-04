@@ -15,31 +15,6 @@ function reset_var_pvalue(var_1, var_2){
     hypotheses.innerHTML  = "Not yet defined."
 }
 
-function save_residuals(){
-    var dataset = document.getElementById("file_display_selected").value
-    var var_column = document.getElementById("residual_column_intrest").value
-    $.ajax({
-        type: "POST",
-        url: '/trend/add_residuals/' + dataset + "/" + var_column,
-        success: function (data) {
-            console.log(data)
-            if (data["answer"] == "Saved."){
-                show_message("save_residualcsv_feedback",data['message'])
-                load_csvdata()
-            }
-            else{
-                make_unclickable("error_unclickable")
-                error_message = document.getElementById("plot_trend_residual_error")
-                error_message.style.display="inline-block"
-                var text = document.createElement("p");
-                text.setAttribute("id", "error_trend_residual_plot_message")
-                text.innerHTML = data["message"];
-                error_message.appendChild(text)
-            }
-        }
-    });
-}
-
 $(document).ready(function() {
     $('#statistical_trend_form').submit(function (e) {
         e.preventDefault(); 
@@ -81,13 +56,17 @@ $(document).ready(function() {
     $('#seasonality_form').submit(function (e) {
         e.preventDefault(); 
         var dataset = document.getElementById("file_display_selected").value
+        var form = new FormData($(this)[0])
+
         $.ajax({
             headers: { 
                 "X-CSRFToken" : "{{ form.csrf_token._value() }}"
             },
             type: "POST",
             url: '/seasonality/calculate/' + dataset,
-            data: $('form').serialize(), // serializes the form's elements.
+            data: form, // serializes the form's elements.
+            processData: false,
+            contentType: false,
             success: function (data) {
                 if(data['message']=="Calculated."){
                     var trend_value = document.getElementById("seasonality_value")
@@ -111,93 +90,55 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-    $('#draw_residul_form').submit(function (e) {
+    $('#stationarity_form').submit(function (e) {
         e.preventDefault(); 
         var dataset = document.getElementById("file_display_selected").value
+        var form = new FormData($(this)[0])
         $.ajax({
             headers: { 
                 "X-CSRFToken" : "{{ form.csrf_token._value() }}"
             },
             type: "POST",
-            url: '/trend/residuals/' + dataset ,
-            data: $('form').serialize(), 
+            url: '/stationarity/calculate/' + dataset,
+            data:form,
+            processData: false,
+            contentType: false,
             success: function (data) {
-                if(data["message"] == "The image has been created."){
-                    const img_div = document.getElementById("residuals_trend_div");
-                    img_div.innerHTML = "<img class=standard_img id=trend_picture src=data:image/jpeg;base64," + data["img"] + ">";
-                    document.getElementById("save_image_trend").style.display="inline-block";
+                if(data['message']=="Calculated."){
+                    var trend_value = document.getElementById("stationarity_value")
+                    trend_value.innerHTML = data["p_value"]
+                    var hypotheses = document.getElementById("hypothese_stationarity")
+                    hypotheses.innerHTML = data["Hypotheses"]
                 }
                 else{
                     make_unclickable("error_unclickable")
-                    var error_text = document.getElementById("error_residual_plot_message");
-                    var error_message = '<p id="error_trend_residual_plot_message">' +  data["message"] + "</p>";
+                    document.getElementById("seasonality_value").innerHTML = data["p_value"]
+                    document.getElementById("hypothese_seasonality").innerHTML = data["Hypotheses"]
+                    var error_text = document.getElementById("error_stationarity_pvalue");
+                    var error_message = '<p id="errror_seasonality_pvalue">' +  data["message"] + "</p>";
                     error_text.innerHTML = error_message;
-                    document.getElementById("plot_trend_residual_error").style.display="inline-block";
+                    document.getElementById("stationarity_calculation_error").style.display="inline-block";
                 }
             }
         });
-
-    })
+    });
 });
 
-
 function add_options(){
-    var columns = document.getElementById("column_intrest");
-    if(document.getElementById("residual_column_intrest")){
-        var columns_draw = document.getElementById("residual_column_intrest");
-        columns_draw.textContent = '';
-        var show = "True";
+    const columns = [document.getElementById("seasonality_column_var"),document.getElementById("trend_column_var"),document.getElementById("stationarity_column_var")] ;
+    for(let column in columns){
+        columns[column].textContent = '';
     }
-    columns.textContent = '';
     var csv_columns = document.getElementById("column_list_ul")
     var list = csv_columns.getElementsByTagName("li")
     for(let i = 0; i < list.length; i++){
-        var option = list[i].innerHTML
-        const element = document.createElement("option");
-        element.value = option;
-        element.innerHTML = option;
-        columns.appendChild(element)
-        if(Boolean(show)){
-            var option2 = list[i].innerHTML
-            const element2 = document.createElement("option");
-            element2.value = option2;
-            element2.innerHTML = option2;
-            columns_draw.appendChild(element2)
+        for(let j = 0; j < columns.length; j++){
+            var option = list[i].innerHTML
+            const element = document.createElement("option");
+            element.value = option;
+            element.innerHTML = option;
+            columns[j].appendChild(element)
         }
-
     }
 }
 
-$(document).ready(function() {
-    $('#save_residual_image_form').submit(function (e) {
-        e.preventDefault(); 
-        image = document.getElementById("trend_picture")
-        const data = new FormData(save_residual_image_form);
-        form = Object.fromEntries(data.entries())
-        src_image = image.src
-        $.ajax({
-            headers: { 
-                'Accept': 'application/json',
-                'Content-Type': 'application/json', 
-            },
-            type: "POST",
-            url: '/save_image',
-            data:JSON.stringify({
-                "form":form,
-                "src":src_image
-            }),
-            success: function (answer) {
-                if(answer['message'] == "Image is saved."){
-                    show_message("resimg_save_result_feedback",answer['message'] )
-                }
-            else{
-                var error_text = document.getElementById("error_saving_resimg");
-                var error_message = '<p id="error_trend_residual_plot_message">' +  answer["message"] + "</p>";
-                error_text.innerHTML = error_message;
-                document.getElementById("save_residual_image_error").style.display="inline-block";
-            }
-        }
-        });
-    });
-
-});
