@@ -4,6 +4,17 @@ function show_save_dialogue(){
 }
 
 
+
+/* 
+Gives the two variables that display p value and the hypotheses calculation there default values.
+*/
+function reset_var_pvalue(var_1, var_2){
+    var trend_value = document.getElementById(var_1)
+    trend_value.innerHTML = "Not yet defined."
+    var hypotheses = document.getElementById(var_2)
+    hypotheses.innerHTML  = "Not yet defined."
+}
+
 function save_residuals(){
     var dataset = document.getElementById("file_display_selected").value
     var var_column = document.getElementById("residual_column_intrest").value
@@ -159,6 +170,7 @@ function add_options(){
 
 $(document).ready(function() {
     $('#save_residual_image_form').submit(function (e) {
+        e.preventDefault(); 
         image = document.getElementById("trend_picture")
         const data = new FormData(save_residual_image_form);
         form = Object.fromEntries(data.entries())
@@ -186,7 +198,6 @@ $(document).ready(function() {
             }
         }
         });
-        e.preventDefault(); 
     });
 
 });

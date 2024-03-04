@@ -1,22 +1,7 @@
-.choice_list{
-    position:relative;
-    height:10%;
-    width:40%;
-    top:5%;
-}
-
-.choice{
-    list-style-type: None;
-
-}
-
 #image-list{
     position:relative;
-    top:3%;
-    left:5%;
-    height:80%;
-    width:90%;
-    border: solid 1px black;
+    height:100%;
+    width:100%;
     overflow: auto;
     padding:0px;
     margin:0px;
@@ -34,7 +19,6 @@
 
 .image{
     position:relative;
-    top:2%;
     height:40%;
     width:45%;
     margin-top:2%;
@@ -47,7 +31,6 @@
     position:relative;
     height:10%;
     width:100%;
-
 }
 
 .name_and_delete > p{

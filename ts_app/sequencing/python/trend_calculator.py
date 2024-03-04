@@ -14,14 +14,14 @@ class trend_calculator:
         self.column = variable_dict["var_column"]
         self.trend = variable_dict["trend_function"]
 
-    def Mann_KendallTrend(self, column):
-        p_value = mk.original_test(self.df[column]).p
+    def Mann_KendallTrend(self):
+        p_value = mk.original_test(self.df[self.column]).p
         return p_value
     
     def calculate_trend(self):
+        self.df[self.column] = pd.to_numeric(self.df[self.column], errors='coerce')
         if self.trend == "pymannkendall":
-            print("pyman")
-            p_value = self.Mann_KendallTrend(self.column)
+            p_value = self.Mann_KendallTrend()
         return round(p_value, 4)
     
 

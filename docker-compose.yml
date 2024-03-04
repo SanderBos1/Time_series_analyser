@@ -15,8 +15,8 @@ services:
     ports:
       - "5432:5432"
   flaskapplication:
-    container_name: time_series_analyzer
-    image: sanderbos/time_series_analyzer:0.0.1
+    container_name: time_series_analyser
+    image: sanderbos/time_series_analyser:0.0.1
     ports:
     - "8000:8000"
     volumes:

@@ -22,6 +22,7 @@ class seasonality_calculator:
     
     def calculate_seasonality(self):
         self.df[self.time_column]= pd.to_datetime(self.df[self.time_column])
+        self.df[self.column] = pd.to_numeric(self.df[self.column], errors='coerce')
         if self.function == "kruskal":
             p_value = self.kruskal_wallis()
         return round(p_value, 4)

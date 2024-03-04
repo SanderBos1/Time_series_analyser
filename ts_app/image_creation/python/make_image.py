@@ -7,6 +7,7 @@ plt.switch_backend('agg')
 
 def make_image(plot_variables):
         df = pd.read_csv(current_app.config['UPLOAD_FOLDER'] + plot_variables["csv_file"])
+        df[plot_variables["var_column"]] = pd.to_numeric(df[plot_variables["var_column"]], errors='coerce')
         df[plot_variables["time_column"]] = pd.to_datetime(df[plot_variables["time_column"]])
         plt.plot(df[plot_variables["time_column"]],df[plot_variables["var_column"]], color=plot_variables["color"])
         plt.grid(True)

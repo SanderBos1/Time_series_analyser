@@ -7,16 +7,6 @@
 
 
 {% block content %}
-
-    <div class="choice_list">
-        <ul class="choice">
-            <li class="navbar-li"><a class="button_standard link_button" href="/display_ts">Make image</a></li>
-            <li class="navbar-li"><a class="button_standard link_button" href="/display_ts_list">Show List</a></li>
-        </ul>
-    </div>
-
-
-
 <form id= image_draw_form method="POST">
     <div class=user-input>
         <h3> Make Image </h3>
@@ -27,6 +17,8 @@
 
     </div>
 
+    <div class="ts-image" id="image_div">
+    </div>
 
     <div id="image_plot_options">
         <h3> Plot options</h3>
@@ -41,8 +33,6 @@
     </div>
 
 
-    <div class="ts-image" id="image_div">
-    </div>
 
 </form>
 <button class="button_standard" id="save_image_dialogue_button" onclick="show_dialogue('image_save_form')">Save image</button>
