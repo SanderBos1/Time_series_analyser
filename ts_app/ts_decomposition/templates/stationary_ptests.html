@@ -1,8 +1,8 @@
 {% extends "base_sidebar.html" %}
 
 {% block head %}
-<link rel="stylesheet" href="{{url_for('sequencing_bp.static',filename='styles/sequencing.css')}}">
-<script src="{{url_for('sequencing_bp.static',filename='scripts/seasonality_trend.js')}}"></script>
+<link rel="stylesheet" href="{{url_for('ts_decomposition_bp.static',filename='styles/sequencing.css')}}">
+<script src="{{url_for('ts_decomposition_bp.static',filename='scripts/seasonality_trend.js')}}"></script>
 
 {% endblock %}
 
@@ -40,9 +40,9 @@
 </div>
 
 <div class="dialogue_buttons_holder" id="trend_buttons_holder">
-  <button class="button_standard" id="statest_trend_button" onclick="show_dialogue('stattest_trend_dialogue', 'true');reset_var_pvalue('trend_value', 'hypothese_trend');">Calculate Trend</button>
-  <button class="button_standard" id="statest_trend_button" onclick="show_dialogue('stattest_seasonality_dialogue', 'true');reset_var_pvalue('seasonality_value', 'hypothese_seasonality');">Calculate Seasonality</button>
-  <button class="button_standard" id="statest_trend_button" onclick="show_dialogue('stattest_stationarity_dialogue', 'true');reset_var_pvalue('stationarity_value', 'hypothese_stationarity');">Calculate Stationarity</button>
+  <button class="button_standard" id="statest_trend_button" onclick="reset_var_pvalue('trend_value', 'hypothese_trend');">Calculate Trend</button>
+  <button class="button_standard" id="statest_seasonality_button" onclick="reset_var_pvalue('seasonality_value', 'hypothese_seasonality');">Calculate Seasonality</button>
+  <button class="button_standard" id="statest_stationarity_button" onclick="reset_var_pvalue('stationarity_value', 'hypothese_stationarity');">Calculate Stationarity</button>
 
 </div>
 
@@ -55,8 +55,8 @@
         {{trend_form.csrf_token}}
         {{trend_form.function.label  (class_="form_label")}}
         {{trend_form.function (class_="form_input error_unclickable")}}
-        {{trend_form.column_intrest.label  (class_="form_label")}}
-        {{trend_form.column_intrest (class_="form_input error_unclickable")}}
+        {{trend_form.column_interest.label  (class_="form_label")}}
+        {{trend_form.column_interest (class_="form_input error_unclickable")}}
         {{trend_form.submit (class_="button_standard error_unclickable")}}
     </form>
   </div>
@@ -76,8 +76,8 @@
       {{seasonality_form.function (class_="form_input error_unclickable")}}
       {{seasonality_form.season_per.label  (class_="form_label")}}
       {{seasonality_form.season_per (class_="form_input error_unclickable")}}
-      {{seasonality_form.column_intrest.label  (class_="form_label")}}
-      {{seasonality_form.column_intrest (class_="form_input error_unclickable")}}
+      {{seasonality_form.column_interest.label  (class_="form_label")}}
+      {{seasonality_form.column_interest (class_="form_input error_unclickable")}}
       {{seasonality_form.submit (class_="button_standard error_unclickable")}}
   </form>
 </div>
@@ -96,8 +96,8 @@
       {{stationarity_form.csrf_token}}
       {{stationarity_form.function.label  (class_="form_label")}}
       {{stationarity_form.function (class_="form_input error_unclickable")}}
-      {{stationarity_form.column_intrest.label  (class_="form_label")}}
-      {{stationarity_form.column_intrest (class_="form_input error_unclickable")}}
+      {{stationarity_form.column_interest.label  (class_="form_label")}}
+      {{stationarity_form.column_interest (class_="form_input error_unclickable")}}
       {{stationarity_form.submit (class_="button_standard error_unclickable")}}
   </form>
 </div>

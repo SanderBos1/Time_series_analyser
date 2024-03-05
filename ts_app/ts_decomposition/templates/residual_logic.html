@@ -1,8 +1,8 @@
 {% extends "base_sidebar.html" %}
 
 {% block head %}
-<link rel="stylesheet" href="{{url_for('sequencing_bp.static',filename='styles/sequencing.css')}}">
-<script src="{{url_for('sequencing_bp.static',filename='scripts/decomposition.js')}}"></script>
+<link rel="stylesheet" href="{{url_for('ts_decomposition_bp.static',filename='styles/sequencing.css')}}">
+<script src="{{url_for('ts_decomposition_bp.static',filename='scripts/decomposition.js')}}"></script>
 {% endblock %}
 
 {%block content%}
@@ -30,12 +30,12 @@
 <dialogue-element class="dialogue-element dialogue-element-sequencing" id="make_csv_residuals" dialogue_name="Make CSV Residuals">
   <div id="draw_residuals">
   <form  id="make_csv_residuals_form">
-    {{make_residuals_form.csrf_token}}
-    {{make_residuals_form.column_intrest.label  (class_="form_label")}}
-    {{make_residuals_form.column_intrest ( class_="form_input error_unclickable")}}
-    {{make_residuals_form.function.label  (class_="form_label")}}
-    {{make_residuals_form.function ( class_="form_input error_unclickable")}}
-    {{make_residuals_form.submit (class_="button_standard error_unclickable")}}
+    {{residuals_form.csrf_token}}
+    {{residuals_form.column_interest.label  (class_="form_label")}}
+    {{residuals_form.column_interest ( class_="form_input error_unclickable")}}
+    {{residuals_form.function.label  (class_="form_label")}}
+    {{residuals_form.function ( class_="form_input error_unclickable")}}
+    {{residuals_form.submit (class_="button_standard error_unclickable")}}
   </form>
   </div>
   

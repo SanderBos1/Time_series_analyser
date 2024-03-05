@@ -1,0 +1,114 @@
+.choice_list {
+    position: relative;
+    height: 7%;
+    width: 30%;
+    top: 5%;
+    left: 2%;
+}
+
+.choice {
+    list-style-type: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.link_button {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.explanation_button_holder {
+    position: relative;
+    top: 5%;
+    left:10%;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+}
+
+.explanation {
+    position: relative;
+    width: 45%;
+    height: 100%;
+    overflow: auto;
+}
+
+.dialogue_buttons_holder {
+    position: relative;
+    width: 30%;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+}
+
+#trend_buttons_holder > * {
+    margin-bottom: 3%;
+}
+
+.dialogue-element-sequencing {
+    width: 96%;
+    height: 98%;
+    left: 2%;
+    top: 1%;
+}
+
+.statistical_test {
+    position: relative;
+    width: 100%;
+    height: 30%;
+}
+
+.statistical_form {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+}
+
+.form_input {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: block;
+}
+
+.form_label {
+    text-align: center;
+    display: block;
+    margin-bottom: 3%;
+}
+
+.pvalue_calculation_error {
+    position: relative;
+    width: 80%;
+    height: 30%;
+}
+
+.sequencing_answers {
+    position: relative;
+    left: 10%;
+    width: 80%;
+    height: 20%;
+    text-align: center;
+}
+
+#draw_residuals {
+    position: relative;
+    top: 5%;
+    left: 10%;
+    width: 20%;
+    height: 50%;
+}
+
+#make_stationary_csv_error {
+    top: 10%;
+    left: 20%;
+    width: 60%;
+    height: 50%;
+}
