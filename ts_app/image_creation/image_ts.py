@@ -38,40 +38,45 @@ def display_ts_list():
 @image_ts_bp.route('/make_image/<dataset>', methods=["POST"])
 @login_required
 def drawn_image(dataset):
+
     """
-    Input: 
-        form = A user form that indicates which columns are going to be used to draw an image
-        it shoud have information for the csv file, 
-        which column is the variable and which column is the time variable.
-    Goal: 
-        Make an b64encode encoded image and store it as session variable
+         Makes an b64encode encoded image and store it as session variable
+    
+    Args:
+        dataset (str): The filename of the dataset to analyze.
+
     Returns:
-        a message container an error or a conformation that the image has been uploaded
+        JSON: {
+            "message": A message with the result or error,
+            "img": The base64 encoded image
+        }
     """
     form = ts_image_form()
     form.column_intrest.choices = [form.column_intrest.data]
-    if form.validate_on_submit():
-        try:
-            plot_variables = {
-                "csv_file": dataset,
-                "time_column": current_app.config['TIME_COLUMN'],
-                "var_column":form.column_intrest.data,
-                "plot_tile": form.image_title.data,
-                "xlabel": form.xlabel.data,
-                "ylabel":form.ylabel.data,
-                "color": form.line_color.data
-            }
-            img = make_image(plot_variables)
-            session["ts_image"] = img
-            message="The image is uploaded."
-        except Exception as e:
-            img=""
-            message=str(e)
-    answer = {
+    if not form.validate_on_submit():
+        return jsonify({"error": "Invalid form submission"}), 400
+    try:
+        plot_variables = {
+            "csv_file": dataset,
+            "time_column": current_app.config['TIME_COLUMN'],
+            "var_column":form.column_intrest.data,
+            "plot_tile": form.image_title.data,
+            "xlabel": form.xlabel.data,
+            "ylabel":form.ylabel.data,
+            "color": form.line_color.data
+        }
+        img = make_image(plot_variables)
+        session["ts_image"] = img
+        message="The image is uploaded."
+        status_code = 200
+    except Exception as e:
+        img=""
+        message=str(e)
+        status_code = 500
+    return jsonify({
         "message":message,
         "img": img
-    }
-    return jsonify(answer)
+    }), status_code
 
 @image_ts_bp.route('/get_images/', methods=["GET"])
 @login_required

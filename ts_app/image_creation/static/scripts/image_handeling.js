@@ -49,20 +49,19 @@ $(document).ready(function() {
             data: form, 
             processData: false,
             contentType: false,
-            success: function (answer) {
-                if(answer['message'] == "The image is uploaded."){
-                    const img_div = document.getElementById("image_div");
-                    img_div.innerHTML = "<img class=standard_img id=picture src=data:image/jpeg;base64," + answer["img"] + ">";
-                    document.getElementById("save_image_dialogue_button").style.display="inline-block";
-                } 
-                else{
-                    make_unclickable('dialogue_unclickable')
-                    var error_text = document.getElementById("error_text_draw_image");
-                    var error_message = '<p id="errror_image_plot">' +  answer["message"] + "</p>";
-                    error_text.innerHTML = error_message;
-                    document.getElementById("image_error").style.display="inline-block";
+            success: function (data) {
+                const img_div = document.getElementById("image_div");
+                img_div.innerHTML = "<img class=standard_img id=picture src=data:image/jpeg;base64," + data["img"] + ">";
+                document.getElementById("save_image_dialogue_button").style.display="inline-block";
+            },
+            error: function(data){
+                answer = JSON.parse(data['responseText'])
+                make_unclickable('dialogue_unclickable')
+                var error_text = document.getElementById("error_text_draw_image");
+                var error_message = '<p id="errror_image_plot">' +  answer["message"] + "</p>";
+                error_text.innerHTML = error_message;
+                document.getElementById("image_error").style.display="inline-block";
                 }
-            }
     })
 
     });

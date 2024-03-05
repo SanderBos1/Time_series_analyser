@@ -28,7 +28,6 @@ $(document).ready(function() {
             error: function(data){
                  // Handle errors
                 answer = JSON.parse(data['responseText'])
-    
                 var error_text = document.getElementById("error_making_residual_csv");
                 var error_message = '<p id="error_trend_residual_plot_message">' +  answer["message"] + "</p>";
                 error_text.innerHTML = error_message;
