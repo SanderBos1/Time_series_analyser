@@ -52,14 +52,14 @@ def drawn_image(dataset):
         }
     """
     form = ts_image_form()
-    form.column_intrest.choices = [form.column_intrest.data]
+    form.column_interest.choices = [form.column_interest.data]
     if not form.validate_on_submit():
         return jsonify({"error": "Invalid form submission"}), 400
     try:
         plot_variables = {
             "csv_file": dataset,
             "time_column": current_app.config['TIME_COLUMN'],
-            "var_column":form.column_intrest.data,
+            "var_column":form.column_interest.data,
             "plot_tile": form.image_title.data,
             "xlabel": form.xlabel.data,
             "ylabel":form.ylabel.data,
