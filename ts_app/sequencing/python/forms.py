@@ -11,17 +11,17 @@ class seasonality_form(FlaskForm):
 
 
 class trend_form(FlaskForm):
-    column_intrest = SelectField(label='Variable of intrest', validators=[InputRequired()] , id="trend_column_var")
+    column_intrest = SelectField(label='Variable of interest', validators=[InputRequired()] , id="trend_column_var")
     function = RadioField(label='Statistical Test', choices=[('pymannkendall','pymannkendall')], default="pymannkendall")
     submit = SubmitField("Calculate Trend", id="calculate_trend")
 
 
 class stationarity_form(FlaskForm):
-    column_intrest = SelectField(label='Variable of intrest', validators=[InputRequired()] , id="stationarity_column_var")
+    column_intrest = SelectField(label='Variable of interest', validators=[InputRequired()] , id="stationarity_column_var")
     function = RadioField(label='Statistical Test', choices=[('adfuller','adfuller')], default="adfuller")
     submit = SubmitField("Calculate Trend", id="calculate_stationarity")
 
 class make_residuals(FlaskForm):
-    column_intrest = SelectField(label='Variable of intrest', validators=[InputRequired()] , id="residual_column_intrest")
+    column_intrest = SelectField(label='Variable of interest', validators=[InputRequired()] , id="residual_column_intrest")
     function = RadioField(label='Statistical Test', choices=[('detrend','detrend')], default="detrend")
     submit = SubmitField("Make CSV", id="save_residuals_button")

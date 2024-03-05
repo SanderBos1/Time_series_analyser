@@ -3,7 +3,6 @@ from flask_login import login_required
 from ts_app.sequencing.python.decomposition import decomposition_residuals
 from ts_app.sequencing.python.stationarity_calculator import trend_calculator, seasonality_calculator, stationarity_calculator
 from ts_app.sequencing.python.forms import seasonality_form, trend_form, make_residuals, stationarity_form
-from ..image_creation.python.forms import image_save_load
 
 sequencing_bp = Blueprint('sequencing_bp', __name__,
                     template_folder='templates',
@@ -101,7 +100,7 @@ def calculate_seasonality(dataset):
 def stationarity(dataset):
     """
     Input: 
-        Dataset: The file which is used to calculate the stationarity farom
+        Dataset: The file which is used to calculate the stationarity form
         Column: The column for which the hypotheses of stationarity is defined and calculated on
         stationarity function: The statistical function that is used
     Results:
@@ -169,5 +168,4 @@ def add_residuals(dataset):
         "answer": reaction,
         "message":message
     }
-    print(answer)
     return jsonify(answer)

@@ -1,3 +1,13 @@
+/* 
+
+    Input: The selected dataset (file_display_selected id)
+    Goal: Send data to the back end to make a residual csv.
+    Success: Display message that the object was saved.
+    Failure: Display an error message with the correct error.
+    Always: load the csv data on the sidebar again.
+
+*/
+
 
 $(document).ready(function() {
     $('#make_csv_residuals_form').submit(function (e) {
@@ -22,13 +32,18 @@ $(document).ready(function() {
                     error_text.innerHTML = error_message;
                     document.getElementById("make_stationary_csv_error").style.display="inline-block";
                 }
+                load_csvdata()
             }
         });
 
     })
 });
 
+/* 
 
+    Goal: add the columns of the selected csv file to the options of the forms that need it.
+
+*/
 
 
 function add_options(){

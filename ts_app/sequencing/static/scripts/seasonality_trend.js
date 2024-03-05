@@ -3,8 +3,6 @@ function show_save_dialogue(){
     save_dialogue.style.display = "inline-block";
 }
 
-
-
 /* 
 Gives the two variables that display p value and the hypotheses calculation there default values.
 */
@@ -57,7 +55,6 @@ $(document).ready(function() {
         e.preventDefault(); 
         var dataset = document.getElementById("file_display_selected").value
         var form = new FormData($(this)[0])
-
         $.ajax({
             headers: { 
                 "X-CSRFToken" : "{{ form.csrf_token._value() }}"
@@ -123,6 +120,14 @@ $(document).ready(function() {
         });
     });
 });
+
+/* 
+
+    Goal: 
+    On the delete button click next to the csv file, 
+    it will delete the html element and the csv file from the dataset.
+*/
+
 
 function add_options(){
     const columns = [document.getElementById("seasonality_column_var"),document.getElementById("trend_column_var"),document.getElementById("stationarity_column_var")] ;
