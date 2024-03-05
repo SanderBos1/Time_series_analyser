@@ -4,6 +4,15 @@ from wtforms.validators import InputRequired
 
 
 class seasonality_form(FlaskForm):
+    """
+    Form for calculating seasonality.
+
+    Attributes:
+    - season_per (SelectField): Dropdown menu for selecting the periods to analyze (e.g., Year, Month).
+    - column_interest (SelectField): Dropdown menu for selecting the column of interest from the dataset.
+    - function (RadioField): Radio button for selecting the statistical test to use (e.g., Kruskal).
+    - submit (SubmitField): Button for initiating the calculation of seasonality.
+    """
     season_per = SelectField(label = "periods", validators=[InputRequired()], choices=[("Year", "Year"), ("Month", "Month")])
     column_interest = SelectField(label = "column_intrest", validators=[InputRequired()], id="seasonality_column_var")
     function = RadioField(label = 'Statistical Test', choices=[('kruskal','kruskal')], default="kruskal")

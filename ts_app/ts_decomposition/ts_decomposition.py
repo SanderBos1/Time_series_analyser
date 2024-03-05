@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, current_app, jsonify
 from flask_login import login_required
 from ts_app.ts_decomposition.python.decomposition import decomposition_residuals
-from ts_app.ts_decomposition.python.stationarity_calculator import trend_calculator, seasonality_calculator, stationarity_calculator
+from ts_app.ts_decomposition.python.stattest_calculator import trend_calculator, seasonality_calculator, stationarity_calculator
 from ts_app.ts_decomposition.python.forms import seasonality_form, trend_form, make_residuals, stationarity_form
 
 # Blueprint for the  section that handles decomposition of time-series logic inside the application

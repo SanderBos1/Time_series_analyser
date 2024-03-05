@@ -40,7 +40,7 @@ def display_ts_list():
 def drawn_image(dataset):
 
     """
-         Makes an b64encode encoded image and store it as session variable
+    Makes an b64encode encoded image and store it as session variable
     
     Args:
         dataset (str): The filename of the dataset to analyze.
@@ -81,10 +81,18 @@ def drawn_image(dataset):
 @image_ts_bp.route('/get_images/', methods=["GET"])
 @login_required
 def get_images():
+    
     """
-    Input: none
-    Goal: show all images from the database
-    returns a json file containing the name and code of all images in the database
+    Gets all images from the database and displays them on the page
+    
+    Args:
+        image_name (str): The filename of thee image to delete
+
+    Returns:
+        JSON: {
+            "message": A message with the result or error,
+            "images": A list containing the name and base64 encoding of the image
+        }
     """
     try:
         images = ts_image.query.all()
@@ -94,40 +102,61 @@ def get_images():
             image = image.get_image()
             images_converted.update({name : image})
         message="Images retrieved."
+        status_code = 200
     except Exception as e:
         images_converted = {}
         message = str(e)
+        status_code = 500
     answer = {
         "message":message,
         "images":images_converted
     }
-    return jsonify(answer)
+
+    return jsonify(answer), status_code
 
 @image_ts_bp.route('/delete/<image_name>', methods=["POST"])
 @login_required
 def delete_image(image_name):
+
     """
-    Input: The name of the image
-    Goal: Deletes the image from the database based on its name
+    Deletes the image with the corresponding image_name
+    
+    Args:
+        image_name (str): The filename of thee image to delete
+
+    Returns:
+        JSON: {
+            "message": A message with the result or error,
+        }
     """
     try:
         image = ts_image.query.get({image_name})
         db.session.delete(image)
         db.session.commit()
         message = "Image deleted"
+        status_code=200
     except Exception as e:
         message=str(e)
+        status_code=500
+
     answer = {
         "message": message
     }
-    return answer
+    return answer, status_code
 
 @image_ts_bp.route('/save_image', methods=["POST"])
 @login_required
 def save_image():
     """
-    Input: A form containing the name of the database
-    Goal: to save the drawn image in the database if its name does not already exists
+    Saves the created image to the database
+    
+    Args:
+        Form (form): A form containg the image name
+
+    Returns:
+        JSON: {
+            "message": A message with the result or error,
+        }
     """
     data = request.get_json()
     form = image_save_load.from_json(data["form"])
@@ -138,9 +167,11 @@ def save_image():
             db.session.add(image)
             db.session.commit()
             message = "Image is saved."
+            status_code=200
     except Exception as e:
         message=str(e)
+        status_code=500
     answer = {
         "message":message
     }
-    return jsonify(answer)
+    return jsonify(answer), status_code
