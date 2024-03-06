@@ -1,5 +1,7 @@
 FROM python:latest
 
+COPY templates templates
+COPY static static
 COPY ts_app ts_app
 COPY data data
 COPY requirements.txt requirements.txt

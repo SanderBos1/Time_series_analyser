@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, session, jsonify, current_app, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from ..image_creation.python.make_image import make_image
 from ..image_creation.python.forms import ts_image_form, image_save_load
-from ..image_creation.python.models import ts_image
-from ..extensions import db
+from ts_app.models import ts_image
+from app import db
 
 
 # Defining a blueprint
@@ -83,7 +83,7 @@ def drawn_image(dataset):
 def get_images():
     
     """
-    Gets all images from the database and displays them on the page
+    Gets all images that belong to the logged in user from the database and displays them on the page
     
     Args:
         image_name (str): The filename of thee image to delete
@@ -95,7 +95,8 @@ def get_images():
         }
     """
     try:
-        images = ts_image.query.all()
+        current_user_name = current_user.username
+        images = ts_image.query.filter_by(user = current_user_name )
         images_converted = {}
         for image in images:
             name = image.get_name()
@@ -161,9 +162,10 @@ def save_image():
     data = request.get_json()
     form = image_save_load.from_json(data["form"])
     try:
+        image_user = current_user.username
         if form.validate():
             image_name = form.imageName.data
-            image = ts_image(name=image_name, image_code=data["src"])
+            image = ts_image(name=image_name, image_code=data["src"], user=image_user)
             db.session.add(image)
             db.session.commit()
             message = "Image is saved."
