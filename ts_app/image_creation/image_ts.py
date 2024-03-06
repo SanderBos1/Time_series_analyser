@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, session, jsonify, current_app, request
 from flask_login import login_required, current_user
-from ..image_creation.python.make_image import make_image
-from ..image_creation.python.forms import ts_image_form, image_save_load
+from ts_app.image_creation.python.make_image import make_image
+from ts_app.image_creation.python.forms import ts_image_form, image_save_load
 from ts_app.models import ts_image
-from app import db
+from extensions import db
 
 
 # Defining a blueprint

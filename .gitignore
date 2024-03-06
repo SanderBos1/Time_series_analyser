@@ -153,7 +153,9 @@ dmypy.json
 cython_debug/
 
 
-
+#vscode variables
+.vscode
+.vs
 #flask_session
 /ts_app/flask_session
 #pychache

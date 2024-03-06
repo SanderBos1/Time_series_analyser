@@ -4,7 +4,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from ts_app.login.python.forms import LoginForm, RegistrationForm
 from ts_app.models import User
-from app import db
+from extensions import db
 # Defining the blueprint that handles everything related to logging in.
 login_bp = Blueprint('login', __name__,
                     template_folder='templates',

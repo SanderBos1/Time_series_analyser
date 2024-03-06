@@ -1,9 +1,9 @@
-from app import db, login
 from typing import Optional
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from extensions import db, login
 
 @login.user_loader
 def load_user(id):
