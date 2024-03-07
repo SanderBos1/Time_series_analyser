@@ -1,6 +1,7 @@
 FROM python:latest
 
 COPY templates templates
+COPY extensions.py extensions.py
 COPY static static
 COPY ts_app ts_app
 COPY data data

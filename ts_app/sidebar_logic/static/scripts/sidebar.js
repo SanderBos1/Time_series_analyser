@@ -1,27 +1,25 @@
-/* 
-
-    Goal: 
-
-    To give the id file_display_selected to the clicked csv file in the sidebar.
-    Adds the columns of that file to the list in the sidebar that displays the columns.
-    It also checks if there is already a selected csv file in the list.
-    if so, it removes the id.
-
-*/
 
 
 function csv_button_click(value) {
+    // Get the currently selected file display element
     var current_selected = document.getElementById('file_display_selected');
+    // If there's already a selected file, remove its id attribute
     if (current_selected) {
         current_selected.removeAttribute('id', "file_display_selected");
     }
+    // Set the id attribute of the the clicked CSV file button
+
     value.setAttribute('id', "file_display_selected");
     $.ajax({
         type: "GET",
+        // URL to fetch columns based on the value of the clicked button
         url: '/columns/' + value.value,
-        success: function(data) {
+        success: function (data) {
+            // Get the UL element where columns will be displayed
             var ul = document.getElementById("column_list_ul");
+            // Clear the UL contents
             ul.innerHTML = "";
+            // Iterate over columns data and create list items for each column
             for (var column_number in data) {
                 var li = document.createElement("li");
                 li.className = "dataset";
@@ -29,35 +27,34 @@ function csv_button_click(value) {
                 li.innerHTML = column;
                 ul.append(li);
             }
+            // After adding columns, call add_options function 
             add_options();
         }
     });
 }
 
 
-/* 
-
-    Goal: 
-    On the delete button click next to the csv file, 
-    it will delete the html element and the csv file from the dataset.
-*/
-
 function delete_csv(value){
     $.ajax({
+        // AJAX request to delete the specified CSV file
         type: "POST",
+        // URL to delete the CSV file based on its value
         url: '/delete_csv/' + value.value,
         success: function () {
+            // Check if the currently selected file is deleted
             if(document.getElementById("file_display_selected")){
-                if(value.value == document.getElementById("file_display_selected").value){
+                if (value.value == document.getElementById("file_display_selected").value) {
+                    // If the deleted file was selected, remove the associated columns list
                     var ul= document.getElementById("column_list_ul");
                     ul.innerHTML = ""
                 }
 
             }
+            // Clear the CSV list to update it after deletion
             list = document.getElementById("csv_list_ul");
             list.innerHTML = ""
+            // Reload the CSV list and data after deletion
             load_csvdata()
-
     }
     });
 };
@@ -69,23 +66,30 @@ function delete_csv(value){
 */
 
 
-function load_csvdata(){
+function load_csvdata() {
+    // AJAX request to get CSV files data
     $.ajax({
         type:'Get',
         url:'/get_csvfiles',
         success:function(data)
         {   
+            // Find the list where CSV files will be displayed
             var list = $("#data-directory-list").find('ul');
-            var ul= document.getElementById("csv_list_ul");
+            // Get the UL element for CSV file list
+            var ul = document.getElementById("csv_list_ul");
+            // Clear the UL contents
             ul.innerHTML = ""
-            for(var csv_number in data){
+            // Iterate over CSV files data and create list items for each file
+            for (var csv_number in data) {
+                // Create HTML for each CSV file item, including buttons for display and deletion
                 var li = document.createElement("li");
                 li.className = "csv_file_list_item";
                 csv = data[csv_number];
                 li.innerHTML = "<div>" + "<form id=file_list_and_delete method=post>"+
                 "<button class='file_display' value='"  + csv + "' onClick='csv_button_click(this);return false;'>" + csv + "</button>" +
                 "<button id=delete_file class='delete_standard dialogue_unclickable' name=delete_file value='" + csv + "' onClick='delete_csv(this);return false;'>X</button>" + "</form>" +
-                "</div>"
+                    "</div>"
+                // Append the created list item to the list
                 list.append(li);
             }
 
