@@ -1,71 +1,34 @@
-body{
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding:0;
+}
+
+body {
     background-color: white;
     width: 100%;
     height: 100%;
     font-family: 'Roboto', sans-serif;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: flex-start;
 }
 
-* {
-    box-sizing: border-box;
-    text-overflow: ellipsis;
-  }
-
-
-/* Style the submit button */
-.standard_input {
-    background-color: #ED693C;
-    border: none;
-    color: black;
-    cursor: pointer;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-input:hover{
-    background-color: #F0F0F0;
-
+/* element that is hidden*/
+.hidden{
+    display:none;
 }
 
-.top{
-    background-color: #ED693C;
-    position: absolute;
-    width: 100%;
-    height: 10%;
-    top: 0;
-    right: 0px;
-}
-
-.side-bar{
-    background-color: #fabeb9;
-    position: absolute;
-    height: 90%;
-    width:12%;
-    top: 10%;
-    left: 0%;
-    text-align: center;
-    overflow:hidden;
-
-}
-
-.navbar-ul{
-    list-style-type: none;
-    left: 5%;
-    padding-left:0px;
-}
-
-.navbar-li{
-    float: left;
-}
-
-.navbar-settings-li{
-    float:right;
-}
-
+/* standard button*/
 .button_standard{
     padding: 8px;
     background-color: #ED693C;
     text-decoration: none;
     text-align:center;
+    border:none
 }
 
 .button_standard:hover{
@@ -74,12 +37,18 @@ input:hover{
 
 
 .delete_standard{
+    height:25px;
     background-color: red;
     cursor: pointer;
     border: none;
     box-sizing: border-box;
     float:right;
 }
+
+.delete_standard:hover {
+    background-color: #F0F0F0;
+}
+
 
 
 .dialogue-element{
@@ -97,7 +66,7 @@ input:hover{
 .orange_top{
     position:relative;
     width:100%;
-    height:10%;
+    height:25px;
     background-color: #ED693C;
     z-index:20;
     text-align: center;
@@ -105,14 +74,14 @@ input:hover{
 
 }
 
-.red_top{
-    position:relative;
-    width:100%;
-    height:10%;
+.red_top {
+    position: relative;
+    width: 100%;
+    height: 25px;
     background-color: red;
-    z-index:20;
+    z-index: 20;
     text-align: center;
-    overflow:hidden;
+    overflow: hidden;
 }
 
 #dialogue_message{

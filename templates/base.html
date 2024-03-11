@@ -2,35 +2,50 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles/base.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles/standards.css')}}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles/base.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles/standards.css')}}">
+    <script src="{{url_for('static',filename='scripts/components.js')}}"></script>
+    <script src="{{url_for('static',filename='scripts/standard_functions.js')}}"></script>
+
     {% block head %}
     {% endblock %}
 </head>
 
 <body>
     <div class="top">
-      <ul class="navbar-ul">
-        <li class="navbar-li"><a class="button_standard" href="/home">Home</a></li>
-        <li class="navbar-li"><a class="button_standard" href="/display_ts">Make Image</a></li>
-        <li class="navbar-li"><a class="button_standard" href="/stationary_ptests">Trend/seasonality</a></li>
-        <li class="navbar-li"><a class="button_standard" href="/display_ts_list">Images</a></li>
-      </ul>
+        <div class="navbar-links">
+            <ul class="navbar-ul">
+                <li class="navbar-links-element"><a class="button_standard" href="/home">Home</a></li>
+                <li class="navbar-links-element"><a class="button_standard" href="/display_ts">Make Image</a></li>
+                <li class="navbar-links-element"><a class="button_standard" href="/stationary_ptests">Trend/seasonality</a></liclass="navbar-links-element">
+                <li class="navbar-links-element"><a class="button_standard" href="/display_ts_list">Images</a></li>
+            </ul>
+        </div>
         {% if current_user.is_authenticated %}
-        <ul class="navbar-ul" id="navbar-settings">
-          <li class="navbar-settings-li"><a class="button_standard" href="/logout">log out</a></li>
-          <li class="navbar-settings-li"><a class = button_standard href="/settings">{{current_user.username}}</a></li>
-        </ul>
+        <div class="navbar-settings">
+            <ul>
+                <li class="navbar-settings-element"><a href="/logout">log out</a></li>
+                <li class="navbar-settings-element"><a href="/settings">{{current_user.username}}</a></li>
+                <li class="navbar-settings-element button_standard">
+                    <button onclick="show_dialogue('upload_csv_dialogue', 'true')">Upload data</button>
+                </li>
+            </ul>
+        </div>
         {%endif%}
-      </div>
-
-    <div class="content">
-        {% block content %}
-        {% endblock %}
     </div>
+
+
+
+<div class="content">
+    {% block content %}
+    {% endblock %}
+</div>
 </body>
 
 </html>

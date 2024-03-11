@@ -2,61 +2,68 @@
 <html>
 
 <head>
-  <link rel="stylesheet" type="text/css" href="{{url_for('sidebar_bp.static',filename='styles/base_sidebar.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles/standards.css')}}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="{{url_for('sidebar_bp.static',filename='scripts/sidebar.js')}}" defer></script>
-  <script src="{{url_for('static',filename='scripts/components.js')}}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{url_for('sidebar_bp.static',filename='styles/base_sidebar.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles/standards.css')}}">
+    <script src="{{url_for('sidebar_bp.static',filename='scripts/sidebar.js')}}" defer></script>
+    <script src="{{url_for('static',filename='scripts/components.js')}}"></script>
+    <script src="{{url_for('static',filename='scripts/standard_functions.js')}}"></script>
 
-  {% block head %}
-  {% endblock %}
+    {% block head %}
+    {% endblock %}
 </head>
 
 <body >
   <div class="top">
-    <ul class="navbar-ul">
-      <li class="navbar-li"><a class="button_standard" href="/home">Home</a></li>
-      <li class="navbar-li"><a class="button_standard" href="/display_ts">Make Image</a></li>
-      <li class="navbar-li"><a class="button_standard" href="/stationary_ptests">Trend/seasonality</a></li>
-      <li class="navbar-li"><a class="button_standard" href="/display_ts_list">Images</a></li>
-    </ul>
+    <div class="navbar-links">
+        <ul class="navbar-ul">
+            <li class="navbar-links-element"><a class="button_standard" href="/home">Home</a></li>
+            <li class="navbar-links-element"><a class="button_standard" href="/display_ts">Make Image</a></li>
+            <li class="navbar-links-element"><a class="button_standard" href="/stationary_ptests">Trend/seasonality</a></liclass="navbar-links-element">
+            <li class="navbar-links-element"><a class="button_standard" href="/display_ts_list">Images</a></li>
+        </ul>
+    </div>
     {% if current_user.is_authenticated %}
-    <ul class="navbar-ul" id="navbar-settings">
-      <li class="navbar-settings-li"><a class="button_standard" href="/logout">log out</a></li>
-      <li class="navbar-settings-li"><a class = button_standard href="/settings">{{current_user.username}}</a></li>
-      <li class="navbar-settings-li"><button class="button_standard dialogue_unclickable" onclick="show_dialogue('upload_csv_dialogue', 'true')">Upload data</button>
-    </li>
-    </ul>
+    <div class="navbar-settings">
+        <ul>
+            <li class="navbar-settings-element"><a href="/logout">log out</a></li>
+            <li class="navbar-settings-element"><a href="/settings">{{current_user.username}}</a></li>
+            <li class="navbar-settings-element button_standard">
+                <button onclick="show_dialogue('upload_csv_dialogue', 'true')">Upload data</button>
+            </li>
+        </ul>
+    </div>
     {%endif%}
   </div>
 
 
 
-  <div class=side-bar>
-
-    <div id="data-directory-list">
-      <h3> Datasets </h3>
-      <ul class="dialogue_unclickable" id="csv_list_ul">
-
+  <div class=side-bar id="side_bar_component">
+    <div class="data-directory-list">
+        <div class="csv_title">
+            <h3> Datasets </h3>
+        </div>
+      <ul class="dialogue_unclickable" id=csv_list_sidebar_ul>
       </ul>
     </div>
-
-
-
     <div id="ts-column-list">
-      <h3 id="column title"> </h3>
-      <ul id="column_list_ul">
-
-      </ul>
+        <div class="csv_title">
+            <h3> Columns </h3>
+        </div>
+        <ul id="column_list_ul">
+        </ul>
     </div>
   </div>
+ <button id="show_unshow_sidebar" onclick="show_unshow('side_bar_component')"><<i class="fa-solid fa-arrow-left"></i></button>
 
   <div class="content">
     <dialogue-element class="dialogue-element" id="upload_csv_dialogue" dialogue_name="Upload Dataset">
-      <p id="upload_explanation"> From this dialogue you can upload csv files. Be aware that the time element of your data should be called "Date"</p>
+      <p id="upload_explanation"> From this dialogue you can upload csv files. Be aware that the time column of your data should be called "Date"</p>
       <form id="upload_form" method=post  enctype="multipart/form-data">
         {{upload_form.csrf_token (id_="csv_upload_csfr")}}
         {{upload_form.file (class_="button_standard") }}

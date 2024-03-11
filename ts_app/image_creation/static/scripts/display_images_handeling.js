@@ -1,4 +1,27 @@
+function enlarge_image(element) {
+    //Removes onclick attribute so that it no longer makes the image large
 
+    element.removeAttribute("onclick")
+    var image = element.closest(".image")
+    image.classList.add("fullscreen_image")
+    image.classList.remove("image")
+    //Adds new onclick element to make the image small
+    element.onclick = function () { small_image(this) };
+
+}
+
+
+
+function small_image(element) {
+    //Removes onclick attribute so that it no longer makes the image small
+    element.removeAttribute("onclick")
+    var image = element.closest(".fullscreen_image")
+    image.classList.add("image")
+    image.classList.remove("fullscreen_image")
+    //Adds new onclick element to enlarge image
+    element.onclick = function () { enlarge_image(this) };
+
+}
 window.onload = function() {
     $.ajax({
         type: 'Get',

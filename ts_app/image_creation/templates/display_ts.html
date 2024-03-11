@@ -7,34 +7,37 @@
 
 
 {% block content %}
-<form id= image_draw_form method="POST">
-    <div class=user-input>
-        <h3> Make Image </h3>
-        {{form.csrf_token }}
-        {{form.column_interest.label (class_="form_label")}}
-        {{form.column_interest (class_="form_input dialogue_unclickable")}}
-        {{form.submit (class_="button_standard dialogue_unclickable")}}
+<div class="image_draw_interaction">
+    <div class="user_interaction_image_plot">
+    <form id=image_draw_form method="POST">
+        <div class=user-input>
+            <h3> Make Image </h3>
+            {{form.csrf_token }}
+            {{form.column_interest.label (class_="form_label")}}
+            {{form.column_interest (class_="form_input dialogue_unclickable")}}
 
-    </div>
+        </div>
+
+
+        <div id="image_plot_options">
+            <h3> Plot options</h3>
+            {{form.image_title.label (class_="form_label")}}
+            {{form.image_title (class_="form_input dialogue_unclickable")}}
+            {{form.xlabel.label (class_="form_label")}}
+            {{form.xlabel (class_="form_input dialogue_unclickable")}}
+            {{form.ylabel.label (class_="form_label")}}
+            {{form.ylabel (class_="form_input dialogue_unclickable")}}
+            {{form.line_color.label (class_="form_label ")}}
+            {{form.line_color (class_="form_input dialogue_unclickable")}}
+            {{form.submit (class_="button_standard dialogue_unclickable")}}
+
+        </div>
+    </form>
+</div>
 
     <div class="ts-image" id="image_div">
     </div>
-
-    <div id="image_plot_options">
-        <h3> Plot options</h3>
-        {{form.image_title.label (class_="form_label")}}
-        {{form.image_title (class_="form_input dialogue_unclickable")}}
-        {{form.xlabel.label (class_="form_label")}}
-        {{form.xlabel (class_="form_input dialogue_unclickable")}}
-        {{form.ylabel.label (class_="form_label")}}
-        {{form.ylabel (class_="form_input dialogue_unclickable")}}
-        {{form.line_color.label (class_="form_label ")}}
-        {{form.line_color (class_="form_input dialogue_unclickable")}}
-    </div>
-
-
-
-</form>
+</div>
 <button class="button_standard" id="save_image_dialogue_button" onclick="show_dialogue('image_save_form')">Save image</button>
 
 

@@ -22,7 +22,7 @@ function csv_button_click(value) {
             // Iterate over columns data and create list items for each column
             for (var column_number in data) {
                 var li = document.createElement("li");
-                li.className = "dataset";
+                li.className = "dataset_column";
                 column = data[column_number];
                 li.innerHTML = column;
                 ul.append(li);
@@ -51,7 +51,7 @@ function delete_csv(value){
 
             }
             // Clear the CSV list to update it after deletion
-            list = document.getElementById("csv_list_ul");
+            list = document.getElementById("csv_list_sidebar_ul");
             list.innerHTML = ""
             // Reload the CSV list and data after deletion
             load_csvdata()
@@ -73,10 +73,8 @@ function load_csvdata() {
         url:'/get_csvfiles',
         success:function(data)
         {   
-            // Find the list where CSV files will be displayed
-            var list = $("#data-directory-list").find('ul');
             // Get the UL element for CSV file list
-            var ul = document.getElementById("csv_list_ul");
+            var ul = document.getElementById("csv_list_sidebar_ul");
             // Clear the UL contents
             ul.innerHTML = ""
             // Iterate over CSV files data and create list items for each file
@@ -85,12 +83,12 @@ function load_csvdata() {
                 var li = document.createElement("li");
                 li.className = "csv_file_list_item";
                 csv = data[csv_number];
-                li.innerHTML = "<div>" + "<form id=file_list_and_delete method=post>"+
-                "<button class='file_display' value='"  + csv + "' onClick='csv_button_click(this);return false;'>" + csv + "</button>" +
-                "<button id=delete_file class='delete_standard dialogue_unclickable' name=delete_file value='" + csv + "' onClick='delete_csv(this);return false;'>X</button>" + "</form>" +
+                li.innerHTML = "<div class=csv_list_item>" +
+                    "<button class='button_standard file_display' value='" + csv + "'onClick='csv_button_click(this);return false;'>" + "<span class=csv_button_text>" + csv + "</span></button>" +
+                "<button id=delete_file class='delete_standard dialogue_unclickable' name=delete_file value='" + csv + "' onClick='delete_csv(this);return false;'>X</button>" +
                     "</div>"
                 // Append the created list item to the list
-                list.append(li);
+                ul.append(li);
             }
 
         }
@@ -105,8 +103,10 @@ $(document).ready(function() {
     $('#upload_form').submit(function (e) {
         e.preventDefault()
         var form = new FormData($(this)[0])
+        // AJAX request to submit the form data
         $.ajax({
-            beforeSend: function(xhr, settings) {
+            beforeSend: function (xhr, settings) {
+                // Add CSRF token to the request headers if not a safe HTTP method or cross-domain request
                 if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
                     xhr.setRequestHeader("X-CSRFToken",  "{{ form.csrf_token._value() }}");
                 }
@@ -118,6 +118,7 @@ $(document).ready(function() {
             contentType: false,
             success:function(data)
             {
+                // Call the load_csvdata function upon successful form submission
                 load_csvdata()
             }
         })

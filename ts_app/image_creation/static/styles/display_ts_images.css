@@ -8,12 +8,15 @@
 }
 
 
-#saved_images{
-    width:100%;
-    height:100%;
+#saved_images {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row wrap;
     margin: 0;
     padding: 0;
-    float:left;
+    float: left;
     list-style-type: None;
 }
 
