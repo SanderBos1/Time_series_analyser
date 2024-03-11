@@ -192,7 +192,7 @@ def add_residuals(dataset):
         if form.validate_on_submit():
             variables = {
                 "dataset": dataset,
-                "variable": form.column_interest.data,  # Assuming typo correction
+                "variable": form.column_interest.data, 
                 "function": form.function.data
             }
             message = decomposition_residuals(variables).add_residuals()

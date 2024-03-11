@@ -11,7 +11,7 @@
     <div class="user_interaction_image_plot">
     <form id=image_draw_form method="POST">
         <div class=user-input>
-            <h3> Make Image </h3>
+            <h3 class="title"> Make Image </h3>
             {{form.csrf_token }}
             {{form.column_interest.label (class_="form_label")}}
             {{form.column_interest (class_="form_input dialogue_unclickable")}}
@@ -20,7 +20,7 @@
 
 
         <div id="image_plot_options">
-            <h3> Plot options</h3>
+            <h3 class="title"> Plot options</h3>
             {{form.image_title.label (class_="form_label")}}
             {{form.image_title (class_="form_input dialogue_unclickable")}}
             {{form.xlabel.label (class_="form_label")}}

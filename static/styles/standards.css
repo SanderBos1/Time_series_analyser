@@ -27,7 +27,6 @@ body {
     padding: 8px;
     background-color: #ED693C;
     text-decoration: none;
-    text-align:center;
     border:none
 }
 
@@ -51,16 +50,20 @@ body {
 
 
 
-.dialogue-element{
-    position:absolute;
-    display:none;
-    z-index:20;
+.dialogue-element {
+    position: absolute;
+    top: 10%;
+    height: 60%;
+    width: 60%;
+    left: 20%;
+    display: none;
+    z-index: 20;
     background-color: white;
     border: solid 1px black;
     box-shadow: 3px 0px 10px;
-    overflow:auto;
-    text-align:center;
-
+    overflow: auto;
+    flex-flow: row wrap;
+    align-content: flex-start;
 }
 
 .orange_top{

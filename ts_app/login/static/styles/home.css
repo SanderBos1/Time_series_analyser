@@ -2,7 +2,6 @@
     position: relative;
     width: 70%;
     height:35%;
-    top: 5%;
     left: 15%;
 }
 
@@ -15,6 +14,9 @@
 #username{
     position:relative;
     text-align: center;
+    width:100%;
+    height:5%;
+
 
 }
 #upload_form {

@@ -31,11 +31,11 @@
     {% if current_user.is_authenticated %}
     <div class="navbar-settings">
         <ul>
-            <li class="navbar-settings-element"><a href="/logout">log out</a></li>
-            <li class="navbar-settings-element"><a href="/settings">{{current_user.username}}</a></li>
-            <li class="navbar-settings-element button_standard">
-                <button onclick="show_dialogue('upload_csv_dialogue', 'true')">Upload data</button>
+            <li class="navbar-settings-element">
+                <button class="button_standard" id="csv_upload_button" onclick="show_dialogue('upload_csv_dialogue', 'true')">Upload data</button>
             </li>
+            <li class="navbar-settings-element"><a class="button_standard" href="/settings">{{current_user.username}}</a></li>
+            <li class="navbar-settings-element"><a class="button_standard" href="/logout">log out</a></li>
         </ul>
     </div>
     {%endif%}
@@ -59,7 +59,7 @@
         </ul>
     </div>
   </div>
- <button id="show_unshow_sidebar" onclick="show_unshow('side_bar_component')"><<i class="fa-solid fa-arrow-left"></i></button>
+ <button class="button_standard" id="show_unshow_sidebar" onclick="show_unshow('side_bar_component')"><<i class="fa-solid fa-arrow-left"></i></button>
 
   <div class="content">
     <dialogue-element class="dialogue-element" id="upload_csv_dialogue" dialogue_name="Upload Dataset">

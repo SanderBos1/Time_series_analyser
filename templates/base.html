@@ -30,11 +30,11 @@
         {% if current_user.is_authenticated %}
         <div class="navbar-settings">
             <ul>
-                <li class="navbar-settings-element"><a href="/logout">log out</a></li>
-                <li class="navbar-settings-element"><a href="/settings">{{current_user.username}}</a></li>
-                <li class="navbar-settings-element button_standard">
-                    <button onclick="show_dialogue('upload_csv_dialogue', 'true')">Upload data</button>
+                <li class="navbar-settings-element">
+                    <button class="button_standard" onclick="show_dialogue('upload_csv_dialogue', 'true')">Upload data</button>
                 </li>
+                <li class="navbar-settings-element"><a class="button_standard" href="/settings">{{current_user.username}}</a></li>
+                <li class="navbar-settings-element"><a class="button_standard" href="/logout">log out</a></li>
             </ul>
         </div>
         {%endif%}

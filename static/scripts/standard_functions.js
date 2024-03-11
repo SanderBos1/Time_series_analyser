@@ -12,7 +12,7 @@ function show_unshow(element){
 
 function show_dialogue(dialogue, block_side_buttons = false) {
 	var save_dialogue = document.getElementById(dialogue);
-	save_dialogue.style.display = "inline-block";
+	save_dialogue.style.display = "flex";
 	if (Boolean(block_side_buttons)) {
 		make_unclickable("dialogue_unclickable");
 	}
