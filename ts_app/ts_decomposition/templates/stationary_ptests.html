@@ -51,14 +51,14 @@
 
 <dialogue-element class="dialogue-element dialogue-element-sequencing" id="stattest_trend_dialogue" dialogue_name="Trend P test">
   <div class=statistical_test id="statistical_trend_test">
-    <form  class="statistical_form" id="statistical_trend_form">
-        {{trend_form.csrf_token}}
-        {{trend_form.function.label  (class_="form_label")}}
-        {{trend_form.function (class_="form_input error_unclickable")}}
-        {{trend_form.column_interest.label  (class_="form_label")}}
-        {{trend_form.column_interest (class_="form_input error_unclickable")}}
-        {{trend_form.submit (class_="button_standard error_unclickable")}}
-    </form>
+      <form class="statistical_form" id="statistical_trend_form">
+          {{trend_form.csrf_token}}
+          {{trend_form.function.label  (class_="form_label")}}
+          {{trend_form.function (class_="form_input error_unclickable")}}
+          {{trend_form.column_interest.label  (class_="form_label")}}
+          {{trend_form.column_interest (class_="form_input error_unclickable")}}
+          {{trend_form.submit (class_="button_standard error_unclickable stattest_button")}}
+      </form>
   </div>
   <div class=sequecing_answers id="trend_answers">
     <p >Your p value of your statistical trend test is: <var id="trend_value">Not yet defined</var></p>
@@ -70,16 +70,16 @@
 
 <dialogue-element class="dialogue-element dialogue-element-sequencing" id="stattest_seasonality_dialogue" dialogue_name="Seasonality P Test">
   <div class=statistical_test id="statistical_form">
-    <form class="statistical_form" id="seasonality_form" method="post" onsubmit="return false;">
-      {{seasonality_form.csrf_token}}
-      {{seasonality_form.function.label  (class_="form_label")}}
-      {{seasonality_form.function (class_="form_input error_unclickable")}}
-      {{seasonality_form.season_per.label  (class_="form_label")}}
-      {{seasonality_form.season_per (class_="form_input error_unclickable")}}
-      {{seasonality_form.column_interest.label  (class_="form_label")}}
-      {{seasonality_form.column_interest (class_="form_input error_unclickable")}}
-      {{seasonality_form.submit (class_="button_standard error_unclickable")}}
-  </form>
+      <form class="statistical_form" id="seasonality_form" method="post" onsubmit="return false;">
+          {{seasonality_form.csrf_token}}
+          {{seasonality_form.function.label  (class_="form_label")}}
+          {{seasonality_form.function (class_="form_input error_unclickable")}}
+          {{seasonality_form.season_per.label  (class_="form_label")}}
+          {{seasonality_form.season_per (class_="form_input error_unclickable")}}
+          {{seasonality_form.column_interest.label  (class_="form_label")}}
+          {{seasonality_form.column_interest (class_="form_input error_unclickable")}}
+          {{seasonality_form.submit (class_="button_standard error_unclickable stattest_button")}}
+      </form>
 </div>
 <div class=sequecing_answers id="seasonality_answers">
   <p >Your p value of your statistical seasonality test is: <var id="seasonality_value">Not yet defined</var></p>
@@ -92,14 +92,14 @@
 
 <dialogue-element class="dialogue-element dialogue-element-sequencing" id="stattest_stationarity_dialogue" dialogue_name="Stationarity P Test">
   <div class=statistical_test id="statistical_form">
-    <form class="statistical_form" id="stationarity_form" method="post" onsubmit="return false;">
-      {{stationarity_form.csrf_token}}
-      {{stationarity_form.function.label  (class_="form_label")}}
-      {{stationarity_form.function (class_="form_input error_unclickable")}}
-      {{stationarity_form.column_interest.label  (class_="form_label")}}
-      {{stationarity_form.column_interest (class_="form_input error_unclickable")}}
-      {{stationarity_form.submit (class_="button_standard error_unclickable")}}
-  </form>
+      <form class="statistical_form" id="stationarity_form" method="post" onsubmit="return false;">
+          {{stationarity_form.csrf_token}}
+          {{stationarity_form.function.label  (class_="form_label")}}
+          {{stationarity_form.function (class_="form_input error_unclickable")}}
+          {{stationarity_form.column_interest.label  (class_="form_label")}}
+          {{stationarity_form.column_interest (class_="form_input error_unclickable")}}
+          {{stationarity_form.submit (class_="button_standard error_unclickable stattest_button")}}
+      </form>
 </div>
 <div class=sequecing_answers id="stationarity_answers">
   <p >Your p value of your statistical stationarity test is: <var id="stationarity_value">Not yet defined</var></p>

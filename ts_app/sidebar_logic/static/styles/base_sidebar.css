@@ -178,10 +178,12 @@
     display: inline-block;
 }
 
+#file_display_selected {
+    background-color: white;
+}
 /* handles the list of columns
 
 */
-
 #column_list_ul {
     list-style-type: none;
     width: 100%;
