@@ -69,7 +69,8 @@ class ts_image(db.Model):
         image_code (str): The image code (e.g., binary data or URL).
         user (str): The user associated with the image.
     """
-    name: so.Mapped[str] = so.mapped_column(sa.String(64), primary_key=True)
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    name: so.Mapped[str] = so.mapped_column(sa.String(64))
     image_code: so.Mapped[str] = so.mapped_column(sa.TEXT)
     user: so.Mapped[str] = so.mapped_column(sa.String(64))
 

@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, current_app, jsonify
 from flask_login import login_required
+from ts_app.ts_decomposition.python.autocorrelation import autocorrelation
 from ts_app.ts_decomposition.python.decomposition import decomposition_residuals
 from ts_app.ts_decomposition.python.stattest_calculator import trend_calculator, seasonality_calculator, stationarity_calculator
 from ts_app.ts_decomposition.python.forms import seasonality_form, trend_form, make_residuals, stationarity_form
@@ -26,7 +27,7 @@ def show_stationary_tests():
     new_seasonality_form = seasonality_form()
     new_stationarity_form = stationarity_form()
 
-    return render_template("stationary_ptests.html", 
+    return render_template("exploratory_analysis.html", 
                            trend_form=new_trend_form, 
                            seasonality_form=new_seasonality_form, 
                            stationarity_form=new_stationarity_form)
@@ -165,6 +166,47 @@ def calculate_stationarity(dataset):
         'p_value': p_value,
         'Hypotheses': hypotheses
     }), status_code
+
+@ts_decomposition_bp.route("/autocorrelation/<dataset>/<column>", methods=["POST"])
+@login_required
+def display_autocorrelation(dataset, column):
+    
+    """
+    Makes autocorrelation plot on column click.
+    
+    Args:
+        dataset (str): The filename of the dataset to analyze.
+        column (str): The column for which autocorrelations are calculated
+
+    
+    Returns:
+            JSON: {
+            "message": A message with the result or error,
+            "img_auto": The autocorrelation plot image
+            "img_partial": The partial autocorrelation plot image
+        }
+
+    """
+    try:
+        autocorrelation_plotter = autocorrelation(dataset, column)
+        img_autocorrelation = autocorrelation_plotter.autocorrelation_plot()
+        img_partial_autocorrelation = autocorrelation_plotter.partial_autocorrelation()
+        print(img_partial_autocorrelation)
+        status_code = 200
+        return jsonify({
+        "Img_auto": img_autocorrelation,
+        "Img_partial": img_partial_autocorrelation
+    }), status_code
+    except Exception as e:
+        status_code = 500
+        return jsonify({
+        "Error": str(e)
+    }), status_code
+        
+
+    return answer
+    
+   
 
 # Decomposition
 

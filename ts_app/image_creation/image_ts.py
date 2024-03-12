@@ -97,15 +97,15 @@ def get_images():
     try:
         current_user_name = current_user.username
         images = ts_image.query.filter_by(user = current_user_name )
-        images_converted = {}
+        images_converted = []
         for image in images:
             name = image.get_name()
             image = image.get_image()
-            images_converted.update({name : image})
+            images_converted.append([name, image])
         message="Images retrieved."
         status_code = 200
     except Exception as e:
-        images_converted = {}
+        images_converted = []
         message = str(e)
         status_code = 500
     answer = {

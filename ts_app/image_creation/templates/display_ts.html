@@ -45,8 +45,8 @@
 <dialogue-element class="dialogue-element" id="image_save_form" dialogue_name="Save Image">
     <form id=save_form method="POST">
         {{ form_image.csrf_token }}
-        {{ form_image.imageName (class_="dialogue_unclickable") }}
-        {{form_image.save (class_="button_standard dialogue_unclickable")}}
+        {{ form_image.imageName (class_="error_unclickable") }}
+        {{form_image.save (class_="button_standard error_unclickable")}}
     </form>
     <p id="image_save_feedback"></p>
     <error-dialogue class="dialogue-element" id="save_image_error" dialogue_name="Error" delete_function =delete_dialogue_error(this) message_id="error_text_save_image">

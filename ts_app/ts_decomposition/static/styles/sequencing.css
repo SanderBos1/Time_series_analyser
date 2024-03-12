@@ -4,7 +4,7 @@
     flex-flow: row wrap;
     height: 7%;
     width: 30%;
-    top: 5%;
+    top: 2%;
     left: 2%;
 }
 
@@ -29,36 +29,59 @@
     position: relative;
     width:100%;
     height:100%;
-    display:inline-block
+    display:inline-block;
+    padding:0px;
 }
 
 .explanation_button_holder {
     position: relative;
-    top: 5%;
     left: 2%;
+    top:2%;
     width: 100%;
-    height: 80%;
+    height: 40%;
     display: flex;
     flex-direction: row;
 }
 
 .explanation {
     position: relative;
-    width: 45%;
+    width: 100%;
     height: 100%;
     overflow: auto;
 }
 
 .dialogue_buttons_holder {
     position: relative;
-    width: 30%;
+    width: 50%;
+    height:10%;
     display: flex;
-    flex-direction: column; /* Stack items vertically */
+    flex-direction: row; /* Stack items vertically */
 }
 
 #trend_buttons_holder > * {
     margin-bottom: 3%;
 }
+
+
+
+/*autocorrelation elements*/
+.autocorrelation_holder {
+    position: relative;
+    width: 100%;
+    height: 40%;
+    border: solid 1px black;
+    display: flex;
+    flex-flow: row;
+}
+
+.autocorrelation{
+    position:relative;
+    width:50%;
+    height:100%;
+    border: solid 1px black;
+}
+
+
 
 .dialogue-element-sequencing {
     flex-flow: row wrap;
@@ -67,7 +90,7 @@
 
 .statistical_test {
     position: relative;
-    width: 30%;
+    width: 40%;
     height: 80%;
 }
 
@@ -83,7 +106,7 @@
 .sequecing_answers {
     position: relative;
     left: 5%;
-    width: 60%;
+    width: 50%;
     height: 80%;
 }
 
@@ -99,11 +122,14 @@
     height: 50%;
 }
 
-#make_stationary_csv_error {
-    top: 10%;
-    left: 20%;
-    width: 60%;
-    height: 50%;
+
+#make_csv_residuals_form{
+    position: relative;
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-flow: row wrap;
+
 }
 
 .form_label {
@@ -112,7 +138,7 @@
     color: #ED693C;
     font-weight: bold;
     width: 30%;
-    height:10%;
+    height: 10%;
     float: left;
 }
 
@@ -126,6 +152,11 @@
     box-shadow: 3px 3px 5px grey;
     list-style-type: none;
 }
+
+#trend_file_made_feedback_text{
+
+}
+
 
 #function{
     height:30%;

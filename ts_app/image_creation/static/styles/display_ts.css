@@ -84,8 +84,9 @@
 
 #save_form{
     position:relative;
+    top:30%;
     left:25%;
-    wdith:50%;
+    width:50%;
 
 }
 
@@ -93,25 +94,26 @@
     position:relative;
     width:70%;
     left:10%;
-    height:20%;
+    height:30%;
     display: block;
     margin:3%;
 
 }
 
-#save_image_dialogue_button{
-    position:absolute;
-    text-align:center;
-    top:75%;
-    left:45%;
-    display:none;
+#image_save_feedback{
+    position:relative;
+    top:0%;
+    width:100%;
 }
 
-#save_image_error{
-    width: 50%;
-    height:50%;
-    left:20%;
+#save_image_dialogue_button {
+    position: absolute;
+    text-align: center;
+    top: 75%;
+    left: 45%;
+    display: none;
 }
+
 
 #image_trendresidual_save_form{
     width: 50%;

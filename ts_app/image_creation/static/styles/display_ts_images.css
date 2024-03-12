@@ -14,7 +14,7 @@
     height: 100%;
     display: flex;
     flex-flow: row wrap;
-    margin: 0;
+    display_images_error margin: 0;
     padding: 0;
     float: left;
     list-style-type: None;
@@ -61,11 +61,4 @@
     height:50%;
     margin: auto;
 
-}
-
-#display_images_error{
-    top:10%;
-    left:20%;
-    width:60%;
-    height:40%;
 }

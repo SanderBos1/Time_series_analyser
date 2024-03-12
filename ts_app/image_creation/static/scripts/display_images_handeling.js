@@ -1,3 +1,10 @@
+function select_column(pressed_column) {
+    if (document.getElementById("column_selected")) {
+        document.getElementById("column_selected").removeAttribute('id', "column_selected")
+    }
+    pressed_column.setAttribute('id', "column_selected");
+}
+
 function enlarge_image(element) {
     //Removes onclick attribute so that it no longer makes the image large
 
@@ -26,22 +33,23 @@ window.onload = function() {
     $.ajax({
         type: 'Get',
         url: '/get_images/',
-        success: function(data) {  
-                // Get the reference to the list where images will be displayed
-                var list = $("#image-list").find('ul');
-                // Loop through each image returned from the server
-                for (var image in data["images"]) {
+        success: function (data) {  
+             // Get the reference to the list where images will be displayed
+             var list = $("#image-list").find('ul');
+            // Loop through each image returned from the server
+            for (let i = 0; i < data["images"].length; i++) {
                     // Create a list item to hold each image
                     var li = document.createElement("li");
                     // Assign a class to the list item
                     li.className = "image";
                     // Get the current image object
-                    var image_obj = data["images"][image];
+                    var image_obj = data["images"][i][1];
+
                     // Populate the list item with image details and delete button
                     li.innerHTML =  "<div class=name_and_delete>" +  
-                                    "<p>" + image + "</p>" +
+                        "<p>" + data["images"][i][0] + "</p>" +
                                     "<form method=POST id=delete_image_form>" +  
-                                    "<button name=delete_image id=delete_image_button class=delete_standard value =" + image +" > X </button>" +
+                        "<button name=delete_image id=delete_image_button class=delete_standard value =" + data["images"][i][0] +" > X </button>" +
                                     "</form>" + "</div>" +
                                     "<div onClick=enlarge_image(this) class=image_list_image >"+
                                     "<img class=standard_img src=" + image_obj + ">" +

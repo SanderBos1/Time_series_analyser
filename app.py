@@ -17,7 +17,7 @@ Returns:
     The Flask application object.
 """
 app = Flask(__name__)
-app.config.from_object(config.dev_config)
+app.config.from_object(config.config)
     
 db.init_app(app)
 Migrate(app, db)

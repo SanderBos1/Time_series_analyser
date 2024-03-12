@@ -2,7 +2,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{url_for('ts_decomposition_bp.static',filename='styles/sequencing.css')}}">
-<script src="{{url_for('ts_decomposition_bp.static',filename='scripts/seasonality_trend.js')}}"></script>
+<script src="{{url_for('ts_decomposition_bp.static',filename='scripts/exploratory_analysis.js')}}"></script>
 
 {% endblock %}
 
@@ -10,7 +10,7 @@
 
 <div class="choice_list">
   <ul class="choice">
-      <li class="link_button dialogue_unclickable"><a class="button_standard" href="/stationary_ptests">Trend & Seasonality</a></li>
+      <li class="link_button dialogue_unclickable"><a class="button_standard" href="/stationary_ptests">Explore</a></li>
       <li class="link_button dialogue_unclickable"><a class="button_standard" href="/decomposition">Decomposition</a></li>
   </ul>
 </div>
@@ -39,15 +39,28 @@
     </p>
 </div>
 
+
+
+</div>
+
 <div class="dialogue_buttons_holder" id="trend_buttons_holder">
-  <button class="button_standard" id="statest_trend_button" onclick="reset_var_pvalue('trend_value', 'hypothese_trend');">Calculate Trend</button>
-  <button class="button_standard" id="statest_seasonality_button" onclick="reset_var_pvalue('seasonality_value', 'hypothese_seasonality');">Calculate Seasonality</button>
-  <button class="button_standard" id="statest_stationarity_button" onclick="reset_var_pvalue('stationarity_value', 'hypothese_stationarity');">Calculate Stationarity</button>
+    <button class="button_standard" id="statest_trend_button" onclick="reset_var_pvalue('trend_value', 'hypothese_trend');">Calculate Trend</button>
+    <button class="button_standard" id="statest_seasonality_button" onclick="reset_var_pvalue('seasonality_value', 'hypothese_seasonality');">Calculate Seasonality</button>
+    <button class="button_standard" id="statest_stationarity_button" onclick="reset_var_pvalue('stationarity_value', 'hypothese_stationarity');">Calculate Stationarity</button>
 
 </div>
 
+<div class="autocorrelation_holder">
+
+    <div class="autocorrelation" id="whole_autocorrelation">
+
+    </div>
+    <div class="autocorrelation" id="partial_autocorrelation">
+
+    </div>
+    <error-dialogue class="dialogue-element autocorrelation_plot_error" id="autocorrelation_error" dialogue_name="Error autocorrelation plot" delete_function=delete_dialogue_error(this) message_id="error_autocorrelation_plot">
+    </error-dialogue>
 </div>
-</dialogue-element>
 
 <dialogue-element class="dialogue-element dialogue-element-sequencing" id="stattest_trend_dialogue" dialogue_name="Trend P test">
   <div class=statistical_test id="statistical_trend_test">

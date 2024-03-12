@@ -1,4 +1,9 @@
-
+function select_column(pressed_column) {
+    if (document.getElementById("column_selected")) {
+        document.getElementById("column_selected").removeAttribute('id', "column_selected")
+    }
+    pressed_column.setAttribute('id', "column_selected");
+}
 
 $(document).ready(function() {
     $('#image_draw_form').submit(function (e) {

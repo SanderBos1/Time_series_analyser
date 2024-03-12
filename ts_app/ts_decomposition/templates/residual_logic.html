@@ -9,7 +9,7 @@
 
 <div class="choice_list">
   <ul class="choice">
-      <li class="navbar-li"><a class="button_standard link_button" href="/stationary_ptests">Trend & Seasonality</a></li>
+      <li class="navbar-li"><a class="button_standard link_button" href="/stationary_ptests">Explore</a></li>
       <li class="navbar-li"><a class="button_standard link_button" href="/decomposition">Decomposition</a></li>
   </ul>
 </div>
@@ -32,21 +32,23 @@
 </div>
 
 <dialogue-element class="dialogue-element dialogue-element-sequencing" id="make_csv_residuals" dialogue_name="Make CSV Residuals">
-  <div id="draw_residuals">
-  <form  id="make_csv_residuals_form">
-    {{residuals_form.csrf_token}}
-    {{residuals_form.column_interest.label  (class_="form_label")}}
-    {{residuals_form.column_interest ( class_="form_input error_unclickable")}}
-    {{residuals_form.function.label  (class_="form_label")}}
-    {{residuals_form.function ( class_="form_input error_unclickable")}}
-    {{residuals_form.submit (class_="button_standard error_unclickable")}}
-  </form>
-  </div>
+    <div id="draw_residuals">
+        <form id="make_csv_residuals_form">
+            {{residuals_form.csrf_token}}
+            {{residuals_form.column_interest.label  (class_="form_label")}}
+            {{residuals_form.column_interest ( class_="form_input error_unclickable")}}
+            {{residuals_form.function.label  (class_="form_label")}}
+            {{residuals_form.function ( class_="form_input error_unclickable")}}
+            {{residuals_form.submit (class_="button_standard error_unclickable")}}
+        </form>
+
+        <p id=trend_file_made_feedback_text></p>
+
+    </div>
   
   <error-dialogue class="dialogue-element" id="make_stationary_csv_error" dialogue_name="Error" delete_function =delete_dialogue_error(this) message_id="error_making_residual_csv">
   </error-dialogue>
   
-  <p id = trend_file_made_feedback_text></p>
 
   </dialogue-element>
 

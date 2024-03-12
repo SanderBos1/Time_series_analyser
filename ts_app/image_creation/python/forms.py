@@ -34,8 +34,8 @@ class ts_image_form(FlaskForm):
     - submit (SubmitField): Button for generating and displaying the plot image.
     """
     column_interest = SelectField(label='Column of Interest', validators=[InputRequired()])
-    image_title = StringField(label='Plot Title', validators=[InputRequired()])
-    xlabel = StringField(label="X label", validators=[InputRequired()])
-    ylabel = StringField(label="Y label", validators=[InputRequired()])
+    image_title = StringField(label='Plot Title', validators=[InputRequired()], default='Time Series')
+    xlabel = StringField(label="X label", validators=[InputRequired()], default='Date')
+    ylabel = StringField(label="Y label", validators=[InputRequired()] , default='Intresting variable')
     line_color = SelectField(label='Line Color', validators=[InputRequired()], choices=[("red", "Red"), ("blue", "Blue")])
     submit = SubmitField("Show Image", id="draw_image_button")

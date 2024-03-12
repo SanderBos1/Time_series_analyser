@@ -1,5 +1,41 @@
 // Adds on click events to buttons
+function select_column(pressed_column) {
+    if (document.getElementById("column_selected")) {
+        document.getElementById("column_selected").removeAttribute('id', "column_selected")
+    }
+    pressed_column.setAttribute('id', "column_selected");
+    if (document.getElementById("partial_autocorrelation")) {
+        var column = pressed_column.value
+        var dataset = document.getElementById("file_display_selected").value
 
+        $.ajax({
+            type: 'POST',
+            url: 'autocorrelation/' + dataset + "/" + column,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                // Display partial and autocorrelation images
+                var auto_image = document.getElementById("whole_autocorrelation")
+                var partial_image = document.getElementById("partial_autocorrelation")
+                auto_image.innerHTML = "<img class=standard_img id=autocorrelation_image src=data:image/jpeg;base64," + data["Img_auto"] + ">";
+                partial_image.innerHTML = "<img class=standard_img id=autocorrelation_image src=data:image/jpeg;base64," + data["Img_partial"] + ">";
+
+            },
+            error: function (data) {
+                // Handle errors
+                answer = JSON.parse(data['responseText'])
+                make_unclickable("error_unclickable")
+                var error_text = document.getElementById("error_autocorrelation_plot");
+                var error_message = '<p id="errror_trend_pvalue">' + answer['Error'] + "</p>";
+                error_text.innerHTML = error_message;
+                document.getElementById("autocorrelation_error").style.display = "inline-block";
+
+
+            }
+        });
+    }
+
+}
 
 
 document.addEventListener("DOMContentLoaded", function() {

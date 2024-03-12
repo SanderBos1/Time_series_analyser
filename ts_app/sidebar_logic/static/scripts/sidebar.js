@@ -24,7 +24,7 @@ function csv_button_click(value) {
                 var li = document.createElement("li");
                 li.className = "dataset_column";
                 column = data[column_number];
-                li.innerHTML = column;
+                li.innerHTML = "<button class='button_standard column_display' onClick=select_column(this) value='" + column + "'>" + column + "</button";
                 ul.append(li);
             }
             // After adding columns, call add_options function 

@@ -1,4 +1,11 @@
-$(document).ready(function() {
+function select_column(pressed_column) {
+    if (document.getElementById("column_selected")) {
+        document.getElementById("column_selected").removeAttribute('id', "column_selected")
+    }
+    pressed_column.setAttribute('id', "column_selected");
+}
+
+$(document).ready(function () {
     $('#make_csv_residuals_form').submit(function (e) {
         e.preventDefault(); 
         var dataset = document.getElementById("file_display_selected").value
