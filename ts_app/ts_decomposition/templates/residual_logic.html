@@ -8,28 +8,27 @@
 {%block content%}
 
 <div class="choice_list">
-  <ul class="choice">
-      <li class="navbar-li"><a class="button_standard link_button" href="/stationary_ptests">Explore</a></li>
-      <li class="navbar-li"><a class="button_standard link_button" href="/decomposition">Decomposition</a></li>
-  </ul>
-</div>
-<div class="explanation_button_holder" id="trend_explanation_button_holder">
-<div class="explanation">
-    <p>
-        Making time-series data stationary is a crucial preprocessing step in time-series analysis.
-        Stationarity implies that statistical properties such as mean, variance, and autocorrelation remain constant over time.
-        By achieving stationarity, we can simplify the modeling process and enable more accurate forecasting and analysis.
-        Stationary data allows us to apply a wider range of statistical techniques, assumptions, and models, ultimately leading to better insights and predictions from the data.
-
-        Detrending by differencing is a common method used to achieve stationarity in time-series data. By taking the difference between consecutive observations, we remove the trend component from the data, making it stationary. 
-        Trends in time-series data represent long-term changes or patterns that may obscure underlying patterns or relationships.
-    </p>
+    <ul class="choice">
+        <li class="link_button dialogue_unclickable"><a class="button_standard" href="/stationary_ptests">Explore</a></li>
+        <li class="link_button dialogue_unclickable"><a class="button_standard" href="/decomposition">Decomposition</a></li>
+    </ul>
 </div>
 
-<div class="dialogue_buttons_holder" id="trend_buttons_holder">
-  <button class="button_standard" id="plot_trend_residuals_button" onclick="show_dialogue('make_csv_residuals', 'true');reset('trend_file_made_feedback_text')">Plot Trend Residuals</button>
-</div>
-</div>
+    <div class="explanation">
+        <p>
+            Making time-series data stationary is a crucial preprocessing step in time-series analysis.
+            Stationarity implies that statistical properties such as mean, variance, and autocorrelation remain constant over time.
+            By achieving stationarity, we can simplify the modeling process and enable more accurate forecasting and analysis.
+            Stationary data allows us to apply a wider range of statistical techniques, assumptions, and models, ultimately leading to better insights and predictions from the data.
+
+            Detrending by differencing is a common method used to achieve stationarity in time-series data. By taking the difference between consecutive observations, we remove the trend component from the data, making it stationary.
+            Trends in time-series data represent long-term changes or patterns that may obscure underlying patterns or relationships.
+        </p>
+    </div>
+
+    <div class="dialogue_buttons_holder" id="trend_buttons_holder">
+        <button class="button_standard" id="plot_trend_residuals_button" onclick="show_dialogue('make_csv_residuals', 'true');reset('trend_file_made_feedback_text')">Plot Trend Residuals</button>
+    </div>
 
 <dialogue-element class="dialogue-element dialogue-element-sequencing" id="make_csv_residuals" dialogue_name="Make CSV Residuals">
     <div id="draw_residuals">
@@ -45,11 +44,11 @@
         <p id=trend_file_made_feedback_text></p>
 
     </div>
-  
-  <error-dialogue class="dialogue-element" id="make_stationary_csv_error" dialogue_name="Error" delete_function =delete_dialogue_error(this) message_id="error_making_residual_csv">
-  </error-dialogue>
-  
 
-  </dialogue-element>
+    <error-dialogue class="dialogue-element" id="make_stationary_csv_error" dialogue_name="Error" delete_function=delete_dialogue_error(this) message_id="error_making_residual_csv">
+    </error-dialogue>
+
+
+</dialogue-element>
 
 {%endblock%}

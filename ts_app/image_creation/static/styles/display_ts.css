@@ -36,9 +36,24 @@
 .user-input {
     position: relative;
     width: 100%;
-    height: 20%;
     display: flex;
     flex-flow: row wrap;
+}
+
+.database_column{
+    position:relative;
+    width:100%;
+    height:100%
+}
+
+.database_column > p{
+    position:relative;
+    width:100%;
+}
+#dataset_column_label {
+    position: relative;
+    width: 100%;
+    color: #ED693C;
 }
 
 #image_plot_options {

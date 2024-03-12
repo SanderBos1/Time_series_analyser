@@ -35,9 +35,9 @@ def display_ts_list():
     return render_template("display_ts_imagelist.html")
 
 
-@image_ts_bp.route('/make_image/<dataset>', methods=["POST"])
+@image_ts_bp.route('/make_image/<dataset>/<column>', methods=["POST"])
 @login_required
-def drawn_image(dataset):
+def drawn_image(dataset, column):
 
     """
     Makes an b64encode encoded image and store it as session variable
@@ -52,14 +52,13 @@ def drawn_image(dataset):
         }
     """
     form = ts_image_form()
-    form.column_interest.choices = [form.column_interest.data]
     if not form.validate_on_submit():
         return jsonify({"error": "Invalid form submission"}), 400
     try:
         plot_variables = {
             "csv_file": dataset,
             "time_column": current_app.config['TIME_COLUMN'],
-            "var_column":form.column_interest.data,
+            "var_column":column,
             "plot_tile": form.image_title.data,
             "xlabel": form.xlabel.data,
             "ylabel":form.ylabel.data,

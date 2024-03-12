@@ -10,6 +10,14 @@ function csv_button_click(value) {
     // Set the id attribute of the the clicked CSV file button
 
     value.setAttribute('id', "file_display_selected");
+    //Set the element that displays which dataset is selected to the selected value
+    if (document.getElementById("dataset")) {
+        document.getElementById("dataset").innerHTML = value.value
+    }
+    // resets the element that displays the column value
+    if (document.getElementById("column")) {
+        document.getElementById("column").innerHTML = "Not yet defined"
+    }
     $.ajax({
         type: "GET",
         // URL to fetch columns based on the value of the clicked button
@@ -24,7 +32,7 @@ function csv_button_click(value) {
                 var li = document.createElement("li");
                 li.className = "dataset_column";
                 column = data[column_number];
-                li.innerHTML = "<button class='button_standard column_display' onClick=select_column(this) value='" + column + "'>" + column + "</button";
+                li.innerHTML = "<button class='button_standard column_display dialogue_unclickable' onClick=select_column(this) value='" + column + "'>" + column + "</button";
                 ul.append(li);
             }
             // After adding columns, call add_options function 

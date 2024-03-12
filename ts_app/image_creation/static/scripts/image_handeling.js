@@ -3,6 +3,7 @@ function select_column(pressed_column) {
         document.getElementById("column_selected").removeAttribute('id', "column_selected")
     }
     pressed_column.setAttribute('id', "column_selected");
+    document.getElementById('column').innerHTML = pressed_column.value
 }
 
 $(document).ready(function() {
@@ -10,36 +11,42 @@ $(document).ready(function() {
         e.preventDefault()
         //Retrieves the dataset that is going to be used
         var dataset = document.getElementById("file_display_selected").value
-        //Retrieves the form that is going to be send to the backend
-        var form = new FormData($(this)[0])
-        $.ajax({
-            headers: { 
-                "X-CSRFToken": "{{ form.csrf_token._value() }}",
-            },
-            type: "POST",
-            url: '/make_image/'+ dataset,
-            data: form, 
-            processData: false,
-            contentType: false,
-            // Handle successful response
+        if (document.getElementById("column_selected")) {
+            var column = document.getElementById("column_selected").value
+            console.log(column, dataset)
+            //Retrieves the form that is going to be send to the backend
+            var form = new FormData($(this)[0])
+            $.ajax({
+                headers: {
+                    "X-CSRFToken": "{{ form.csrf_token._value() }}",
+                },
+                type: "POST",
+                url: '/make_image/' + dataset + "/" + column,
+                data: form,
+                processData: false,
+                contentType: false,
+                // Handle successful response
 
-            success: function (data) {
-                const img_div = document.getElementById("image_div");
-                img_div.innerHTML = "<img class=standard_img id=picture src=data:image/jpeg;base64," + data["img"] + ">";
-                document.getElementById("save_image_dialogue_button").style.display="inline-block";
-            },
-            // Handle failed response
-            error: function(data){
-                answer = JSON.parse(data['responseText'])
-                make_unclickable('dialogue_unclickable')
-                var error_text = document.getElementById("error_text_draw_image");
-                var error_message = '<p id="errror_image_plot">' +  answer["message"] + "</p>";
-                error_text.innerHTML = error_message;
-                document.getElementById("image_error").style.display="inline-block";
+                success: function (data) {
+                    const img_div = document.getElementById("image_div");
+                    img_div.innerHTML = "<img class=standard_img id=picture src=data:image/jpeg;base64," + data["img"] + ">";
+                    document.getElementById("save_image_dialogue_button").style.display = "inline-block";
+                },
+                // Handle failed response
+                error: function (data) {
+                    answer = JSON.parse(data['responseText'])
+                    make_unclickable('dialogue_unclickable')
+                    var error_text = document.getElementById("error_text_draw_image");
+                    var error_message = '<p id="errror_image_plot">' + answer["message"] + "</p>";
+                    error_text.innerHTML = error_message;
+                    document.getElementById("image_error").style.display = "inline-block";
                 }
+            });
+        }
+        else {
+            alert("no column selected")
+        }
     })
-
-    });
 });
 
 

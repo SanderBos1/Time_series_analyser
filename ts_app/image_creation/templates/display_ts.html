@@ -11,16 +11,19 @@
     <div class="user_interaction_image_plot">
     <form id=image_draw_form method="POST">
         <div class=user-input>
-            <h3 class="title"> Make Image </h3>
-            {{form.csrf_token }}
-            {{form.column_interest.label (class_="form_label")}}
-            {{form.column_interest (class_="form_input dialogue_unclickable")}}
-
+            <h3 class="title"> Make image </h3>
+            <div class="database_column">
+                <p id="dataset_column_label">Dataset<p>
+                <p id="dataset" > Not yet selected</p>
+                <p id="dataset_column_label">Column</p>
+                <p id="column" value="column"> Not yet selected</p>
+            </div>
         </div>
 
 
         <div id="image_plot_options">
             <h3 class="title"> Plot options</h3>
+            {{form.csrf_token }}
             {{form.image_title.label (class_="form_label")}}
             {{form.image_title (class_="form_input dialogue_unclickable")}}
             {{form.xlabel.label (class_="form_label")}}

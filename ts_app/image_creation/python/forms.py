@@ -26,14 +26,12 @@ class ts_image_form(FlaskForm):
     Form for generating a time-series plot image.
 
     Attributes:
-    - column_interest (SelectField): Dropdown menu for selecting the column of interest from the dataset.
     - image_title (StringField): Input field for the title of the plot.
     - xlabel (StringField): Input field for the label of the x-axis.
     - ylabel (StringField): Input field for the label of the y-axis.
     - line_color (SelectField): Dropdown menu for selecting the color of the plot line.
     - submit (SubmitField): Button for generating and displaying the plot image.
     """
-    column_interest = SelectField(label='Column of Interest', validators=[InputRequired()])
     image_title = StringField(label='Plot Title', validators=[InputRequired()], default='Time Series')
     xlabel = StringField(label="X label", validators=[InputRequired()], default='Date')
     ylabel = StringField(label="Y label", validators=[InputRequired()] , default='Intresting variable')
