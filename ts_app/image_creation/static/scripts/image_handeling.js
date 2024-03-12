@@ -13,7 +13,6 @@ $(document).ready(function() {
         var dataset = document.getElementById("file_display_selected").value
         if (document.getElementById("column_selected")) {
             var column = document.getElementById("column_selected").value
-            console.log(column, dataset)
             //Retrieves the form that is going to be send to the backend
             var form = new FormData($(this)[0])
             $.ajax({
@@ -43,10 +42,11 @@ $(document).ready(function() {
                 }
             });
         }
-        else {
-            alert("no column selected")
+        else{
+             alert("no column selected")
         }
     })
+
 });
 
 

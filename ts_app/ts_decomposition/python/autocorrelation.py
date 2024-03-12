@@ -1,10 +1,9 @@
 import pandas as pd
-import matplotlib.pyplot as plt 
-import statsmodels.api as sm
-import io
+from matplotlib.figure import Figure
+from io import BytesIO
 import base64
 from flask import current_app
-plt.switch_backend('agg')
+import statsmodels.api as sm
 
 class autocorrelation:
     
@@ -20,21 +19,24 @@ class autocorrelation:
         Makes an autocorrelation plot of the given dataset and column
         """
         data = self.df[self.column]
-        plt.title("Autocorrelation Plot" + self.column)
-        plt.xlabel = "Largs"
-        plt.acorr(data, maxlags = 50) 
-        plt.grid(True)
-        img = io.BytesIO()
-        plt.savefig(img, format='jpg')
-        encoded_img_data = base64.b64encode(img.getvalue()).decode('utf-8')
-        plt.close()
-        return encoded_img_data
-
+        fig = Figure()
+        ax = fig.subplots()
+        ax.acorr(data, maxlags = 50, color="red")
+        ax.set_title("Autocorrelation Plot")
+        ax.set_xlabel = "Largs"
+        ax.set_ylabel = "correlation"
+        buf = BytesIO()
+        fig.savefig(buf, format="jpg")
+        img_data = base64.b64encode(buf.getbuffer()).decode("ascii")
+        return img_data
+    
     def partial_autocorrelation(self):
+        fig = Figure()
         data = self.df[self.column]
-        sm.graphics.tsa.plot_pacf(data, lags=40, method="ywm")
-        partial = io.BytesIO()
-        plt.savefig(partial, format='jpg')
-        partial_img_data = base64.b64encode(partial.getvalue()).decode('utf-8')
-        plt.close()
-        return partial_img_data
+        ax = fig.subplots()
+        sm.graphics.tsa.plot_pacf(data, lags=40, method="ywm", ax=ax)
+        buf = BytesIO()
+        fig.savefig(buf, format="jpg")
+        img_data = base64.b64encode(buf.getbuffer()).decode("ascii")
+        return img_data
+

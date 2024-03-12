@@ -191,7 +191,6 @@ def display_autocorrelation(dataset, column):
         autocorrelation_plotter = autocorrelation(dataset, column)
         img_autocorrelation = autocorrelation_plotter.autocorrelation_plot()
         img_partial_autocorrelation = autocorrelation_plotter.partial_autocorrelation()
-        print(img_partial_autocorrelation)
         status_code = 200
         return jsonify({
         "Img_auto": img_autocorrelation,
