@@ -8,17 +8,8 @@
 
 {%block content%}
 
-<div class="choice_list">
-  <ul class="choice">
-      <li class="link_button dialogue_unclickable"><a class="button_standard" href="/stationary_ptests">Explore</a></li>
-      <li class="link_button dialogue_unclickable"><a class="button_standard" href="/decomposition">Decomposition</a></li>
-  </ul>
-</div>
 
-
-
-
-<div class="explanation">
+<div class="explanation flex">
     <p>
         Trend in a time series is defined as the general tendency of the data to increase or decrease over a long period of time.
         Most computations on time series assume that there is no trend in the data.
@@ -36,14 +27,14 @@
 
 
 
-<div class="dialogue_buttons_holder" id="trend_buttons_holder">
+<div class="dialogue_buttons_holder flex" id="trend_buttons_holder">
     <button class="button_standard" id="statest_trend_button" onclick="reset_var_pvalue('trend_value', 'hypothese_trend');">Calculate Trend</button>
     <button class="button_standard" id="statest_seasonality_button" onclick="reset_var_pvalue('seasonality_value', 'hypothese_seasonality');">Calculate Seasonality</button>
     <button class="button_standard" id="statest_stationarity_button" onclick="reset_var_pvalue('stationarity_value', 'hypothese_stationarity');">Calculate Stationarity</button>
 
 </div>
 
-<div class="autocorrelation_holder">
+<div class="autocorrelation_holder flex">
 
     <div class="autocorrelation" id="whole_autocorrelation">
         <p> Select a column</p>

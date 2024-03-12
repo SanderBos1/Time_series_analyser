@@ -1,38 +1,3 @@
-.choice_list {
-    position: relative;
-    display: flex;
-    flex-flow: row wrap;
-    height: 25px;
-    width: 30%;
-    top: 2%;
-    left: 2%;
-}
-
-.choice {
-    list-style-type: none;
-    display: flex;
-    flex-flow: row wrap;
-    margin: 0px;
-    padding: 0px;
-    height: 100%;
-    width: 100%;
-}
-
-.link_button {
-    position: relative;
-    width:50%;
-    height:100%;
-    flex: 1
-}
-
-.link_button > a{
-    position: relative;
-    width:100%;
-    height:100%;
-    display:inline-block;
-    padding:0px;
-}
-
 
 
 .explanation {
@@ -41,13 +6,13 @@
     top: 2%;
     width: 100%;
     height: 30%;
-    display: flex;
     flex-flow: row wrap;
     overflow: auto
 }
 
 .explanation > p {
     position: relative;
+    word-wrap: break-word;
     width: 100%;
     margin:2px;
 }
@@ -55,7 +20,6 @@
     position: relative;
     width: 50%;
     height:10%;
-    display: flex;
     flex-direction: row; /* Stack items vertically */
 }
 
@@ -73,7 +37,6 @@
     width: 100%;
     height: 40%;
     border: solid 1px black;
-    display: flex;
     flex-flow: row;
 }
 
@@ -154,10 +117,6 @@
     margin-bottom: 5%;
     box-shadow: 3px 3px 5px grey;
     list-style-type: none;
-}
-
-#trend_file_made_feedback_text{
-
 }
 
 

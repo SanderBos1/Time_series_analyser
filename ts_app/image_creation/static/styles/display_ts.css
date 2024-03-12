@@ -1,10 +1,3 @@
-.link_button{
-    position:relative;
-    width:100%;
-    height:100%;
-    display:inline-block;
-    overflow:hidden;
-}
 
 .title{
     width:100%;
@@ -14,7 +7,6 @@
     position: relative;
     height: 60%;
     width: 100%;
-    display: flex;
     flex-flow: row wrap;
 
 }
@@ -23,7 +15,6 @@
     position: relative;
     height: 100%;
     width: 100%;
-    display: flex;
     flex-flow: row wrap;
 }
 
@@ -36,7 +27,6 @@
 .user-input {
     position: relative;
     width: 100%;
-    display: flex;
     flex-flow: row wrap;
 }
 
@@ -53,14 +43,13 @@
 #dataset_column_label {
     position: relative;
     width: 100%;
-    color: #ED693C;
+    color: var(--main-orange-color);
 }
 
 #image_plot_options {
     position: relative;
     height: 60%;
     width: 100%;
-    display: flex;
     flex-flow: row wrap;
 }
 
@@ -83,7 +72,7 @@
 }
 
 .form_label {
-    color: #ED693C;
+    color: var(--main-orange-color);
     font-weight: bold;
     width: 30%;
     float: left;
