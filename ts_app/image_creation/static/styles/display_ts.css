@@ -22,7 +22,8 @@
 .user_interaction_image_plot{
     position:relative;
     width:25%;
-    display:inline-block
+    display:inline-block;
+    overflow:hidden;
 }
 .user-input {
     position: relative;
@@ -70,21 +71,6 @@
     text-align:center;
 
 }
-
-.form_label {
-    color: var(--main-orange-color);
-    font-weight: bold;
-    width: 30%;
-    float: left;
-}
-
-.form_input {
-    position: relative;
-    width: 65%;
-    margin-bottom: 5%;
-    box-shadow: 3px 3px 5px grey;
-}
-
 
 #save_form{
     position:relative;

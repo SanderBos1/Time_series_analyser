@@ -36,24 +36,32 @@
 
 <div class="autocorrelation_holder flex">
 
+    <div class="autocorrelation" id="stat_data">
+        <p> Select a column</p>
+    </div>
+    <div class="autocorrelation" id="ts_image">
+        <p> Select a column</p>
+    </div>
     <div class="autocorrelation" id="whole_autocorrelation">
         <p> Select a column</p>
     </div>
     <div class="autocorrelation" id="partial_autocorrelation">
         <p> Select a column</p>
     </div>
-    <error-dialogue class="dialogue-element autocorrelation_plot_error" id="autocorrelation_error" dialogue_name="Error autocorrelation plot" delete_function=delete_dialogue_error(this) message_id="error_autocorrelation_plot">
+    <error-dialogue class="dialogue-element hidden autocorrelation_plot_error" id="autocorrelation_error" dialogue_name="Error autocorrelation plot" delete_function=delete_dialogue_error(this) message_id="error_autocorrelation_plot">
     </error-dialogue>
 </div>
 
-<dialogue-element class="dialogue-element dialogue-element-sequencing" id="stattest_trend_dialogue" dialogue_name="Trend P test">
+
+
+<dialogue-element class="dialogue-element hidden dialogue-element-sequencing" id="stattest_trend_dialogue" dialogue_name="Trend P test">
   <div class=statistical_test id="statistical_trend_test">
       <form class="statistical_form" id="statistical_trend_form">
           {{trend_form.csrf_token}}
-          {{trend_form.function.label  (class_="form_label")}}
-          {{trend_form.function (class_="form_input error_unclickable")}}
-          {{trend_form.column_interest.label  (class_="form_label")}}
-          {{trend_form.column_interest (class_="form_input error_unclickable")}}
+          {{trend_form.function.label  (class_="label")}}
+          {{trend_form.function (class_="input error_unclickable")}}
+          {{trend_form.column_interest.label  (class_="label")}}
+          {{trend_form.column_interest (class_="input error_unclickable")}}
           {{trend_form.submit (class_="button_standard error_unclickable stattest_button")}}
       </form>
   </div>
@@ -61,20 +69,20 @@
     <p >Your p value of your statistical trend test is: <var id="trend_value">Not yet defined</var></p>
     <p> Therefore we can say the following over your hypotheses: <var id="hypothese_trend">Not yet defined</var></p>
   </div>
-  <error-dialogue class="dialogue-element pvalue_calculation_error" id="trend_calculation_error" dialogue_name="Error with calculating p value" delete_function =delete_dialogue_error(this) message_id="error_trend_pvalue">
+  <error-dialogue class="dialogue-element hidden pvalue_calculation_error" id="trend_calculation_error" dialogue_name="Error with calculating p value" delete_function =delete_dialogue_error(this) message_id="error_trend_pvalue">
   </error-dialogue>
   </dialogue-element>
 
-<dialogue-element class="dialogue-element dialogue-element-sequencing" id="stattest_seasonality_dialogue" dialogue_name="Seasonality P Test">
+<dialogue-element class="dialogue-element hidden dialogue-element-sequencing" id="stattest_seasonality_dialogue" dialogue_name="Seasonality P Test">
   <div class=statistical_test id="statistical_form">
       <form class="statistical_form" id="seasonality_form" method="post" onsubmit="return false;">
           {{seasonality_form.csrf_token}}
-          {{seasonality_form.function.label  (class_="form_label")}}
-          {{seasonality_form.function (class_="form_input error_unclickable")}}
-          {{seasonality_form.season_per.label  (class_="form_label")}}
-          {{seasonality_form.season_per (class_="form_input error_unclickable")}}
-          {{seasonality_form.column_interest.label  (class_="form_label")}}
-          {{seasonality_form.column_interest (class_="form_input error_unclickable")}}
+          {{seasonality_form.function.label  (class_="label")}}
+          {{seasonality_form.function (class_="input error_unclickable")}}
+          {{seasonality_form.season_per.label  (class_="label")}}
+          {{seasonality_form.season_per (class_="input error_unclickable")}}
+          {{seasonality_form.column_interest.label  (class_="label")}}
+          {{seasonality_form.column_interest (class_="input error_unclickable")}}
           {{seasonality_form.submit (class_="button_standard error_unclickable stattest_button")}}
       </form>
 </div>
@@ -82,19 +90,19 @@
   <p >Your p value of your statistical seasonality test is: <var id="seasonality_value">Not yet defined</var></p>
   <p> Therefore we can say the following over your hypotheses: <var id="hypothese_seasonality">Not yet defined</var></p>
 </div>
-<error-dialogue class="dialogue-element pvalue_calculation_error" id="seasonality_calculation_error" dialogue_name="Error with calculating p value" delete_function =delete_dialogue_error(this) message_id="error_seasonality_pvalue">
+<error-dialogue class="dialogue-element hidden pvalue_calculation_error" id="seasonality_calculation_error" dialogue_name="Error with calculating p value" delete_function =delete_dialogue_error(this) message_id="error_seasonality_pvalue">
 </error-dialogue>
 </dialogue-element>
 
 
-<dialogue-element class="dialogue-element dialogue-element-sequencing" id="stattest_stationarity_dialogue" dialogue_name="Stationarity P Test">
+<dialogue-element class="dialogue-element hidden dialogue-element-sequencing" id="stattest_stationarity_dialogue" dialogue_name="Stationarity P Test">
   <div class=statistical_test id="statistical_form">
       <form class="statistical_form" id="stationarity_form" method="post" onsubmit="return false;">
           {{stationarity_form.csrf_token}}
-          {{stationarity_form.function.label  (class_="form_label")}}
-          {{stationarity_form.function (class_="form_input error_unclickable")}}
-          {{stationarity_form.column_interest.label  (class_="form_label")}}
-          {{stationarity_form.column_interest (class_="form_input error_unclickable")}}
+          {{stationarity_form.function.label(class_="label")}}
+          {{stationarity_form.function (class_="input error_unclickable")}}
+          {{stationarity_form.column_interest.label  (class_="label")}}
+          {{stationarity_form.column_interest (class_="input error_unclickable")}}
           {{stationarity_form.submit (class_="button_standard error_unclickable stattest_button")}}
       </form>
 </div>
@@ -102,7 +110,7 @@
   <p >Your p value of your statistical stationarity test is: <var id="stationarity_value">Not yet defined</var></p>
   <p> Therefore we can say the following over your hypotheses: <var id="hypothese_stationarity">Not yet defined</var></p>
 </div>
-<error-dialogue class="dialogue-element pvalue_calculation_error" id="stationarity_calculation_error" dialogue_name="Error with calculating p value" delete_function =delete_dialogue_error(this) message_id="error_stationarity_pvalue">
+<error-dialogue class="dialogue-element hidden pvalue_calculation_error" id="stationarity_calculation_error" dialogue_name="Error with calculating p value" delete_function =delete_dialogue_error(this) message_id="error_stationarity_pvalue">
 </error-dialogue>
 </dialogue-element>
 

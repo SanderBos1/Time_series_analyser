@@ -1,11 +1,14 @@
 
 
+.content{
+    flex-direction:column
+}
+
 .explanation {
     position: relative;
     width: 80%;
-    height: 30%;
-    flex-flow: row wrap;
-    overflow: auto
+    height: 200px;
+    overflow: auto;
 }
 
 .explanation > p {
@@ -17,11 +20,9 @@
 .dialogue_buttons_holder {
     position: relative;
     width: 50%;
-    height:10%;
-    flex-direction: row; /* Stack items vertically */
+    height: 10%;
+    flex-flow: row wrap;
 }
-
-
 
 
 #trend_buttons_holder > * {
@@ -29,14 +30,13 @@
 }
 
 
-
 /*autocorrelation elements*/
 .autocorrelation_holder {
     position: relative;
     width: 80%;
-    height: 40%;
+    height: 350px;
     border: solid 1px black;
-    flex-flow: row;
+    flex-flow: row wrap;
 }
 
 .autocorrelation{
@@ -46,6 +46,19 @@
     border: solid 1px black;
 }
 
+.standard_table {
+    position:relative;
+    border-collapse: collapse;
+    left:10%;
+    height:100%;
+    width:80%;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+    .standard_table tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
 
 
 .dialogue-element-sequencing {
@@ -97,26 +110,6 @@
 
 }
 
-.form_label {
-    margin: 0;
-    padding: 0;
-    color: #ED693C;
-    font-weight: bold;
-    width: 30%;
-    height: 10%;
-    float: left;
-}
-
-.form_input {
-    position: relative;
-    padding:0px;
-    margin:0px;
-    width: 65%;
-    height: 10%;
-    margin-bottom: 5%;
-    box-shadow: 3px 3px 5px grey;
-    list-style-type: none;
-}
 
 
 #function{

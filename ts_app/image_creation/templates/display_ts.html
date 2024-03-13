@@ -24,15 +24,15 @@
         <div class="flex" id="image_plot_options">
             <h3 class="title"> Plot options</h3>
             {{form.csrf_token }}
-            {{form.image_title.label (class_="form_label")}}
-            {{form.image_title (class_="form_input dialogue_unclickable")}}
-            {{form.xlabel.label (class_="form_label")}}
-            {{form.xlabel (class_="form_input dialogue_unclickable")}}
-            {{form.ylabel.label (class_="form_label")}}
-            {{form.ylabel (class_="form_input dialogue_unclickable")}}
-            {{form.line_color.label (class_="form_label ")}}
-            {{form.line_color (class_="form_input dialogue_unclickable")}}
-            {{form.submit (class_="button_standard dialogue_unclickable")}}
+            {{form.image_title.label (class_="image_form_label label")}}
+            {{form.image_title (class_="input dialogue_unclickable")}}
+            {{form.xlabel.label (class_="image_form_label label")}}
+            {{form.xlabel (class_="input dialogue_unclickable")}}
+            {{form.ylabel.label (class_="image_form_label label")}}
+            {{form.ylabel (class_="input dialogue_unclickable")}}
+            {{form.line_color.label (class_="image_form_label label ")}}
+            {{form.line_color (class_="input dialogue_unclickable")}}
+            {{form.submit (class_="button button_standard dialogue_unclickable")}}
 
         </div>
     </form>
@@ -41,24 +41,24 @@
     <div class="ts-image" id="image_div">
     </div>
 </div>
-<button class="button_standard" id="save_image_dialogue_button" onclick="show_dialogue('image_save_form')">Save image</button>
+<button class="button button_standard" id="save_image_dialogue_button" onclick="show_dialogue('image_save_form')">Save image</button>
 
 
 
-<dialogue-element class="dialogue-element" id="image_save_form" dialogue_name="Save Image">
+<dialogue-element class="dialogue-element hidden" id="image_save_form" dialogue_name="Save Image">
     <form id=save_form method="POST">
         {{ form_image.csrf_token }}
         {{ form_image.imageName (class_="error_unclickable") }}
-        {{form_image.save (class_="button_standard error_unclickable")}}
+        {{form_image.save (class_="button button_standard error_unclickable")}}
     </form>
     <p id="image_save_feedback"></p>
-    <error-dialogue class="dialogue-element" id="save_image_error" dialogue_name="Error" delete_function =delete_dialogue_error(this) message_id="error_text_save_image">
+    <error-dialogue class="dialogue-element hidden" id="save_image_error" dialogue_name="Error" delete_function =delete_dialogue_error(this) message_id="error_text_save_image">
     </error-dialogue>
   </dialogue-element>
 
 
-<error-dialogue class="dialogue-element" id="image_error" dialogue_name="image plot error" delete_function = delete_dialogue(this) message_id="error_text_draw_image">
-</dialogue-element>
+<error-dialogue class="dialogue-element hidden" id="image_error" dialogue_name="image plot error" delete_function=delete_dialogue(this) message_id="error_text_draw_image">
+</error-dialogue>
 
 
 

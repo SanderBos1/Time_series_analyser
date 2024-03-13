@@ -23,7 +23,7 @@
         </p>
     </div>
 </div>
-<dialogue-element class="dialogue-element" id="upload_csv_dialogue" dialogue_name="Upload Dataset">
+<dialogue-element class="hidden dialogue-element" id="upload_csv_dialogue" dialogue_name="Upload Dataset">
     <p id="upload_explanation"> From this dialogue you can upload csv files. Be aware that the time column of your data should be called "Date"</p>
     <form id="upload_form" method=post enctype="multipart/form-data">
         {{upload_form.csrf_token (id_="csv_upload_csfr")}}

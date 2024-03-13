@@ -32,7 +32,7 @@ function csv_button_click(value) {
                 var li = document.createElement("li");
                 li.className = "dataset_column";
                 column = data[column_number];
-                li.innerHTML = "<button class='button_standard column_display dialogue_unclickable' onClick=select_column(this) value='" + column + "'>" + "<span class=csv_button_text>" + column + "</span></button>";
+                li.innerHTML = "<button class='button button_standard column_display dialogue_unclickable' onClick=select_column(this) value='" + column + "'>" + "<span class=csv_button_text>" + column + "</span></button>";
                 ul.append(li);
             }
             // After adding columns, call add_options function 
@@ -92,8 +92,8 @@ function load_csvdata() {
                 li.className = "csv_file_list_item";
                 csv = data[csv_number];
                 li.innerHTML = "<div class=csv_list_item>" +
-                    "<button class='button_standard file_display' value='" + csv + "'onClick='csv_button_click(this);return false;'>" + "<span class=csv_button_text>" + csv + "</span></button>" +
-                "<button id=delete_file class='delete_standard dialogue_unclickable' name=delete_file value='" + csv + "' onClick='delete_csv(this);return false;'>X</button>" +
+                    "<button class='button button_standard file_display' value='" + csv + "'onClick='csv_button_click(this);return false;'>" + "<span class=csv_button_text>" + csv + "</span></button>" +
+                "<button id=delete_file class='button delete_standard dialogue_unclickable' name=delete_file value='" + csv + "' onClick='delete_csv(this);return false;'>X</button>" +
                     "</div>"
                 // Append the created list item to the list
                 ul.append(li);

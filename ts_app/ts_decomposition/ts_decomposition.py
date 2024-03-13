@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, current_app, jsonify
 from flask_login import login_required
-from ts_app.ts_decomposition.python.autocorrelation import autocorrelation
+from ts_app.image_creation.python.make_image import make_image
+from ts_app.ts_decomposition.python.autocorrelation import explore_ts
 from ts_app.ts_decomposition.python.decomposition import decomposition_residuals
 from ts_app.ts_decomposition.python.stattest_calculator import trend_calculator, seasonality_calculator, stationarity_calculator
 from ts_app.ts_decomposition.python.forms import seasonality_form, trend_form, make_residuals, stationarity_form
@@ -184,17 +185,31 @@ def display_autocorrelation(dataset, column):
             "message": A message with the result or error,
             "img_auto": The autocorrelation plot image
             "img_partial": The partial autocorrelation plot image
+            "ts_img": The plot of the time-series
         }
 
     """
     try:
-        autocorrelation_plotter = autocorrelation(dataset, column)
+        autocorrelation_plotter = explore_ts(dataset, column)
         img_autocorrelation = autocorrelation_plotter.autocorrelation_plot()
         img_partial_autocorrelation = autocorrelation_plotter.partial_autocorrelation()
+        plot_variables = {
+            "csv_file": dataset,
+            "time_column": current_app.config['TIME_COLUMN'],
+            "var_column":column,
+            "plot_tile": "time-series of" + column,
+            "xlabel": "Date",
+            "ylabel":column,
+            "color": "red"
+        }
+        ts_img = make_image(plot_variables)
+        stats = autocorrelation_plotter.stat_descriptors()
         status_code = 200
         return jsonify({
         "Img_auto": img_autocorrelation,
-        "Img_partial": img_partial_autocorrelation
+        "Img_partial": img_partial_autocorrelation,
+        "ts_img": ts_img,
+        "stats" :stats
     }), status_code
     except Exception as e:
         status_code = 500

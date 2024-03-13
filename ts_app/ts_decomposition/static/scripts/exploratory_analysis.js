@@ -17,8 +17,19 @@ function select_column(pressed_column) {
                 // Display partial and autocorrelation images
                 var auto_image = document.getElementById("whole_autocorrelation")
                 var partial_image = document.getElementById("partial_autocorrelation")
+                var ts_image = document.getElementById("ts_image")
+                var table = document.getElementById("stat_data")
+
                 auto_image.innerHTML = "<img class=standard_img id=autocorrelation_image src=data:image/jpeg;base64," + data["Img_auto"] + ">";
                 partial_image.innerHTML = "<img class=standard_img id=autocorrelation_image src=data:image/jpeg;base64," + data["Img_partial"] + ">";
+                ts_image.innerHTML = "<img class=standard_img id=ts_img src=data:image/jpeg;base64," + data["ts_img"] + ">";
+                console.log(data["stats"])
+                let text = "<table class='standard_table'>"
+                for (let x in data["stats"]) {
+                    text += "<tr><td>" + x + "</td><td>" + data["stats"][x] + "</td></tr>";
+                }
+                text += "</table>"
+                table.innerHTML = text
 
             },
             error: function (data) {

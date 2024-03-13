@@ -12,7 +12,7 @@ class dialogue extends HTMLElement {
 		const name = this.getAttribute('dialogue_name');        
 
 		this.innerHTML = `
-			<div class=orange_top>
+			<div class= 'orange_top interaction_top'>
 				<p id=dialogue_message> ${name} </p>
   				<button onclick="delete_dialogue(this)" class="delete_standard error_unclickable upload_delete">X</button>
 			</div>
@@ -51,9 +51,9 @@ class error extends HTMLElement {
 		const message_id = this.getAttribute("message_id")
 
 		this.innerHTML = `
-			<div class=red_top>
+			<div class='red_top interaction_top'>
 				<p id=dialogue_message> ${name} </p>
-  				<button onclick="${delete_function};make_clickable('error_unclickable')" class="delete_standard upload_delete">X</button>
+  				<button onclick="${delete_function};make_clickable('error_unclickable')" class="button delete_standard upload_delete">X</button>
 			</div>
 			<div id=${message_id}>
     

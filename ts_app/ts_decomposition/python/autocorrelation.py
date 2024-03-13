@@ -5,7 +5,7 @@ import base64
 from flask import current_app
 import statsmodels.api as sm
 
-class autocorrelation:
+class explore_ts:
     
     def __init__(self, dataset, column):
         self.column = column
@@ -22,7 +22,7 @@ class autocorrelation:
         fig = Figure()
         ax = fig.subplots()
         ax.acorr(data, maxlags = 50, color="red")
-        ax.set_title("Autocorrelation Plot")
+        ax.set_title("ACF")
         ax.set_xlabel = "Largs"
         ax.set_ylabel = "correlation"
         buf = BytesIO()
@@ -39,4 +39,20 @@ class autocorrelation:
         fig.savefig(buf, format="jpg")
         img_data = base64.b64encode(buf.getbuffer()).decode("ascii")
         return img_data
+    
+    def stat_descriptors(self):
+        unique_values = len(self.df[self.column].unique())
+        nan_count = self.df[self.column].isna().sum()
+        mean = self.df[self.column].mean()
+        min = self.df[self.column].min()
+        max = self.df[self.column].max()
 
+        descriptive_stats = {
+           "unique values" :unique_values,
+           "mean": mean,
+           "Sum of missing": int(nan_count),
+           "Min": min,
+           "Max": max,
+
+        }
+        return descriptive_stats

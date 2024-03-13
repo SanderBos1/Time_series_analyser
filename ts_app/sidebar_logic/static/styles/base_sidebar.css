@@ -1,5 +1,5 @@
 .top {
-    position: sticky;
+    position: fixed;
     background-color: var(--main-orange-color);
     top: 0px;
     width: 100%;
@@ -12,19 +12,18 @@
 
 .content {
     position: relative;
-    top:5%;
-    left:10%;
+    top: 12%;
+    left: 200px;
     width: 80%;
-    height: 90%;
+    min-height: 90%;
     flex-flow: row wrap;
     flex: 4 4 auto;
-    align-content: flex-start;
 }
 
 .side-bar {
-    position:relative;
-    width:10%;
+    position: fixed;
     height:100%;
+    top:7%;
     flex: 1 2 auto;
 }
 
@@ -76,8 +75,7 @@
     list-style-type:none;
     width:100%;
     height:100%;
-    margin: 0px;
-    padding: 0px;
+
 }
 .navbar-settings-element {
     position: relative;
@@ -85,8 +83,6 @@
     height: 50%;
     width: 100px;
     float: right;
-    margin: 0px;
-    padding: 0px;
     text-align: center;
     flex: 1;
     overflow:hidden
@@ -107,10 +103,10 @@
 .user_selection_holder {
     position: relative;
     flex-flow: row wrap;
-    width: 85%;
+    width: 150px;
     height: 100%;
-    background-color: var(--main-red-color);
     align-content: flex-start;
+    background-color: var(--main-red-color);
 }
 
 .data-directory-list {
@@ -123,13 +119,13 @@
 
 .fold-sidebar-button {
     position: relative;
-    width: 15%;
+    width: 25px;
     background-color: var(--main-red-color);
 }
 .sidebar_title {
     position: relative;
     width: 100%;
-    heigth:40px;
+    height: 40px;
     overflow: hidden;
 }
 
@@ -149,16 +145,13 @@
 #csv_list_sidebar_ul {
     list-style-type: none;
     width: 100%;
-    margin: 0px;
-    padding: 0px;
+
 }
 
 .csv_file_list_item {
     position: relative;
     width: 100%;
     height: 40px;
-    margin:0px;
-    padding:0px;
     overflow: hidden;
 }
 
@@ -209,8 +202,7 @@
 #column_list_ul {
     list-style-type: none;
     width: 100%;
-    margin: 0px;
-    padding: 0px;
+
 }
 
 #column_list_ul > li{
