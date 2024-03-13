@@ -1,5 +1,6 @@
 .welcome_message {
     width:80%;
+    height:60%;
     flex-flow: row wrap;
     justify-content: center;
 }
@@ -7,6 +8,7 @@
 #introduction_text {
     position: relative;
     width: 70%;
+    height:50%;
 }
 
 #introduction_text > p{
@@ -19,7 +21,7 @@
     position:relative;
     text-align: center;
     width:100%;
-    height:5%;
+    height:15%;
 
 
 }

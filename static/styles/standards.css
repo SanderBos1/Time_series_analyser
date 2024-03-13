@@ -97,7 +97,7 @@ body {
 }
 
 .dialogue-element {
-    position: absolute;
+    position: fixed;
     top: 10%;
     height: 60%;
     width: 60%;

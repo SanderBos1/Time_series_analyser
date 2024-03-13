@@ -56,9 +56,9 @@
     font-family: sans-serif;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
-    .standard_table tbody tr {
-        border-bottom: 1px solid #dddddd;
-    }
+.standard_table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
 
 
 .dialogue-element-sequencing {
