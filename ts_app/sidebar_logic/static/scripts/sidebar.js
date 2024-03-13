@@ -32,7 +32,7 @@ function csv_button_click(value) {
                 var li = document.createElement("li");
                 li.className = "dataset_column";
                 column = data[column_number];
-                li.innerHTML = "<button class='button_standard column_display dialogue_unclickable' onClick=select_column(this) value='" + column + "'>" + column + "</button";
+                li.innerHTML = "<button class='button_standard column_display dialogue_unclickable' onClick=select_column(this) value='" + column + "'>" + "<span class=csv_button_text>" + column + "</span></button>";
                 ul.append(li);
             }
             // After adding columns, call add_options function 
