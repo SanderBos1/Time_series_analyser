@@ -2,9 +2,7 @@
 
 .explanation {
     position: relative;
-    left: 2%;
-    top: 2%;
-    width: 100%;
+    width: 80%;
     height: 30%;
     flex-flow: row wrap;
     overflow: auto
@@ -25,6 +23,7 @@
 
 
 
+
 #trend_buttons_holder > * {
     margin-bottom: 3%;
 }
@@ -34,7 +33,7 @@
 /*autocorrelation elements*/
 .autocorrelation_holder {
     position: relative;
-    width: 100%;
+    width: 80%;
     height: 40%;
     border: solid 1px black;
     flex-flow: row;

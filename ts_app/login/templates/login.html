@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<div id="sign_in_form_container">
+<div class="flex" id="sign_in_form_container">
     <h1>Sign In</h1>
     <form action="" method="post" novalidate id="sign_in_form">
         {{ form.hidden_tag() }}
@@ -15,7 +15,7 @@
         {{ form.password(size=32) }} <br>
         {{ form.remember_me() }} {{ form.remember_me.label }}
         {{ form.submit (class_="button_standard") }}
-        <button name="register" class="button_standard">Register</button>
-    </div>
-    </form>
+        <button name="register" class="button_standard">Register</button>    
+   </form>
+</div>
 {% endblock %}

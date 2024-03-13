@@ -18,24 +18,32 @@
 </head>
 
 <body>
-    <div class="top">
+    <div class="top flex">
         <div class="navbar-links">
-            <ul class="navbar-ul">
+            <ul class="navbar-ul flex">
                 <li class="navbar-links-element"><a class="button_standard" href="/home">Home</a></li>
                 <li class="navbar-links-element"><a class="button_standard" href="/display_ts">Make Image</a></li>
-                <li class="navbar-links-element"><a class="button_standard" href="/stationary_ptests">Exploratory analysis</a></li>
-                <li class="navbar-links-element"><a class="button_standard" href="/display_ts_list">Images</a></li>
+                <li class="navbar-links-element"><a class="button_standard" href="/stationary_ptests">Exploratory analysis</a></liclass="navbar-links-element">
                 <li class="navbar-links-element"><a class="button_standard" href="/decomposition">Decomposition</a></li>
+                <li class="navbar-links-element"><a class="button_standard" href="/display_ts_list">Images</a></li>
+
             </ul>
         </div>
         {% if current_user.is_authenticated %}
         <div class="navbar-settings">
-            <ul>
+            <ul class="flex">
                 <li class="navbar-settings-element">
-                    <button class="button_standard" onclick="show_dialogue('upload_csv_dialogue', 'true')">Upload data</button>
+                    <button class="button_standard" id="csv_upload_button" onclick="show_dialogue('upload_csv_dialogue', 'true')">Upload data</button>
                 </li>
                 <li class="navbar-settings-element"><a class="button_standard" href="/settings">{{current_user.username}}</a></li>
                 <li class="navbar-settings-element"><a class="button_standard" href="/logout">log out</a></li>
+            </ul>
+        </div>
+        {%else%}
+        <div class="navbar-settings">
+            <ul class="flex">
+                <li class="navbar-settings-element"><a class="button_standard" href="/register">register</a></li>
+                <li class="navbar-settings-element"><a class="button_standard" href="/">log in</a></li>
             </ul>
         </div>
         {%endif%}
@@ -43,10 +51,10 @@
 
 
 
-<div class="content">
-    {% block content %}
-    {% endblock %}
-</div>
+    <div class="flex content">
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
 
 </html>

@@ -29,6 +29,30 @@ function small_image(element) {
     element.onclick = function () { enlarge_image(this) };
 
 }
+
+
+$(document).on('submit', '#delete_image_form', function (e) {   // Prevent default form submission behavior
+    e.preventDefault();
+    // Retrieve the delete button and its value
+
+    let button = document.getElementById("delete_image_button");
+    let button_value = button.value;
+    // Send an AJAX POST request to delete the image
+
+    $.ajax({
+        type: 'POST',
+        url: '/delete/' + button_value,
+        success: function () {
+            // Upon successful deletion, remove the corresponding list item
+            button.closest('li').remove()
+        },
+        error: function () {
+            alert("something went wrong")
+        }
+    })
+});
+
+
 window.onload = function() {
     $.ajax({
         type: 'Get',
@@ -43,11 +67,11 @@ window.onload = function() {
                     // Assign a class to the list item
                     li.className = "image";
                     // Get the current image object
-                    var image_obj = data["images"][i][1];
+                    var image_obj = data["images"][i][2];
 
                     // Populate the list item with image details and delete button
                     li.innerHTML =  "<div class=name_and_delete>" +  
-                        "<p>" + data["images"][i][0] + "</p>" +
+                        "<p>" + data["images"][i][1] + "</p>" +
                                     "<form method=POST id=delete_image_form>" +  
                         "<button name=delete_image id=delete_image_button class=delete_standard value =" + data["images"][i][0] +" > X </button>" +
                                     "</form>" + "</div>" +

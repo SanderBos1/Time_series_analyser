@@ -19,57 +19,65 @@
 </head>
 
 <body class="flex">
-  <div class="top flex">
-    <div class="navbar-links">
-        <ul class="navbar-ul flex">
-            <li class="navbar-links-element"><a class="button_standard" href="/home">Home</a></li>
-            <li class="navbar-links-element"><a class="button_standard" href="/display_ts">Make Image</a></li>
-            <li class="navbar-links-element"><a class="button_standard" href="/stationary_ptests">Exploratory analysis</a></liclass="navbar-links-element">
-            <li class="navbar-links-element"><a class="button_standard" href="/decomposition">Decomposition</a></li>
-            <li class="navbar-links-element"><a class="button_standard" href="/display_ts_list">Images</a></li>
+    <div class="top flex">
+        <div class="navbar-links">
+            <ul class="navbar-ul flex">
+                <li class="navbar-links-element"><a class="button_standard" href="/home">Home</a></li>
+                <li class="navbar-links-element"><a class="button_standard" href="/display_ts">Make Image</a></li>
+                <li class="navbar-links-element"><a class="button_standard" href="/stationary_ptests">Exploratory analysis</a></liclass="navbar-links-element">
+                <li class="navbar-links-element"><a class="button_standard" href="/decomposition">Decomposition</a></li>
+                <li class="navbar-links-element"><a class="button_standard" href="/display_ts_list">Images</a></li>
 
-        </ul>
+            </ul>
+        </div>
+        {% if current_user.is_authenticated %}
+        <div class="navbar-settings">
+            <ul class="flex">
+                <li class="navbar-settings-element">
+                    <button class="button_standard" id="csv_upload_button" onclick="show_dialogue('upload_csv_dialogue', 'true')">Upload data</button>
+                </li>
+                <li class="navbar-settings-element"><a class="button_standard" href="/settings">{{current_user.username}}</a></li>
+                <li class="navbar-settings-element"><a class="button_standard" href="/logout">log out</a></li>
+            </ul>
+        </div>
+        {%else%}
+        <div class="navbar-settings">
+            <ul class="flex">
+                <li class="navbar-settings-element"><a class="button_standard" href="/register">register</a></li>
+                <li class="navbar-settings-element"><a class="button_standard" href="/">log in</a></li>
+            </ul>
+        </div>
+        {%endif%}
     </div>
-    {% if current_user.is_authenticated %}
-    <div class="navbar-settings">
-        <ul class="flex">
-            <li class="navbar-settings-element">
-                <button class="button_standard" id="csv_upload_button" onclick="show_dialogue('upload_csv_dialogue', 'true')">Upload data</button>
-            </li>
-            <li class="navbar-settings-element"><a class="button_standard" href="/settings">{{current_user.username}}</a></li>
-            <li class="navbar-settings-element"><a class="button_standard" href="/logout">log out</a></li>
-        </ul>
-    </div>
-    {%endif%}
-  </div>
 
 
 
-  <div class="side-bar flex">
+  <div class="page_content flex">
+      <div class="side-bar flex">
 
-      <div class="user_selection_holder flex" id="side_bar_component">
-          <div class="data-directory-list flex">
-              <div class="csv_title">
-                  <h3> Datasets </h3>
+          <div class="user_selection_holder flex" id="side_bar_component">
+              <div class="data-directory-list flex">
+                  <div class="csv_title">
+                      <h3> Datasets </h3>
+                  </div>
+                  <ul class="dialogue_unclickable" id=csv_list_sidebar_ul>
+                  </ul>
               </div>
-              <ul class="dialogue_unclickable" id=csv_list_sidebar_ul>
-              </ul>
+              <div class="flex" id="ts-column-list">
+                  <div class="csv_title">
+                      <h3> Columns </h3>
+                  </div>
+                  <ul id="column_list_ul">
+                  </ul>
+              </div>
           </div>
-          <div class="flex" id="ts-column-list">
-              <div class="csv_title">
-                  <h3> Columns </h3>
-              </div>
-              <ul id="column_list_ul">
-              </ul>
+          <div class="fold-sidebar-button flex">
+              <button class="button_standard" id="show_unshow_sidebar" onclick="show_unshow('side_bar_component')"><<i class="fa-solid fa-arrow-left"></i></button>
+
           </div>
       </div>
-      <div class="fold-sidebar-button flex">
-          <button class="button_standard" id="show_unshow_sidebar" onclick="show_unshow('side_bar_component')"><<i class="fa-solid fa-arrow-left"></i></button>
 
-      </div>
-  </div>
-
-      <div class="content">
+      <div class="content flex">
           <dialogue-element class="dialogue-element" id="upload_csv_dialogue" dialogue_name="Upload Dataset">
               <p id="upload_explanation"> From this dialogue you can upload csv files. Be aware that the time column of your data should be called "Date"</p>
               <form id="upload_form" method=post enctype="multipart/form-data">
@@ -84,6 +92,7 @@
           {% block content%}
           {% endblock %}
       </div>
+  </div>
 </body>
 
 </html>

@@ -73,7 +73,11 @@ class ts_image(db.Model):
     name: so.Mapped[str] = so.mapped_column(sa.String(64))
     image_code: so.Mapped[str] = so.mapped_column(sa.TEXT)
     user: so.Mapped[str] = so.mapped_column(sa.String(64))
-
+    
+    def get_id(self):
+        
+        return self.id
+    
     def get_image(self):
         """
         Get the image code.

@@ -16,6 +16,7 @@ class dialogue extends HTMLElement {
 				<p id=dialogue_message> ${name} </p>
   				<button onclick="delete_dialogue(this)" class="delete_standard error_unclickable upload_delete">X</button>
 			</div>
+
 		`;
 	}
 	disconnectedCallback() {

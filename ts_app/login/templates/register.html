@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block head %}
 <link rel="stylesheet" href="{{url_for('login.static',filename='styles/authentication.css')}}">
+<script src="{{url_for('login.static',filename='scripts/authentication.js')}}"></script>
+
 {% endblock %}
 
 {% block content %}
-<div id="register_form_container">
+<div class="flex" id="register_form_container">
 
     <h1>Register</h1>
     <form action="" method="post" id="register_form">
@@ -39,5 +41,7 @@
         </p>
         {{ form.submit (class_="button_standard")}}
     </form>
+
+
 </div>
 {% endblock %}

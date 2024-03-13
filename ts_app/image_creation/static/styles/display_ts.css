@@ -1,6 +1,7 @@
 
 .title{
     width:100%;
+    margin:0px;
 }
 
 .image_draw_interaction {
@@ -20,7 +21,6 @@
 
 .user_interaction_image_plot{
     position:relative;
-    top:0px;
     width:25%;
     display:inline-block
 }
@@ -55,7 +55,7 @@
 
 .ts-image {
     position: relative;
-    top:25px;
+    left:2%;
     width: 50%;
     height: 90%;
     border: solid;

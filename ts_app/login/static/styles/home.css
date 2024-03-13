@@ -1,8 +1,12 @@
+.welcome_message {
+    width:80%;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
 #introduction_text {
     position: relative;
     width: 70%;
-    height:35%;
-    left: 15%;
 }
 
 #introduction_text > p{

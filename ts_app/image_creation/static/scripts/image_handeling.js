@@ -114,26 +114,4 @@ function add_options(){
 }
 
 
-$(document).on('submit','#delete_image_form',function(e)
-{   // Prevent default form submission behavior
-    e.preventDefault(); 
-     // Retrieve the delete button and its value
-
-    let button = document.getElementById("delete_image_button");
-    let button_value = button.value;
-    // Send an AJAX POST request to delete the image
-
-    $.ajax({
-        type:'POST',
-        url:'/delete/' + button_value,
-        success:function()
-        {   
-            // Upon successful deletion, remove the corresponding list item
-            button.closest('li').remove()
-        },
-        error:function(){
-            alert("something went wrong")
-        }
-    })
-});
 

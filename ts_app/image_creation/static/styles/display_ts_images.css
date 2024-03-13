@@ -1,7 +1,7 @@
 #image-list{
     position:relative;
     height:100%;
-    width:100%;
+    width:80%;
     overflow: auto;
     padding:0px;
     margin:0px;
@@ -14,9 +14,8 @@
     height: 100%;
     display: flex;
     flex-flow: row wrap;
-    display_images_error margin: 0;
-    padding: 0;
-    float: left;
+    padding: 0px;
+    margin:0px;
     list-style-type: None;
 }
 
@@ -24,8 +23,6 @@
     position:relative;
     height:40%;
     width:45%;
-    margin-top:2%;
-    margin-left: 3%;
     padding: 0;    
     float:left
 }
@@ -37,6 +34,8 @@
 }
 
 .name_and_delete > p{
+    position:relative;
+    left:2%;
     padding:0px;
     margin:0px;
     float:left

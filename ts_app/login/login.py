@@ -1,4 +1,4 @@
-from flask import Blueprint, flash
+from flask import Blueprint, flash, jsonify
 from flask import render_template, request, url_for, redirect
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
@@ -61,9 +61,19 @@ def logout():
     logout_user()
     return redirect(url_for('login.login'))
 
-
 @login_bp.route('/register', methods=['GET', 'POST'])
 def register():
+    """
+    loads the registration page
+    """
+
+    form = RegistrationForm()
+    return render_template('register.html', title='Register', form=form)
+
+
+
+@login_bp.route('/register_user', methods=['GET', 'POST'])
+def registe_userr():
     """
     Displays the registration page and processes registration submissions.
 
@@ -76,15 +86,20 @@ def register():
     """
     if current_user.is_authenticated:
         return redirect(url_for('login.home_page'))
-
+    
     form = RegistrationForm()
-    if form.validate_on_submit():
+
+    if not form.validate_on_submit():
+        return jsonify({"error": "Invalid form submission"}), 400
+    try:
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
-        return redirect(url_for('login.login'))
+        return jsonify({"message": "You have been registered"}), 200
+    except Exception as e:
+        return jsonify({"message": str(e)}), 500
+    
 
     return render_template('register.html', title='Register', form=form)
 
