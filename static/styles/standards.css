@@ -96,6 +96,16 @@ body {
     box-shadow: 3px 3px 5px grey;
 }
 
+h2, h3{
+    border-bottom: 1px solid;
+}
+p{
+    margin:20px;
+}
+.page_title{
+    margin:20px;
+}
+
 .dialogue-element {
     position: fixed;
     top: 10%;

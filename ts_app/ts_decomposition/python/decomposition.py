@@ -21,12 +21,12 @@ class decomposition_residuals:
         })
         name = self.variables["variable"] + "_residuals.csv"
         residual_df.to_csv(current_app.config['UPLOAD_FOLDER'] + name, index=False)
-        return "Trend file of " + self.variables["variable"] + " is made."
+        return name
     
     
     def add_residuals(self):
         df = pd.read_csv(current_app.config['UPLOAD_FOLDER'] + self.variables["dataset"])
         if self.variables['function'] == "detrend":
-            message = self.calculate_residuals_detrend(df)
-        return message
+            name = self.calculate_residuals_detrend(df)
+        return name
 

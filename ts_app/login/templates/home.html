@@ -1,20 +1,47 @@
 {% extends "base.html" %}
 {% block head %}
 <link rel="stylesheet" href="{{url_for('login.static',filename='styles/home.css')}}">
-
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>MathJax = {
+        loader: { load: ['input/asciimath', 'output/chtml'] }
+    }</script>
 {% endblock %}
 
 {% block content %}
 <div class="flex welcome_message">
-    <h1 id="username">Hi, {{ current_user.username }}!</h1>
+    <h2 class="Title"> Main concepts</h2>
 
-    <div class="text_box" id="introduction_text">
+    <div class="text_box">
+        <h3 class="sub_title"> Time-series</h3>
         <p>
-            This web application is built to help people understand time series data.
-            All functions in this web application work with CSV files that include a time column named "Date."
-            Be aware that all functions will not work unless the data is provided in this format.
+            Time-series are sets of data points that indicate the value of a variable for each
+            timestamp over a period of time. An often used example that illustrates a time-series is the stock
+            market data, where each data point consist of, for example, the daily end price of a stock of an
+            company. This data often follows a pattern that can be analyzed. A basic time-series functions looks as follows:
         </p>
+        <p>
+            `y_t = a_0 + a_1 \cdot y_{t-1} + a_2 \cdot y_{t-2}+ ... + a_m \cdot y_{t-m} + \varepsilon_t`.
+        </p>
+        <p>
+            In this webapplication you can upload a CSV file containing your time-series by pressing the upload button.
+            Keep in mind that this application assumes that your time-column is called Date and will trow errors if it is not correctly named.
+            In addition to this, the rest of the columns should be numerical.
+        </p>
+    </div>
+    <div class="text_box">
+        <h3 class="sub_title"> Stationarity</h3>
+        <p>
+            Time series whose properties do not depend on the time at which the series is observed are called stationary.
+            Thus, time series with trend and seasonality are not stationary.
+            In this case, trend is defined as the general tendency of the data to increase or decrease over a long period of time,
+            whereas seasonality in a time series is defined as cycles that repeat regularly over time.
+            It is important to note that a time series with cyclic behavior is stationary, just as a time series containing white noise.
+            In the analysis of time series, the assumption of stationarity is often made; thus, it is necessary to detect if a time series is stationary or not.
+        </p>
+    </div>
+    <div class="text_box">
+        <h3 class="sub_title"> Autocorrelation</h3>
         <p>
             Click on the 'Display ts' button to plot your data.
             On this page, you can also find a link to the page that shows all the images you have created.
@@ -22,6 +49,7 @@
             Feel free to leave suggestions for improvements on the GitHub page of this project.
         </p>
     </div>
+
 </div>
 <dialogue-element class="hidden dialogue-element" id="upload_csv_dialogue" dialogue_name="Upload Dataset">
     <p id="upload_explanation"> From this dialogue you can upload csv files. Be aware that the time column of your data should be called "Date"</p>
@@ -34,4 +62,4 @@
 
 </dialogue-element>
 
-{% endblock %}
+    {% endblock %}

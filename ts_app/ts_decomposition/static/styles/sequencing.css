@@ -4,26 +4,6 @@
     flex-direction:column
 }
 
-.explanation {
-    position: relative;
-    width: 80%;
-    height: 200px;
-    overflow: auto;
-}
-
-.explanation > p {
-    position: relative;
-    word-wrap: break-word;
-    width: 100%;
-    margin:2px;
-}
-.dialogue_buttons_holder {
-    position: relative;
-    width: 50%;
-    height: 10%;
-    flex-flow: row wrap;
-}
-
 
 #trend_buttons_holder > * {
     margin-bottom: 3%;
@@ -34,7 +14,7 @@
 .autocorrelation_holder {
     position: relative;
     width: 80%;
-    height: 350px;
+    height: 450px;
     border: solid 1px black;
     flex-flow: row wrap;
 }
@@ -42,7 +22,7 @@
 .autocorrelation{
     position:relative;
     width:50%;
-    height:100%;
+    height:50%;
     border: solid 1px black;
 }
 
@@ -60,6 +40,15 @@
     border-bottom: 1px solid #dddddd;
 }
 
+
+.dialogue_buttons_holder {
+    position: relative;
+    width: 80%;
+    height: 10%;
+    flex-flow: row wrap;
+    margin-top:20px;
+    justify-content:center;
+}
 
 .dialogue-element-sequencing {
     flex-flow: row wrap;
@@ -94,10 +83,10 @@
 }
 #draw_residuals {
     position: relative;
-    top: 5%;
-    left: 10%;
-    width: 50%;
-    height: 50%;
+    left:20px;
+    width: 30%;
+    height: 20%;
+    flex-flow: column wrap;
 }
 
 
@@ -110,12 +99,16 @@
 
 }
 
-
-
 #function{
+    position:relative;
+    list-style-type:none;
     height:30%;
+    width:90%;
 }
 
+#plot_before, #plot_after{
+    height:100%;
+}
 
 .stattest_button {
     position: relative;
@@ -123,3 +116,4 @@
     width: 60%;
     height: 20%;
 }
+

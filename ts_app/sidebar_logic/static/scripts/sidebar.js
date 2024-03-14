@@ -35,8 +35,7 @@ function csv_button_click(value) {
                 li.innerHTML = "<button class='button button_standard column_display dialogue_unclickable' onClick=select_column(this) value='" + column + "'>" + "<span class=csv_button_text>" + column + "</span></button>";
                 ul.append(li);
             }
-            // After adding columns, call add_options function 
-            add_options();
+
         }
     });
 }

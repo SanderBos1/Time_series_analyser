@@ -33,9 +33,9 @@ def show_stationary_tests():
                            seasonality_form=new_seasonality_form, 
                            stationarity_form=new_stationarity_form)
 
-@ts_decomposition_bp.route("/trend/calculate/<dataset>", methods=["POST"])
+@ts_decomposition_bp.route("/trend/calculate/<dataset>/<column>", methods=["POST"])
 @login_required
-def calculate_trend(dataset):
+def calculate_trend(dataset, column):
     """
     Calculates and returns the trend of a specified column in a dataset using a selected statistical function.
     
@@ -50,13 +50,12 @@ def calculate_trend(dataset):
         }
     """
     form = trend_form()
-    form.column_interest.choices = [form.column_interest.data]    
     if not form.validate_on_submit():
         return jsonify({"error": "Invalid form submission"}), 400
     try:
         variable_dict = {
             "dataset": current_app.config['UPLOAD_FOLDER'] + dataset,
-            "var_column": form.column_interest.data,  
+            "var_column": column,  
             "trend_function": form.function.data,
         }
         p_value = trend_calculator(variable_dict).calculate_trend()
@@ -78,9 +77,9 @@ def calculate_trend(dataset):
         'Hypotheses': hypotheses
     }), status_code
 
-@ts_decomposition_bp.route("/seasonality/calculate/<dataset>", methods=["POST"])
+@ts_decomposition_bp.route("/seasonality/calculate/<dataset>/<column>", methods=["POST"])
 @login_required
-def calculate_seasonality(dataset):
+def calculate_seasonality(dataset, column):
     """
     Calculates and returns the seasonality of a specified column in a dataset using a selected statistical function.
     
@@ -95,13 +94,13 @@ def calculate_seasonality(dataset):
         }
     """
     form = seasonality_form()
-    form.column_interest.choices = [form.column_interest.data]
+    print("get_here")
     if not form.validate_on_submit():
         return jsonify({"error": "Invalid form submission"}), 400
     try:
         variable_dict = {
             "dataset": current_app.config['UPLOAD_FOLDER']  + dataset,
-            "var_column":form.column_interest.data,
+            "var_column":column,
             "seasonality_function": form.function.data,
             "period": form.season_per.data
         }
@@ -123,9 +122,9 @@ def calculate_seasonality(dataset):
         'Hypotheses': hypotheses
     }), status_code
 
-@ts_decomposition_bp.route("/stationarity/calculate/<dataset>", methods=["POST"])
+@ts_decomposition_bp.route("/stationarity/calculate/<dataset>/<column>", methods=["POST"])
 @login_required
-def calculate_stationarity(dataset):
+def calculate_stationarity(dataset, column):
     """
     Calculates and returns the stationarity of a specified column in a dataset using a selected stationarity function.
     
@@ -140,13 +139,12 @@ def calculate_stationarity(dataset):
         }
     """
     form = stationarity_form()
-    form.column_interest.choices = [form.column_interest.data]
     if not form.validate_on_submit():
         return jsonify({"error": "Invalid form submission"}), 400
     try:
         variable_dict = {
             "dataset": current_app.config['UPLOAD_FOLDER']  + dataset,
-            "var_column":form.column_interest.data,
+            "var_column":column,
             "stationarity_function": form.function.data,
         }
         p_value = stationarity_calculator(variable_dict).calculate_seasonality()
@@ -197,7 +195,7 @@ def display_autocorrelation(dataset, column):
             "csv_file": dataset,
             "time_column": current_app.config['TIME_COLUMN'],
             "var_column":column,
-            "plot_tile": "time-series of" + column,
+            "plot_tile": "time-series of " + column,
             "xlabel": "Date",
             "ylabel":column,
             "color": "red"
@@ -236,23 +234,50 @@ def load_decomposition():
     return render_template("residual_logic.html", residuals_form=residuals_form)
 
     
-@ts_decomposition_bp.route("/add_residuals/<dataset>", methods=["POST"])
+@ts_decomposition_bp.route("/add_residuals/<dataset>/<column>", methods=["POST"])
 @login_required
-def add_residuals(dataset):
+def add_residuals(dataset, column):
     """
     Takes a column and makes a csv file of the  residuals of that column using a function that makes the column stationary
     """
     form = make_residuals()
-    form.column_interest.choices = [form.column_interest.data]
     try:
         if form.validate_on_submit():
             variables = {
                 "dataset": dataset,
-                "variable": form.column_interest.data, 
+                "variable": column,
                 "function": form.function.data
             }
-            message = decomposition_residuals(variables).add_residuals()
-            response = {"message": "Residuals added successfully."}
+
+            plot_variables = {
+                "csv_file": dataset,
+                "time_column": current_app.config['TIME_COLUMN'],
+                "var_column":column,
+                "plot_tile": "time-series of " + column,
+                "xlabel": "Date",
+                "ylabel":column,
+                "color": "red"
+            }
+
+            ts_img = make_image(plot_variables)
+
+            name = decomposition_residuals(variables).add_residuals()
+            plot_variables_after = {
+                "csv_file": name,
+                "time_column": current_app.config['TIME_COLUMN'],
+                "var_column":column, 
+                "plot_tile": "time-series of " + column + "after" + form.function.data,
+                "xlabel": "Date",
+                "ylabel":column,
+                "color": "red"
+            }
+            ts_img_after = make_image(plot_variables_after)
+
+            response = {
+                "message": "Residuals added successfully.",
+                "ts_img": ts_img,
+                "ts_img_after": ts_img_after
+            }
             status_code = 200
 
         else:
@@ -261,4 +286,5 @@ def add_residuals(dataset):
     except Exception as e:
         response = {"success": False, "message": str(e)}
         status_code = 500
+    print(response)
     return jsonify(response), status_code

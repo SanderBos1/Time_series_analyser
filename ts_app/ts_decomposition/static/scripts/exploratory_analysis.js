@@ -85,42 +85,46 @@ $(document).ready(function() {
     $('#statistical_trend_form').submit(function (e) {
         e.preventDefault(); 
 
-        var dataset = document.getElementById("file_display_selected").value
-        var form = new FormData($(this)[0])
         
         // Validate the selected dataset
-        if (!dataset) {
-            console.error("No dataset selected.");
-            return;
-        }
-        $.ajax({
-            headers: { 
-                "X-CSRFToken" : "{{ form.csrf_token._value() }}"
-            },
-            type: "POST",
-            url: '/trend/calculate/' + dataset,
-            data:form,
-            processData: false,
-            contentType: false,            
-            success: function (data) {
-                // Display trend value and hypotheses
-                document.getElementById("trend_value").innerHTML = data["p_value"];
-                document.getElementById("hypothese_trend").innerHTML = data["Hypotheses"];
-            },
-            error: function(data){
-                // Handle errors
-                answer = JSON.parse(data['responseText'])
-                make_unclickable("error_unclickable")
-                document.getElementById("trend_value").innerHTML = "Not yet defined"
-                document.getElementById("hypothese_trend").innerHTML = "Not yet defined"
-                var error_text = document.getElementById("error_trend_pvalue");
-                var error_message = '<p id="errror_trend_pvalue">' +  answer["message"] + "</p>";
-                error_text.innerHTML = error_message;
-                document.getElementById("trend_calculation_error").style.display="inline-block";
+        if (document.getElementById("column_selected")) {
 
-            }
-    
-        });
+            var dataset = document.getElementById("file_display_selected").value
+            var column = document.getElementById("column_selected").value
+            var form = new FormData($(this)[0])
+            $.ajax({
+                headers: {
+                    "X-CSRFToken": "{{ form.csrf_token._value() }}"
+                },
+                type: "POST",
+                url: '/trend/calculate/' + dataset + "/" + column,
+                data: form,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    // Display trend value and hypotheses
+                    document.getElementById("trend_value").innerHTML = data["p_value"];
+                    document.getElementById("hypothese_trend").innerHTML = data["Hypotheses"];
+                },
+                error: function (data) {
+                    // Handle errors
+                    answer = JSON.parse(data['responseText'])
+                    console.log(answer)
+                    make_unclickable("error_unclickable")
+                    document.getElementById("trend_value").innerHTML = "Not yet defined"
+                    document.getElementById("hypothese_trend").innerHTML = "Not yet defined"
+                    var error_text = document.getElementById("error_trend_pvalue");
+                    var error_message = '<p id="errror_trend_pvalue">' + answer["message"] + "</p>";
+                    error_text.innerHTML = error_message;
+                    document.getElementById("trend_calculation_error").style.display = "inline-block";
+
+                }
+
+            });
+        }
+        else {
+            alert("Please select a column first")
+        }
     });
 });
 
@@ -128,36 +132,45 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#seasonality_form').submit(function (e) {
         e.preventDefault(); 
-        var dataset = document.getElementById("file_display_selected").value
-        var form = new FormData($(this)[0])
-        $.ajax({
-            headers: { 
-                "X-CSRFToken" : "{{ form.csrf_token._value() }}"
-            },
-            type: "POST",
-            url: '/seasonality/calculate/' + dataset,
-            data: form, // serializes the form's elements.
-            processData: false,
-            contentType: false,
-            success: function (data) {
-                // Display trend value and hypotheses
-                document.getElementById("seasonality_value").innerHTML = data["p_value"];
-                document.getElementById("hypothese_seasonality").innerHTML = data["Hypotheses"];
-            },
-            error: function(data){
-                // Handle errors
-                answer = JSON.parse(data['responseText'])
-                make_unclickable("error_unclickable")
-                document.getElementById("seasonality_value").innerHTML = "Not yet defined"
-                document.getElementById("hypothese_seasonality").innerHTML = "Not yet defined"
-                var error_text = document.getElementById("error_seasonality_pvalue");
-                var error_message = '<p id="errror_seasonality_pvalue">' +  answer['message']+ "</p>";
-                error_text.innerHTML = error_message;
-                document.getElementById("seasonality_calculation_error").style.display="inline-block";
-    
-            }
-        
-        });
+        if (document.getElementById("column_selected")) {
+
+            var dataset = document.getElementById("file_display_selected").value
+            var column = document.getElementById("column_selected").value
+            var form = new FormData($(this)[0])
+
+            $.ajax({
+                headers: {
+                    "X-CSRFToken": "{{ form.csrf_token._value() }}"
+                },
+                type: "POST",
+                url: '/seasonality/calculate/' + dataset + "/" + column,
+                data: form, // serializes the form's elements.
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    // Display trend value and hypotheses
+                    document.getElementById("seasonality_value").innerHTML = data["p_value"];
+                    document.getElementById("hypothese_seasonality").innerHTML = data["Hypotheses"];
+                },
+                error: function (data) {
+                    // Handle errors
+                    console.log(data['responseText'])
+                    answer = JSON.parse(data['responseText'])
+                    make_unclickable("error_unclickable")
+                    document.getElementById("seasonality_value").innerHTML = "Not yet defined"
+                    document.getElementById("hypothese_seasonality").innerHTML = "Not yet defined"
+                    var error_text = document.getElementById("error_seasonality_pvalue");
+                    var error_message = '<p id="errror_seasonality_pvalue">' + answer['message'] + "</p>";
+                    error_text.innerHTML = error_message;
+                    document.getElementById("seasonality_calculation_error").style.display = "inline-block";
+
+                }
+
+            });
+        }
+        else {
+            alert("Please select a column first")
+        }
     });
 });
 
@@ -165,35 +178,43 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#stationarity_form').submit(function (e) {
         e.preventDefault(); 
-        var dataset = document.getElementById("file_display_selected").value
-        var form = new FormData($(this)[0])
-        $.ajax({
-            headers: { 
-                "X-CSRFToken" : "{{ form.csrf_token._value() }}"
-            },
-            type: "POST",
-            url: '/stationarity/calculate/' + dataset,
-            data:form,
-            processData: false,
-            contentType: false,
-            success: function (data) {
-                // Display trend value and hypotheses
-                document.getElementById("stationarity_value").innerHTML = data["p_value"];
-                document.getElementById("hypothese_stationarity").innerHTML = data["Hypotheses"];
+        if (document.getElementById("column_selected")) {
+
+            var dataset = document.getElementById("file_display_selected").value
+            var column = document.getElementById("column_selected").value
+            var form = new FormData($(this)[0])
+            $.ajax({
+                headers: {
+                    "X-CSRFToken": "{{ form.csrf_token._value() }}"
                 },
-            error: function(data){
-                // Handle errors
-                answer = JSON.parse(data['responseText'])
-                make_unclickable("error_unclickable")
-                document.getElementById("seasonality_value").innerHTML = "Not yet defined"
-                document.getElementById("hypothese_seasonality").innerHTML = "Not yet defined"
-                var error_text = document.getElementById("error_stationarity_pvalue");
-                var error_message = '<p id="errror_seasonality_pvalue">' +  answer["message"] + "</p>";
-                error_text.innerHTML = error_message;
-                document.getElementById("stationarity_calculation_error").style.display="inline-block";
-        
+                type: "POST",
+                url: '/stationarity/calculate/' + dataset + "/" + column,
+                data: form,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    // Display trend value and hypotheses
+                    document.getElementById("stationarity_value").innerHTML = data["p_value"];
+                    document.getElementById("hypothese_stationarity").innerHTML = data["Hypotheses"];
+                },
+                error: function (data) {
+                    // Handle errors
+                    answer = JSON.parse(data['responseText'])
+                    make_unclickable("error_unclickable")
+                    document.getElementById("seasonality_value").innerHTML = "Not yet defined"
+                    document.getElementById("hypothese_seasonality").innerHTML = "Not yet defined"
+                    var error_text = document.getElementById("error_stationarity_pvalue");
+                    var error_message = '<p id="errror_seasonality_pvalue">' + answer["message"] + "</p>";
+                    error_text.innerHTML = error_message;
+                    document.getElementById("stationarity_calculation_error").style.display = "inline-block";
+
                 }
-        });
+            });
+        }
+        else {
+            alert("Please select a column first")
+
+        }
     });
 });
 
