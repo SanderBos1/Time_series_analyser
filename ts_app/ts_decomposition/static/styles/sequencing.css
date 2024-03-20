@@ -16,7 +16,6 @@
     width: 80%;
     height: 450px;
     border: solid 1px black;
-    flex-flow: row wrap;
 }
 
 .autocorrelation{
@@ -45,28 +44,22 @@
     position: relative;
     width: 80%;
     height: 10%;
-    flex-flow: row wrap;
     margin-top:20px;
-    justify-content:center;
 }
 
-.dialogue-element-sequencing {
-    flex-flow: row wrap;
-    align-content: flex-start;
-}
 
 .statistical_test {
     position: relative;
     width: 40%;
     height: 80%;
+    margin-left: 50px;
+    margin-top: 50px;
 }
 
 .statistical_form {
     position: relative;
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-flow: row wrap;
 }
 
 
@@ -90,13 +83,11 @@
 }
 
 
-#make_csv_residuals_form{
+#make_csv_residuals_form {
     position: relative;
-    width:100%;
-    height:100%;
-    display:flex;
-    flex-flow: row wrap;
-
+    width: 100%;
+    height: 100%;
+    flex-flow: column wrap;
 }
 
 #function{

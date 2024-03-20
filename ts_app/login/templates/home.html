@@ -43,10 +43,16 @@
     <div class="text_box">
         <h3 class="sub_title"> Autocorrelation</h3>
         <p>
-            Click on the 'Display ts' button to plot your data.
-            On this page, you can also find a link to the page that shows all the images you have created.
-            On the calculation page, you can analyze the trend and seasonality of your dataset and examine the behavior of the residuals after removing the trend or seasonality.
-            Feel free to leave suggestions for improvements on the GitHub page of this project.
+            Autocorrelation measures the correlation between a time series and a lagged version of itself. In simpler terms, it assesses how well the current value of a series correlates with its past values at different lags.
+            ACF is calculated using the correlation coefficient between the original series and its lagged values.
+            It is often visualized using an autocorrelation plot, where the lag is plotted on the x-axis and the correlation coefficient is plotted on the y-axis.
+            ACF helps in identifying the presence of serial correlation in the time series. If autocorrelation is significant at certain lags, it indicates that past values of the series can help predict future values.
+
+            Partial autocorrelation measures the correlation between a time series and a lagged version of itself, after removing the effects of intervening observations. 
+            In other words, it measures the correlation between two observations at a particular lag, while controlling for the influence of all shorter lags.
+            PACF is useful in identifying the direct relationship between an observation and its lagged values, without the influence of intermediate observations.
+            It is often visualized using a partial autocorrelation plot, similar to the autocorrelation plot.
+            PACF helps in determining the appropriate lag order for autoregressive (AR) models. Significant partial autocorrelations at certain lags suggest that those lags are potential candidates for inclusion in an AR model.
         </p>
     </div>
 

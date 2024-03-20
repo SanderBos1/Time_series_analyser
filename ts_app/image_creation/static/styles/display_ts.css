@@ -1,22 +1,19 @@
 
 .title{
     width:100%;
-    margin:0px;
+    height:30px;
 }
 
 .image_draw_interaction {
     position: relative;
     height: 60%;
     width: 100%;
-    flex-flow: row wrap;
-
 }
 
 #image_draw_form {
     position: relative;
     height: 100%;
     width: 100%;
-    flex-flow: row wrap;
 }
 
 .user_interaction_image_plot{
@@ -28,7 +25,6 @@
 .user-input {
     position: relative;
     width: 100%;
-    flex-flow: row wrap;
 }
 
 .database_column{
@@ -51,7 +47,6 @@
     position: relative;
     height: 60%;
     width: 100%;
-    flex-flow: row wrap;
 }
 
 .ts-image {

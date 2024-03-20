@@ -41,6 +41,8 @@ body {
 /* element that uses flexbox*/
 .flex {
     display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
 }
 
 /* element that is hidden*/
@@ -135,6 +137,10 @@ p{
 .red_top {
     text-align: center;
     background-color: var(--main-error-red);
+}
+
+.interaction_top > p {
+    margin: 0px;
 }
 
 #dialogue_message{

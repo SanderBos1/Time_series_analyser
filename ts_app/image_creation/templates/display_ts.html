@@ -23,17 +23,18 @@
 
         <div class="flex" id="image_plot_options">
             <h3 class="title"> Plot options</h3>
-            {{form.csrf_token }}
-            {{form.image_title.label (class_="image_form_label label")}}
-            {{form.image_title (class_="input dialogue_unclickable")}}
-            {{form.xlabel.label (class_="image_form_label label")}}
-            {{form.xlabel (class_="input dialogue_unclickable")}}
-            {{form.ylabel.label (class_="image_form_label label")}}
-            {{form.ylabel (class_="input dialogue_unclickable")}}
-            {{form.line_color.label (class_="image_form_label label ")}}
-            {{form.line_color (class_="input dialogue_unclickable")}}
-            {{form.submit (class_="button button_standard dialogue_unclickable")}}
-
+            <div class="flex input_options">
+                {{form.csrf_token }}
+                {{form.image_title.label (class_="image_form_label label")}}
+                {{form.image_title (class_="input dialogue_unclickable")}}
+                {{form.xlabel.label (class_="image_form_label label")}}
+                {{form.xlabel (class_="input dialogue_unclickable")}}
+                {{form.ylabel.label (class_="image_form_label label")}}
+                {{form.ylabel (class_="input dialogue_unclickable")}}
+                {{form.line_color.label (class_="image_form_label label ")}}
+                {{form.line_color (class_="input dialogue_unclickable")}}
+                {{form.submit (class_="button button_standard dialogue_unclickable")}}
+            </div>
         </div>
     </form>
 </div>
