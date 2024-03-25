@@ -1,7 +1,8 @@
 .welcome_message {
+    position:relative;
+    left:10%;
     width: 80%;
     height: 60%;
-    flex-flow: row wrap;
     justify-content: center;
 }
 

@@ -11,6 +11,10 @@ Has the following attributes:
 - file: The file (or files) the user is going to upload
 - Submit: A button used to submit the form.
 """
+
+
 class file_upload_form(FlaskForm):
-    file = MultipleFileField(label = 'File', validators=[FileAllowed(['csv']),FileRequired()])
-    submit = SubmitField('Submit')
+    file = MultipleFileField(
+        label="File", validators=[FileAllowed(["csv"]), FileRequired()]
+    )
+    submit = SubmitField("Submit")

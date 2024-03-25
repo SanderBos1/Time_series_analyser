@@ -20,26 +20,17 @@ $(document).ready(function () {
                 data: $('form').serialize(),
                 success: function (data) {
                     // Display a success message
-                    var ts_image = document.getElementById("plot_before")
-                    var ts_image_after = document.getElementById("plot_after")
-                    ts_image.innerHTML = "<img class=standard_img id=ts_img src=data:image/jpeg;base64," + data["ts_img"] + ">";
-                    ts_image_after.innerHTML = "<img class=standard_img id=ts_img src=data:image/jpeg;base64," + data["ts_img_after"] + ">";
-                    const feedback_text = document.getElementById("trend_file_made_feedback_text");
-                    feedback_text.innerHTML = "Your residual object is saved."
+                    $("#plot_before").html("<img class=standard_img id=autocorrelation_image src=data:image/jpeg;base64," + data["ts_img"] + ">");
+                    $("#plot_after").html("<img class=standard_img id=autocorrelation_image src=data:image/jpeg;base64," + data["ts_img_after"] + ">");
+                    $("#trend_file_made_feedback_text").html("Your residual object is saved.")
                     // Reload the CSV data on the sidebar
                     load_csvdata()
                 },
                 error: function (data) {
-                    // Handle errors
                     answer = JSON.parse(data['responseText'])
-                    console.log(answer)
-
-                    var error_text = document.getElementById("error_making_residual_csv");
-                    var error_message = '<p id="error_trend_residual_plot_message">' + answer["message"] + "</p>";
-                    error_text.innerHTML = error_message;
-                    document.getElementById("make_stationary_csv_error").style.display = "inline-block";
-                    // Make certain elements unclickable in case of error
                     make_unclickable("error_unclickable")
+                    $("#error_making_residual_csv").html('<p id="error_trend_residual_plot_message">' + answer["message"] + "</p>");
+                    $( '#make_stationary_csv_error' ).show();
                 }
             });
 

@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from extensions import db, login
 
+
 @login.user_loader
 def load_user(id):
     """
@@ -18,6 +19,7 @@ def load_user(id):
     """
     return db.session.get(User, int(id))
 
+
 class User(UserMixin, db.Model):
     """
     Represents a user in the database.
@@ -30,15 +32,13 @@ class User(UserMixin, db.Model):
     """
 
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
-    username: so.Mapped[str] = so.mapped_column(sa.String(64), index=True,
-                                                unique=True)
-    email: so.Mapped[str] = so.mapped_column(sa.String(120), index=True,
-                                             unique=True)
+    username: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, unique=True)
+    email: so.Mapped[str] = so.mapped_column(sa.String(120), index=True, unique=True)
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
-    
+        return "<User {}>".format(self.username)
+
     def set_password(self, password):
         """
         Set the password for the user.
@@ -59,7 +59,8 @@ class User(UserMixin, db.Model):
             bool: True if the password matches, False otherwise.
         """
         return check_password_hash(self.password_hash, password)
-    
+
+
 class ts_image(db.Model):
     """
     Represents an image stored in the database.
@@ -69,15 +70,16 @@ class ts_image(db.Model):
         image_code (str): The image code (e.g., binary data or URL).
         user (str): The user associated with the image.
     """
+
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     name: so.Mapped[str] = so.mapped_column(sa.String(64))
     image_code: so.Mapped[str] = so.mapped_column(sa.TEXT)
     user: so.Mapped[str] = so.mapped_column(sa.String(64))
-    
+
     def get_id(self):
-        
+
         return self.id
-    
+
     def get_image(self):
         """
         Get the image code.
@@ -87,7 +89,7 @@ class ts_image(db.Model):
         """
 
         return self.image_code
-    
+
     def get_name(self):
         """
         Get the name of the image.
@@ -96,7 +98,7 @@ class ts_image(db.Model):
             str: The name of the image.
         """
         return self.name
-    
+
     def get_user(self):
         """
         Get the user associated with the image.

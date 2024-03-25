@@ -5,7 +5,8 @@ from flask import current_app
 from scipy import stats
 from statsmodels.tsa.stattools import adfuller
 
-plt.switch_backend('agg')
+plt.switch_backend("agg")
+
 
 class trend_calculator:
 
@@ -33,7 +34,7 @@ class trend_calculator:
         """
         p_value = mk.original_test(self.df[self.column]).p
         return p_value
-    
+
     def calculate_trend(self):
         """
         Calculates the trend based on the specified function.
@@ -47,19 +48,21 @@ class trend_calculator:
         - ValueError: If an error occurs during trend calculation or if an invalid trend function is specified.
         """
         try:
-            self.df[self.column] = pd.to_numeric(self.df[self.column], errors='coerce')
+            self.df[self.column] = pd.to_numeric(self.df[self.column], errors="coerce")
             if self.trend == "pymannkendall":
                 p_value = self._calculate_mann_kendall_trend()
                 return round(p_value, 4)
             else:
                 raise ValueError("Invalid trend function specified.")
         except KeyError as e:
-            raise KeyError(f"Column '{self.var_column}' not found in the dataset.") from e
+            raise KeyError(
+                f"Column '{self.var_column}' not found in the dataset."
+            ) from e
         except FileNotFoundError as e:
             raise FileNotFoundError(f"Dataset '{self.dataset_path}' not found.") from e
         except Exception as e:
             raise ValueError("An error occurred during trend calculation.") from e
-    
+
 
 class seasonality_calculator:
     """
@@ -77,6 +80,7 @@ class seasonality_calculator:
     - kruskal_wallis(): Performs seasonality analysis using the Kruskal-Wallis test.
     - calculate_seasonality(): Calculates seasonality based on the specified function.
     """
+
     def __init__(self, variable_dict):
         """
         Initializes the SeasonalityCalculator.
@@ -92,7 +96,7 @@ class seasonality_calculator:
         self.column = variable_dict["var_column"]
         self.function = variable_dict["seasonality_function"]
         self.period = variable_dict["period"]
-        self.time_column =  current_app.config['TIME_COLUMN']
+        self.time_column = current_app.config["TIME_COLUMN"]
 
     def kruskal_wallis(self):
         """
@@ -102,13 +106,16 @@ class seasonality_calculator:
         - p_value (float): The p-value indicating the significance of seasonality.
         """
         if self.period.lower() == "year":
-            grouped_df = self.df.groupby(pd.Grouper(key=self.time_column, freq='1YE')).mean()
+            grouped_df = self.df.groupby(
+                pd.Grouper(key=self.time_column, freq="1YE")
+            ).mean()
         elif self.period.lower() == "month":
-            grouped_df = self.df.groupby(pd.Grouper(key=self.time_column, freq="1M")).mean()
+            grouped_df = self.df.groupby(
+                pd.Grouper(key=self.time_column, freq="1M")
+            ).mean()
         p_value = stats.kruskal(*grouped_df[self.column].values).pvalue
-        return  p_value
+        return p_value
 
-    
     def calculate_seasonality(self):
         """
         Calculates seasonality based on the specified function.
@@ -116,12 +123,11 @@ class seasonality_calculator:
         Returns:
         - float: The p-value indicating the significance of seasonality, rounded to 4 decimal places.
         """
-        self.df[self.time_column]= pd.to_datetime(self.df[self.time_column])
-        self.df[self.column] = pd.to_numeric(self.df[self.column], errors='coerce')
+        self.df[self.time_column] = pd.to_datetime(self.df[self.time_column])
+        self.df[self.column] = pd.to_numeric(self.df[self.column], errors="coerce")
         if self.function == "kruskal":
             p_value = self.kruskal_wallis()
         return round(p_value, 4)
-    
 
 
 class stationarity_calculator:
@@ -139,6 +145,7 @@ class stationarity_calculator:
     - adfuller(): Performs stationarity analysis using the Augmented Dickey-Fuller test.
     - calculate_seasonality(): Calculates stationarity based on the specified function.
     """
+
     def __init__(self, variable_dict):
         """
         Initializes the StationarityCalculator.
@@ -152,7 +159,7 @@ class stationarity_calculator:
         self.df = pd.read_csv(variable_dict["dataset"])
         self.column = variable_dict["var_column"]
         self.function = variable_dict["stationarity_function"]
-        self.time_column =  current_app.config['TIME_COLUMN']
+        self.time_column = current_app.config["TIME_COLUMN"]
 
     def adfuller(self):
         """
@@ -163,9 +170,8 @@ class stationarity_calculator:
         """
         result = adfuller(self.df[self.column])
         p_value = result[1]
-        return  p_value
+        return p_value
 
-    
     def calculate_seasonality(self):
         """
         Calculates stationarity based on the specified function.
@@ -173,10 +179,8 @@ class stationarity_calculator:
         Returns:
         - float: The p-value indicating the significance of stationarity, rounded to 4 decimal places.
         """
-        self.df[self.time_column]= pd.to_datetime(self.df[self.time_column])
-        self.df[self.column] = pd.to_numeric(self.df[self.column], errors='coerce')
+        self.df[self.time_column] = pd.to_datetime(self.df[self.time_column])
+        self.df[self.column] = pd.to_numeric(self.df[self.column], errors="coerce")
         if self.function == "adfuller":
             p_value = self.adfuller()
-        return round(p_value, 4)  
-
-    
+        return round(p_value, 4)

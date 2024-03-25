@@ -1,4 +1,3 @@
-
 from flask import Flask
 from flask_migrate import Migrate
 import wtforms_json
@@ -18,15 +17,14 @@ Returns:
 """
 app = Flask(__name__)
 app.config.from_object(config.dev_config)
-    
+
 db.init_app(app)
 Migrate(app, db)
 
 login.init_app(app)
-login.login_view = 'login.login'
+login.login_view = "login.login"
 
 wtforms_json.init()
-
 
 
 app.register_blueprint(login_bp)
@@ -36,5 +34,5 @@ app.register_blueprint(ts_decomposition_bp)
 
 Session(app)
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, threaded=True)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8000, threaded=True)

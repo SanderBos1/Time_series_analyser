@@ -15,15 +15,11 @@ function select_column(pressed_column) {
             contentType: false,
             success: function (data) {
                 // Display partial and autocorrelation images
-                var auto_image = document.getElementById("whole_autocorrelation")
-                var partial_image = document.getElementById("partial_autocorrelation")
-                var ts_image = document.getElementById("ts_image")
-                var table = document.getElementById("stat_data")
+                $("#whole_autocorrelation").html("<img class=standard_img id=autocorrelation_image src=data:image/jpeg;base64," + data["Img_auto"] + ">");
+                $("#partial_autocorrelation").html("<img class=standard_img id=autocorrelation_image src=data:image/jpeg;base64," + data["Img_partial"] + ">");
+                $("#ts_image").html("<img class=standard_img id=ts_img src=data:image/jpeg;base64," + data["ts_img"] + ">");
 
-                auto_image.innerHTML = "<img class=standard_img id=autocorrelation_image src=data:image/jpeg;base64," + data["Img_auto"] + ">";
-                partial_image.innerHTML = "<img class=standard_img id=autocorrelation_image src=data:image/jpeg;base64," + data["Img_partial"] + ">";
-                ts_image.innerHTML = "<img class=standard_img id=ts_img src=data:image/jpeg;base64," + data["ts_img"] + ">";
-                console.log(data["stats"])
+                var table = document.getElementById("stat_data")
                 let text = "<table class='standard_table'>"
                 for (let x in data["stats"]) {
                     text += "<tr><td>" + x + "</td><td>" + data["stats"][x] + "</td></tr>";
@@ -36,10 +32,8 @@ function select_column(pressed_column) {
                 // Handle errors
                 answer = JSON.parse(data['responseText'])
                 make_unclickable("error_unclickable")
-                var error_text = document.getElementById("error_autocorrelation_plot");
-                var error_message = '<p id="errror_trend_pvalue">' + answer['Error'] + "</p>";
-                error_text.innerHTML = error_message;
-                document.getElementById("autocorrelation_error").style.display = "inline-block";
+                $("#error_autocorrelation_plot").html('<p id="errror_trend_pvalue">' + answer['Error'] + "</p>");
+                $( '#autocorrelation_error' ).show();
 
 
             }
@@ -103,21 +97,17 @@ $(document).ready(function() {
                 contentType: false,
                 success: function (data) {
                     // Display trend value and hypotheses
-                    document.getElementById("trend_value").innerHTML = data["p_value"];
-                    document.getElementById("hypothese_trend").innerHTML = data["Hypotheses"];
+                    $("#trend_value").html(data["p_value"]);
+                    $("#hypothese_trend").html(data["Hypotheses"]);
                 },
                 error: function (data) {
                     // Handle errors
                     answer = JSON.parse(data['responseText'])
-                    console.log(answer)
                     make_unclickable("error_unclickable")
-                    document.getElementById("trend_value").innerHTML = "Not yet defined"
-                    document.getElementById("hypothese_trend").innerHTML = "Not yet defined"
-                    var error_text = document.getElementById("error_trend_pvalue");
-                    var error_message = '<p id="errror_trend_pvalue">' + answer["message"] + "</p>";
-                    error_text.innerHTML = error_message;
-                    document.getElementById("trend_calculation_error").style.display = "inline-block";
-
+                    $("#trend_value").html("Not yet defined");
+                    $("#hypothese_trend").html("Not yet defined");
+                    $("#error_trend_pvalue").html('<p id="errror_trend_pvalue">' + answer["message"] + "</p>");
+                    $( '#trend_calculation_error' ).show();
                 }
 
             });
@@ -154,15 +144,12 @@ $(document).ready(function() {
                 },
                 error: function (data) {
                     // Handle errors
-                    console.log(data['responseText'])
                     answer = JSON.parse(data['responseText'])
                     make_unclickable("error_unclickable")
-                    document.getElementById("seasonality_value").innerHTML = "Not yet defined"
-                    document.getElementById("hypothese_seasonality").innerHTML = "Not yet defined"
-                    var error_text = document.getElementById("error_seasonality_pvalue");
-                    var error_message = '<p id="errror_seasonality_pvalue">' + answer['message'] + "</p>";
-                    error_text.innerHTML = error_message;
-                    document.getElementById("seasonality_calculation_error").style.display = "inline-block";
+                    $("#seasonality_value").html("Not yet defined");
+                    $("#hypothese_seasonality").html("Not yet defined");
+                    $("#error_seasonality_pvalue").html('<p id="errror_seasonality_pvalue">' + answer["message"] + "</p>");
+                    $( '#seasonality_calculation_error' ).show();
 
                 }
 
@@ -179,7 +166,6 @@ $(document).ready(function() {
     $('#stationarity_form').submit(function (e) {
         e.preventDefault(); 
         if (document.getElementById("column_selected")) {
-
             var dataset = document.getElementById("file_display_selected").value
             var column = document.getElementById("column_selected").value
             var form = new FormData($(this)[0])
@@ -194,20 +180,18 @@ $(document).ready(function() {
                 contentType: false,
                 success: function (data) {
                     // Display trend value and hypotheses
-                    document.getElementById("stationarity_value").innerHTML = data["p_value"];
-                    document.getElementById("hypothese_stationarity").innerHTML = data["Hypotheses"];
+                    $("#stationarity_value").html(data["p_value"]);
+                    $("#hypothese_stationarity").html(data["Hypotheses"]);
+
                 },
                 error: function (data) {
                     // Handle errors
                     answer = JSON.parse(data['responseText'])
                     make_unclickable("error_unclickable")
-                    document.getElementById("seasonality_value").innerHTML = "Not yet defined"
-                    document.getElementById("hypothese_seasonality").innerHTML = "Not yet defined"
-                    var error_text = document.getElementById("error_stationarity_pvalue");
-                    var error_message = '<p id="errror_seasonality_pvalue">' + answer["message"] + "</p>";
-                    error_text.innerHTML = error_message;
-                    document.getElementById("stationarity_calculation_error").style.display = "inline-block";
-
+                    $("#stationarity_value").html("Not yet defined");
+                    $("#hypothese_stationarity").html("Not yet defined");
+                    $("#error_stationarity_pvalue").html('<p id="error_stationarity_pvalue">' + answer["message"] + "</p>");
+                    $( '#stationarity_calculation_error' ).show();
                 }
             });
         }

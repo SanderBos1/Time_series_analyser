@@ -1,11 +1,12 @@
 lint:
 	pylint ./ts_app
-	pylint ./ts_app/image_creation
 
-activate_vm:
-	.\venv\Scripts\activate
+format:
+	black ./ts_app
 
 requirements:
 	pip freeze > requirements.txt
 
-
+install:
+	pip install --upgrade pip &&\
+		pip install -r requirements.txt
